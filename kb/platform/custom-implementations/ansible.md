@@ -46,7 +46,7 @@ Click "Apply Changes" in the top right to save your repo settings.
 
 Hover your mouse to the right of the clone step within your step group, select the blue + icon and select "Add Step" and add a new "Run" step.
 
-Select your docker connector, and specify an image that has the ansble version you wish to use. For this example I will be using `pad92/ansible-alpine:9.1.0` but you can use any docker image that has ansible included.
+Select your docker connector, and specify an image that has the ansible version you wish to use. For this example I will be using `pad92/ansible-alpine:9.1.0` but you can use any docker image that has ansible included.
 
 In the "command" section we will write the execution of our playbook. An example of doing so is included below:
 
