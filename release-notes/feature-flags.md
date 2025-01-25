@@ -1,7 +1,7 @@
 ---
 title: Feature Flags release notes
 sidebar_label: Feature Flags
-date: 2025-01-15T08:09:25
+date: 2025-01-21T08:09:25
 tags: [NextGen, "feature flags"]
 
 sidebar_position: 11
@@ -11,11 +11,48 @@ sidebar_position: 11
 
 Review the notes below for details about recent changes to Harness Feature Flags (FF). For release notes for Harness Self-Managed Enterprise Edition, go to [Self-Managed Enterprise Edition release notes](/release-notes/self-managed-enterprise-edition). Additionally, Harness publishes security advisories for every release. Go to the [Harness Trust Center](https://trust.harness.io/?itemUid=c41ff7d5-98e7-4d79-9594-fd8ef93a2838&source=documents_card) to request access to the security advisories.
 
+<!-- 
+
+Follow this template to sort your release notes into the correct headline:
+**Fixed Issues**:
+ - <type text> (FFM-*ticket number the release note is in relation to*)
+**New features and enhancements**:
+ - <type text> (FFM-*ticket number*)
+**Bug fixes**: 
+- <type text> (FFM-*ticket number*) 
+
+-->
+
 :::info note
 Harness deploys changes to Harness SaaS clusters on a progressive basis. This means that the features and fixes that these release notes describe may not be immediately available in your cluster. To identify the cluster that hosts your account, go to the **Account Overview** page. 
 :::
 
-#### Last updated: January 15, 2025
+#### Last updated: January 21, 2025
+
+## January 2025
+
+### Ruby SDK
+
+### Version 1.4.6
+
+**Fixed Issues**:
+ - Thread safety issues have been resolved. Previously, the Ruby SDK was marked a singleton and did not ensure only one instance can be created. This caused some issues where multiples were created in a quick period of time. This fix helps protect you from it. (FFM-12281)
+ - Added `initialized` method. This checks if client is initialized and returns `true` if initialization is complete and `false` if it has 
+  not. (FFM-12277)
+
+# Previous releases
+
+<details>
+<summary>2024 releases</summary>
+
+## December 2024
+
+### Android Client SDK
+
+### Version 2.2.4
+
+**New features and enhancements**:
+ - Remove unused `org.threeten:threetenbpdependency`. (FFM-12237)
 
 ## November 2024
 
@@ -880,8 +917,7 @@ This is a major hardening effort of the SDK to improve its overall reliability:
 #### Version 1.7.0
 
  - This version updates the JavaScript SDK to the latest version. This will now make your experience using with React Native much better. (FFM-10488)
-
-# Previous releases
+</details>
 
 <details>
 <summary>2023 releases</summary>
