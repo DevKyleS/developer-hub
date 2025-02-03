@@ -1,7 +1,7 @@
 ---
 title: Continuous Integration release notes
 sidebar_label: Continuous Integration
-date: 2025-01-10T10:00
+date: 2025-01-30T10:00
 sidebar_position: 10
 ---
 
@@ -21,6 +21,67 @@ These release notes describe recent changes to Harness Continuous Integration.
 :::
 
 ## January 2025
+
+### Version 1.63
+
+<!-- 2025-01-27 -->
+
+#### Fixed issues
+
+- Fixed an issue where the node selector field under the Infrastructure tab in the CI module lost focus when input was entered for the first time. (CI-15730, ZD-76187)
+- Fixed an issue where the DockerHub v2 URL was not working with Buildx in CI. This issue occurred specifically in the **Build and Push an Image to Docker Registry** step when caching was enabled. (CI-15702, ZD-75850)
+- Fixed an issue where project-level default settings for the S3 bucket in **self-hosted build infrastructure** failed to pass secrets to the proxy server when selecting an account-level connector or secret. (CI-15699, ZD-76063, ZD-76750)
+- Fixed an issue where using the `ci-addon` image caused it to be identified as root, violating non-root policies. Added configuration for rootless `lite-engine` and `ci-addon` container images. When using Windows infrastructure with the feature flag `CI_ADDON_LE_WINDOWS_ROOTLESS` enabled, rootless container images will be used for the lite-engine addon. (CI-14868, ZD-72927, ZD-77194)
+
+#### New features and enhancements
+
+- Added support for SSH clone with passphrase in Git, GitHub, GitLab, Azure, and Bitbucket connectors. This feature is available on Linux and macOS infrastructure (Windows support is not yet available) and requires `drone-git` plugin version 1.6.5. (CI-15212)
+- Output variables from a plugin step are now visible in the Outputs tab even when the step fails. Only variables populated up until the failure point will be displayed. This feature is available in Lite Engine and Addon version 1.16.73 and can be enabled using the `CI_ENABLE_OUTPUTS_STEP_FAILURE` feature flag. (CI-15379)
+- The `CI` environment variable, which returns `true` to indicate a Continuous Integration environment, is now available. (CI-15304, ZD-73840)
+    
+#### Harness images updates
+
+| **Image**                | **Change**                                      | **Previous version** | **New Version** |
+| ------------------------ | ----------------------------------------------- | -------------------- | --------------- |
+| `plugins/buildx`      | Updated dependencies to address vulnerabilities | 1.1.24                | 1.1.25           |
+| `plugins/ci-addon`       | Changes described in fixed issues list                  | 1.16.71              | 1.16.73         |
+| `plugins/ci-lite-engine` | Minor updates and improvements                  | 1.16.71              | 1.16.73         |
+
+### Version 1.62
+
+<!-- 2025-01-20 -->
+
+#### Fixed issues
+
+- Fixed an issue where the resource class size option under Cloud Infra for the CI module was incorrectly interchanged between macOS and Linux. (CI-15587)
+- Fixed an issue where the security context of the last step in the stage was incorrectly applied to all steps, causing Kaniko to lack root permissions even when configured with runAsUser: 0. This issue resulted in Build and Push to DockerHub stage failures due to file permission errors. (CI-15732, ZD-76107, ZD-76178)
+- Resolved an issue where the build and push step would fail when configured to use Docker Layer Caching (DLC) and push to Harness Artifact Registry. (CI-15683, AH-879)
+ 
+#### New features and enhancements
+
+- The UI editor for CI stages running on Cloud has been enhanced to allow setting machine size and enabling nested virtualization. Previously available only through YAML, these configurations can now be easily managed via the UI editor. (CI-15587)
+  
+#### Harness images updates
+
+| **Image**                | **Change**                                      | **Previous version** | **New Version** |
+| ------------------------ | ----------------------------------------------- | -------------------- | --------------- |
+| `harness/ssca-plugin`      | Updated dependencies to address vulnerabilities | 0.30.3                | 0.32.0           |
+
+### Version 1.61
+
+<!-- 2025-01-13 -->
+
+#### New features and enhancements
+
+- Added support for mTLS for CI Build stages using Kubernetes infrastructure. This requires using the [latest delegate with mTLS enabled](https://developer.harness.io/docs/platform/delegates/secure-delegates/delegate-mtls-support/). (CI-14888)
+
+#### Harness images updates
+
+| **Image**                | **Change**                                      | **Previous version** | **New Version** |
+| ------------------------ | ----------------------------------------------- | -------------------- | --------------- |
+| `plugins/drone-git`      | Updated dependencies to address vulnerabilities | 1.6.3                | 1.6.4           |
+| `plugins/ci-addon`       | Minor updates and improvements                  | 1.16.69              | 1.16.71         |
+| `plugins/ci-lite-engine` | Minor updates and improvements                  | 1.16.69              | 1.16.71         |
 
 ### Version 1.60
 
