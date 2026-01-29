@@ -41,7 +41,7 @@ Set up FME in your code base with two simple steps.
 ### 1. Import the SDK into your project using pip
 
 ```bash title="Shell"
-pip install 'splitio_client[cpphash]==10.5.1'
+pip install 'splitio_client[cpphash]==10.6.0'
 ```
 
 ### 2. Instantiate the SDK and create a new SDK factory client
@@ -85,7 +85,7 @@ Set up FME in your code base with two simple steps.
 ### 1. Import the SDK into your project using pip
 
 ```bash title="Shell"
-pip install 'splitio_client[cpphash,asyncio]==10.5.1'
+pip install 'splitio_client[cpphash,asyncio]==10.6.0'
 ```
 
 ### 2. Instantiate the SDK and create a new SDK factory client
@@ -151,14 +151,14 @@ Use `pip install` to install the SDK. Note that the package is different for sta
 <TabItem value="Multi-threaded">
 
 ```bash
-pip install 'splitio_client[redis,cpphash]==10.5.1'
+pip install 'splitio_client[redis,cpphash]==10.6.0'
 ```
 
 </TabItem>
 <TabItem value="asyncio">
 
 ```bash
-pip install 'splitio_client[redis,cpphash,asyncio]==10.5.1'
+pip install 'splitio_client[redis,cpphash,asyncio]==10.6.0'
 ```
 
 </TabItem>
@@ -1031,7 +1031,6 @@ configuration = {
     'impressionsRefreshRate' : 60,
     'ready' : 0,
     'connectionTimeout' : 1500,
-    'readTimeout' : 1500,
     'labelsEnabled' : True
 }
 
@@ -1051,7 +1050,6 @@ async def main():
         'impressionsRefreshRate' : 60,
         'ready' : 0,
         'connectionTimeout' : 1500,
-        'readTimeout' : 1500,
         'labelsEnabled' : True
     }
 
