@@ -121,12 +121,12 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 ### Version 26.01.88303 <!--January 29, 2026-->
 
 #### Fixed issues
-- Removed request object logging which was exposing some tokens for CV Connectors [CDS-118296]
+- Adjusted request object logging for CV connectors. [CDS-118296]
 
 ### Version 26.01.88203 <!--January 29, 2026-->
 
 #### Fixed issues
-- Removed request object logging which was exposing some tokens for CV Connectors [CDS-118296]
+- Adjusted request object logging for CV connectors. [CDS-118296]
 
 ### Version 25.07.86408 <!--January 23, 2026-->
 
