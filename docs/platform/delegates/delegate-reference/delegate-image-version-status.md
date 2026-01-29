@@ -70,39 +70,41 @@ Hotfixes do not extend the original EOS and EOL dates. The lifecycle remains bas
 
 Support dates are calculated from when the delegate image was published to [Harness Delegate Docker Hub](https://hub.docker.com/r/harness/delegate/tags).
 
-| Image version | Release date      | EOS              | EOL              |
-|---------------|-------------------|------------------|------------------|
-| 26.01.88300   | January 21, 2026  | June 30, 2026    | August 31, 2026  |
-| 25.09.86705   | January 20, 2025  | February 28, 2026| April 30, 2026   |
-| 26.01.88202   | January 16, 2026  | June 30, 2026    | August 31, 2026  |
-| 26.01.88201   | January 16, 2026  | June 30, 2026    | August 31, 2026  |
-| 26.01.88200   | January 07, 2026  | June 30, 2026    | August 31, 2026  |
+| Image version | Release date       | EOS              | EOL              |
+|---------------|--------------------|------------------|------------------|
+| 26.01.88303   | January 29, 2026   | June 30, 2026    | August 31, 2026  |
+| 26.01.88203   | January 29, 2026   | June 30, 2026    | August 31, 2026  |
+| 26.01.88300   | January 21, 2026   | June 30, 2026    | August 31, 2026  |
+| 25.09.86705   | January 20, 2025   | February 28, 2026| April 30, 2026   |
+| 26.01.88202   | January 16, 2026   | June 30, 2026    | August 31, 2026  |
+| 26.01.88201   | January 16, 2026   | June 30, 2026    | August 31, 2026  |
+| 26.01.88200   | January 07, 2026   | June 30, 2026    | August 31, 2026  |
 | 25.12.87402   | December 10, 2025  | May 31, 2026    | July 31, 2026    |
 | 25.11.87301   | November 27, 2025  | April 30, 2026   | June 30, 2026   |
 | 25.11.87202   | November 13, 2025  | April 30, 2026   | June 30, 2026   |
 | 25.10.87102   | November 10, 2025  | March 31, 2026   | May 31, 2026    |
-| 25.10.87101   | October 30, 2025  | March 31, 2026   | May 31, 2026     |
-| 25.10.86901   | October 15, 2025  | March 31, 2026   | May 31, 2026     |
-| 25.10.86900   | October 08, 2025  | March 31, 2026   | May 31, 2026     |
-| 25.07.86403   | October 08, 2025  | December 31, 2025| February 28, 2026|
-| 25.09.86801   | October 08, 2025  | February 28, 2026| April 30, 2026   |
-| 25.09.86800   | September 24, 2025| February 28, 2026| April 30, 2026   |
-| 25.09.86703   | September 11, 2025| February 28, 2026| April 30, 2026   |
-| 25.08.86600   | August 27, 2025   | January 31, 2026 | March 31, 2026   |
-| 25.07.86503   | August 13, 2025   | December 31, 2025| February 28, 2026|
-| 25.07.86402   | August 12, 2025   | December 31, 2025| February 28, 2026|
-| 25.07.86401   | July 31, 2025     | December 31, 2025| February 28, 2026|
-| 25.07.86301   | July 30, 2025     | December 31, 2025| February 28, 2026|
-| 25.07.86302   | July 30, 2025     | December 31, 2025| February 28, 2026|
-| 25.07.86300   | July 17, 2025     | December 31, 2025| February 28, 2026|
-| 25.06.86106   | July 15, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86203   | July 14, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86004   | July 12, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86202   | July 03, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86104   | July 01, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86102   | June 26, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86101   | June 19, 2025     | November 30, 2025| January 31, 2026 |
-| 25.06.86100   | June 16, 2025     | November 30, 2025| January 31, 2026 |
+| 25.10.87101   | October 30, 2025   | March 31, 2026   | May 31, 2026     |
+| 25.10.86901   | October 15, 2025   | March 31, 2026   | May 31, 2026     |
+| 25.10.86900   | October 08, 2025   | March 31, 2026   | May 31, 2026     |
+| 25.07.86403   | October 08, 2025   | December 31, 2025| February 28, 2026|
+| 25.09.86801   | October 08, 2025   | February 28, 2026| April 30, 2026   |
+| 25.09.86800   | September 24, 2025 | February 28, 2026| April 30, 2026   |
+| 25.09.86703   | September 11, 2025 | February 28, 2026| April 30, 2026   |
+| 25.08.86600   | August 27, 2025    | January 31, 2026 | March 31, 2026   |
+| 25.07.86503   | August 13, 2025    | December 31, 2025| February 28, 2026|
+| 25.07.86402   | August 12, 2025    | December 31, 2025| February 28, 2026|
+| 25.07.86401   | July 31, 2025      | December 31, 2025| February 28, 2026|
+| 25.07.86301   | July 30, 2025      | December 31, 2025| February 28, 2026|
+| 25.07.86302   | July 30, 2025      | December 31, 2025| February 28, 2026|
+| 25.07.86300   | July 17, 2025      | December 31, 2025| February 28, 2026|
+| 25.06.86106   | July 15, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86203   | July 14, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86004   | July 12, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86202   | July 03, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86104   | July 01, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86102   | June 26, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86101   | June 19, 2025      | November 30, 2025| January 31, 2026 |
+| 25.06.86100   | June 16, 2025      | November 30, 2025| January 31, 2026 |
 
 <details>
     <summary>EOL Delegates</summary>

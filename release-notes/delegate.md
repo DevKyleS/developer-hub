@@ -116,7 +116,17 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 
 ## Delegate image release notes
 
-## January 2026 
+## January 2026
+
+### Version 26.01.88303 <!--January 29, 2026-->
+
+#### Fixed issues
+- Removed request object logging which was exposing some tokens for CV Connectors [CDS-118296]
+
+### Version 26.01.88203 <!--January 29, 2026-->
+
+#### Fixed issues
+- Removed request object logging which was exposing some tokens for CV Connectors [CDS-118296]
 
 ### Version 25.07.86408 <!--January 23, 2026-->
 
