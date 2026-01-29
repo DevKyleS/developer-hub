@@ -1,7 +1,7 @@
 ---
 title: Feature Management & Experimentation release notes
 sidebar_label: Feature Management & Experimentation
-date: 2026-01-23T10:00:00
+date: 2026-01-30T10:00:00
 tags: ["fme", "feature management experimentation"]
 sidebar_position: 11
 ---
@@ -12,9 +12,30 @@ import HarnessApiData from '../src/components/HarnessApiData/index.tsx';
 
 These release notes describe recent changes to Harness Feature Management & Experimentation (FME).
 
-#### Last updated: January 23, 2026
+#### Last updated: January 30, 2026
 
 ## January 2026
+
+### [New Enhancement] Improved Onboarding Flow for Harness FME
+----
+#### 2026-01-30
+
+The onboarding experience for [Harness Feature Management & Experimentation (FME)](/docs/feature-management-experimentation/getting-started/overview/) has been improved to clarify the required steps for starting FME in a Harness project. To get started, navigate to the left-hand navigation menu, select the **Grid Menu** icon, and click **Feature Management & Experimentation (FME)** in [Harness](https://app.harness.io/). 
+
+![](./static/fme/onboarding-1.png)
+
+Then, select **Start FME Free Plan**. This step initializes FME for your account and is **required for all Harness customers**. 
+
+![](./static/fme/onboarding-2.png)
+
+Customers on the [Enterprise Plan](https://www.harness.io/pricing) can then work with their [Harness sales representative](https://www.harness.io/company/contact-sales) to activate a paid FME subscription with access to additional features.
+
+This enhancement helps reduce confusion during initial setup and ensures a smoother path to getting started with Feature Management & Experimentation (FME) in the Harness platform.
+
+#### Related documentation
+
+- [Split and Harness](/docs/feature-management-experimentation/getting-started/split-and-harness#accessing-harness-fme)
+- [Harness Feature Management & Experimentation (FME)](/docs/feature-management-experimentation/getting-started/overview/)
 
 ### [New Enhancement] Identifier-based Filtering for Harness FME Projects
 ----

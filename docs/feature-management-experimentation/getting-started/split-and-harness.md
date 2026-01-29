@@ -1,14 +1,10 @@
 ---
 title: Split and Harness
-description: Learn about the Split acquisition.
+description: Learn how Split.io became Harness Feature Management & Experimentation (FME), how to access FME in the Harness platform, and what to expect when migrating or getting started.
 sidebar_position: 3
 ---
 
 In June 2024, [Harness acquired Split](https://www.harness.io/blog/harness-to-acquire-split), now called Harness Feature Management & Experimentation (FME). This page provides information to support you during the transition to Feature Management & Experimentation (FME) in the Harness platform.
-
-:::warning Split to Harness FME
-If you are currently accessing Split via `app.split.io`, our customer success and support teams will be in contact with you to help you ensure a smooth transition into FME on `app.harness.io`. For more information, see [Split to Harness Migration](/docs/feature-management-experimentation/split-to-harness).
-:::
 
 ## Get started with Harness
 
@@ -16,9 +12,55 @@ If you're new to Harness, go to [Get started with Harness](/docs/category/get-st
 
 ## Accessing Harness FME
 
-When your account is [migrated from Split to Harness](/docs/feature-management-experimentation/split-to-harness/migrated-account), you will access Feature Management & Experimentation (FME) through the Harness platform. Most migrated accounts use `app.harness.io`, but some customers (depending on their cluster) will use a different base URL.
+Whether you are a new Harness user, an existing Harness customer, or a customer migrating from Split, accessing Feature Management & Experimentation (FME) starts in the [Harness platform](https://app.harness.io/). 
+
+:::warning Split to Harness FME
+If you are currently accessing Split via `app.split.io`, our customer success and support teams will be in contact with you to help you ensure a smooth transition into FME on `app.harness.io`. For more information, see [Split to Harness Migration](/docs/feature-management-experimentation/split-to-harness).
+:::
+
+To start [Harness Feature Management & Experimentation (FME)](/docs/feature-management-experimentation/getting-started/overview/):
+
+1. In the Harness navigation menu, select the **Grid menu** icon.
+
+   ![](./static/nav-1.png)
+
+1. In the modal, select **Feature Management & Experimentation (FME)** under `DevOps Modernization`. You are redirected to the Harness FME module landing page.
+
+   ![](./static/nav-2.png)
+
+1. Click **Start FME Free Plan**. After selecting **Start FME Free Plan**, your account is initialized with the FME Free Plan, allowing you to begin exploring FME in the Harness platform.
+
+   ![](./static/nav-3.png)
+
+   :::info Selecting Start FME Free Plan
+   Selecting **Start FME Free Plan** is a required step for all Harness customers, regardless of whether you intend to use the [Free or Enterprise Plan](https://www.harness.io/pricing).
+   :::
+
+1. If you would like to upgrade to the Enterprise plan and access additional features and capabilities, [contact your Harness sales representative](https://www.harness.io/company/contact-sales). 
+    
+    ![](./static/nav-4.png)
+
+    <details>
+    <summary>Migrated Split Account?</summary>
+
+    When a Split account is migrated to Harness FME, the structure of your [Harness organizations](/docs/feature-management-experimentation/split-to-harness/administering-migrated-account#harness-organizations-and-environments), [projects](/docs/feature-management-experimentation/split-to-harness/administering-migrated-account#projects), and [resource groups](/docs/feature-management-experimentation/split-to-harness/administering-migrated-account#user-groups) depend on whether your account is on the **Free** or **Enterprise Plan** at the time of the migration.
+
+
+    | Plan | Organization created | Project location | Resource group |
+    |------|----------------------|------------------|----------------|
+    | **Free** | Default Harness organization | Default organization | `All Project Level Resources` |
+    | **Enterprise** | `<legacy Split account name> FME` | Dedicated FME organization | `FME All Resources` |
+
+    - On the **Free plan**, legacy Split projects are recreated as Harness projects in the default Harness organization.
+    - On the **Enterprise plan**, a Harness organization named **`<legacy Split account name> FME`** is created, and legacy Split projects are recreated as Harness projects within this organization.
+    
+    <br /> In both cases, each Harness project created by the migration script links to its corresponding legacy Split (FME) project.
+
+    </details>
 
 ### Harness clusters and base URLs
+
+When your account is [migrated from Split to Harness](/docs/feature-management-experimentation/split-to-harness/migrated-account), you will access **Feature Management & Experimentation (FME)** through the Harness platform. Most migrated accounts use `app.harness.io`, but some customers (depending on their cluster) will use a different base URL.
 
 To identify which Harness cluster your account is in, navigate to **Account Settings** and select **Account Details**. 
 
