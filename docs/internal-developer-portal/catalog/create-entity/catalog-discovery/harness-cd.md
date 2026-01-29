@@ -121,6 +121,52 @@ Auto-discovery is now suspended.
 
 ---
 
+## CD Auto-Discovery with IDP_INTEGRATIONS Feature Flag
+
+:::info
+This enhanced CD Auto-Discovery experience requires the **`IDP_INTEGRATIONS`** feature flag to be enabled. Contact [Harness Support](mailto:support@harness.io) to enable it.
+:::
+
+When the `IDP_INTEGRATIONS` feature flag is enabled, the CD Auto-Discovery integration transforms into a more powerful workflow with enhanced discovery and management capabilities for CD services.
+
+### What changes with the IDP_INTEGRATIONS feature flag?
+
+The CD Auto-Discovery workflow becomes more comprehensive with new capabilities:
+
+**Enhanced discovery and management:** Instead of services being automatically imported, you now have a **Discovered** tab where all CD services appear first. Use the **Sync Services** button to manually refresh and fetch the latest services within your configured scope. From here, you can review each service (seeing its name, kind, type, scope, and available actions) and decide whether to **register it as a new entity** or **merge it with an existing catalog entity**. This gives you complete control over how services are brought into your catalog. Once you import services (individually or in bulk), they move to the **Imported** tab for easy management.
+
+<DocImage path={require('./static/sync.png')} alt="Sync Services" title="Click to view full size image" />
+
+**Entity sync behavior:** CD services sync the same fields as before (name, identifier, description, tags), but with the enhanced workflow you get more visibility into the sync process. If an entity with the same CD service ID already exists, the system performs a merge operation automatically. You can view which entities are linked to which CD services in the Imported tab.
+
+**Flexible import options:** You can import services one at a time or select multiple services for bulk import. There's also an **Auto-import toggle** that automatically imports all future discovered services, giving you the choice between manual curation and automatic syncing.
+
+<DocImage path={require('./static/import-toggle.png')} alt="Import Toggle" title="Click to view full size image" />
+
+**Register vs Merge:** For each discovered service, choose how to bring it into your catalog. **Register** creates a fresh catalog entry, while **Merge** links the CD service to an existing entity, combining information from both sources. This is particularly useful when you already have catalog entities defined and want to enrich them with CD service data.
+
+**Imported services management:** The **Imported** tab shows all services that have been brought into your catalog, displaying the relationship between CD services and IDP entities. You can unlink services at any time using the three-dot menu, which stops sync updates while keeping the IDP entity intact.
+
+<DocImage path={require('./static/imported.png')} alt="Imported Services" title="Click to view full size image" />
+
+**Configuration changes:** When configuring the sync scope, you'll use the **Configuration** button instead of **Edit**, and confirm changes with **Confirm** instead of **Save Changes**. The scope selection options remain the same (All Scopes or specific organizations/projects), but you can now also select specific account-level entities.
+
+In addition to scope selection, you can now configure **DORA metrics settings**:
+- Set the **deployment cycle period** (in days) to define the time window for calculating DORA metrics
+- Once configured, DORA metrics from CD (deployment frequency, lead time, change failure rate, and mean time to recovery) will be automatically sent to the catalog entity
+
+<DocImage path={require('./static/config.png')} alt="Configuration" title="Click to view full size image" />
+
+:::info Scope Filter Changes
+If you remove a project or organization from the sync scope, existing linked entities from that scope remain in your catalog unchanged but stop receiving updates. The link between the CD service and IDP entity remains active but sync is paused. To resume sync, add the scope back to the filter.
+:::
+
+**Suspend behavior:** When you suspend auto-discovery with the `IDP_INTEGRATIONS` feature flag enabled, new CD services won't appear in the Discovered tab, and the Discovered tab won't refresh automatically. Existing entities remain unchanged, and you can re-enable auto-discovery at any time.
+
+**Additional RBAC requirement:** All operations for CD Auto-Discovery with the `IDP_INTEGRATIONS` feature flag require the **IDP Integration Edit** permission (`IDP_INTEGRATION_EDIT`) on the **IDP Integration** resource type.
+
+---
+
 
 
 
