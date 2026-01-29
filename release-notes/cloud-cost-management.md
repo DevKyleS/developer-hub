@@ -25,6 +25,20 @@ We've migrated to LabelsV2, which preserves your original label keys while drama
 
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
 
+
+## January 2025 - Hotfix: Changes to Anomaly Detection
+#### Deployment Date: January 30, 2025 (Prod-1)
+
+This release focuses on improving the clarity, accuracy, and usability of Anomalies across the product. We’ve enhanced the UI, corrected spend calculations and date logic, expanded API filtering capabilities, and improved alert accuracy so teams can detect, understand, and act on cost anomalies with greater confidence.
+
+#### What’s new
+
+- Fixed an issue where the **resource name and tags** overlapped in the **Anomalies resources table**.
+- Replaced the **Cost Impact** column with **One-Day Change** in the Anomalies drill-down resource table for clearer day-over-day insights.
+- Improved **UX and consistency** across the Anomalies home and drill-down pages. Spend metrics were renamed for clarity, **Expected Spend** and **% Change** were added, layouts were simplified to reduce visual noise, and **date comparisons** and **spend calculations** were corrected. We also fixed several long-standing UI issues (multi-cloud sorting, table labels/layout, missing tooltips, and comment ordering) to improve reliability and usability.
+- Enhanced the **Anomalies fetch API** to support **Perspective-based filters**. Anomalies can now be mapped using **AWS Account Name/ID**, **AWS Service**, and **AWS Usage Type**.
+- **Daily budget alert emails** now display the **date the cost was incurred** instead of the alert generation time, ensuring accurate context when cloud cost data arrives with a delay.
+
 ## January 2025 - Version 1.75.1
 #### Deployment Date: January 24, 2025 (Prod-1)
 
