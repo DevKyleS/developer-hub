@@ -74,17 +74,21 @@ External Policy Failures indicate that a policy or compliance rule defined in th
 
 External policy failures are surfaced in Harness STO as a distinct **Issue Type** so that you can view External Policy Failures alongside other scan results.
 
+In the Settings, you can enable the External Policy Failures to map policy failures to a selected severity level - `Critical`, `High`, `Medium`, or `Low`. Once enabled, external policy failures are treated as vulnerabilities instead of `Info` level issues.  This setting takes effect from the next pipeline execution.
+
+<DocImage path={require('./static/external-policy.png')} width="90%" height="90%" title="Click to view full size image" />
+
+
 Scanners that currently support External Policy Failures:
 
-1. [Aqua Security](/docs/security-testing-orchestration/sto-techref-category/aquasec-scanner-reference#configure-external-policy-failures)
-2. [Wiz](/docs/security-testing-orchestration/sto-techref-category/wiz/artifact-scans-with-wiz#configure-external-policy-failures)
-3. [SonarQube](/docs/security-testing-orchestration/sto-techref-category/sonarqube-sonar-scanner-reference#configure-external-policy-failures)
+1. [Aqua Security](/docs/security-testing-orchestration/sto-techref-category/aquasec-scanner-reference#view-aquasec-assurance-policy-violations)
+2. [Wiz](/docs/security-testing-orchestration/sto-techref-category/wiz/artifact-scans-with-wiz/#view-wiz-policy-failures)
+3. [SonarQube](/docs/security-testing-orchestration/sto-techref-category/sonarqube-sonar-scanner-reference#view-sonarqube-quality-gate-failures)
 4. [Prisma Cloud](/docs/security-testing-orchestration/sto-techref-category/prisma-cloud-scanner-reference#configure-external-policy-failures)
-5. [Anchore](/docs/security-testing-orchestration/sto-techref-category/anchore-enterprise-scanner-reference#configure-external-policy-failures)
-6. [Veracode](/docs/security-testing-orchestration/sto-techref-category/veracode-scanner-reference#configure-external-policy-failures)
+5. [Anchore](/docs/security-testing-orchestration/sto-techref-category/anchore-enterprise-scanner-reference#view-anchore-policy-failures)
+6. [Veracode](/docs/security-testing-orchestration/sto-techref-category/veracode-scanner-reference#view-veracode-policy-failures)
 
 ### Severity-based filtering
-
 Issues are summarized by severity levels (**Critical**, **High**, **Medium**, **Low**, **Info**) as clickable tiles, serving as additional filters. You can select multiple tiles.
 
 <DocImage path={require('./static/filter-issue-by-severity.png')} width="90%" height="90%" title="Click to view full size image" />
