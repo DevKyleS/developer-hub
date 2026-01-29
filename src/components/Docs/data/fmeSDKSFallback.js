@@ -17,6 +17,11 @@ export const fallbackSDKs = [
     link: '/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/browser-sdk#configure-fallback-treatments',
   },
   {
+    name: 'Flutter Plugin',
+    img: '/provider-logos/flutter-logo.svg',
+    link: '/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/flutter-plugin#configure-fallback-treatments',
+  },
+  {
     name: 'JavaScript SDK',
     img: '/provider-logos/js-logo.svg',
     link: '/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/javascript-sdk#configure-fallback-treatments',
