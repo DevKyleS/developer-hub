@@ -5,12 +5,12 @@ import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { certType } from "./CertCard";
 import { ActivePage, getCertLevel } from "./LandingPage";
-// import AdminCertificationExamDetails from "./data/dbdevops-certification-admin-exam-details.md";
-// import AdminCertificationReviewDetails from "./data/dbdevops-certification-admin-review-guide.md";
-// import DeveloperCertificationExamDetails from "./data/dbdevops-certification-developer-exam-details.md";
-// import DeveloperCertificationReviewGuide from "./data/dbdevops-certification-developer-review-guide.md";
-// import ArchitectCertificationReviewDetails from "./data/dbdevops-certification-architect-review-guide.md";
-// import ArchitectCertificationExamDetails from "./data/dbdevops-certification-architect-exam-details.md";
+// import AdminCertificationExamDetails from "./data/dbdo-certification-admin-exam-details.md";
+// import AdminCertificationReviewDetails from "./data/dbdo-certification-admin-review-guide.md";
+import DeveloperCertificationExamDetails from "./data/dbdo-certification-developer-exam-details.md";
+import DeveloperCertificationReviewGuide from "./data/dbdo-certification-developer-review-guide.md";
+// import ArchitectCertificationReviewDetails from "./data/dbdo-certification-architect-review-guide.md";
+// import ArchitectCertificationExamDetails from "./data/dbdo-certification-architect-exam-details.md";
 import IltCard from "./Card";
 import { ilt } from "./data/iltData";
 import { spt } from "./data/sptData";
@@ -269,8 +269,7 @@ export default function CertificationsDBDEVOPS() {
                 <div className={styles.innerCard}>
                   <div className={styles.left}>
                     <h2>
-                      Database DevOps - Developer (BETA COMING
-                      SOON)
+                      Database DevOps - Developer
                     </h2>
                     <img
                       src={`${baseUrl}img/cert_dev_dbdo_badge.svg`}
@@ -288,17 +287,17 @@ export default function CertificationsDBDEVOPS() {
                       Assesses the fundamental skills to manage your
                       applications with DB DevOps projects.
                     </div>
-                    {/*
+                    
                     <DeveloperCertificationReviewGuide />
 
                     <div className={styles.btnContainer}>
-                      <Link href="https://university-registration.harness.io/database-devops-developer">
+                      <Link href="https://university-registration.harness.io/page/harness-certified-expert-dbdevops">
                         <button className={styles.moreDetails}>
                           Register for Exam
                         </button>
                       </Link>
                     </div> 
-                    */}
+                    
 
                   </div>
                 </div>
@@ -307,14 +306,14 @@ export default function CertificationsDBDEVOPS() {
 
             {/* Developer Exam Details */}
 
-            {/*
+            
             <div className={styles.examDetails}>
               <h2 id="exam-details">Exam Details</h2>
               <div className={styles.examDetailsCard}>
             
                 <DeveloperCertificationExamDetails />
                 <div className={styles.btnContainer}>
-                  <Link href="https://university-registration.harness.io/database-devops-developer">
+                  <Link href="https://university-registration.harness.io/page/harness-certified-expert-dbdevops">
                     <button className={styles.moreDetails}>
                       Register for Exam
                     </button>
@@ -323,7 +322,6 @@ export default function CertificationsDBDEVOPS() {
 
               </div>
             </div>
-*/}
           </div>
 
           {/* Administrator Tab Content */}
