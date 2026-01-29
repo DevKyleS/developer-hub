@@ -16,6 +16,10 @@ tags:
 
 The Platform Integration feature in Harness IDP automatically syncs all scope-level entities from the Harness Platform as IDP catalog entities. This integration creates a hierarchical view of your Harness account structure, including accounts, organizations, and projects, making them discoverable and manageable within the IDP catalog.
 
+:::info
+This feature requires the **`IDP_INTEGRATIONS`** feature flag to be enabled. Contact [Harness Support](mailto:support@harness.io) to enable it.
+:::
+
 ## Overview
 
 Platform Integration synchronizes your entire Harness Platform hierarchy into the IDP catalog as entities with a special `hierarchy` kind. This provides a unified view of your organizational structure and all associated services across accounts, organizations, and projects.

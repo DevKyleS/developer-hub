@@ -40,6 +40,54 @@ Review the notes below for details about recent changes to Harness Internal Deve
 
 ### New Features
 
+#### Platform Integration for Catalog Auto-Discovery
+
+Your Harness account structure (accounts, organizations, and projects) is now automatically synced to the IDP catalog as hierarchy entities. Enable Platform Integration with a single click and get:
+
+- Complete organizational visibility across your entire Harness Platform
+- Hierarchical navigation from account level down to individual projects
+- Real-time sync that keeps entities up-to-date automatically
+- Foundation for powerful aggregation and reporting capabilities
+
+![Platform Integration](./static/internal-developer-portal/hierarchy-entities.png)
+
+**Learn more:** [Platform Integration Documentation](/docs/internal-developer-portal/catalog/create-entity/catalog-discovery/platform-cd)
+
+---
+
+#### Aggregation Rules for Metrics Rollup
+
+Roll up metrics from services to projects, organizations, and accounts automatically with aggregation rules. Create rules to compute aggregated values and display them on hierarchy entities:
+
+- Compute sum, average, maximum, minimum, or median from any entity properties
+- Display aggregated DORA metrics, test coverage, or custom metrics at any hierarchy level
+- Use filters to select which entities to aggregate
+- Show results using StatsCard and AggregatedTable components in layouts
+- Automatic refresh every 12 hours, or trigger on-demand updates
+
+![Aggregation Rules](./static/internal-developer-portal/aggregation-rules-list.png)
+
+**Learn more:** [Aggregation Rules Documentation](/docs/internal-developer-portal/catalog/aggregation-rules)
+
+---
+
+#### Hierarchy Entity Layouts with Specialized Components
+
+Customize how hierarchy entities display with four new specialized layout components:
+
+- **HierarchicalEntitiesTable** to show direct child entities
+- **EntitiesByScopeTable** to display all entities at the current scope
+- **StatsCard** to highlight aggregated metrics
+- **AggregatedTable** for drill-down views with individual values from child entities
+
+Configure layouts for each hierarchy type (account, organization, project) and add multiple columns to display various metrics side-by-side.
+
+![Hierarchy Entity Layout](./static/internal-developer-portal/hierarchy-layout.png)
+
+**Learn more:** [Hierarchy Entity Layouts Documentation](/docs/internal-developer-portal/layout-and-appearance/catalog#hierarchy-entity-layouts)
+
+---
+
 #### User Context in Dynamic Workflow Pickers
 
 Building user-aware workflows previously required complex workarounds to pass user information to APIs and display user context within forms.
@@ -71,9 +119,27 @@ Environment Management now supports drift detection for infrastructure resources
 The system chains and dynamically executes drift detection pipelines for each workspace in your environment, checking infrastructure resources against their expected state and highlighting discrepancies. Each workspace can have its drift detection pipeline configured at the workspace, workspace template, or project level. This enables you to maintain infrastructure consistency, improve security by identifying unauthorized changes, and ensure compliance across your environments.
 
 **Learn more:** [Drift Detection for Environment Infrastructure](/docs/internal-developer-portal/environment-management/environments#drift-detection)
+
 ---
 
 ### Enhancements & Bug Fixes
+
+#### Enhanced CD Services Auto-Discovery
+
+When IDP Integration is enabled, CD Auto-Discovery transforms into a more powerful workflow with full control over how services are brought into your catalog:
+
+- **Discovered and Imported tabs** for better visibility into available services and imported entities
+- **Register or Merge options** to create fresh catalog entries or link CD services to existing entities
+- **Bulk import with auto-import toggle** for flexible manual curation or automatic syncing
+- **Manual sync control** to refresh services on demand
+- **Unlink functionality** to disconnect services while preserving catalog entities
+
+This enhanced workflow gives you complete control over service discovery and import, making it easy to curate your catalog exactly how you want it.
+
+
+**Learn more:** [CD Auto-Discovery with Platform Integration](/docs/internal-developer-portal/catalog/create-entity/catalog-discovery/harness-cd#cd-auto-discovery-with-platform-integration)
+
+---
 
 #### Cross-Scope Resource References in Environment Management
 

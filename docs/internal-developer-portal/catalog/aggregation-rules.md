@@ -17,7 +17,7 @@ tags:
 Aggregation rules allow you to roll up metrics from lower-level entities to higher levels in the organizational hierarchy. This enables you to view aggregated metrics at account, organization, and project levels, providing insights into performance across your entire platform.
 
 :::info
-Aggregation Rules are behind a feature flag. Contact your Harness representative to enable this feature.
+This feature requires the **`IDP_AGGREGATION_RULES`** feature flag to be enabled. Contact [Harness Support](mailto:support@harness.io) to enable it.
 :::
 
 ## Overview
