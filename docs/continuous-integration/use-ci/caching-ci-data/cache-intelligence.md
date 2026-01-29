@@ -404,6 +404,24 @@ Add the following snippet under the `<build>` section to configure the apache-ra
 </build>
 ```
 
+### Gradle cache location
+
+Harness sets the following environment variable for Gradle builds:
+
+```
+GRADLE_USER_HOME=/harness/.gradle
+```
+
+As a result:
+
+- All Gradle dependencies and caches are saved and restored from `/harness/.gradle` because `/harness` is a shared directory that can be accessed across all steps.
+- Cache Intelligence and the Save/Restore Cache steps are optimized for this path.
+- This location is different from the default Gradle cache location (`~/.gradle`).
+
+:::info
+Cache Intelligence is not currently supported on local (self-managed) infrastructure.
+:::
+
 Go to the [CI Knowledge Base](/docs/continuous-integration/ci-articles-faqs/continuous-integration-faqs) for questions and issues related to caching, data sharing, dependency management, workspaces, shared paths, and more. For example:
 
 * [Why are changes made to a container image filesystem in a CI step is not available in the subsequent step that uses the same container image?](/docs/continuous-integration/ci-articles-faqs/continuous-integration-faqs#why-are-changes-made-to-a-container-image-filesystem-in-a-ci-step-is-not-available-in-the-subsequent-step-that-uses-the-same-container-image)
