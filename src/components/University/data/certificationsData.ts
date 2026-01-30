@@ -93,6 +93,16 @@ export const university: CardItem[] = [
     // numberOfCerts: 1,
   },
     {
+    title: "Database DevOps  - Developer",
+    module: MODULES.dbdevops,
+    type: certType.developer,
+    description:
+      "DBDO Developer focuses on the fundamental skills to integrate your database changes into a CI/CD pipeline.",
+    version: "Harness DBDO Paid Plans",
+    link: "/university/database-devops?lvl=developer",
+    // numberOfCerts: 1,
+  },
+    {
     title: "Feature Management & Experimentation  - Developer",
     module: MODULES.fme,
     type: certType.developer,

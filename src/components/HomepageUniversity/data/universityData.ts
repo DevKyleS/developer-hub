@@ -60,6 +60,15 @@ export const university: CardItem[] = [
     ILT_available: true,
   },
 
+    {
+    title: "Database DevOps",
+    module: MODULES.dbdevops,
+    description:
+      "Integrate database changes into your CI/CD pipeline.",
+    link: "/university/database-devops",
+    numberOfCerts: 1,
+  },
+
   {
     title: "Feature Management & Experimentation",
     module: MODULES.fme,
