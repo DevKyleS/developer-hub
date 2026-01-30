@@ -381,6 +381,120 @@ For more information on how to setup an Azure connector, go to [Azure Connector 
 ```
 </details>
 
+### GCP Connector
+
+:::note
+This feature requires Harness Delegate version 88303 or later.
+:::
+
+Harness Terraform steps support authenticating with Google Cloud Platform (GCP) using GCP connectors for target infrastructure provisioning. This enables seamless integration with GCP resources when running Terraform Plan, Apply, and Destroy steps with inline Terraform configuration.
+
+For information on setting up a GCP connector, go to [Connect to Google Cloud Platform (GCP)](/docs/platform/connectors/cloud-providers/connect-to-google-cloud-platform-gcp).
+
+#### Authentication Methods
+
+GCP connectors support three authentication methods for Terraform steps:
+
+**Manual Credentials (ManualConfig)**
+
+Use this method to explicitly provide GCP service account credentials stored in Harness Secret Manager. The connector references a secret containing the GCP Service Account Key in JSON format. This approach gives you direct control over which credentials are used for provisioning.
+
+**Inherit From Delegate (InheritFromDelegate)**
+
+This method uses credentials from the delegate's IAM role, such as a GCE instance service account or GKE workload identity. At least one delegate selector must be specified for this configuration. This is ideal when your delegates already have appropriate GCP permissions attached.
+
+**OIDC Authentication (OidcAuthentication)**
+
+This method enables federated authentication using OpenID Connect for workload identity federation. It requires configuring a GCP Workload Identity Pool, an OIDC Provider, and a service account for impersonation. This is the recommended approach for production environments as it eliminates the need to manage long-lived credentials.
+
+#### YAML Configuration Example
+
+<details>
+<summary>Sample YAML</summary>
+
+```yaml
+- step:
+    type: TerraformPlan
+    name: TerraformPlan_1
+    identifier: TerraformPlan_1
+    spec:
+      provisionerIdentifier: gcp_terraform_provision
+      configuration:
+        command: Apply
+        configFiles:
+          store:
+            spec:
+              connectorRef: githubConnector
+              repoName: terraform-repo
+              gitFetchType: Branch
+              branch: main
+              folderPath: tf/gcp
+            type: Github
+        providerCredential:
+          type: Gcp
+          spec:
+            connectorRef: gcpOidcConnector
+            project: cd-play
+    timeout: 10m
+```
+</details>
+
+#### GCP Connector Configuration Examples
+
+<details>
+<summary>Manual Credentials Connector</summary>
+
+Use this configuration when you want to provide GCP service account credentials explicitly via Harness Secret Manager.
+
+```yaml
+connector:
+  type: Gcp
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        secretKeyRef: account.gcp_service_account_key
+    delegateSelectors:
+      - gcp-delegate
+```
+</details>
+
+<details>
+<summary>Inherit From Delegate Connector</summary>
+
+Use this configuration when your delegate already has GCP credentials via IAM role (GCE instance service account or GKE workload identity).
+
+```yaml
+connector:
+  type: Gcp
+  spec:
+    credential:
+      type: InheritFromDelegate
+      spec:
+        delegateSelectors:
+          - gcp-delegate-with-iam
+```
+</details>
+
+<details>
+<summary>OIDC Authentication Connector</summary>
+
+Use this configuration for federated authentication using OpenID Connect workload identity federation.
+
+```yaml
+connector:
+  type: Gcp
+  spec:
+    credential:
+      type: OidcAuthentication
+      spec:
+        workloadPoolId: projects/123456789/locations/global/workloadIdentityPools/harness-pool
+        providerId: harness-oidc-provider
+        gcpProjectId: my-gcp-project-id
+        serviceAccountEmail: harness-workload-identity@my-gcp-project-id.iam.gserviceaccount.com
+```
+</details>
+
 ## Backend Configuration
 
 The **Backend Configuration** section contains the [remote state](https://www.terraform.io/docs/language/state/remote.html) values.
