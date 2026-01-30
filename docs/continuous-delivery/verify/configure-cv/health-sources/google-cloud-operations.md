@@ -30,12 +30,15 @@ In **Health Sources**, click **Add**. The **Add New Health Source** settings
 
 2. In **Health Source Name**, enter a name for the Health Source.
 3. Under **Connect Health Source**, click **Select Connector**.
-4. In **Connector** settings, you can either choose an existing connector GCP connector or click **New Connector.**
+4. In **Connector** settings, you can either choose an existing connector GCP connector or click **New Connector.**
 
    ![](./static/verify-deployments-with-google-cloud-operations-125.png)
 
-5. Click **Apply Selected**. The Connector is added to the Health Source.
-6. In **Select Feature**, select the feature to be used.
+5. Click **Apply Selected**. The Connector is added to the Health Source.
+
+6. (Optional) In **GCP Project ID**, select a project from the dropdown to query metrics or logs from a different project than the one configured in your connector. The dropdown auto-populates with all GCP projects that your connector's service account has access to. You can also enter a custom project ID, but the connector must have access to that project, otherwise an error will occur when fetching data. Leave this field empty to use the connector's default project.
+
+7. In **Select Feature**, select the feature to be used.
 
 ![](./static/verify-deployments-with-google-cloud-operations-126.png)
 
