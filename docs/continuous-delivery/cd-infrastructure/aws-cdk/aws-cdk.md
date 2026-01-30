@@ -8,7 +8,7 @@ redirect_from:
   - /docs/continuous-delivery/cd-infrastructure/aws-cdk
 ---
 
-AWS Cloud Development Kit (AWS CDK), is an open-source software development framework that allows developers to provision AWS infrastructure resources using familiar programming languages, such as Go, Python, Java, C#, etc. CDK simplifies infrastructure as code (IaC) by abstracting away many of the low-level details and providing a higher-level, programmatic approach.
+AWS Cloud Development Kit (AWS CDK) is an open-source software development framework that allows developers to provision AWS infrastructure resources using familiar programming languages, such as Go, Python, Java, C#, etc. CDK simplifies infrastructure as code (IaC) by abstracting away many of the low-level details and providing a higher-level, programmatic approach.
 
 This topic provides steps on using Harness to provision a target AWS environment or resources using AWS CDK.
 
@@ -17,6 +17,8 @@ This topic provides steps on using Harness to provision a target AWS environment
 - You can add AWS CDK provisioning steps to Harness Deploy and Custom stage types.
 - You can perform ad hoc provisioning or provision the target environment for a deployment as part of the deployment stage.
 - AWS OIDC connectors are supported for CDK deployments starting with delegate version 859xx or later.
+- Multi-account deployments are supported, allowing you to deploy to different AWS accounts using a single connector by overriding the region and assuming a different IAM role. For details, see [AWS connector configuration (optional)](#aws-connector-configuration-optional).
+
 ## Demo Video
 
 <DocVideo src="https://www.loom.com/share/5a118a7ace3e49819c697b7131468990?sid=36ae85f0-0a39-4c5c-ba62-0e1a9d52c4de" />
@@ -278,7 +280,7 @@ Step settings:
 - **App Path:** The path to the CDK app. The Git Clone step listed the app repository in its **Repository Name** setting. **App Path** must include the path to the app folder in that directory.
 - **AWS CDK Bootstrap Command Options:** You can add any CDK parameters you can see in the `cdk bootstrap --help` command, just like you would in the `cdk` command-line tool. For example, `--verbose`. For more information, go to [Parameters](https://docs.aws.amazon.com/cdk/v2/guide/parameters.html) from AWS.
 
-For the remaining settings, see [Step settings common to multiple steps](/docs/continuous-delivery/cd-infrastructure/aws-cdk#step-settings-common-to-multiple-steps) below.
+For the remaining settings, including [AWS connector configuration](#aws-connector-configuration-optional), see [Step settings common to multiple steps](#step-settings-common-to-multiple-steps) below.
 
 ## AWS CDK Diff step
 
@@ -296,7 +298,7 @@ Step settings:
 
   If you omit a stack name, it can cause a step failure. If your app uses only one stack, you do not need to enter its name.
 
-For the remaining settings, see [Step settings common to multiple steps](/docs/continuous-delivery/cd-infrastructure/aws-cdk#step-settings-common-to-multiple-steps) below.
+For the remaining settings, including [AWS connector configuration](#aws-connector-configuration-optional), see [Step settings common to multiple steps](#step-settings-common-to-multiple-steps) below.
 
 ## AWS CDK Synth step
 
@@ -311,7 +313,7 @@ Step settings:
 - **Stack Names:** If you are using a multi-stack app, enter the names of each stack you want to passed to `cdk` command. For example, if your stack names are `cdkTest1Stack1` and `cdkTest1Stack2`, you would select **Add** and enter two stack names, one for each stack.
 - **Export Template:** Exports the JSON template(s) for the stacks entered in **Stack Names**. If no stacks are listed in Stack Names, and **Export Template** is enabled, Harness export templates for all stacks in the app.
 
-For the remaining settings, see [Step settings common to multiple steps](/docs/continuous-delivery/cd-infrastructure/aws-cdk#step-settings-common-to-multiple-steps) below.
+For the remaining settings, including [AWS connector configuration](#aws-connector-configuration-optional), see [Step settings common to multiple steps](#step-settings-common-to-multiple-steps) below.
 
 ### Export and reference JSON templates
 
@@ -396,8 +398,12 @@ Step settings:
   ```
   /usr/local/bin/cdk deploy cdkTest3stack1 cdkTest3stack2 --parameters cdkTest3stack1:sname=stackOneSecretNameStage1ZfBcO4T6Te --parameters cdkTest3stack2:sname=stackTwoSecretNameStage1mEDUcmGTm1 -c stack1_name=cdkTest3stack1 -c stack2_name=cdkTest3stack2 --outputs-file cdk-outputs.json
   ```
+:::note Multi-account deployments
+You can deploy to different AWS accounts using the same connector by configuring the optional AWS connector settings. This allows you to override the region and assume a different IAM role at the step level. For details, see [AWS connector configuration (optional)](#aws-connector-configuration-optional).
+:::
 
-For the remaining settings, see [Step settings common to multiple steps](/docs/continuous-delivery/cd-infrastructure/aws-cdk#step-settings-common-to-multiple-steps) below.
+
+For the remaining settings, including [AWS connector configuration](#aws-connector-configuration-optional), see [Step settings common to multiple steps](#step-settings-common-to-multiple-steps) below.
 
 :::warning
 
@@ -492,7 +498,7 @@ Step settings:
 - **AWS CDK Destroy Command Options:** You can add any CDK parameters you can see in the `cdk destroy --help` command, just like you would in the `cdk` command-line tool.
 - **Stack Names:** If you are using a multi-stack app, enter the names of each stack you want to destroy here. For example, if your stack names are `cdkTest1Stack1` and `cdkTest1Stack2`, you would select **Add** and enter two stack names, one for each stack.
 
-For the remaining settings, see [Step settings common to multiple steps](/docs/continuous-delivery/cd-infrastructure/aws-cdk#step-settings-common-to-multiple-steps) below.
+For the remaining settings, including [AWS connector configuration](#aws-connector-configuration-optional), see [Step settings common to multiple steps](#step-settings-common-to-multiple-steps) below.
 
 ## AWS CDK rollback steps
 
@@ -546,6 +552,44 @@ Step settings:
 ## Step settings common to multiple steps
 
 The followings settings are common to the CDK steps and configure the pods used for each step.
+
+### AWS connector configuration (optional)
+
+These optional settings enable multi-account deployments by allowing you to override the default AWS connector settings. When you configure an AWS connector in Harness, it typically connects to a specific AWS account. With these settings, you can deploy to different AWS accounts using the same connector by overriding the region and assuming a different IAM role at the step level.
+
+<div align="center">
+  <DocImage path={require('./static/connector-credentials.png')} width="60%" height="60%" title="Click to view full size image" />
+</div>
+
+- **AWS Connector (optional):** Select a Harness AWS connector to use for this step. When specified, this connector provides the credentials for AWS authentication.
+- **Region (optional):** Override the region configured in the selected AWS connector. Use this to perform CDK operations in a different region.
+- **Role ARN (optional):** Specify an IAM role ARN that the connector should assume. The role must have a trust policy that allows the connector's account to assume it. This enables performing CDK operations in different AWS accounts.
+
+For example, if you have an AWS connector configured for Account A, you can deploy CDK stacks to Account B by providing the Region and Role ARN for Account B in the step configuration. The connector from Account A will assume the specified role in Account B to perform the deployment.
+
+#### Setting up cross-account access
+
+To enable cross-account deployments, configure a trust policy on the target account's IAM role. This policy must allow the source account (where your AWS connector is configured) to assume the role.
+
+Here's an example trust policy for the target Role ARN:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::1234xxxx:root"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {}
+    }
+  ]
+}
+```
+
+Replace `1234xxxx` with the AWS account ID of your source account (the account associated with your Harness AWS connector). The IAM role you specify in **Role ARN** must have sufficient permissions to perform the CDK operations (bootstrap, deploy, destroy, etc.) in the target account.
 
 ### Privileged
 
