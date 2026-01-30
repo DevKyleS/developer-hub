@@ -28,7 +28,7 @@ Additionally, each repository is subject to default storage limits based on your
 
 :::info
 
-All files stored in git are limited to 100 MB in size by default, regardless of plan. This file-size limitation can be modified per repository via the [API](https://apidocs.harness.io/tag/repository#operation/updateGeneralSettings).
+All files stored in git are limited to 100 MB in size by default, regardless of plan. This file-size limitation can be modified per repository via the [API](https://apidocs.harness.io/repository/updategeneralsettings).
 
 :::
 
