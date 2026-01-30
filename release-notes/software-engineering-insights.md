@@ -1,7 +1,7 @@
 ---
 title: Software Engineering Insights release notes
 sidebar_label: Software Engineering Insights
-date: 2026-01-15T10:00:10
+date: 2026-01-30T10:00:10
 sidebar_position: 15
 ---
 
@@ -12,13 +12,44 @@ import TabItem from '@theme/TabItem';
 
 These release notes describe recent changes to Harness Software Engineering Insights.
 
-#### Last updated: January 15, 2026
+#### Last updated: January 30, 2026
 
 :::info About Harness Release Notes
 * **Progressive deployment:** Harness deploys changes to Harness SaaS clusters on a progressive basis. This means that the features described in these release notes may not be immediately available in your cluster. To identify the cluster that hosts your account, go to your **Account Overview** page in Harness. In the new UI, go to **Account Settings**, **Account Details**, **General**, **Account Details**, and then **Platform Service Versions**.
 * **Security advisories:** Harness publishes security advisories for every release. Go to the [Harness Trust Center](https://trust.harness.io/?itemUid=c41ff7d5-98e7-4d79-9594-fd8ef93a2838&source=documents_card) to request access to the security advisories.
 * **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 :::
+
+## January 2026
+
+### [New Feature] Security Insights is in beta
+---
+#### 2026-01-30
+
+Security Insights is in beta for SEI 2.0, introducing vulnerability and code quality analytics alongside existing DORA, Productivity, and Business Alignment metrics. Security Insights is powered by the following integrations:
+
+- [ArmorCode](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/armorcode/), which ingests Application Security Posture Management (ASPM) data from your security toolchain into Harness SEI, and provides visibility into open vulnerabilities.
+- [SonarQube](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/sonarqube/), which provides code quality data to complement security insights.
+
+Once ArmorCode and SonarQube are connected, you can configure how security and code quality data is attributed across your organization and teams. Use the **Integrations** tab in **Team Settings** to select [which security and code quality integrations apply to each team](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-integrations-for-a-team), and define filter sets on the **Security** tab in **Team Settings** to [scope ASPM data to teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-team-tool-settings).
+
+![](./static/sei/security-teams.png)
+
+You can analyze security performance across your organization using the Security Insights dashboard on the **Security** tab of the **Insights** page. The dashboard supports two levels of drilldowns: 
+
+* An organization-level view that displays aggregated security metrics (such as total open vulnerabilities) at the top level of the Org Tree.
+* A team-level view that you access by selecting a team in the Org Tree. In this view, the **Vulnerabilities Drilldown** section shows vulnerability details scoped to that team.
+
+![](./static/sei/security.png)
+
+These insights help teams monitor overall security posture, prioritize remediation efforts, and evaluate remediation efficiency across teams and assets. To request access to the Security Insights beta experience, contact [Harness Support](/docs/software-engineering-insights/sei-support).
+
+#### Related documentation
+
+- [ArmorCode Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/armorcode)
+- [SonarQube Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/sonarqube)
+- [Set up Teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-team-tool-settings)
+- [Security Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/security)
 
 ## December 2025
 

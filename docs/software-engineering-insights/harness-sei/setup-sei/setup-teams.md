@@ -56,7 +56,7 @@ In this situation, a team manager must select and save both issue management and
 To select and save integrations:
 
 1. Navigate to the **Integrations** tab in **Team Settings**.
-1. Select integrations from the following sections: **Issue Management**, **Source Code Management**, and **Continuous Deployment**.
+1. Select integrations from the following sections: **Issue Management**, **Source Code Management**, **Continuous Deployment**, **Security**, and **Code Quality**.
 1. Click **Save Integrations**.
 
 Once saved, SEI 2.0 uses these integrations to scope data ingestion, developer activity, and metric calculations for the team.
@@ -363,6 +363,33 @@ Correct failure detection ensures SEI 2.0 accurately calculates **Change Failure
 :::
 
 After completing all CD Pipelines filters, click **Save CD Settings** to apply the configuration to the team.
+
+</TabItem>
+<TabItem value="security-settings" label="Security Settings">
+
+:::tip
+Security Insights is in beta. To request access, contact [Harness Support](/docs/software-engineering-insights/sei-support).
+:::
+
+Use the **Security** tab in **Team Settings** to define how SEI 2.0 maps Application Security Posture Management (ASPM) data to your teams. 
+
+Click **+ Add Condition** to set the scope of security assets. These filters determine which ASPM data is associated with the team and used to calculate security-related metrics. If you add several filter sets, these filter sets are evaluated together to determine the final scope of security data mapped to the team. 
+
+![](../static/teams-12.png)
+
+| Filter field   | Available options                                                                 |
+| -------------- | --------------------------------------------------------------------------------- |
+| **Property**   | Product Name, Sub Product Name, Environment, Asset Name, Asset Type, Asset URL, Tool Source |
+| **Condition** | Equals, Contains, Starts With, Ends With                                           |
+| **Value**     | A value from your ASPM data (for example, `production`, `api-service`, or `snyk`)  |
+
+To associate assets from a specific environment, use `Environment Equals Production`. To scope assets by a source, use `Tool Source Equals Snyk`.
+
+:::info
+Only ASPM data that matches these filters is used to calculate **Security** metrics in SEI 2.0.
+:::
+
+After adding Security filters, click **Save Security Filters** to apply the configuration to the team.
 
 </TabItem>
 </Tabs>
