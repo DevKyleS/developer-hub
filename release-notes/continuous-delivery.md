@@ -139,6 +139,14 @@ For more information about this major ArgoCD upgrade, including breaking changes
 
 - Fixed an issue where application parameters were not appearing in the GitOps UI for organization-level agents. This occurred because the system was incorrectly prefixing *org.* to the agent ID when fetching agent details, resulting in a 404 error and preventing subsequent API calls from completing. The parameters existed in the manifest and sync operations worked correctly, but the UI failed to render them. The agent ID handling has been corrected to work properly for organization-level scopes. (**CDS-117296, ZD-99840**)
 
+### GitOps Service 1.49.0, GitOps Agent 0.108.0
+
+#### Fixed issues
+
+- Improved user experience for GitOps applications updated through ApplicationSets. Setup usage events are now sent when applications are updated through ApplicationSets, providing better tracking and visibility into application lifecycle events. (**CDS-117821**, **ZD-101609**)
+- Fixed an issue where Harness Support Group users authenticated via OKTA SSO received 403 Permission Denied errors when accessing GitOps resources. The fix ensures support user tokens are properly forwarded to the Access Control Service for elevated access detection. (**CDS-116751**)
+- The resource view now sorts by date by default, providing a more intuitive view of resources with the most recent items appearing first. (**CDS-117862**)
+
 ### Version 1.125.4
 
 #### New Features and Enhancements
