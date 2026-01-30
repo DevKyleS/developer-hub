@@ -60,7 +60,34 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 #### New Features and Enhancements
 
+- Harness now supports Blue-Green deployments to **Google Cloud Platform Managed Instance Groups**. Deploy GCP VM workloads with zero downtime, gradual traffic shifting using Cloud Service Mesh, and instant rollback.  Currently, this feature is governed by the `CDS_GOOGLE_MIG` feature flag. Contact [Harness Support](mailto:support@harness.io) to enable it. (**CDS-114547**)
+
+- Harness now supports **multi-account deployments for AWS CDK**, allowing you to deploy to different AWS accounts using a single connector by overriding the region and assuming a different IAM role at the step level. (**CDS-114915**)
+
+- Harness now supports **GCP connector credentials for Terraform steps**, enabling authentication with Google Cloud Platform using Manual Credentials, Inherit From Delegate, or OIDC Authentication methods. This feature requires delegate version 88303 or later. (**CDS-115648**)
+
+- Harness now supports **cross-project access for Google Cloud Operations health sources**. You can now specify a GCP Project ID to query metrics and logs from a different project than your connector's default, eliminating the need to create separate connectors for each GCP project. (**CDS-114447**)
+
+- Harness now supports **Git-based pipeline YAMLs in Dynamic Stages**, allowing you to execute pipeline YAMLs stored in Git repositories in addition to inline and runtime-provided YAML. You can optionally specify a commit hash to use a specific version of the file. (**PIPE-30849**)
+
+- Harness now supports a new **"Waiting for User Action" pipeline notification event**. You can configure pipeline notifications that are sent whenever a pipeline pauses for user input, such as approvals, manual interventions, or file uploads. (**PIPE-24734**)
+
+- Harness has improved **trigger evaluation resilience**. A failure in one trigger no longer blocks or skips the evaluation of other triggers, ensuring all eligible triggers are evaluated independently when an event is received. (**PIPE-31331**)
+
+#### Fixed issues
+
+- Fixed an issue where nexus connector experiencing 504 errors due to socket exhaustion potentially related to http/2 → http/1.1 traffic handling. Added env variable to DISABLE_NEXUS_DOCKER_V2_CATALOG, DISABLE_NEXUS_DOCKER_ARTIFACT_VALIDATION and MAX_BUILD_NEXUS_TRIGGERS to restrict the api calls to /v2/_catalog. (**CDS-118102**, **ZD-101720**, **ZD-102180**)
+- Fixed an issue where a pipeline step's "When" condition was not re-evaluated on retry attempts after an initial evaluation failure. This could lead to the step incorrectly executing on a retry. Now, the "When" condition is always re-evaluated on each retry attempt, ensuring consistent and correct execution behavior. Currently, this fix is governed by the feature flag `PIPE_SKIP_EXECUTE_WHEN_CONDITION_ON_RETRY_STEP`. Contact [Harness Support](mailto:support@harness.io) to enable it.(**PIPE-31684**, **ZD-101561**)
+- Fixed an issue where “send status back to git” does not publish commit status when pipeline is triggered via harness code trigger in custom stages. Status handling was missing in the Harness code repository because it lacks a connectorRef. Added proper handling for the code repository. (**PIPE-31736**, **ZD-100597**)
+
+
+### Version 1.127.0
+
+#### New Features and Enhancements
+
 - **Harness Artifact Registry now supported as an artifact source** for all CD deployment types (except Helm). HAR provides native integration for both container images and packaged artifacts (Maven, npm, NuGet, generic). For more information, go to [Harness Artifact Registry](/docs/continuous-delivery/x-platform-cd-features/services/artifact-sources#harness-artifact-registry).
+
+- Continuous Verification now supports custom webhook notifications for verification sub-tasks, providing real-time updates on data collection, analysis, and verification status with correlation IDs for event tracking. This feature is behind the feature flag `CDS_CV_SUB_TASK_CUSTOM_WEBHOOK_NOTIFICATIONS_ENABLED`. Contact [Harness Support](mailto:support@harness.io) to enable it. For more information, go to [Sub-Task Notifications](/docs/continuous-delivery/verify/configure-cv/verify-deployments#sub-task-notifications).
 
 #### Fixed issues
 
