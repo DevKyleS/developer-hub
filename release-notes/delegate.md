@@ -120,6 +120,10 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 
 ### Version 26.01.88303 <!--January 29, 2026-->
 
+:::note
+This fix also applies to versions 863xx through 874xx.:::
+:::
+
 #### Fixed issues
 - Adjusted request object logging for CV connectors. [CDS-118296]
 
