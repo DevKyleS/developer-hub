@@ -26,12 +26,9 @@ These release notes describe recent changes to Harness Software Engineering Insi
 ---
 #### 2026-01-30
 
-Security Insights is in beta for SEI 2.0, introducing vulnerability and code quality analytics alongside existing DORA, Productivity, and Business Alignment metrics. Security Insights is powered by the following integrations:
+Security Insights is in beta for SEI 2.0, introducing vulnerability and code quality analytics alongside existing DORA, Productivity, and Business Alignment metrics. Security Insights is powered by the [ArmorCode integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/armorcode/), which ingests Application Security Posture Management (ASPM) data from your security toolchain into Harness SEI, and provides visibility into open vulnerabilities.
 
-- [ArmorCode](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/armorcode/), which ingests Application Security Posture Management (ASPM) data from your security toolchain into Harness SEI, and provides visibility into open vulnerabilities.
-- [SonarQube](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/sonarqube/), which provides code quality data to complement security insights.
-
-Once ArmorCode and SonarQube are connected, you can configure how security and code quality data is attributed across your organization and teams. Use the **Integrations** tab in **Team Settings** to select [which security and code quality integrations apply to each team](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-integrations-for-a-team), and define filter sets on the **Security** tab in **Team Settings** to [scope ASPM data to teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-team-tool-settings).
+Once ArmorCode is connected, you can configure how security data is attributed across your organization and teams. Use the **Integrations** tab in **Team Settings** to select [which security integrations apply to each team](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-integrations-for-a-team), and define filter sets on the **Security** tab in **Team Settings** to [scope ASPM data to teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-team-tool-settings).
 
 ![](./static/sei/security-teams.png)
 
@@ -47,7 +44,6 @@ These insights help teams monitor overall security posture, prioritize remediati
 #### Related documentation
 
 - [ArmorCode Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/armorcode)
-- [SonarQube Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/sonarqube)
 - [Set up Teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-team-tool-settings)
 - [Security Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/security)
 
