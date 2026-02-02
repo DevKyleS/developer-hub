@@ -13,7 +13,7 @@ This guide explains how to configure and execute deployments for Google Cloud Ma
 Before setting up your Blue-Green deployment, ensure you have the following GCP resources already provisioned:
 
 - **Backend Service**: A GCP backend service configured with appropriate health checks
-- **Instance Group**: At least one Managed Instance Group must be pre-configured
+- **Instance Group**: At least one Managed Instance Group must be pre-configured with your MIG service already running
 - **Cloud Service Mesh**: HTTPRoute or GRPCRoute resources configured for traffic management. The route must be configured with the backend service as a destination
 
 These resources form the foundation of your Blue-Green deployment infrastructure. Harness will manage the deployment lifecycle, but these core GCP resources must exist beforehand.
@@ -30,7 +30,7 @@ When you select the **Blue-Green** execution strategy, Harness automatically add
 
 If you choose **Blank Canvas**, you need to manually add and configure the deployment steps within the step group. This option provides flexibility to customize your deployment workflow. You can choose from these four steps: Download Manifests, Google MIG Blue Green Deploy, Google MIG Steady State, and Google MIG Traffic Shift.
 
-For a functional Blue-Green deployment, three steps are mandatory: **Download Manifests** (fetches your configuration files), **Google MIG Blue Green Deploy** (creates or updates the MIG without shifting traffic), and **Google MIG Traffic Shift** (shifts production traffic to the new version). The **Google MIG Steady State** step is optional but strongly recommended for production deployments to verify instance health before shifting traffic.
+For a functional Blue-Green deployment, three steps are required: **Download Manifests** (fetches your configuration files), **Google MIG Blue-Green Deploy** (creates or updates the MIG without shifting traffic), and **Google MIG Traffic Shift** (shifts production traffic to the new version). The **Google MIG Steady State** step is optional but strongly recommended for production deployments to verify instance health before shifting traffic.
 
 
 ## Blue-Green deployment step group
@@ -51,75 +51,115 @@ These steps execute sequentially, ensuring each phase completes successfully bef
 ## How Blue-Green deployment works
 
 :::info Prerequisites
-This section assumes you have already configured your backend service, at least one Managed Instance Group, and Cloud Service Mesh (HTTPRoute or GRPCRoute) in GCP as outlined in the [Prerequisites](#prerequisites-for-blue-green-deployment) section.
+This section assumes you have already configured your backend service, at least one Managed Instance Group with your service running, and Cloud Service Mesh (HTTPRoute or GRPCRoute) in GCP as outlined in the [Prerequisites](#prerequisites-for-blue-green-deployment) section.
 :::
 
-Blue-Green deployment maintains two identical environments that alternate roles with each deployment, ensuring zero downtime and instant rollback capabilities. You can deploy with one or two MIG environments.
+Blue-Green deployment maintains two identical environments that alternate roles with each deployment, ensuring zero downtime and instant rollback capabilities. Harness supports two deployment scenarios based on your existing infrastructure.
 
 
-### First Deployment (1 MIG environment)
+### Scenario 1: Starting with One Backend Service and MIG
 
-When you provide only one environment configuration, no labels are required. Harness automatically manages the entire Blue-Green setup:
+This is the most common starting point: you have one backend service and one MIG, with your service already running. Harness sets up the Blue-Green infrastructure on the first deployment, and subsequent deployments follow an alternating pattern.
 
-**What you provide:**
-- One backend service path (e.g., `projects/my-project/regions/us-central1/backendServices/my-service`)
-- One MIG name (e.g., `my-app-mig`)
+**Prerequisites:**
+- One backend service with appropriate health checks configured
+- One MIG with your service running on it
+- Cloud Service Mesh route (HTTPRoute or GRPCRoute) configured
 
-**What Harness does automatically:**
-1. Deploys your new version to the MIG you provided
-2. Creates a second backend service by cloning the provided backend service configuration (appends a `-1` suffix to the backend service name)
-3. Creates a second MIG based on your configuration
-4. Adds the `harness-blue-green-version: stable` label to all instance configurations in the newly deployed MIG (serves production traffic)
-5. Adds the `harness-blue-green-version: stage` label to all instance configurations in the second MIG (ready for next deployment)
-6. Waits for the newly deployed MIG to reach steady state before proceeding
-7. Shifts 100% of traffic to the stable environment through Cloud Service Mesh
+**What you provide in the Blue-Green Deploy step:**
+- Backend service path (e.g., `projects/my-project/regions/us-central1/backendServices/ABC`)
+- MIG name (e.g., `my-app-mig`)
 
-After the first deployment completes, you have two MIGs alternating between stable and stage roles. No manual labeling is needed—Harness handles everything.
+#### First Deployment
 
-```mermaid
-graph TB
-    subgraph "First Deployment - 1 MIG Provided"
-        A1[User Provides:<br/>Backend Service + MIG Name] --> B1[Harness Deploys to MIG]
-        B1 --> C1[Harness Creates 2nd Backend Service + MIG]
-        C1 --> D1[MIG 1: harness-blue-green-version: stable<br/>serves production traffic]
-        C1 --> E1[MIG 2: harness-blue-green-version: stage<br/>ready for next deployment]
-        D1 --> F1[100% Traffic to Stable]
-        style A1 fill:#e1f5ff
-        style D1 fill:#90EE90
-        style E1 fill:#FFD700
-        style F1 fill:#90EE90
-    end
+During the first deployment, Harness creates the Blue-Green infrastructure.
 
-    subgraph "Subsequent Deployments - 2 MIGs Exist"
-        A2[Deployment Starts] --> B2[Harness Identifies Labels]
-        B2 --> C2[Deploy New Version<br/>to Stage MIG]
-        C2 --> D2[Health Check Passes]
-        D2 --> E2[Shift Traffic:<br/>Stable → Stage]
-        E2 --> F2[Labels Swap:<br/>Old Stable → New Stage<br/>Old Stage → New Stable]
-        F2 --> G2[Production on New Version]
-        style B2 fill:#e1f5ff
-        style C2 fill:#FFD700
-        style E2 fill:#FFA500
-        style F2 fill:#DDA0DD
-        style G2 fill:#90EE90
-    end
-```
+**Step 1: Blue-Green Deploy**
 
-### Subsequent Deployments (2 MIG environments)
+Harness performs the following operations:
+1. Clones the backend service and appends `-1` suffix (e.g., `ABC` becomes `ABC-1`)
+2. Creates a second MIG based on your configuration (`ABC-1`)
+3. Labels the initial service/MIG as `harness-blue-green-version: stable` (primary/production)
+4. Labels the newly created service/MIG as `harness-blue-green-version: stage` (secondary/deployment target)
 
-For all deployments after the first, Harness uses labels to identify which environment is stable (production) and which is stage (deployment target):
+This step only creates the infrastructure and adds labels. No deployment or traffic shifting occurs in this step.
 
-**How it works:**
-1. **Identify Environments**: Harness checks the `harness-blue-green-version` label in the MIG's instance configurations to determine which MIG is currently `stable` (serving production traffic) and which is `stage` (ready for new deployment)
-2. **Deploy to Stage**: The new version deploys to whichever MIG carries the `stage` label. Your production traffic continues flowing to the `stable` MIG—no disruption occurs
-3. **Verify and Shift Traffic**: Once the stage environment passes health checks, traffic gradually shifts from `stable` to `stage` using Cloud Service Mesh route updates
-4. **Swap Labels**: After 100% traffic is successfully shifted to the newly deployed MIG, Harness updates the labels:
-   - The newly deployed MIG's label changes from `harness-blue-green-version: stage` to `harness-blue-green-version: stable` (now serving production)
-   - The previously stable MIG's label changes from `harness-blue-green-version: stable` to `harness-blue-green-version: stage` (ready for the next deployment)
+**Step 2: Steady State Check**
 
-This alternating pattern continues indefinitely. Each deployment targets whichever MIG is labeled as `stage`, and the labels swap after successful traffic cutover.
+This step checks the steady state of the MIG specified in its configuration. You should configure this step to check the newly created MIG (the one labeled `stage`), since it's not currently handling traffic. Harness verifies that the specified MIG has reached a stable, healthy state before proceeding with traffic shifting.
 
-**Important**: If you manually create two MIGs before the first deployment, you must add the `harness-blue-green-version: stable` and `harness-blue-green-version: stage` labels to the instance configurations yourself to indicate which is which. Otherwise, let Harness create the second environment automatically during the first deployment.
+**Step 3: Traffic Shift**
+
+Harness shifts traffic from stable to stage based on configured weights (e.g., 0% → 20% → 50% → 100%). Once the stage service reaches 100% traffic weight, the labels automatically swap:
+- Stage service becomes the new `stable` (now serving production traffic)
+- Stable service becomes the new `stage` (ready for next deployment)
+
+After the first deployment, you have two backend services and two MIGs that will alternate between stable and stage roles for all future deployments.
+
+
+#### Subsequent Deployments
+
+After the first deployment completes, all subsequent deployments follow this pattern. Harness uses the existing labels to identify which environment is stable (production) and which is stage (deployment target).
+
+**Step 1: Blue-Green Deploy**
+
+Harness does NOT create any new services or MIGs. Instead, it:
+1. Identifies which service has the `stable` label (primary/production)
+2. Identifies which service has the `stage` label (secondary/deployment target)
+3. Deploys the new version only to the service labeled as `stage`.
+4. Production traffic continues flowing to the `stable` service (zero downtime)
+
+**Step 2: Steady State Check**
+
+This step checks the steady state of the MIG specified in its configuration. You should configure this step to check the secondary MIG (the one labeled as `stage`) since it contains the new deployment and is not currently handling production traffic.
+
+**Step 3: Traffic Shift**
+
+Harness shifts traffic from the primary (stable) to the secondary (stage) based on configured weights. Once the secondary reaches 100% traffic, the labels swap:
+- Secondary becomes the new `stable` (now primary/production)
+- Primary becomes the new `stage` (now secondary/deployment target)
+
+This pattern repeats for every subsequent deployment, with services alternating roles indefinitely.
+
+
+### Scenario 2: Two Existing Services
+
+If you already have two backend services and two MIGs set up, you can configure them directly in the Blue-Green Deploy step. However, you must manually add labels to the MIGs before running the deployment.
+
+**Prerequisites:**
+- Two backend services already exist (e.g., `ABC` and `ABC-1`)
+- Two MIGs already exist with services running
+- Labels manually configured on both MIGs (see below)
+
+#### Adding Labels Manually
+
+Before running the Blue-Green deployment, you must add labels to your MIGs in GCP. Navigate to your MIG's **All Instances Configuration** section and add the following labels:
+
+- Add `harness-blue-green-version: stable` to the MIG you want as your primary/production environment
+- Add `harness-blue-green-version: stage` to the MIG you want as your secondary/deployment target
+
+<div style={{textAlign: 'center'}}>
+  <DocImage path={require('./static/mig-labels.png')} width="60%" height="60%" title="Click to view full size image" />
+</div>
+
+**What you provide in the Blue-Green Deploy step:**
+- **Blue Environment**: Backend service path and MIG name for your stable service
+- **Green Environment**: Backend service path and MIG name for your stage service
+
+**Step 1: Blue-Green Deploy**
+
+Harness does NOT create new services, MIGs, or labels. Instead, it:
+1. Recognizes both services already exist with labels configured
+2. Identifies the stable-labeled MIG as primary and the stage-labeled MIG as secondary
+3. Deploys the new version to the stage-labeled MIG (green environment)
+
+**Step 2: Steady State Check**
+
+This step checks the steady state of the MIG specified in its configuration. You should configure this step to check the green environment MIG (the one labeled `stage`), since it's not currently handling traffic.
+
+**Step 3: Traffic Shift**
+
+Harness shifts traffic from stable (blue) to stage (green) based on configured weights. Once the stage reaches 100% traffic, labels are swapped, and subsequent deployments follow the same pattern as in Scenario 1.
 
 
 ## Deployment steps overview
@@ -157,9 +197,14 @@ This step downloads all manifest files specified in your service configuration a
 
 ### 2. Google MIG Blue Green Deploy
 
-This step orchestrates the Blue-Green deployment by creating or updating MIGs for both stable and stage environments. During the first deployment, if only one environment configuration is provided, it creates another complete environment (backend service and MIG) from your configuration. For subsequent deployments, it deploys the new version to whichever environment currently holds the `stage` label. The step handles instance template creation or updates, MIG creation or updates, backend service configuration, and environment labeling.
+This step orchestrates the Blue-Green deployment and behaves differently based on your deployment scenario:
 
-**Important**: This step only creates or updates the MIG infrastructure. It does not shift any production traffic. Traffic shifting happens exclusively in the **Google MIG Traffic Shift** step, giving you control over when to expose the new version to users.
+- **Scenario 1 (Starting with one service)**: On the first deployment, creates a second backend service (with `-1` suffix) and MIG, then labels both environments (`stable` and `stage`). On subsequent deployments, identifies existing labels and deploys only to the `stage` labeled service without creating new resources
+- **Scenario 2 (Two existing services with manual labels)**: Recognizes both services already exist with labels you've manually configured. Does not create services or add labels—deploys to the stage-labeled MIG (green environment)
+
+The step handles instance template creation or updates, MIG updates, backend service configuration, and environment labeling based on the scenario.
+
+**Important**: This step only deploys the infrastructure and does not shift production traffic. Traffic shifting happens exclusively in the **Google MIG Traffic Shift** step, giving you control over when to expose the new version to users.
 
 <div style={{textAlign: 'center'}}>
   <DocImage path={require('./static/blue-green-deploy.png')} width="50%" height="50%" title="Click to view full size image" />
@@ -175,9 +220,21 @@ This step orchestrates the Blue-Green deployment by creating or updating MIGs fo
 
 **Green Environment (Second Environment)** (Optional for first deployment):
 
-**Backend Service**: This field specifies the full GCP resource path to your backend service for the second environment. The format should be: `projects/PROJECT_ID/regions/REGION/backendServices/SERVICE_NAME`. This field is optional for the first deployment. If you leave it empty, Harness automatically creates a second backend service by cloning your first environment configuration with a **-1** suffix. If you provide both environments on first deployment, ensure each MIG has the appropriate `harness-blue-green: stable` or `harness-blue-green: stage` label. For subsequent deployments, this field is automatically populated. Both backend services work together to enable zero-downtime Blue-Green deployments with instant rollback capability.
+**Backend Service**: This field specifies the full GCP resource path to your backend service for the second environment. The format should be: `projects/PROJECT_ID/regions/REGION/backendServices/SERVICE_NAME`. 
 
-**Enter MIG Name**: This field specifies the name of the Managed Instance Group for your second environment. This field is optional for the first deployment. If you do not provide it, Harness creates it automatically by appending **-1** to your first MIG name (e.g., my-app-mig-1). This second MIG forms the other half of your Blue-Green setup, alternating with the first MIG between stable and stage roles. After the first deployment completes, both MIGs exist permanently and swap roles with each deployment.
+This field behavior depends on your deployment scenario:
+- **Scenario 1 (First deployment)**: Optional. If left empty, Harness automatically creates a second backend service by cloning your first environment configuration with a **-1** suffix. On subsequent deployments, this is automatically populated based on existing labeled services
+- **Scenario 2 (Two existing services)**: Provide the path to your second existing backend service. You must manually add the `stage` label to the MIG before deployment
+
+Both backend services work together to enable zero-downtime Blue-Green deployments with instant rollback capability.
+
+**Enter MIG Name**: This field specifies the name of the Managed Instance Group for your second environment. 
+
+This field behavior depends on your deployment scenario:
+- **Scenario 1 (First deployment)**: Optional. If not provided, Harness creates it automatically by appending **-1** to your first MIG name (e.g., my-app-mig-1). On subsequent deployments, this is automatically identified based on existing labeled MIGs
+- **Scenario 2 (Two existing MIGs)**: Provide the name of your second existing MIG. You must manually add the `stage` label to this MIG before deployment
+
+This second MIG forms the other half of your Blue-Green setup, alternating with the first MIG between stable and stage roles.
 
 **Type**: This field determines how traffic is shifted between stable and stage environments. Currently, only the **CSM** (Cloud Service Mesh) option is supported, which uses HTTPRoute or GRPCRoute resources for advanced, granular traffic control, including weighted routing, header-based routing, and service-to-service communication. CSM is ideal for microservice architectures and service-mesh deployments.
 
@@ -193,8 +250,12 @@ This step orchestrates the Blue-Green deployment by creating or updating MIGs fo
 
 **Image**: This field specifies the full path to the deployment plugin container image used to execute this deployment step. This image contains the deployment logic and tools needed to interact with GCP APIs, create and update MIGs, configure backend services, and manage Cloud Service Mesh routes. Use the official Harness image: [`harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-bluegreen-deploy/tags) for Blue-Green deployments.
 
-:::note
-For the first deployment, you can provide only the first environment configuration, and Harness will automatically clone it with a **-1** suffix to create the second environment. Alternatively, you can provide both blue and green environments, but ensure each MIG has the appropriate `harness-blue-green: stable` or `harness-blue-green: stage` label.
+:::note Deployment Scenarios
+Harness supports two deployment scenarios:
+
+**Scenario 1 - Starting with one backend service and MIG**: Provide only the blue environment (backend service + MIG where your service is running). On the first deployment, Harness automatically clones the backend service (adds **-1** suffix) and creates a second MIG with appropriate labels (`stable` and `stage`). Subsequent deployments use these labels to identify environments—no new services are created.
+
+**Scenario 2 - Two existing services with manual labels**: If you already have two backend services and two MIGs, provide both blue and green environments. You must manually add labels (`stable` to blue MIG, `stage` to green MIG) in GCP before running the deployment. Harness does not create services or add labels in this scenario.
 :::
 
 <details>
@@ -232,7 +293,9 @@ For the first deployment, you can provide only the first environment configurati
 
 ### 3. Google MIG Steady State
 
-This step verifies that the deployed MIG has reached a stable, healthy state before proceeding with traffic shifting. Harness checks that the MIG status is `stable` and that all instances use the correct instance template version. The step fails if the MIG doesn't achieve steady state within the configured timeout. This validation prevents premature traffic shifting to an unhealthy environment and is critical for zero-downtime deployments.
+This step verifies that the newly deployed MIG (the one labeled as `stage` or secondary service) has reached a stable, healthy state before proceeding with traffic shifting. Harness checks that the MIG status is `stable` and that all instances use the correct instance template version. 
+
+The step only monitors the secondary (stage) service, not the primary (stable) service, since the primary is already running and serving production traffic. The step fails if the secondary MIG doesn't achieve steady state within the configured timeout. This validation prevents premature traffic shifting to an unhealthy environment and is critical for zero-downtime deployments.
 
 <div style={{textAlign: 'center'}}>
   <DocImage path={require('./static/steady-state.png')} width="50%" height="50%" title="Click to view full size image" />
@@ -240,7 +303,7 @@ This step verifies that the deployed MIG has reached a stable, healthy state bef
 
 **Step parameters**:
 
-**MIG Name**: Specify the name of the Managed Instance Group that Harness should monitor for steady state. Harness continuously polls this MIG's status to verify that the status is `stable` and all instances are using the expected instance template. This ensures your deployment is fully ready before allowing traffic to reach it.
+**MIG Name**: Specify the name of the Managed Instance Group that Harness should monitor for steady state. This should be the secondary (stage-labeled) MIG where the new version was just deployed. Harness continuously polls this MIG's status to verify that the status is `stable` and all instances are using the expected instance template. This ensures your new deployment is fully ready before allowing traffic to reach it.
 
 **Instance Template**: Specify the instance template name that Harness should verify. Harness checks that the MIG is using this specific template version. Note that during a rolling update, a MIG can temporarily have multiple templates, which is expected behavior. Once the rolling update completes, the MIG will be fully updated with the latest applied template. The template name typically includes version information or timestamps (e.g., my-app-template-v2-20260120).
 
@@ -279,7 +342,11 @@ This step verifies that the deployed MIG has reached a stable, healthy state bef
 
 ### 4. Google MIG Traffic Shift
 
-This step gradually or instantly shifts production traffic between your stable and stage environments. It enables safe, controlled rollouts by allowing you to move traffic incrementally (e.g., 10% → 25% → 50% → 100%) while monitoring application metrics, error rates, and performance. If issues arise at any traffic percentage, you can halt the shift or roll back. This step supports multiple traffic shift steps in sequence for phased rollouts. This is the key step that makes Blue-Green deployments safe for production.
+This step shifts production traffic from the primary (stable) service to the secondary (stage) service. It enables safe, controlled rollouts by allowing you to move traffic incrementally (e.g., 10% → 25% → 50% → 100%) while monitoring application metrics, error rates, and performance. 
+
+Traffic flows from the primary (currently serving production) to the secondary (newly deployed). Once the secondary service reaches 100% traffic weight, Harness automatically swaps the labels—the secondary becomes the new `stable` (primary) and the previous primary becomes the new `stage` (secondary). 
+
+If issues arise at any traffic percentage, you can halt the shift or roll back. This step supports multiple traffic shift steps in sequence for phased rollouts, making it the key step that enables safe Blue-Green deployments in production.
 
 <div style={{textAlign: 'center'}}>
   <DocImage path={require('./static/traffic-shift.png')} width="80%" height="80%" title="Click to view full size image" />
@@ -293,7 +360,11 @@ This step gradually or instantly shifts production traffic between your stable a
 
 **Enter Route**: Specify the full GCP resource path to the Cloud Service Mesh route that controls traffic flow to your application (format: `projects/PROJECT_ID/locations/global/httpRoutes/ROUTE_NAME` or `projects/PROJECT_ID/locations/global/grpcRoutes/ROUTE_NAME`). Harness updates the weights in this route's rule configuration to shift traffic between stable and stage environments. The route must already exist, be properly configured with both backend services as weighted destinations, and have appropriate mesh associations. Verify the route path is correct before deployment to avoid traffic disruption.
 
-**Destinations**: Define the traffic distribution percentages between your environments by adding multiple destinations with weight values that total 100%. For destinations, you can provide the full backend service path (e.g., `projects/PROJECT_ID/regions/REGION/backendServices/SERVICE_NAME`) or use placeholders like `stable` and `stage`. For example, setting Stable=90 and Stage=10 sends 90% of requests to the stable environment and 10% to stage. Use gradual shifts across multiple traffic shift steps (e.g., Step 1: 80/20, Step 2: 50/50, Step 3: 0/100) to safely validate new versions under increasing load. The weights are applied to Cloud Service Mesh routes. Monitor application metrics between shifts to catch issues early.
+**Destinations**: Define the traffic distribution percentages between your environments by adding multiple destinations with weight values that total 100%. For destinations, you can provide the full backend service path (e.g., `projects/PROJECT_ID/regions/REGION/backendServices/SERVICE_NAME`) or use placeholders like `stable` (primary) and `stage` (secondary). 
+
+For example, setting Stable=90 and Stage=10 sends 90% of requests to the primary environment and 10% to the secondary. Use gradual shifts across multiple traffic shift steps (e.g., Step 1: 80/20, Step 2: 50/50, Step 3: 0/100) to safely validate new versions under increasing load. 
+
+When the secondary (stage) reaches 100% traffic weight, Harness automatically swaps the labels—the secondary becomes the new primary (stable) and serves production traffic going forward. Monitor application metrics between shifts to catch issues early.
 
 **Container Configuration**:
 
