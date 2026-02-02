@@ -964,5 +964,11 @@
     "description": "Enables google dns by default for Harness CI Hosted Builds.",
     "gaStartDate": "2025-12-02",
     "module": "Continuous Integration"
+  },
+    {
+    "flagKey": "CI_ENABLE_PARALLEL_SECRET_RESOLUTION",
+    "description": "Enable parallel secret resolution for faster initialization time in CI stages & Container step groups",
+    "gaStartDate": "2026-01-20",
+    "module": "Continuous Integration"
   }
 ]
