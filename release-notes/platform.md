@@ -179,6 +179,10 @@ The following deprecated API endpoints are longer supported:
 
 ## January 2026
 
+### Version 1.128.x <!--January 29,2026-->
+
+No enhancements or fixes were released in this cycle.
+
 ### Version 1.127.x <!--January 21,2026-->
 
 #### Fixed issues
