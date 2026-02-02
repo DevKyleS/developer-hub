@@ -1,7 +1,7 @@
 ---
 title: Continuous Delivery & GitOps release notes
 sidebar_label: Continuous Delivery & GitOps
-date: 2025-09-15T10:00:00
+date: 2026-02-02T10:00:00
 sidebar_position: 8
 ---
 
@@ -138,6 +138,24 @@ For more information about this major ArgoCD upgrade, including breaking changes
 #### Fixed issues
 
 - Fixed an issue where application parameters were not appearing in the GitOps UI for organization-level agents. This occurred because the system was incorrectly prefixing *org.* to the agent ID when fetching agent details, resulting in a 404 error and preventing subsequent API calls from completing. The parameters existed in the manifest and sync operations worked correctly, but the UI failed to render them. The agent ID handling has been corrected to work properly for organization-level scopes. (**CDS-117296, ZD-99840**)
+
+### GitOps Service 1.48.5, GitOps Agent 0.107.2
+
+#### New Features and Enhancements
+
+- GitOps services with multiple environments now execute in separate stages per service and environment combination, matching the behavior of CD multi-environment execution. This prevents variable clashes between services and environments when using overrides, eliminating unexpected behavior that could occur when aggregating cluster details from each environment in a single stage. (**CDS-114264**, **ZD-91288**)
+
+- The GitOps sync step now supports server-side apply, which helps prevent errors when dealing with large manifests. The step also respects ignore-diff configurations, providing more control over how resources are synchronized. (**CDS-117361**)
+
+#### Fixed issues
+
+- Fixed an issue where the Update Release Repo step was incorrectly wrapping all YAML values, including command fields, in double quotes, causing deployments to break. The step now preserves existing values without modifying them. (**CDS-114900**)
+
+- Fixed an issue where the Fetch Linked Apps step, when filtering by service environment and cluster, did not provide sufficient logging to explain why applications were filtered out. Now, the logs include details when applications are filtered out due to agent identifier mismatches between the linked service and the application, providing better visibility into the filtering process. (**CDS-117383**)
+
+- Fixed an issue in GitOps project settings where users were incorrectly redirected when attempting to access GnuPG keys and repository certificates. Users are now directed to the correct locations for managing these settings. (**CDS-117513**)
+
+- Fixed an issue where pagination controls were not visible in the Applications list view, making it difficult to navigate through large numbers of applications. Users can now properly navigate through all applications using the pagination controls. (**CDS-117553**)
 
 ### Version 1.125.4
 
