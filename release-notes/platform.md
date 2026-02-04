@@ -27,6 +27,15 @@ These release notes describe recent changes to Harness Platform.
 :::
 ## Important feature change notice
 
+:::danger OIDC ID Token API Access Update (Effective: Mar 20, 2026)
+To strengthen security and reduce potential risks, the [**OIDC ID token–related APIs**](https://apidocs.harness.io/oidc-id-token) will be made internal to Harness and will no longer be available for direct access.
+
+  - **Current behaviour**: OIDC ID token APIs can be directly accessed.
+  - **New behaviour**: These APIs can only be used through the Harness Connector for OIDC-based authentication with external platforms (e.g., HashiCorp Vault, AWS).
+
+**Action Required**: If you are directly invoking OIDC ID token APIs, update your automation to use the connector before this change takes effect on March 20, 2026. Please reach out to [Harness support](mailto:support@harness.io) in case of any concerns.
+:::
+
 :::danger BREAKING CHANGE: Reserved Identifier Enforcement for Platform Entities (Effective : Feb 18, 2026)
 
 We are enforcing restrictions on some keywords that can be used as identifiers for platform entities (organizations, projects, services, environments, secrets, file store folders, etc.).
