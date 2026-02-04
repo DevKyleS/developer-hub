@@ -135,7 +135,7 @@ Once you've created your policies, it's time to apply them with a Policy Set.
 1. In the **Policy Sets** tab, click **+ New Policy Set**.
 2. On the Overview page: 
    - Define the **Name** of the policy set.
-   - Under **Entity Type that this policy set applies to**, choose the entities for which you want to apply the policy. The supported entities are:
+   - Under **Entity Type that this policy set applies to**, choose the entities for which you want to use the policy. The supported entities are:
      - Service
      - Environment
      - Infrastructure
@@ -146,16 +146,18 @@ Once you've created your policies, it's time to apply them with a Policy Set.
    - Click **+ Add Policy**.
    - Select the policy you created earlier for the entity. You can also select policies created at the project, organization, and account levels.
    - Under **What should happen if a policy fails?**, you can choose one of the following options:
-     - **Warn & continue**: Displays a warning message if the policy evaluation fails but allows the entity to be saved.
+     - **Warn & continue**: Displays a warning message if the policy evaluation fails, but allows the entity to be saved.
      - **Error and exit**: Displays an error message and prevents the entity from being saved.
      ![OPA Policy Set](./static/opa-policy-4.png)
 
-Now the policy set is enabled and the policy will be enforced while saving the entity.
+The policy set is now enabled, and the policy will be enforced when saving the entity.
 
-For example, you have a policy that does not allow the creation of a Kubernetes service. Now, when you try to create a Kubernetes service, you receive the following error while attempting to save the service.
+For example, you have a policy that prevents the creation of a Kubernetes service. Now, when you try to create a Kubernetes service, you receive the following error while attempting to save the service.
 
 ![OPA Policy Set](./static/opa-policy-5.png)
 
-## Limitation:
+## Limitations
 
-The policy is applicable on **ON SAVE**. If the entity is already created, the policy will not be enforced during the deployment.
+- The policy is applicable on **On Save**. If the entity already exists, the policy will not be enforced during deployment.
+
+- Harness does not support evaluating environments using dynamically linked branches from the pipeline during OPA policy evaluation. The dynamic linked branch is determined by the parent entity (the pipeline), which is not accessible in the `EnvironmentExpansionHandler` context. This issue only occurs when the entity is created or moved to a branch other than `main` in the remote repository.
