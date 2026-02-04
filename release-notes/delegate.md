@@ -116,6 +116,13 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 
 ## Delegate image release notes
 
+## February 2026
+
+### Version 26.01.88204 <!--February 04, 2026-->
+
+#### Fixed issues
+- Improved the ECS steady state check. Instead of relying on the event createdAt timestamp, we now store the timestamp before performing any ECS operations and use it to filter out stale AWS events. This fix is gated behind the feature flag CDS_ECS_USE_CREATED_AT_DEPLOYMENT_STEADY_STATE. [CDS-118310].
+
 ## January 2026
 
 ### Version 26.01.88303 <!--January 29, 2026-->
