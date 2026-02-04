@@ -2606,6 +2606,22 @@ html[data-theme='dark'] .navbar .dropdown__menu .dropdown__section-header {
   vertical-align: middle;
 }
 
+.sidebar-item-beta > a::after {
+  content: 'BETA';
+  /* background: linear-gradient(135deg, #5a00cc, #ff00cc); */
+  background: #5a00cc;
+  border-radius: 4px;
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: auto;
+  animation: betaBadgePulse 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
 .sidebar-item-beta > .menu__list-item-collapsible > .menu__link {
   position: relative;
   display: flex !important;

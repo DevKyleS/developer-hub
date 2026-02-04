@@ -52,7 +52,7 @@ Before setting up your Org Tree, ensure the following:
   The CSV file must follow the required structure:
   * Each row represents a developer.
   * Must include at least `Name`, `Email`, and `Manager Email`. Optionally, include `Site`, `Role`, or `Team`.
-* You have created the relevant [Profiles](/docs/category/set-up-profiles).
+* You have created the relevant [Profiles](/docs/software-engineering-insights/harness-sei/setup#step-2-set-up-profiles).
 * You have configured Issue Management (e.g. Jira, Azure Boards), Source Code Management (e.g. GitHub, GitLab), and CI/CD (e.g. Harness) integrations, if applicable
 
 <details>

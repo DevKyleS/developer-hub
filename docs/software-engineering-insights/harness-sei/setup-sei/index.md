@@ -1,10 +1,12 @@
 ---
 title: Overview
 description: Learn how to setup Harness SEI to measure engineering insights across your organization.
-sidebar_label: Overview
 sidebar_position: 1
+id: index
+slug: /software-engineering-insights/harness-sei/setup
 redirect_from:
 - /docs/software-engineering-insights/sei-new-experience/setup/
+- /docs/software-engineering-insights/harness-sei/setup-sei/setup-overview
 ---
 
 This page walks you through the essential steps to configure Software Engineering Insights (SEI) 2.0 for your organization, from setting up integrations and defining your org structure to uploading developer records and exploring insights.
@@ -13,7 +15,7 @@ Follow these steps to get started and customize SEI 2.0 to your team's structure
 
 ### Step 1: Set up integrations
 
-To start using SEI 2.0, you can [configure integrations](./configure-integrations/overview) with your organization's source control, CI/CD, and ticketing tools. 
+To start using SEI 2.0, you can [configure integrations](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/) with your organization's source control, CI/CD, and ticketing tools. 
 
 * Source Control Management Systems (e.g., GitHub, GitLab, Bitbucket)
 * CI/CD Tools (e.g., Harness, GitHub Actions, Jenkins)
@@ -69,15 +71,15 @@ With your org tree in place, configure Teams and begin tracking insights. You ca
 
 * Review & update the developers integration identifiers in the specific teams.
 * Customize & define the performance parameters using the [team settings](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams).
-* Once setup is complete, you can [view insights at the org tree level](./view-insights/insights) to understand how your organization is performing overall, or [view insights for a specific team](./view-insights/granular-insights) to dive deeper into team-level performance data.
+* Once setup is complete, you can [view insights at the org tree level](/docs/software-engineering-insights/harness-sei/setup-sei/view-insights/) to understand how your organization is performing overall, or [view insights for a specific team](/docs/software-engineering-insights/harness-sei/setup-sei/view-insights/) to dive deeper into team-level performance data.
 
 ![](../static/efficiency.png)
 
 ### Next steps
 
-* [Set up integrations](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/overview)
+* [Set up integrations](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/)
 * [Set up profiles](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/efficiency-profile)
 * [Upload the developer records](/docs/software-engineering-insights/harness-sei/setup-sei/manage-developers)
 * [Set up Org Tree](/docs/software-engineering-insights/harness-sei/setup-sei/setup-org-tree)
 * [Set up & define team settings](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams)
-* [View insights](/docs/software-engineering-insights/harness-sei/setup-sei/view-insights/insights)
+* [View insights](/docs/software-engineering-insights/harness-sei/setup-sei/view-insights/)

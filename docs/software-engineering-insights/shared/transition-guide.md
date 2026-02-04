@@ -16,7 +16,7 @@ This transition is your opportunity to start fresh, remove technical debt, and a
 
 ## Transition workflow
 
-:::info For Beta Customers
+:::info 
 - Harness creates the SEI 2.0 experience initially using existing SEI 1.0 context (if applicable).
 - SEI Admin and Managers can validate, provide feedback, and adjust structures.
 :::
@@ -33,7 +33,7 @@ This transition is your opportunity to start fresh, remove technical debt, and a
    - Led by SEI Admin
    - [Import Developers](/docs/software-engineering-insights/harness-sei/setup-sei/manage-developers) into Harness SEI using a CSV file.
    - [Define Org Trees](/docs/software-engineering-insights/harness-sei/setup-sei/setup-org-tree): Reflect your org structure, teams, and reporting.
-   - [Create Profiles](/docs/category/set-up-profiles): Align metrics to teams, roles, and use cases.
+   - [Create Profiles](/docs/software-engineering-insights/harness-sei/setup#step-2-set-up-profiles): Align metrics to teams, roles, and use cases.
 
 1. **Team & Developer Setup**
    

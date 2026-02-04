@@ -22,6 +22,60 @@ These release notes describe recent changes to Harness Software Engineering Insi
 
 ## January 2026
 
+### [New Feature] AI Summaries and Recommendations is in beta
+----
+#### 2026-01-30
+
+[AI Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/ai) now includes [AI-generated summaries and recommendations](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/ai#ai-summaries-and-recommendations), providing prescriptive interpretations of AI adoption, productivity, and code quality metrics in the **AI Insights** dashboard.
+
+![](./static/sei/ai-summary-org.png)
+
+When you navigate to the **AI Insights** tab on the **Insights** page, SEI 2.0 generates a contextual AI summary for the selected time range and granularity. This section integrates trends across AI assistant adoption, productivity metrics, and code rework metrics to highlight what changed, why it matters, and where to take action.
+
+The **AI Summary** section adapts as you navigate through teams in the **Org Tree**:
+
+- At the organization level, AI summaries surface portfolio-wide trends such adoption shifts, acceptance rate gaps between AI assistants, changes in PR velocity and cycle time, and elevated code rework signals. Recommendations focus on strategic actions like standardizing tool usage, reallocating licenses, and addressing bottlenecks in code review workflows.
+- At the team level, summaries become more strategic, highlighting engineering managers, team-specific adoption patterns, velocity changes, and code review constraints. Recommendations emphasize next steps to help improve throughput, quality, and tool effectiveness.
+
+![](./static/sei/ai-summary-team.png)
+
+To request access, contact [Harness Support](/docs/software-engineering-insights/sei-support).
+
+#### Related documentation
+
+- [Cursor Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/cursor/)
+- [Windsurf Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/windsurf/)
+- [Productivity Profile](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/productivity-profile)
+- [AI Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/ai#ai-summaries-and-recommendations)
+
+### [New Feature] AI Insights is in beta
+---
+#### 2026-01-30
+
+AI Insights is in beta for SEI 2.0, enabling teams to measure AI assistant adoption and correlate AI usage to productivity and code quality metrics. The AI Insights dashboard supports Cursor and Windsurf integrations and helps organizations understand how AI-assisted development impacts overall pull request velocity and code rework.
+
+![](./static/sei/ai-insights.png)
+
+You can access adoption and performance metrics at the organization level, or click into an individual team in the **Org Tree** to focus the dashboard at the team level.
+
+With AI Insights, teams can:
+
+- Track AI assistant adoption over time and across teams
+- Compare adoption trends to [Productivity metrics](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/productivity-profile#set-up-productivity-metrics) such as **PR Velocity Per Developer** and **PR Cycle Time**
+- Measure code quality and maintainability using [Code Rework metrics](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/productivity-profile#code-rework) such as **Recent Rework** and **Legacy Rework** to understand how AI usage affects code stability
+- Drill into individual developer metrics to identify usage patterns, productivity gains, and quality tradeoffs across assistants
+
+![](./static/sei/ai-insights-1.png)
+
+Set up the [Cursor](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/cursor#prerequisites) and [Windsurf](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/windsurf#prerequisites) integrations and configure a [Productivity profile](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/productivity-profile) in SEI 2.0. To request access to the AI Insights beta experience, contact [Harness Support](/docs/software-engineering-insights/sei-support).
+
+#### Related documentation
+
+- [Cursor Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/cursor/)
+- [Windsurf Integration](/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/beta-integrations/windsurf/)
+- [Productivity Profile](/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/productivity-profile)
+- [AI Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/ai)
+
 ### [New Feature] Security Insights is in beta
 ---
 #### 2026-01-30

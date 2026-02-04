@@ -37,23 +37,23 @@ import { MODULES } from "@site/src/constants";
       },
 
       {
-        name: "Set up SEI",
+        name: "Set up SEI 2.0",
         description:
           "",
         list: [
           {
-            title: "Configure integrations",
+            title: "Configure Integrations",
             module: MODULES.sei,
             description:
               "SEI uses integrations to ingest data from your SDLC tools.",
-            link: "/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/overview",
+            link: "/docs/software-engineering-insights/harness-sei/setup-sei/configure-integrations/",
           },
           {
-            title: "Set up profiles",
+            title: "Set up Profiles",
             module: MODULES.sei,
             description:
               "Profiles aggregate data for Efficiency, Productivity metrics, and more.",
-            link: "/docs/category/set-up-profiles",
+            link: "/docs/software-engineering-insights/harness-sei/setup-sei/setup-profiles/",
           },
           {
             title: "Set up Org Trees",
@@ -85,21 +85,21 @@ import { MODULES } from "@site/src/constants";
           "",
         list: [
           {
-            title: "Measure team efficiency",
+            title: "Measure Engineering Efficiency",
             module: MODULES.sei,
             description:
               "Use the efficiency dashboard to measure the key DORA metrics for your team.",
             link: "/docs/software-engineering-insights/harness-sei/analytics-and-reporting/efficiency",
           },
           {
-            title: "Measure developer productivity",
+            title: "Measure Developer Productivity",
             module: MODULES.sei,
             description:
               "Use the productivity dashboard to measure the key productivity metrics for your developers.",
             link: "/docs/software-engineering-insights/harness-sei/analytics-and-reporting/productivity",
           },
           {
-            title: "Business Alignment",
+            title: "Measure Business Alignment",
             module: MODULES.sei,
             description:
               "Track and analyze how engineering initiatives contribute to business outcomes.",
