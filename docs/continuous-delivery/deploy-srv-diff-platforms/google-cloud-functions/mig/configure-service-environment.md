@@ -480,11 +480,24 @@ When configuring your infrastructure definition, the **Project** field accepts a
 
 ## Next steps
 
-Now that you've configured your service, environment, and infrastructure, you can proceed to configure your deployment execution strategy. 
+Now that you've configured your service, environment, and infrastructure, you can proceed to configure your deployment execution strategy in the **Execution** tab.
 
-Harness currently supports **Blue-Green deployment strategy** for MIG deployments. When you select this strategy in the Execution tab, Harness automatically adds a step group containing all the necessary deployment steps, including rollback capabilities.
+### Blue-Green strategy
+
+Harness supports **Blue-Green deployment strategy** for MIG deployments. When you select this strategy, Harness automatically adds a step group containing all the necessary deployment steps, including rollback capabilities.
 
 - [Blue-Green Deployment Strategy](mig-blue-green-deployment.md) - Configure Blue-Green deployments with automatic step group setup, execution steps, and rollback
+
+### Blank Canvas
+
+If you choose **Blank Canvas**, you need to manually add and configure the deployment steps within a Container Step Group. This option provides flexibility to customize your deployment workflow.
+
+To set up a basic MIG deployment with Blank Canvas:
+
+1. Add a **Container Step Group** to your execution and configure the Kubernetes infrastructure (connector, namespace, service account)
+2. Inside the step group, add a **Download Manifests** step to fetch your configuration files
+3. Add a [Google MIG Deploy](step-references/deploy-mig.md) step to create the instance template and MIG
+4. (Optional) Add a **Download Harness Store** step followed by a [GCE Provision Backend Service](step-references/gce-provision-backend-service.md) step to create or update a backend service for your MIG
 
 ## Related resources
 

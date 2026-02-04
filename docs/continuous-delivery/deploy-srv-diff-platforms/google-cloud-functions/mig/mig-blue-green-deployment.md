@@ -20,18 +20,7 @@ These resources form the foundation of your Blue-Green deployment infrastructure
 
 ## Select deployment strategy
 
-After configuring your service, environment, and infrastructure, navigate to the **Execution** tab to configure your deployment strategy. Harness provides two options:
-
-### Blue-Green Strategy
-
-When you select the **Blue-Green** execution strategy, Harness automatically adds a pre-configured step group containing all the necessary deployment steps. This automated setup eliminates manual configuration and ensures best practices for zero-downtime deployments, with instant rollback. The step group includes Download Manifests, Google MIG Blue Green Deploy, Google MIG Steady State, and Google MIG Traffic Shift steps.
-
-### Blank Canvas
-
-If you choose **Blank Canvas**, you need to manually add and configure the deployment steps within the step group. This option provides flexibility to customize your deployment workflow. You can choose from these four steps: Download Manifests, Google MIG Blue Green Deploy, Google MIG Steady State, and Google MIG Traffic Shift.
-
-For a functional Blue-Green deployment, three steps are required: **Download Manifests** (fetches your configuration files), **Google MIG Blue-Green Deploy** (creates or updates the MIG without shifting traffic), and **Google MIG Traffic Shift** (shifts production traffic to the new version). The **Google MIG Steady State** step is optional but strongly recommended for production deployments to verify instance health before shifting traffic.
-
+After configuring your service, environment, and infrastructure, navigate to the **Execution** tab and select the **Blue-Green** execution strategy. Harness automatically adds a pre-configured step group containing all the necessary deployment steps. This automated setup eliminates manual configuration and ensures best practices for zero-downtime deployments with instant rollback.
 
 ## Blue-Green deployment step group
 
@@ -305,7 +294,23 @@ The step only monitors the secondary (stage) service, not the primary (stable) s
 
 **MIG Name**: Specify the name of the Managed Instance Group that Harness should monitor for steady state. This should be the secondary (stage-labeled) MIG where the new version was just deployed. Harness continuously polls this MIG's status to verify that the status is `stable` and all instances are using the expected instance template. This ensures your new deployment is fully ready before allowing traffic to reach it.
 
+:::tip Expression
+Use this expression to fetch the MIG name from the Blue-Green Deploy step:
+
+```
+<+pipeline.stages.BlueGreen_Traffic_shift.spec.execution.steps.blueGreenDeployment.steps.GoogleMigBlueGreenDeploy.GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.mig>
+```
+:::
+
 **Instance Template**: Specify the instance template name that Harness should verify. Harness checks that the MIG is using this specific template version. Note that during a rolling update, a MIG can temporarily have multiple templates, which is expected behavior. Once the rolling update completes, the MIG will be fully updated with the latest applied template. The template name typically includes version information or timestamps (e.g., my-app-template-v2-20260120).
+
+:::tip Expression
+Use this expression to fetch the instance template name from the Blue-Green Deploy step:
+
+```
+<+steps.blueGreenDeployment.steps.GoogleMigBlueGreenDeploy.GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.instanceTemplate>
+```
+:::
 
 **Polling Interval** (optional): Specify how frequently Harness checks the MIG status during steady state verification (e.g., 30s, 1m, 2m). Shorter intervals (10-30 seconds) provide faster detection of steady state and quicker deployments but generate more API calls to GCP. Longer intervals (1-2 minutes) reduce API load but slow down deployment feedback. The default is typically 30 seconds. Balance between deployment speed and API rate limits based on your requirements.
 
@@ -314,6 +319,8 @@ The step only monitors the secondary (stage) service, not the primary (stable) s
 **Container Registry**: Harness connector for authenticating to your container registry (Docker Hub, GCR, GAR, ECR). This connector pulls the deployment plugin image that executes the deployment operations.
 
 **Image**: Full path to the deployment plugin container image for this step. Use the official Harness image: [`harness/google-mig-steady-state:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-steady-state/tags) for steady state verification.
+
+**Timeout**: The default timeout is 10 minutes. If your MIG requires more time to reach steady state, increase this value accordingly.
 
 <details>
 <summary>YAML Example</summary>

@@ -39,11 +39,17 @@ Harness currently supports **Blue-Green** deployment strategy for MIGs, which ma
 
 The Blue-Green approach uses Cloud Service Mesh with HTTPRoute or GRPCRoute resources to control traffic distribution between environments. Harness automatically manages both environments, creating and labeling them as stable and stage. After each successful deployment, the environments swap roles—what was stable becomes stage, and what was stage becomes the new stable environment. This pattern aligns with how Harness implements Blue-Green deployments in Kubernetes, providing a consistent deployment experience across different cloud platforms.
 
-### MIG configuration management
+### MIG infrastructure components
 
-Harness provides comprehensive management of all MIG configuration aspects. Instance templates define your VM configuration, including machine type, boot disk, network interfaces, startup scripts, metadata, and labels. These templates act as blueprints for every instance in your MIG, ensuring consistency across your entire deployment.
+MIG deployments rely on several GCP resources that you configure and maintain. Understanding these components helps you set up your infrastructure correctly before deploying with Harness.
 
-The [MIG configuration](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances) itself controls operational aspects like distribution policy across zones, update policy for rolling changes, and constraints like maxSurge and maxUnavailable that govern update speed. You can optionally configure [autoscaling](https://cloud.google.com/compute/docs/autoscaler) based on CPU utilization, load balancer capacity, or custom Cloud Monitoring metrics. [Health checks](https://cloud.google.com/load-balancing/docs/health-checks) monitor instance health and trigger automatic replacement of unhealthy instances, ensuring your application maintains high availability.
+**Instance templates** define your VM configuration, including machine type, boot disk, network interfaces, startup scripts, metadata, and labels. These templates act as blueprints for every instance in your MIG, ensuring consistency across your entire deployment. You create and manage these templates in GCP.
+
+**MIG configuration** controls operational aspects like distribution policy across zones, update policy for rolling changes, and constraints like maxSurge and maxUnavailable that govern update speed. For details, see [Creating managed instance groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances) in GCP documentation.
+
+**Autoscaling** (optional) adjusts instance count based on CPU utilization, load balancer capacity, or custom Cloud Monitoring metrics. See [Autoscaling groups of instances](https://cloud.google.com/compute/docs/autoscaler) for configuration options.
+
+**Health checks** monitor instance health and trigger automatic replacement of unhealthy instances, ensuring your application maintains high availability. See [Health checks overview](https://cloud.google.com/load-balancing/docs/health-checks) for setup guidance.
 
 ### Cloud Service Mesh integration
 
