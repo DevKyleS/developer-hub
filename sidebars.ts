@@ -4304,6 +4304,12 @@ const sidebars: SidebarsConfig = {
             id: 'software-engineering-insights/harness-sei/analytics-and-reporting/business-alignment',
             label: 'Business Alignment Insights',
           },
+          { 
+            type: 'doc', 
+            id: 'software-engineering-insights/harness-sei/analytics-and-reporting/security',
+            label: 'Security Insights',
+            className: 'sidebar-item-beta',
+          },
           {
             type: 'doc',
             id: 'software-engineering-insights/harness-sei/analytics-and-reporting/export',
