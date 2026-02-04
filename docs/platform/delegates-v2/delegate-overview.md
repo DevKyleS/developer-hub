@@ -3,6 +3,8 @@ title: Overview
 description: Learn about the new Harness Delegate
 sidebar_position: 0
 sidebar_label: Overview
+redirect_from:
+    - /docs/platform/delegates-v2/install-delegate-2-0/delegate-overview
 ---
 
 :::warning Closed Beta

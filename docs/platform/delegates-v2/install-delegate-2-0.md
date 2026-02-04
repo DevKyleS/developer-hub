@@ -25,21 +25,21 @@ import TabItem from '@theme/TabItem';
 
 :::warning Closed Beta
 
-The new Harness Delegate is currently in closed beta and is available to select customers only. Access is determined by the product team, and is based on current [supported use cases and steps](#whats-supported).
+The new Harness Delegate is currently in closed beta and available only to select customers. Access is determined by the product team and is based on current [supported use cases and steps](#whats-supported).
 
 :::
 
-This guide describes how to install the new Harness Delegate to local machines. Skip to the [End to End Demo](#end-to-end-demo) if you want to watch video instructions for the new delegate installation.
+This guide describes how to install the new Harness Delegate on local machines. Skip to the [End to End Demo](#end-to-end-demo) if you want to watch video instructions for the new delegate installation.
 
 :::info
 To learn more about the new delegate, including architecture, capabilities, and how it compares to the legacy delegate, go to:
-- [New Delegate Overview](./delegate-overview) - Complete guide to the new delegate
-- [Feature Parity](./feature-parity) - Detailed feature comparison
+- [New Delegate Overview](/docs/platform/delegates-v2/delegate-overview/) - Complete guide to the new delegate
+- [Feature Parity](/docs/platform/delegates-v2/feature-parity/) - Detailed feature comparison
 :::
 
 :::info Important
 
-The new Harness Delegate is under **Beta** and can only be used for Mac Build, Android Build, and CI Stage Pipelines with limited sets of steps and connector support.
+The new Harness Delegate is in **Beta** and can only be used for Mac Build, Android Build, and CI Stage Pipelines, with limited step and connector support.
 
 :::
 
