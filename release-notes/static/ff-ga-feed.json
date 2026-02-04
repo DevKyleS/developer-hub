@@ -976,5 +976,11 @@
     "description": "Enables support to modify subsequent updates to the alias `routingConfig` during alias update",
     "gaStartDate": "2026-01-30",
     "module": "Continuous Delivery"
+  },
+  {
+    "flagKey": "CDS_ASG_SKIP_INSTANCE_HEALTH_CHECK_BEFORE_INSTANCE_REFRESH",
+    "description": "Enables skipping the ASG instance health check before instance refresh",
+    "gaStartDate": "2026-02-04",
+    "module": "Continuous Delivery"
   }
 ]
