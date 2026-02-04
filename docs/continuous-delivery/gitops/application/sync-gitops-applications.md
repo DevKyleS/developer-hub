@@ -67,8 +67,6 @@ Here is how the resources would look in Harness after the sync process is comple
 
 For more information on creating a multi-source application, refer to the [Support for Multiple Sources](/docs/continuous-delivery/gitops/get-started/harness-cd-git-ops-quickstart#step-4-add-a-harness-gitops-application) documentation
 
-Currently, Support for Multiple Sources is behind the feature flag `GITOPS_MULTI_SOURCE_ENABLED`. Please contact [Harness support](mailto:support@harness.io) to enable this feature.
-
 After the application with multiple source is created, you can also choose which source to sync with the application during the sync operation. By default, all applications will be synced.
 
 To sync a specific source:

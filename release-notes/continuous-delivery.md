@@ -1302,7 +1302,7 @@ This issue has been resolved. The Monitored Services page now supports opening v
 
 #### New Features and Enhancements
 
-- Users can now audit the manual changes to applications and manual AppSyncs for GitOps. Currently, this feature is behind the feature flag `GITOPS_AUDIT_TRAIL_ENABLED`. Contact [Harness Support](mailto:support@harness.io) to enable the feature. (**CDS-106545**)
+- Users can now audit the manual changes to applications and manual AppSyncs for GitOps. Check the Audit Trail Docs [here](/docs/continuous-delivery/gitops/security/audit-trail/). (CDS-106545)
 
 #### Fixed Issues
 
@@ -1869,7 +1869,7 @@ Harness now supports configuring OAuth for self-hosted GitLab providers. This fe
 
 - The Harness GitOps agent uses the **Horizontal Pod Autoscaler** for CPU and memory management, with a minimum of 1 replica and a maximum of 5 replicas in High Availability (HA) mode. For more information, go to [GitOps documentation](/docs/continuous-delivery/gitops/gitops-entities/agents/install-a-harness-git-ops-agent/#high-availability-ha). (CDS-100830)
 
-- Harness GitOps now supports Multi-Source applications with Argo CD. This feature is available for the GitOps agent version 0.79. Currently, this feature is behind the feature flag  `GITOPS_MULTI_SOURCE_ENABLED`. Please contact [Harness support](mailto:support@harness.io) to enable this feature. (CDS-85518)
+- Harness GitOps now supports Multi-Source applications with Argo CD. This feature is available for the GitOps agent version 0.79. (CDS-85518)
 
 - We now suport force deleting of GitOps Applications, which can be used when a delete operation is stalled. Note that this option may leave some resources orphaned, so it is advised to use it only in critical scenarios. (CDS-97813)
 

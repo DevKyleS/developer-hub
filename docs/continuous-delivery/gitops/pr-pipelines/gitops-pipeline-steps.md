@@ -262,12 +262,6 @@ In order to rollback this step, you will need to add another **Update GitOps App
 
 #### Update GitOps App step for multi-source applications
 
-:::note
-
-Currently, support for multi-source applications are behind the feature flag `GITOPS_MULTI_SOURCE_ENABLED`. Please contact Harness support to enable this feature. 
-
-:::
-
 With this feature enabled, you can select your multi-source application in the **Application** field. This will populate the step with all the sources for the selected application. 
 
 From there, you can update each source individually as you would for a single source application and described above. 

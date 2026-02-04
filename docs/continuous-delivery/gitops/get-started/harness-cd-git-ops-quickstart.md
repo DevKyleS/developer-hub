@@ -434,8 +434,6 @@ Note: When importing applications in BYOA, if the URL in the application matches
 
 You can configure multiple sources for a single application in Harness GitOps. This feature is supported by Argo CD starting from version 2.6 and is currently in beta.
 
-Currently, Support for Multiple Sources is behind the feature flag `GITOPS_MULTI_SOURCE_ENABLED`. Contact Harness Support to enable the feature.
-
 Select the checkbox **Is Multiple Source** in the Source section.
 
 Under **Repository**, choose **Repo ID** if you have pre-configured repositories in Harness GitOps Repositories. If not, select **Repo URL** and provide the URL details of your repository. Ensure that you have a credentials template configured for the repository if it is private.
