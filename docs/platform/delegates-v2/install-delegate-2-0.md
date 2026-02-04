@@ -50,7 +50,8 @@ The new Harness Delegate is in **Beta** and can only be used for Mac Build, Andr
 | Connector          | Caveats                                                                 |
 |--------------------|-------------------------------------------------------------------------|
 | Docker Registry    | Only the DockerHub provider type                                        |
-| Github             | Does not work with Github App OAuth.                                    |
+| Github             | All authentication types are supported                                  |
+| Bitbucket          | All authentication types are supported                                  |
 | HashiCorp Vault    | Only AppRole and Token Auth; set Renewal Interval to 0 (zero)           |
 | AWS Secrets Manager| Only Access Key and IAM Role Credential Type                            |
 
@@ -274,7 +275,27 @@ These settings ensure proper permission mapping between your local filesystem an
 
 **Proxy configuration:**
 
-If you need proxy settings, add them to `~/.harness-delegate/config.env`. See [Configure Delegate Proxy Settings](/docs/platform/delegates/manage-delegates/configure-delegate-proxy-settings).
+The delegate inherits system-level proxies by default, but you can set a custom proxy configuration through the delegate config.
+
+Edit `~/.harness-delegate/config.env` and add:
+
+```bash
+PROXY_HOST=3.139.239.136
+PROXY_PORT=3128
+PROXY_SCHEME=http
+PROXY_USER=proxy_user
+PROXY_PASSWORD=password
+NO_PROXY="localhost,127.0.0.1,.corp.local,10.0.0.0/8"
+```
+
+Alternatively, you can set environment variables:
+
+```bash
+export HTTP_PROXY="http://USER:PASSWORD@PROXY_HOST:PORT"
+export HTTPS_PROXY="http://USER:PASSWORD@PROXY_HOST:PORT"
+export NO_PROXY="localhost,127.0.0.1,.corp.local,10.0.0.0/8"
+```
+
 
 **Manual plugin installation:**
 
@@ -373,7 +394,27 @@ To manually install a plugin:
 
 **Proxy configuration:**
 
-If you need proxy settings, add them to `config.env`. See [Configure Delegate Proxy Settings](/docs/platform/delegates/manage-delegates/configure-delegate-proxy-settings).
+The delegate inherits system-level proxies by default, but you can set a custom proxy configuration through the delegate config.
+
+Edit `config.env` and add:
+
+```bash
+PROXY_HOST=3.139.239.136
+PROXY_PORT=3128
+PROXY_SCHEME=http
+PROXY_USER=proxy_user
+PROXY_PASSWORD=password
+NO_PROXY="localhost,127.0.0.1,.corp.local,10.0.0.0/8"
+```
+
+Alternatively, you can set environment variables:
+
+```bash
+export HTTP_PROXY="http://USER:PASSWORD@PROXY_HOST:PORT"
+export HTTPS_PROXY="http://USER:PASSWORD@PROXY_HOST:PORT"
+export NO_PROXY="localhost,127.0.0.1,.corp.local,10.0.0.0/8"
+```
+
 
 **Manual plugin installation:**
 
@@ -555,7 +596,7 @@ There are different ways to set up a proxy:
 
 :::warning PowerShell Version Compatibility
 
-PowerShell versions below 7 do not support environment proxy configurations like `http_proxy`, which the delegate sets up, and they only work with WinHTTP proxy configurations. Windows 2019 and 2022 ship with PowerShell 5.1, which means the Run step will not work until the WinHTTP proxy is manually configured or Powershell is upgraded to >7
+PowerShell versions below 7 do not support environment proxy configurations such as `http_proxy`, which the delegate sets, and only work with WinHTTP proxy configurations. Windows 2019 and 2022 ship with PowerShell 5.1, which means the Run step will not work until the WinHTTP proxy is manually configured or PowerShell is upgraded to >7
 
 :::
 
@@ -604,7 +645,7 @@ For Git operations, two different SSL channels can be used, with varying configu
    If using the OpenSSL channel, append your CA certificate to `C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt`.
 
    :::note
-   This configuration only affects Git clone operations. Other steps or tasks will not utilize this certificate, and Git API requests will not use it.
+   This configuration only affects Git clone operations. Other steps or tasks will not use this certificate, and Git API requests will not use it either.
    :::
 
 **Manual plugin installation:**
@@ -615,7 +656,7 @@ To manually install a plugin:
 
 1. Download the plugin from its source (e.g., [drone-git v1.7.6](https://github.com/wings-software/drone-git/releases/tag/v1.7.6))
 2. Decompress: `zstd.exe -d plugin-windows-amd64.zst -o plugin-windows-amd64.exe`
-3. Move to plugins directory:
+3. Move to the plugins directory:
    ```powershell
    New-Item -ItemType Directory -Force -Path "C:\HarnessDelegate\default\plugin\drone-git\"
    Move-Item plugin-windows-amd64.exe "C:\HarnessDelegate\default\plugin\drone-git\"
@@ -649,7 +690,7 @@ If you don't set a name for your delegate, it will default to `harness-delegate`
 
 For the CI stages that you want to use the new delegate with, [define the stage variable](/docs/platform/variables-and-expressions/add-a-variable/#define-variables) `HARNESS_CI_INTERNAL_ROUTE_TO_RUNNER` and set it to `true`.
 
-Then, in order for the pipeline to select this delegate, [set your pipeline's build infrastructure](/docs/continuous-integration/use-ci/set-up-build-infrastructure/define-a-docker-build-infrastructure#set-the-pipelines-build-infrastructure) as normal.
+Then, for the pipeline to select this delegate, [set your pipeline's build infrastructure](/docs/continuous-integration/use-ci/set-up-build-infrastructure/define-a-docker-build-infrastructure#set-the-pipelines-build-infrastructure) as usual.
 
 Most importantly, ensure that you have set `Local` as the **Infrastructure** and that the **Operating System** and **Architecture** match the delegate you installed in the [download and install delegate step](#download-and-install-the-delegate).
 
@@ -668,13 +709,13 @@ The `config.env` file location:
 
 ### Set Max Stage Capacity
 
-With the new Harness Delegate, you can configure a limit for the maximum number of stages the delegate will be executing at a given time. When the delegate is handling tasks at full capacity, new tasks will be queued and picked up once the delegate's capacity is freed.
+With the new Harness Delegate, you can configure a limit for the maximum number of stages the delegate will execute at a given time. When the delegate is handling tasks at full capacity, new tasks will be queued and picked up once the delegate's capacity is freed.
 
-In order to configure a max limit for number of stages executed by a delegate, you should add a `MAX_STAGES` variable in the delegate's `config.env` file. The value of the `MAX_STAGES` should be a positive integer.
+To configure a max limit for the number of stages executed by a delegate, you should add a `MAX_STAGES` variable in the delegate's `config.env` file. The value of the `MAX_STAGES` should be a positive integer.
 
 #### Example config.env
 
-If you wanted the delegate to only execute up to 5 stages a time, set `MAX_STAGES=5`. For example:
+If you want the delegate to execute only up to 5 stages at a time, set `MAX_STAGES=5`. For example:
 
 ```
 ACCOUNT_ID="<ACCOUNT_ID>"
@@ -689,10 +730,11 @@ MAX_STAGES=5
 ### Set Graceful Shutdown
 
 :::info Available in version 1.25.2+
+:::
+
+With the new Harness Delegate, you can configure a grace period to allow for a clean shutdown of running containers and processes when a pipeline execution is aborted. This ensures that any resources started by the pipeline have time to terminate gracefully before they are forcibly removed.
 
 The new Harness Delegate supports transaction-aware graceful shutdown. This feature allows the delegate to complete active transactions before shutting down when it receives a termination signal.
-
-:::
 
 With the new Harness Delegate, you can configure graceful shutdown behavior in two ways:
 
@@ -735,7 +777,7 @@ IDLE_WAIT_SECS_BEFORE_STOP=60
 When a task runs directly on the delegate's host machine (such as a Run step without containers), subprocesses are started on the host to handle the task. When a stage is aborted or encounters an error, the delegate will clean up these subprocesses.
 
 :::note
-This feature is only available on Unix-based platforms (macOS and Linux). For Windows, the process is terminated by invoking `taskkill.exe /t /f` directly (forceful kill).
+This feature is only available on Unix-based platforms (macOS and Linux). On Windows, the process is terminated by invoking `taskkill.exe /t /f` directly (a forceful kill).
 :::
 
 You can control the cleanup behavior by configuring the following environment variables in the delegate's `config.env` file:
