@@ -68,7 +68,7 @@ Check out [Harness Cloud VM Images Docs](/docs/platform/references/harness-cloud
 
 #### New Features and Enhancements
 
-- Kubernetes builds now support additional JWT claims when integrating with HashiCorp Vault for secret management. This feature was shipped as a hotfix (CI-20662, CI-20458)
+- Kubernetes builds now support additional JWT claims when integrating with HashiCorp Vault for secret management. This feature is currently behind the feature flag `PL_ENABLE_GRANULAR_CLAIMS_FOR_VAULT` (CI-20662, CI-20458)
 
 #### Fixed Issues
 
