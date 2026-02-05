@@ -1,7 +1,7 @@
 ---
 title: Continuous Delivery & GitOps release notes
 sidebar_label: Continuous Delivery & GitOps
-date: 2026-02-02T10:00:00
+date: 2026-02-05T10:00:00
 sidebar_position: 8
 ---
 
@@ -54,13 +54,26 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 :::
 
 
+## February 2026
+
+### Version 1.129.5
+
+#### Fixed issues
+
+- Fixed an issue where delegates encountered 404 errors during deployment, specifically when attempting to locate pods that were no longer available after a canary deployment phase. The system now avoids retrying pod lookups for non-existent pods during the event phase, preventing unnecessary errors and improving deployment stability. (**CDS-117947**, **ZD-101883**)
+- Fixed an issue where service tags were failing to load in the pipeline when deploying the scn-pdm service, preventing users from selecting a tag during deployment. This was due to an error retrieving tags from the artifact repository. A null check was added to return a 400 error instead of a 500 error when encountering an incorrect YAML configuration. (**CDS-118014**, **ZD-101621**)
+- Fixed an issue where the Service Deployment GitOps step failed when the `agentIdentifier` was not explicitly provided in the GitOps cluster configuration. The step now correctly utilizes the `agentIdentifier` passed in the environment, restoring previous functionality and preventing errors such as "No G..." when deploying. (**CDS-118321**, **ZD-102880**, **ZD-103034**)
+- Fixed an issue where pipelines were intermittently becoming stuck and failing to proceed, impacting multiple customers. This fix ensures pipelines consistently progress through all stages as configured, resolving instances where execution stalled unexpectedly. (**PIPE-31510**, **ZD-100762**, **ZD-100766**, **ZD-100767**, **ZD-100768**, **ZD-100777**, **ZD-100778**, **ZD-100785**)
+- Fixed an issue where validating Bitbucket Server (on-prem) connectors using Access Token authentication failed. This resulted in a "ClassCastException" error. Bitbucket Server connectors can now be successfully validated when using Access Token authentication. (**PIPE-31837**, **ZD-102262**)
+
+
 ## January 2026
 
-### Version 1.127.0
+### Version 1.128.1
 
 #### New Features and Enhancements
 
-- Harness now supports Blue-Green deployments to **Google Cloud Platform Managed Instance Groups**. Deploy GCP VM workloads with zero downtime, gradual traffic shifting using Cloud Service Mesh, and instant rollback.  Currently, this feature is governed by the `CDS_GOOGLE_MIG` feature flag. Contact [Harness Support](mailto:support@harness.io) to enable it. (**CDS-114547**)
+- Harness now supports Blue-Green deployments to [**Google Cloud Platform Managed Instance Groups**](/docs/continuous-delivery/deploy-srv-diff-platforms/google-cloud-functions/mig). Deploy GCP VM workloads with zero downtime, gradual traffic shifting using Cloud Service Mesh, and instant rollback.  Currently, this feature is governed by the `CDS_GOOGLE_MIG` feature flag. Contact [Harness Support](mailto:support@harness.io) to enable it. (**CDS-114547**)
 
 - Harness now supports **multi-account deployments for AWS CDK**, allowing you to deploy to different AWS accounts using a single connector by overriding the region and assuming a different IAM role at the step level. (**CDS-114915**)
 
@@ -76,9 +89,9 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 #### Fixed issues
 
-- Fixed an issue where nexus connector experiencing 504 errors due to socket exhaustion potentially related to http/2 → http/1.1 traffic handling. Added env variable to DISABLE_NEXUS_DOCKER_V2_CATALOG, DISABLE_NEXUS_DOCKER_ARTIFACT_VALIDATION and MAX_BUILD_NEXUS_TRIGGERS to restrict the api calls to /v2/_catalog. (**CDS-118102**, **ZD-101720**, **ZD-102180**)
-- Fixed an issue where a pipeline step's "When" condition was not re-evaluated on retry attempts after an initial evaluation failure. This could lead to the step incorrectly executing on a retry. Now, the "When" condition is always re-evaluated on each retry attempt, ensuring consistent and correct execution behavior. Currently, this fix is governed by the feature flag `PIPE_SKIP_EXECUTE_WHEN_CONDITION_ON_RETRY_STEP`. Contact [Harness Support](mailto:support@harness.io) to enable it.(**PIPE-31684**, **ZD-101561**)
-- Fixed an issue where “send status back to git” does not publish commit status when pipeline is triggered via harness code trigger in custom stages. Status handling was missing in the Harness code repository because it lacks a connectorRef. Added proper handling for the code repository. (**PIPE-31736**, **ZD-100597**)
+- Fixed an issue where nexus connector experiencing 504 errors due to socket exhaustion potentially related to `http/2 → http/1.1` traffic handling. Added env variable to `DISABLE_NEXUS_DOCKER_V2_CATALOG`, `DISABLE_NEXUS_DOCKER_ARTIFACT_VALIDATION`, and `MAX_BUILD_NEXUS_TRIGGERS` to restrict the api calls to `/v2/_catalog`. (**CDS-118102**, **ZD-101720**, **ZD-102180**)
+- Fixed an issue where a pipeline step's *When* condition was not re-evaluated on retry attempts after an initial evaluation failure. This could lead to the step incorrectly executing on a retry. Now, the *When* condition is always re-evaluated on each retry attempt, ensuring consistent and correct execution behavior. Currently, this fix is governed by the feature flag `PIPE_SKIP_EXECUTE_WHEN_CONDITION_ON_RETRY_STEP`. Contact [Harness Support](mailto:support@harness.io) to enable it.(**PIPE-31684**, **ZD-101561**)
+- Fixed an issue where *send status back to git* does not publish commit status when pipeline is triggered via harness code trigger in custom stages. Status handling was missing in the Harness code repository because it lacks a connector reference. Added proper handling for the code repository. (**PIPE-31736**, **ZD-100597**)
 
 
 ### Version 1.127.0
