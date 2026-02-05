@@ -982,5 +982,17 @@
     "description": "Enables skipping the ASG instance health check before instance refresh",
     "gaStartDate": "2026-02-04",
     "module": "Continuous Delivery"
+  },
+  {
+    "flagKey": "PIE_GITXWEBHOOKS_RBAC_PERMISSIONS",
+    "description": "FF to enable GitX Webhooks RBAC permissions",
+    "gaStartDate": "2026-02-05",
+    "module": "Pipeline"
+  },
+  {
+    "flagKey": "PIPE_AUDIT_GITX_WEBHOOKS",
+    "description": "FF to support GitX webhook audit events",
+    "gaStartDate": "2026-02-05",
+    "module": "Pipeline"
   }
 ]
