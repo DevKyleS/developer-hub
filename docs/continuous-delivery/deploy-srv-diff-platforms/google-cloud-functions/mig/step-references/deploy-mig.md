@@ -8,14 +8,14 @@ tags:
 
 # Google MIG Deploy
 
-The **Google MIG Deploy** step creates a new version of the instance template and creates the instance group if it doesn't exist.
+The **Google MIG Deploy** step creates a new version of the instance template and, if the instance group doesn't exist, creates the instance group.
 
 :::note Prerequisites
 - This step must be added within a **Container Step Group**. The step runs as a containerized task and requires the container infrastructure configuration provided by the step group.
 - A **Download Manifests** step must be added before this step to fetch the required manifest files (instance template, MIG manifest, etc.) from your configured manifest store.
 
 <div style={{textAlign: 'center'}}>
-  <DocImage path={require('./static/mig-deploy-2.png')} width="60%" height="60%" title="Click to view full size image" />
+  <DocImage path={require('./static/mig-deploy-2.png')} width="40%" height="40%" title="Click to view full size image" />
 </div>
 
 :::

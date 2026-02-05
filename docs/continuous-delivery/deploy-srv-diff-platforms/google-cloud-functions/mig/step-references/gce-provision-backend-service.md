@@ -16,12 +16,12 @@ The **GCE Provision Backend Service** step creates or updates a backend service 
 - A **Download Harness Store** or **Git Clone** step must be added before this step to fetch the backend service configuration file from the Harness File Store or a Git repository.
 
 <div style={{textAlign: 'center'}}>
-  <DocImage path={require('./static/gce-provision-backend.png')} width="60%" height="60%" title="Click to view full size image" />
+  <DocImage path={require('./static/gce-provision-backend.png')} width="40%" height="40%" title="Click to view full size image" />
 </div>
 :::
 
 <div style={{textAlign: 'center'}}>
-  <DocImage path={require('./static/gce-provision-backend-2.png')} width="60%" height="60%" title="Click to view full size image" />
+  <DocImage path={require('./static/gce-provision-backend-2.png')} width="40%" height="40%" title="Click to view full size image" />
 </div>
 
 ## Deployment flow
@@ -29,7 +29,7 @@ The **GCE Provision Backend Service** step creates or updates a backend service 
 1. **Download Harness Store**: Fetches the backend service configuration JSON file from the Harness File Store and makes it available for the next step. When configuring this step, specify the **Download Directory Path** (e.g., `/harness`) where the file will be downloaded.
 
 <div style={{textAlign: 'center'}}>
-  <DocImage path={require('./static/harness-store.png')} width="60%" height="60%" title="Click to view full size image" />
+  <DocImage path={require('./static/harness-store.png')} width="40%" height="40%" title="Click to view full size image" />
 </div>
 
 2. **GCE Provision Backend Service**: Reads the configuration file and creates or updates the backend service in the specified GCP project and region. The **Config File Path** in this step must match the download directory from the previous step (e.g., `/harness/backendservice.json`).
