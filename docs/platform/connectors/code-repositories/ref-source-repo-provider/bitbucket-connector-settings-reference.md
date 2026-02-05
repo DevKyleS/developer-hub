@@ -15,6 +15,14 @@ import TabItem from '@theme/TabItem';
 
 This topic describes the settings and permissions for the Bitbucket connector. Harness supports both Cloud and Data Center (On-Prem) versions of Bitbucket. The following settings are applicable to both versions.
 
+:::warning App Passwords Deprecated
+
+Bitbucket App Passwords are deprecated and will stop working after June 9, 2026. Migrate to API tokens or access tokens for authentication. For more information, see the [Bitbucket App Password deprecation announcement](https://www.atlassian.com/blog/bitbucket/bitbucket-cloud-enters-phase-2-of-app-password-deprecation).
+
+If you're using App Passwords, see [Migrate from App Passwords to API tokens](#migrate-from-app-passwords-to-api-tokens) for migration instructions.
+
+:::
+
 ## Overview settings
 
 * **Name:** The unique name for this connector. Harness generates an **Id** ([Entity Identifier](../../../references/entity-identifier-reference.md)) based on the **Name**. You can edit the **Id** during initial connector creation. Once you save the connector, the **Id** is locked.
@@ -133,38 +141,48 @@ Provide authentication credentials for the connector.
 
 The **Connection Type** you chose in the [Details settings](#details-settings) determines the **Authentication** method.
 
-
 <Tabs>
-  <TabItem value="http" label="Username and Password" default>
-
+  <TabItem value="http" label="HTTP: Username and Password" default>
 
 The **HTTP** Connection Type requires **Username** and **Password** authentication for all accounts and repos, including read-only repos.
 
-In the **Username** field, enter the Bitbucket account username as specified in your Bitbucket **Account settings**. You can use either plaintext or a [Harness encrypted text secret](/docs/platform/secrets/add-use-text-secrets).
+#### Username
 
-![Bitbucket Personal settings screen, highlighting the Account settings page and the Username field.](./static/bitbucket-username-in-acct-settings.png)
+In the **Username** field, enter your Bitbucket account username. You can find your username in your Bitbucket **Account settings**. You can use either plaintext or a [Harness encrypted text secret](/docs/platform/secrets/add-use-text-secrets).
 
-In the **Password** field, provide a Bitbucket account-level [access token](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/), [HTTP access token](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html), or [app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/). Passwords are stored as [Harness encrypted text secrets](/docs/platform/secrets/add-use-text-secrets). If you use an access token, the **Username** must be `x-token-auth`.
+:::tip Finding your username
 
-:::warning
-
-The options for the password field are limited by your account type. 
-
-  - For SaaS accounts, you cannot use `access tokens`.
-  - For self-hosted or on-prem accounts, you cannot use `app passwords`.
+If you're unsure of your Bitbucket username, go to [https://bitbucket.org/account/settings/](https://bitbucket.org/account/settings/) to view your account username. This is different from your email address.
 
 :::
 
-You must provide an account-level app password or token. Repo-level tokens are not supported.
+#### Password
 
-If you use a Google account to log in to Bitbucket, you must use an App password.
+In the **Password** field, provide one of the following authentication credentials. All passwords are stored as [Harness encrypted text secrets](/docs/platform/secrets/add-use-text-secrets).
 
-Bitbucket accounts with two-factor authentication must use access tokens.
+**For Bitbucket Cloud:**
 
+* **API Token** (recommended): Use an [API token](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/) with your username. API tokens are the recommended authentication method for Bitbucket Cloud. See [Create an API token](#create-an-api-token) for instructions.
+* **Access Token**: Use an [access token](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/) with your username. If you use an access token, the **Username** must be `x-token-auth`.
+* **App Password** (deprecated): App Passwords are deprecated and will stop working after June 9, 2026. Migrate to API tokens. See [Migrate from App Passwords to API tokens](#migrate-from-app-passwords-to-api-tokens).
+
+**For Bitbucket Data Center (On-Prem):**
+
+* **HTTP Access Token**: Use an [HTTP access token](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html) with your username.
+
+:::warning Account type limitations
+
+The authentication options available depend on your Bitbucket account type:
+
+* **Bitbucket Cloud**: Use API tokens (recommended), access tokens, or App Passwords (deprecated).
+* **Bitbucket Data Center (On-Prem)**: Use HTTP access tokens only. API tokens and App Passwords are not supported.
+
+:::
+
+You must provide an account-level token. Repo-level tokens are not supported.
 
 </TabItem>
-  <TabItem value="ssh" label="SSH Key">
-
+  <TabItem value="ssh" label="SSH: SSH Key">
 
 The **SSH** Connection Type requires an **SSH Key** in PEM format. OpenSSH keys are not supported. In Harness, SSH Keys are stored as [Harness SSH credential secrets](/docs/platform/secrets/add-use-ssh-secrets). When creating an SSH credential secret for a code repo connector, the SSH credential's **Username** must be `git`. Always save the ssh key as a file secret.
 
@@ -182,27 +200,54 @@ Make sure to follow the prompts to finish creating the key. For more information
 
 :::
 
-
 </TabItem>
 </Tabs>
 
 
 ### Enable API access
 
-You must enable API access to use Git-based triggers, manage webhooks, or update Git statuses with this connector. If you are using the Harness Git Experience, this setting is required. API access allows authentication via two methods. 
-
+You must enable API access to use Git-based triggers, manage webhooks, or update Git statuses with this connector. If you are using the Harness Git Experience, this setting is required. API access allows authentication via multiple methods.
 
 <Tabs>
-<TabItem value="fba" label="Username and App Password">
+<TabItem value="email-api-token" label="Email and API Token (Bitbucket Cloud only)" default>
 
-In the **Username** field, enter the Bitbucket account username as specified in your Bitbucket **Account settings**, please note this might be different from what you entered in the first **Username** field. You can use either plaintext or a [Harness encrypted text secret](/docs/platform/secrets/add-use-text-secrets).
+This authentication method is available only for Bitbucket Cloud. It requires Harness Delegate version 26.01.88201 or later.
 
-![Bitbucket Personal settings screen, highlighting the Account settings page and the Username field.](./static/bitbucket-username-in-acct-settings.png)
+In the **Email** field, enter the email address associated with your Bitbucket account.
 
-In the **Personal Access Token** field, provide a Bitbucket account-level [App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/). Please note this will be different from the **Access Token** you may have used. Passwords are stored as [Harness Encrypted Text secrets](/docs/platform/secrets/add-use-text-secrets).
+In the **API Token** field, provide a Bitbucket account-level API token stored as a [Harness Encrypted Text secret](/docs/platform/secrets/add-use-text-secrets). See [Create an API token](#create-an-api-token) for instructions on creating an API token with the required scopes.
+
+![](./static/harness-connector-bitbucket.png)
+
+:::warning Delegate version requirement
+
+The Email and API Token authentication method requires Harness Delegate version **26.01.88201** or later. If you're using an older delegate version, use one of the other authentication methods.
+
+:::
+
+:::info Bitbucket Cloud only
+
+Email and API Token authentication is only available for Bitbucket Cloud. For Bitbucket Data Center (On-Prem), use the **Access Token** method.
+
+:::
+
+</TabItem>
+
+<TabItem value="username-app-password" label="Username and App Password (Deprecated)">
+
+:::warning Deprecated
+
+App Passwords are deprecated and will stop working after June 9, 2026. Migrate to **Email and API Token** or **Access Token** authentication methods. [Learn More](https://www.atlassian.com/blog/bitbucket/bitbucket-cloud-enters-phase-2-of-app-password-deprecation)
+
+:::
+
+In the **Username** field, enter the Bitbucket account username as specified in your Bitbucket **Account settings**. Note that this might be different from what you entered in the first **Username** field. You can use either plaintext or a [Harness encrypted text secret](/docs/platform/secrets/add-use-text-secrets).
+
+In the **Personal Access Token** field, provide a Bitbucket account-level [App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/). Passwords are stored as [Harness Encrypted Text secrets](/docs/platform/secrets/add-use-text-secrets).
 
 You must provide an account-level app password or token. Repo-level tokens are not supported.
 
+![](./static/harness-connector-bitbucket-username.png)
 
 :::warning
 
@@ -214,19 +259,82 @@ For On-Prem repos, if the repo URL has an extra segment before the project ID, s
 
 </TabItem>
 
-
-<TabItem value="atb" label="Access Token">
+<TabItem value="access-token" label="Access Token">
 
 Access tokens are linked to your Bitbucket repository, project, or workspace. While creating the Bitbucket connector, you get an option to select the access token method for API Authentication.
 
-![Enable API access](./static/bitbucket-connector-api-access.png)
+When you select the access token method, you can provide the reference to a secret containing your Bitbucket access token (which can be stored as a [Harness Encrypted Text secret](/docs/platform/secrets/add-use-text-secrets)) in the **Access Token** field.
 
-When you select the access token method, you can provide the reference to a secret containing your Bitbucket access token ( which can be  stored as a [Harness Encrypted Text secret](/docs/platform/secrets/add-use-text-secrets) ) in the **Access Token** field. 
-
-In order to find out the features and limitations of Bitbucket access tokens, Please go through the [Bitbucket documentation](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/).
+For information about the features and limitations of Bitbucket access tokens, see the [Bitbucket documentation](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/).
 
 </TabItem>
 </Tabs>
+## Create an API token
+
+To use API token authentication, you must create an API token in Bitbucket with the required scopes.
+
+### Steps to create an API token
+
+1. Go to Bitbucket [API Tokens Page](https://id.atlassian.com/manage-profile/security/api-tokens)
+2. Click **Create API token with scopes**.
+3. Enter a label for your token (for example, "Harness Connector").
+4. Set an expiry date (maximum is one year).
+5. Select **Bitbucket** as the workspace.
+6. Select the following required scopes:
+   * `read:issue:bitbucket`
+   * `read:me`
+   * `read:project:bitbucket`
+   * `read:pullrequest:bitbucket`
+   * `read:repository:bitbucket`
+   * `read:user:bitbucket`
+   * `read:webhook:bitbucket`
+   * `read:workspace:bitbucket`
+   * `write:webhook:bitbucket`
+   * `write:issue:bitbucket`
+   * `write:repository:bitbucket`
+   * `write:pullrequest:bitbucket`
+   * `delete:issue:bitbucket`
+   * `delete:webhook:bitbucket`
+7. Click **Create**.
+8. Copy the API token immediately. You won't be able to view it again.
+
+
+![Screenshot: Creating an API token in Bitbucket UI.](./static/bitbucket-api-token.png)
+
+Store the API token as a [Harness Encrypted Text secret](/docs/platform/secrets/add-use-text-secrets) and reference it in your connector configuration.
+
+:::info Two-factor authentication required
+
+Bitbucket requires two-factor authentication (2FA) to be enabled on your account before you can create API tokens.
+
+:::
+
+## Migrate from App Passwords to API tokens
+
+If you're currently using App Passwords, migrate to API tokens before June 9, 2026, when App Passwords will stop working.
+
+### Migration steps
+
+1. **Create an API token** in Bitbucket with the required scopes. See [Create an API token](#create-an-api-token) for instructions.
+
+2. **Update your connector**:
+   * Open your Bitbucket connector in Harness.
+   * In the **Password** field (under Credentials settings), edit the secret.
+   * Replace the App Password with your new API token.
+   * Save the connector.
+
+3. **If you enabled API access**:
+   * If you're using **Username and App Password** for API access, switch to **Email and API Token** (Bitbucket Cloud only) or **Access Token**.
+   * Update the credentials accordingly.
+
+4. **Test the connection** to verify the migration was successful.
+
+:::tip
+
+You can use the same API token for both basic authentication (Username/Password) and API access (Email and API Token), but make sure the token has all the required scopes listed in [Create an API token](#create-an-api-token).
+
+:::
+
 ## Connectivity Mode settings
 
 Select whether you want Harness to connect directly to your Bitbucket account or repo, or if you want Harness to communicate with your Bitbucket account or repo through a delegate. If you plan to use this connector with [Harness Cloud build infrastructure](/docs/continuous-integration/use-ci/set-up-build-infrastructure/use-harness-cloud-build-infrastructure), you must select **Connect through Harness Platform**.
@@ -253,13 +361,13 @@ Here are some troubleshooting suggestions for BitBucket Connectors.
 
 ### Connection test failing
 
-If the connection test returns a `not authorized` error, make sure you used the **Username** specified in the Bitbucket **Account settings**.
+If the connection test returns a `not authorized` error, check the following:
 
-![Bitbucket Personal settings screen, highlighting the Account settings page and the Username field.](./static/bitbucket-username-in-acct-settings.png)
+* **Username**: Make sure you used the **Username** specified in the Bitbucket **Account settings**, not your email address. You can find your username at [https://bitbucket.org/account/settings/](https://bitbucket.org/account/settings/).
 
-The connection test may also fail if the token doesn't have sufficient privileges.
+* **Token permissions**: The connection test may fail if the token doesn't have sufficient privileges. Make sure your API token or access token has all the required scopes. See [Create an API token](#create-an-api-token) for the list of required scopes.
 
-![](./static/bitbucket-connector-settings-reference-05.png)
+* **App Password deprecation**: If you're using an App Password and the connection test fails, the App Password may have expired or been revoked. Migrate to an API token. See [Migrate from App Passwords to API tokens](#migrate-from-app-passwords-to-api-tokens).
 
 ### Status doesn't update in BitBucket Cloud PRs
 
