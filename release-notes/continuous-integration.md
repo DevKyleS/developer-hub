@@ -60,6 +60,34 @@ Please reach out to your support team to get these flag enabled.
 Check out [Harness Cloud VM Images Docs](/docs/platform/references/harness-cloud-vm-images/) for details.
 :::
 
+## February 2026
+
+### Version 1.120.0
+
+<!-- 3 February 2026 -->
+
+#### New Features and Enhancements
+
+- Kubernetes builds now support additional JWT claims when integrating with HashiCorp Vault for secret management. This feature was shipped as a hotfix (CI-20662, CI-20458)
+
+#### Fixed Issues
+
+- Improved handling of multiline-secrets used in Run step, when running on Kubernetes build infrastructure. (CI-20498, ZD-102195)
+- Improved Build and Push step error messages to display the full Dockerfile path when the file is not found. (CI-14073)
+
+#### Harness Images Updates
+
+| Image | Change | Previous Version | New Version |
+|-------|--------|------------------|-------------|
+| `harness/ci-addon` | Updated base image | 1.18.6 | 1.18.7 |
+| `harness/ci-lite-engine` | Updated base image | 1.18.6 | 1.18.7 |
+| `plugins/kaniko` | Improved Dockerfile error messages | 1.13.3 | 1.13.4 |
+| `plugins/kaniko-ecr` | Improved Dockerfile error messages | 1.13.3 | 1.13.4 |
+| `plugins/kaniko-gcr` | Improved Dockerfile error messages | 1.13.3 | 1.13.4 |
+| `plugins/kaniko-gar` | Improved Dockerfile error messages | 1.13.3 | 1.13.4 |
+| `plugins/kaniko-acr` | Improved Dockerfile error messages | 1.13.3 | 1.13.4 |
+
+
 ## January 2026
 
 ### Version 1.119.0
