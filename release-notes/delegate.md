@@ -118,6 +118,16 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 
 ## February 2026
 
+### Version 26.02.88400 <!--February 04, 2026-->
+
+#### Fixed issues
+
+- We’ve improved accuracy for low-data scenarios. Previously, the Statistical model would mark anomalies that Prophet didn't, leading to occasional inaccuracies. [CCM-29409]
+- Resolved deserialization errors in connector validation results caused by missing constructors. [CCM-29305]
+- Fixed an issue where 'not found' pods triggered retry loops during the event phase. [CDS-117947]
+- We’ve updated the retry logic to always re-evaluate conditions, even if the step previously attempted to run. [PIPE-31684]
+- Improved error messaging to suggest checking permissions and installation for the `aws-iam-authenticator` binary. [CDS-103293] 
+
 ### Version 26.01.88204 <!--February 04, 2026-->
 
 #### Fixed issues
