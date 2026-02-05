@@ -65,5 +65,5 @@ The following Git providers are supported:
 
 Now that you've completed the initial setup:
 
-- [Create and manage catalog entities](/docs/internal-developer-portal/get-started)
-- [Set up workflows for self-service](/docs/internal-developer-portal/get-started)
+- [Create and manage catalog entities](/docs/internal-developer-portal/catalog/overview)
+- [Set up workflows for self-service](/docs/internal-developer-portal/flows/overview)
