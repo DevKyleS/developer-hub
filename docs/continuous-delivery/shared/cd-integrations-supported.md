@@ -479,6 +479,43 @@ Helm chart dependencies are not supported in Git source repositories. Helm chart
 </details>
 
 <details>
+<summary>Google Managed Instance Groups (MIG)</summary>
+
+- **Overview:**
+  - [Google Managed Instance Groups](/docs/continuous-delivery/deploy-srv-diff-platforms/google-cloud-functions/mig)
+- **Supported connectors for deployment:**
+  - Google Cloud Connector
+    - Service Account
+    - OIDC authentication support
+- **Supported platforms for deployment:**
+  - Google Cloud, any region
+- **Versions and tooling support:**
+  - Google Compute Engine API
+  - Cloud Service Mesh (HTTPRoute, GRPCRoute)
+- **Deployment strategies:**
+  - Blue-Green deployment with Cloud Service Mesh traffic management
+  - Basic deployment (Blank Canvas)
+- **Supported integrations:**
+  - Artifact Repository:
+    - Google Artifact Registry (GAR)
+    - Docker Registry
+  - Container images for deployment:
+    - [harness/google-mig-deploy:0.0.1-linux-amd64](https://hub.docker.com/r/harness/google-mig-deploy/tags)
+    - [harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64](https://hub.docker.com/r/harness/google-mig-bluegreen-deploy/tags)
+    - [harness/google-mig-steady-state:0.0.1-linux-amd64](https://hub.docker.com/r/harness/google-mig-steady-state/tags)
+    - [harness/google-mig-traffic-shift:0.0.1-linux-amd64](https://hub.docker.com/r/harness/google-mig-traffic-shift/tags)
+    - [harness/google-mig-bluegreen-rollback:0.0.1-linux-amd64](https://hub.docker.com/r/harness/google-mig-bluegreen-rollback/tags)
+    - [harness/gce-provision-backend-service:0.0.1-linux-amd64](https://hub.docker.com/r/harness/gce-provision-backend-service/tags)
+- **Supported workload types:**
+  - Regional MIGs (multi-zone distribution for high availability)
+  - Zonal MIGs (single-zone deployment)
+- **Limitations:**
+  - Requires containerized execution environment (Container Step Group)
+  - Feature currently behind feature flag `CDS_GOOGLE_MIG`
+
+</details>
+
+<details>
 <summary>Spot Instances</summary>
 
 - **Overview:**
@@ -817,6 +854,7 @@ The following table lists supported manifest overrides for each integration.
 
 All artifact sources are covered in [CD artifact sources](/docs/continuous-delivery/x-platform-cd-features/services/artifact-sources).
 
+- Harness Artifact Registry
 - Docker registry on any platform
 - Google Container Registry (GCR)
 - Google Cloud Storage (GCS)
@@ -843,21 +881,22 @@ The maximum number of artifact image tags fetched by Harness that is 10000.
 
 The following table lists Harness integrations and their artifact source support:
 
-|                              | **Docker Hub** | **ECR** | **GCR** [:warning: Deprecation Notice](/docs/continuous-delivery/x-platform-cd-features/services/artifact-sources#google-container-registry-gcr)| **GCS** | **ACR** | **Artifactory** | **Nexus 3** | **Custom** | **Google Artifact Registry** | **Github Artifact Registry** | **Jenkins** | **AWS S3** |
-| ---------------------------- | -------------- | ------- | ------- | --- | ------- | --------------- | ----------- | ---------- | ---------------------------- | ---------------------------- | ----------- | ---------- |
-| **Kubernetes**               | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         | ✅                           | ✅                           |             |            |
-| **Helm**                     | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         |                              |                              |             |            |
-| **AWS ECS**                  | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         |                              |                              |             |            |
-| **AWS ASG**                  |                |         |         |     |         |                 |             |            |                              |                              |             |            |
-| **AWS Lambda**               |                | ✅      |         |     |         |                 |             |            |                              |                              |             | ✅         |
-| **Azure Web Apps**           | ✅             |         |         |     | ✅      | ✅              | ✅          |            |                              |                              |             |            |
-| **Azure Functions**          | ✅             | ✅      |         |     |         |                 |             |            | ✅                           |                              |             |            |
-| **Tanzu**                    | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          |            |                              |                              |             |            |
-| **SSH**                      |                |         |         |     | ✅        | ✅              | ✅          | ✅         |                              |                              | ✅          | ✅         |
-| **WinRM**                    |                |         |         |     |         | ✅              | ✅          | ✅         |                              |                              | ✅          | ✅         |
-| **Serverless.com Framework** |                | ✅      |         |     |         | ✅              |             |            |                              |                              |             | ✅         |
-| **Google Cloud Function**    |                |         |         | ✅    |         |                 |             |            |                              |                              |             |            |
-| **Google Cloud Run**         | ✅             |         |         |     |         |                 |             |            | ✅                           |                              |             |            |
+|                              | **Harness Artifact Registry** | **Docker Hub** | **ECR** | **GCR** [:warning: Deprecation Notice](/docs/continuous-delivery/x-platform-cd-features/services/artifact-sources#google-container-registry-gcr)| **GCS** | **ACR** | **Artifactory** | **Nexus 3** | **Custom** | **Google Artifact Registry** | **Github Artifact Registry** | **Jenkins** | **AWS S3** |
+| ---------------------------- | ----------------------------- | -------------- | ------- | ------- | --- | ------- | --------------- | ----------- | ---------- | ---------------------------- | ---------------------------- | ----------- | ---------- |
+| **Kubernetes**               | ✅                            | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         | ✅                           | ✅                           |             |            |
+| **Helm**                     | ✅                            | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         |                              |                              |             |            |
+| **AWS ECS**                  | ✅                            | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          | ✅         |                              |                              |             |            |
+| **AWS ASG**                  |                               |                |         |         |     |         |                 |             |            |                              |                              |             |            |
+| **AWS Lambda**               | ✅                            |                | ✅      |         |     |         |                 |             |            |                              |                              |             | ✅         |
+| **Azure Web Apps**           | ✅                            | ✅             |         |         |     | ✅      | ✅              | ✅          |            |                              |                              |             |            |
+| **Azure Functions**          | ✅                            | ✅             | ✅      |         |     |         |                 |             |            | ✅                           |                              |             |            |
+| **Tanzu**                    | ✅                            | ✅             | ✅      | ✅      |     | ✅      | ✅              | ✅          |            |                              |                              |             |            |
+| **SSH**                      | ✅                            |                |         |         |     | ✅        | ✅              | ✅          | ✅         |                              |                              | ✅          | ✅         |
+| **WinRM**                    | ✅                            |                |         |         |     |         | ✅              | ✅          | ✅         |                              |                              | ✅          | ✅         |
+| **Serverless.com Framework** | ✅                            |                | ✅      |         |     |         | ✅              |             |            |                              |                              |             | ✅         |
+| **Google Cloud Function**    |                               |                |         |         | ✅    |         |                 |             |            |                              |                              |             |            |
+| **Google Cloud Run**         |                               | ✅             |         |         |     |         |                 |             |            | ✅                           |                              |             |            |
+| **Google MIG**               |                               | ✅             |         |         |     |         |                 |             |            | ✅                           |                              |             |            |
 
 
 
