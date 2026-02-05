@@ -32,6 +32,12 @@ It can be observed that currently the pipeline is able to deploy the application
 
    ![Chaos Step Config](./static/chaos-step-config.png)
 
+:::tip Using Runtime Inputs with Experiment Inputs
+When your chaos experiment has runtime inputs configured, those inputs automatically appear in the **Experiment Inputs** section of the chaos step configuration. You can then set these as **Runtime input** to be prompted for values when the pipeline runs, or provide a **Fixed value** for this specific pipeline.
+
+This allows you to reuse the same experiment across different pipelines with different configurations. For more details, see [Using Runtime Inputs in Chaos Experiments](/docs/chaos-engineering/integrations/cicd/harness-cd#using-runtime-inputs-in-chaos-experiments).
+:::
+
 4. Go to the **Advanced** tab. Under **Failure Strategy** select **Add**. For **On failure of type** select **All Errors** and for **Perform Action** select **Rollback Stage**.
 
    This will ensure that if the chaos experiment's resiliency score is less than 100%, the deployment will be rolled back to the previous version. Hence, the application deployment is continuously validated to be resilient before it gets deployed, otherwise the deployment is safely rolled back to the previous version until the weakness in the application can be mitigated.

@@ -1,0 +1,28 @@
+# change state of Azure Service Bus queues for a certain chaos duration
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: engine-nginx
+spec:
+  engineState: "active"
+  annotationCheck: "false"
+  chaosServiceAccount: litmus-admin
+  experiments:
+  - name: azure-service-bus-queue-state-change
+    spec:
+      components:
+        env:
+        # comma-separated names of the Azure Service Bus queues
+        - name: QUEUE_NAMES
+          value: 'queue-1,queue-2'
+        # name of the Azure Service Bus namespace
+        - name: AZURE_NAMESPACE_NAME
+          value: 'my-servicebus-namespace'
+        # name of the resource group
+        - name: RESOURCE_GROUP
+          value: 'rg-azure-servicebus'
+        # target state for the queues
+        - name: ACTION
+          value: 'disabled'
+        - name: TOTAL_CHAOS_DURATION
+          value: '60'

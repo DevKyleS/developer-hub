@@ -1,0 +1,25 @@
+# disable receive operations on Azure Service Bus queues
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: engine-nginx
+spec:
+  engineState: "active"
+  annotationCheck: "false"
+  chaosServiceAccount: litmus-admin
+  experiments:
+  - name: azure-service-bus-queue-state-change
+    spec:
+      components:
+        env:
+        - name: QUEUE_NAMES
+          value: 'queue-1'
+        - name: AZURE_NAMESPACE_NAME
+          value: 'my-servicebus-namespace'
+        - name: RESOURCE_GROUP
+          value: 'rg-azure-servicebus'
+        # disable receive operations only
+        - name: ACTION
+          value: 'receivedisabled'
+        - name: TOTAL_CHAOS_DURATION
+          value: '60'

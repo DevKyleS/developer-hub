@@ -25,6 +25,7 @@ Templates allow you to:
 - Ensure best practices and consistent configurations
 - Share proven patterns across projects and environments
 - Maintain version control for your chaos engineering assets
+- Use pre-configured experiments in CD pipeline chaos steps for consistent deployment validation
 
 ## Template Scopes
 

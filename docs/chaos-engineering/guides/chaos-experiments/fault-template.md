@@ -30,3 +30,15 @@ To set up an experiment, specify details such as the name, environment, infrastr
 - If you don't provide values for certain fields (which are not mandatory), the experiment executes with default values.
 - Variables specified as runtime inputs appear as editable fields in the UI, whereas static fields appear as display-only.
 :::
+
+### Use Runtime Inputs in Pipelines
+
+When you add a chaos experiment with runtime inputs to a Harness CD pipeline, those inputs automatically appear in the **Experiment Inputs** section of the chaos step configuration. You can then configure each input to be a runtime input for the pipeline as well, allowing you to provide values when the pipeline runs.
+
+This enables you to:
+
+- Reuse the same experiment across multiple pipelines with different configurations
+- Dynamically provide experiment parameters at pipeline execution time
+- Customize chaos validation based on deployment context
+
+For more information on using chaos experiments with runtime inputs in CD pipelines, see [Using Runtime Inputs in Chaos Experiments](/docs/chaos-engineering/integrations/cicd/harness-cd#using-runtime-inputs-in-chaos-experiments).

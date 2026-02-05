@@ -20,7 +20,7 @@ The diagram represents a high-level architecture of the interaction between the 
 The mandatory input required for the installation of the chaos infrastructure is the `name`.
 You can tune the other flags of the infrastructure with the following flags:
 
-1. **admin user**: Administrator used to execute commands on the terminal to install and manage the Windows chaos infrastructure. By default, the logs are stored at `C:\\HCE\logs`.
+1. **admin user**: User account used to execute commands on the terminal to install and manage the Windows chaos infrastructure. Administrator privileges are optional for installation. By default, the logs are stored at `C:\\HCE\logs`.
 
 2. **task poll interval**: Interval between subsequent poll queries to the server for a new experiment. The default value is **5 seconds**.
 
@@ -95,7 +95,7 @@ Ensure that you have fulfilled the [prerequisites](/docs/chaos-engineering/fault
 
 ## Step 3: Deploy Infrastructure
 
-4. Copy the command generated. The [prerequisites](/docs/chaos-engineering/faults/chaos-faults/windows/prerequisites) discusses how you can configure a password. If you have a password, replace it in the `<your-password>` placeholder. Execute this command on your terminal (remember to open the command prompt as an admin if you are not an admin by default). Click **Done** once you finish the execution.
+4. Copy the command generated. The [prerequisites](/docs/chaos-engineering/faults/chaos-faults/windows/prerequisites) discusses how you can configure a password. If you have a password, replace it in the `<your-password>` placeholder. Execute this command on your terminal. **Note:** Administrator privileges are optional for installation, though some advanced chaos experiments may require administrator access. Click **Done** once you finish the execution.
 
     ![](./static/copy-command-3.png)
 

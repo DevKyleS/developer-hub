@@ -21,6 +21,36 @@ The release notes describe recent changes to Harness Chaos Engineering.
 :::
 
 ## January 2026
+### Version 1.73.1
+
+#### Images required
+Listed below are the images to download to use [image registry with Harness Delegate](https://developer.harness.io/docs/chaos-engineering/guides/image-registry).
+
+- harness/chaos-ddcr:1.73.0
+- harness/chaos-ddcr-faults:1.73.0
+- harness/chaos-log-watcher:1.73.0
+- harness/service-discovery-collector:0.53.0
+
+#### New Features and Enhancements
+
+- Migrated to new DB interface for fault template and experiment template (CHAOS-10854)
+- Added common db impl to remove duplicate code (CHAOS-10851)
+- Created hierarchy_lookup table for chaos (CHAOS-10750)
+- Updated chaos module license rollover period to 365 days in subscriptions doc page (CHAOS-10732)
+- Migrated azure based faults from track1 sdk to track2 sdk version (CHAOS-10726)
+- Added support for resource groups for chaos probes and actions in chaos web (CHAOS-10716)
+- Added support for resource groups for chaos experiments in chaos web (CHAOS-10715)
+
+#### Fixed Issues
+
+- Fixed container probe is erroring out incase of failed condition (CHAOS-10823)
+- Fixed apm probe template creation (CHAOS-10819)
+- Fixed helper annotation issue for helper daemonset pods (CHAOS-10812)
+- Fixed RESILIENCE SCORE and RESILIENCE COVERAGE not updating in application maps with v1beta1 experiments. The fix introduces enhancements to the chaos experiment pipeline by adding logic to update the target network map and target services, thereby improving resiliency coverage for v1beta1 experiments (CHAOS-10844)
+- Fixed tune fault functionality broken in beta1 experiments. All fault tunables are working correctly (CHAOS-10809)
+- Fixed JVM experiment not respecting JAVA_HOME setting set on the spec. Fixed JVM chaos experiments to support custom JavaHome paths - experiments now succeed when java is not in the system PATH but JavaHome is specified in the experiment configuration (CHAOS-10616)
+- Fixed API not sending updated details in response when updating metadata of a fault template (CHAOS-9958)
+
 ### Version 1.72.7
 
 #### Images required
