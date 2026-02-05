@@ -1765,6 +1765,61 @@ client.on(SplitEvent.SDK_UPDATE, object : SplitEventTask() {
 </TabItem>
 </Tabs>
 
+#### Include metadata
+
+:::info Supported SDK Versions
+Event metadata is supported in the Android SDK version 5.5.0 or later. 
+:::
+
+`metadata` provides additional context for events:
+
+- `onReady` / `onReadyFromCache`: Includes `isInitialCacheLoad` (true if no cached data from a previous session was available) and `lastUpdateTimestamp` (milliseconds since epoch when the cache was last updated).
+- `onUpdate`: Includes `type` (`FLAGS_UPDATE` or `SEGMENTS_UPDATE`) and `names` (list of impacted flags; empty for segment-only updates).
+
+For example: 
+
+```java title="Java"
+client.addEventListener(new SplitEventListener() {
+    @Override
+    public void onReady(SplitClient client, SdkReadyMetadata metadata) {
+        Boolean initialCacheLoad = metadata.isInitialCacheLoad();
+        // Handle SDK ready on background thread
+    }
+
+    @Override
+    public void onReadyView(SplitClient client, SdkReadyMetadata metadata) {
+        Boolean initialCacheLoad = metadata.isInitialCacheLoad();
+        // Handle SDK ready on main/UI thread
+    }
+
+    @Override
+    public void onUpdate(SplitClient client, SdkUpdateMetadata metadata) {
+        SdkUpdateMetadata.Type type = metadata.getType(); // FLAGS_UPDATE or SEGMENTS_UPDATE
+        List<String> names = metadata.getNames(); // updated flag names
+        // Handle update on background thread
+    }
+
+    @Override
+    public void onUpdateView(SplitClient client, SdkUpdateMetadata metadata) {
+        SdkUpdateMetadata.Type type = metadata.getType(); // FLAGS_UPDATE or SEGMENTS_UPDATE
+        List<String> names = metadata.getNames(); // updated flag names
+        // Handle update on main/UI thread
+    }
+
+    @Override
+    public void onReadyFromCache(SplitClient client, SdkReadyMetadata metadata) {
+        // Handle on background thread
+        Boolean initialCacheLoad = metadata.isInitialCacheLoad();
+    }
+
+    @Override
+    public void onReadyFromCacheView(SplitClient client, SdkReadyMetadata metadata) {
+        // Handle on main/UI thread
+        Boolean initialCacheLoad = metadata.isInitialCacheLoad();
+    }
+});
+```
+
 ### User consent
 
 The SDK allows you to disable the tracking of events and impressions until user consent is explicitly granted or declined.

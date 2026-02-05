@@ -1357,6 +1357,40 @@ client.once(client.Event.SDK_READY_FROM_CACHE, () => {
 </TabItem>
 </Tabs>
 
+#### Include metadata
+
+:::info Supported SDK Versions
+Event metadata is supported in the JavaScript SDK version 11.10.0 or later. 
+:::
+
+`metadata` provides additional context for events:
+
+- `SDK_READY` / `SDK_READY_FROM_CACHE`: Includes `initialCacheLoad` (true if no cached data from a previous session was available) and `lastUpdateTimestamp` (milliseconds since epoch when the cache was last updated).
+- `SDK_UPDATE`: Includes `type` (`FLAGS_UPDATE` or `SEGMENTS_UPDATE`) and `names` (list of impacted flags; empty for segment-only updates).
+- `SDK_READY_TIMED_OUT`: No metadata is included.
+
+For example: 
+
+```javascript title="JavaScript"
+client.on(client.Event.SDK_UPDATE, (metadata: SplitIO.SdkUpdateMetadata) => {
+  const type: SplitIO.SdkUpdateMetadataType = metadata.type;
+  const names: string[] = metadata.names;
+})
+
+client.on(client.Event.SDK_READY, (metadata: SplitIO.SdkReadyMetadata) => {
+  const initialCacheLoad: boolean = metadata.initialCacheLoad;
+  const lastUpdateTimestamp: number | undefined = metadata.lastUpdateTimestamp;  
+})
+
+client.on(client.Event.SDK_READY_FROM_CACHE, (metadata: SplitIO.SdkReadyMetadata) => {
+  const initialCacheLoad: boolean = metadata.initialCacheLoad;
+  const lastUpdateTimestamp: number | undefined = metadata.lastUpdateTimestamp;  
+})
+client.on(client.Event.SDK_READY_TIMED_OUT, () => {
+      console.log('Split SDK emitted SDK_READY_TIMED_OUT event.')
+})
+```
+
 #### Using readiness state and promises
 
 The `SDK_READY_FROM_CACHE`, `SDK_READY`, and `SDK_READY_TIMED_OUT` events fire only once. Therefore, if an event listener is attached after the event has already fired, it will never be triggered.

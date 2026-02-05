@@ -12,13 +12,61 @@ import HarnessApiData from '../src/components/HarnessApiData/index.tsx';
 
 These release notes describe recent changes to Harness Feature Management & Experimentation (FME).
 
-#### Last updated: January 30, 2026
+#### Last updated: February 5, 2026
 
 ## January 2026
 
-### [New Enhancement] Improved Onboarding Flow for Harness FME
+### [New Enhancement] Include metadata with events
 ----
 #### 2026-01-30
+
+Supported Harness FME SDKs (Android, iOS, Browser, JavaScript, Node.js, and Python) and suites (Android, iOS, and Browser) now include event metadata when [subscribing to events](#new-feature-subscribe-to-events-in-server-side-sdks). This enhancement provides additional context about SDK readiness, cache state, and updates.
+
+Metadata is available for the following events, for example:
+
+| Event | Metadata Keys | Description |
+|---|---|---|
+| `SDK_READY` / `SDK_READY_FROM_CACHE` | `initialCacheLoad: Bool` <br /> `lastUpdateTimestamp: Int64 (ms since epoch)` | Indicates whether data was loaded from cache and when it was last updated. |
+| `SDK_READY_TIMED_OUT` | None | Fires if the SDK could not fetch the latest data within the configured timeout. |
+| `SDK_UPDATE` | `type: "FLAGS_UPDATE" or "SEGMENTS_UPDATE"`<br />`names: [String]` | Indicates the type of update and which flags were impacted. Empty list for segment-only updates. |
+
+The event names may differ slightly depending on the SDK or suite. With this metadata, your applications can programmatically respond to updates, handle feature flag changes more reliably, and optimize background processing across supported SDKs.
+
+#### Related documentation
+
+- [Android SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/android-sdk#include-metadata)
+- [iOS SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/ios-sdk#include-metadata)
+- [Browser SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/browser-sdk#include-metadata)
+- [Android Suite](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-suites/android-suite#include-metadata)
+- [iOS Suite](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-suites/ios-suite#include-metadata)
+- [Browser Suite](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-suites/browser-suite#include-metadata)
+- [JavaScript SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/javascript-sdk#include-metadata)
+- [Node.js SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/nodejs-sdk#include-metadata)
+- [Python SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/python-sdk#include-metadata)
+
+### [New Feature] Subscribe to events in server-side SDKs
+----
+#### 2026-01-30
+
+Server-side SDKs for [Python](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/python-sdk) and [Node.js](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/nodejs-sdk) can now subscribe to SDK events, enabling your applications to respond programmatically to SDK changes.
+
+Previously, the [`Subscribe to events` feature](/docs/feature-management-experimentation/sdks-and-infrastructure/client-side-sdks/android-sdk#subscribe-to-events) was only available in client-side SDKs. With this update, server-side applications can listen for the following events:
+
+- `SDK_READY_FROM_CACHE`: Fires when cached data is loaded.
+- `SDK_READY`: Fires when the SDK is ready with the latest rollout plan.
+- `SDK_READY_TIMED_OUT`: Fires if the SDK cannot fetch the latest data within the configured timeout.
+- `SDK_UPDATE`: Fires whenever feature flags or segments change.
+
+The event names and available options may differ slightly depending on the SDK. This feature allows server-side applications to refresh relevant flags, optimize background processing, and respond to feature rollout changes reliably.
+
+#### Related documentation
+
+- [Python SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/python-sdk#subscribe-to-events)
+- [Node.js SDK](/docs/feature-management-experimentation/sdks-and-infrastructure/server-side-sdks/nodejs-sdk#subscribe-to-events)
+
+### [New Enhancement] Improved Onboarding Flow for Harness FME
+----
+#### 2026-01-29
 
 The onboarding experience for [Harness Feature Management & Experimentation (FME)](/docs/feature-management-experimentation/getting-started/overview/) has been improved to clarify the required steps for starting FME in a Harness project. To get started, navigate to the left-hand navigation menu, select the **Grid Menu** icon, and click **Feature Management & Experimentation (FME)** in [Harness](https://app.harness.io/). 
 
@@ -252,8 +300,6 @@ This integration enables product, experimentation, and DevOps teams to automate 
 - [Metric Alert Webhook](/docs/feature-management-experimentation/api/webhooks/metric-alerts)
 - [Automated Alerts and Notifications](/docs/feature-management-experimentation/release-monitoring/alerts/automated-alerts-and-notifications/)
 - [Harness FME Integrations](/docs/feature-management-experimentation/integrations/)
-
-## November 2025
 
 ### [New Feature] Permissions Enforcement Controls for Transitioning from Split Legacy Permissions
 ----

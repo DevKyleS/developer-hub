@@ -1187,10 +1187,7 @@ You can listen for four different events from the Suite.
 
 The syntax to listen for each event is shown below:
 
-<Tabs groupId="java-type-script">
-<TabItem value="JavaScript">
-
-```javascript
+```javascript title="JavaScript"
 function whenReady() {
   const treatment = client.getTreatment('FEATURE_FLAG_NAME');
 
@@ -1228,8 +1225,39 @@ client.once(client.Event.SDK_READY_FROM_CACHE, () => {
 });
 ```
 
-</TabItem>
-</Tabs>
+#### Include metadata
+
+:::info Supported Suite Versions
+Event metadata is supported in the Browser Suite version 2.4.0 or later. 
+:::
+
+`metadata` provides additional context for events:
+
+- `SDK_READY` / `SDK_READY_FROM_CACHE`: Includes `initialCacheLoad` (true if no cached data from a previous session was available) and `lastUpdateTimestamp` (milliseconds since epoch when the cache was last updated).
+- `SDK_UPDATE`: Includes `type` (`FLAGS_UPDATE` or `SEGMENTS_UPDATE`) and `names` (list of impacted flags; empty for segment-only updates).
+- `SDK_READY_TIMED_OUT`: No metadata is included.
+
+For example: 
+
+```typescript title="TypeScript"
+client.on(client.Event.SDK_UPDATE, (metadata: SplitIO.SdkUpdateMetadata) => {
+  const type: SplitIO.SdkUpdateMetadataType = metadata.type;
+  const names: string[] = metadata.names;
+})
+
+client.on(client.Event.SDK_READY, (metadata: SplitIO.SdkReadyMetadata) => {
+  const initialCacheLoad: boolean = metadata.initialCacheLoad;
+  const lastUpdateTimestamp: number | undefined = metadata.lastUpdateTimestamp;  
+})
+
+client.on(client.Event.SDK_READY_FROM_CACHE, (metadata: SplitIO.SdkReadyMetadata) => {
+  const initialCacheLoad: boolean = metadata.initialCacheLoad;
+  const lastUpdateTimestamp: number | undefined = metadata.lastUpdateTimestamp;  
+})
+client.on(client.Event.SDK_READY_TIMED_OUT, () => {
+      console.log('Split SDK emitted SDK_READY_TIMED_OUT event.')
+})
+```
 
 ### User consent
 

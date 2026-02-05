@@ -1751,6 +1751,49 @@ config = result.config        # None if no config defined
 
 For more information, see [Fallback treatments](/docs/feature-management-experimentation/feature-management/setup/fallback-treatment/).
 
+## Advanced use cases
+
+This section describes advanced use cases and features provided by the SDK. 
+
+### Subscribe to events
+
+:::info Supported SDK Versions
+SDK events and event metadata are supported in the Python SDK version 10.6.0 or later. 
+:::
+
+You can listen for four different events from the SDK.
+
+* `SDK_READY`. This event fires once the SDK is ready to evaluate treatments using the most up-to-date version of your rollout plan, downloaded from Harness servers.
+* `SDK_UPDATE`. This event fires whenever your rollout plan is changed. Listen for this event to refresh your app whenever a feature flag or segment is changed in Harness FME.
+
+These events provide hooks to run custom logic whenever the SDK state changes.
+
+```python
+from splitio import get_factory
+from splitio.models.events import SdkEvent
+
+def ready_callback(metadata):
+    print("SDK is ready.")
+
+def update_callback(metadata):
+    print("UPDATE CALLBACK")
+    print(metadata.get_type())
+    print(metadata.get_names())
+
+factory = get_factory('API KEY', config={})
+
+split = factory.client()
+split.on(SdkEvent.SDK_READY, ready_callback)
+split.on(SdkEvent.SDK_UPDATE, update_callback)
+```
+
+#### Include metadata
+
+`metadata` provides additional context for events:
+
+- `SDK_READY`: No metadata is included.
+- `SDK_UPDATE`: Includes the type (SdkEventType.FLAG_UPDATE or SdkEventType.SEGMENTS_UPDATE) and names (list of impacted flags; empty for segment-only updates).
+
 ## Troubleshooting
 
 ### Error: type() argument 1 must be string, not unicode

@@ -1564,6 +1564,43 @@ After initialization, all SDK requests are routed through the configured proxy. 
 
 This section describes advanced use cases and features provided by the SDK.
 
+### Subscribe to events
+
+:::info Supported SDK Versions
+SDK events and event metadata are supported in the Node.js SDK version 11.1.0 or later. 
+:::
+
+You can listen for four different events from the SDK.
+
+* `SDK_READY`. This event fires once the SDK is ready to evaluate treatments using the most up-to-date version of your rollout plan, downloaded from Harness servers.
+* `SDK_READY_TIMED_OUT `. This event fires if the SDK could not fully download the data from Harness servers (`SDK_READY` event), within the time specified by the `ready` setting of the `SplitClientConfig` object. This event does not indicate that the SDK initialization was interrupted. The SDK continues downloading the rollout plan and fires the `SDK_READY` event when finished. This delayed `SDK_READY` event may happen with slow connections or large rollout plans with many feature flags, segments, or dynamic configurations.
+* `SDK_UPDATE`. This event fires whenever your rollout plan is changed. Listen for this event to refresh your app whenever a feature flag or segment is changed in Harness FME.
+
+These events provide hooks to run custom logic whenever the SDK state changes.
+
+```typescript title="TypeScript"
+client.on(client.Event.SDK_UPDATE, (metadata: SplitIO.SdkUpdateMetadata) => {
+      const type: SplitIO.SdkUpdateMetadataType = metadata.type;
+      const names: string[] = metadata.names;
+    })
+
+client.on(client.Event.SDK_READY, (metadata: SplitIO.SdkReadyMetadata) => {
+  const initialCacheLoad: boolean = metadata.initialCacheLoad;
+  const lastUpdateTimestamp: number | undefined = metadata.lastUpdateTimestamp;  
+})
+client.on(client.Event.SDK_READY_TIMED_OUT, () => {
+      console.log('Split SDK emitted SDK_READY_TIMED_OUT event.')
+})
+```
+
+#### Include metadata
+
+`metadata` provides additional context for events:
+
+- `SDK_READY`: Includes `initialCacheLoad` (true if no cached data from a previous session was available) and `lastUpdateTimestamp` (milliseconds since epoch when the cache was last updated).
+- `SDK_UPDATE`: Includes `Type` (`FLAGS_UPDATE` or `SEGMENTS_UPDATE`) and `Names` (list of impacted flags; empty for segment-only updates).
+- `SDK_READY_TIMED_OUT`: No metadata is included.
+
 ### Working with both sync and async storage
 
 You can write code that works with all type of SDK storage. For example, you might have an application that you want to run on both `REDIS` and `MEMORY` storage types. To accommodate this, check if the treatments are [thenable objects](https://promisesaplus.com/#terminology) to decide when to execute the code that depends on the feature flag.

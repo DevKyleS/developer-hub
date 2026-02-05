@@ -917,6 +917,41 @@ client.on(event: SplitEvent.sdkUpdated) {
 ...
 ```
 
+
+#### Include metadata
+
+:::info Supported SDK Versions
+Event metadata is supported in the iOS SDK version 3.7.0 or later. 
+:::
+
+`metadata` provides additional context for events:
+
+- `onSdkReady` / `onSdkReadyFromCache`: Includes `isInitialCacheLoad` (true if no cached data from a previous session was available) and `lastUpdateTimestamp` (milliseconds since epoch when the cache was last updated).
+- `onSdkUpdate`: Includes `type` (`.flagsUpdate` or `.segmentsUpdate`) and `names` (list of impacted flags; empty for segment-only updates).
+
+For example: 
+
+```swift title="Swift"
+final class Listener: SplitEventListener {
+    func onSdkReady(_ metadata: SdkReadyMetadata) {
+        let initialLoad: Bool = metadata.isInitialCacheLoad
+        let timestamp: Int64 = metadata.lastUpdateTimestamp
+    }
+    
+    func onSdkReadyFromCache(_ metadata: SdkReadyFromCacheMetadata) {
+        let initialLoad: Bool = metadata.isInitialCacheLoad
+        let timestamp: Int64 = metadata.lastUpdateTimestamp
+    }
+    
+    func onSdkUpdate(_ metadata: SdkUpdateMetadata) {
+        let updateType: SdkUpdateMetadataType = metadata.type // .flagsUpdate or .segmentsUpdate
+        let affectedFlags: [String] = metadata.names
+    }
+}
+
+client.addEventListener(listener: Listener())
+```
+
 ### User consent
 
 The SDK allows you to disable the tracking of events and impressions until user consent is explicitly granted or declined.
