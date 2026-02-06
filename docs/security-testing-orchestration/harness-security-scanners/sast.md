@@ -44,6 +44,13 @@ import StoMoreInfo from '/docs/security-testing-orchestration/sto-techref-catego
 Harness SAST scanner is currently behind the feature flag `STO_STEP_PALETTE_SHIFTLEFT` Contact [Harness Support](mailto:support@harness.io) to enable the scanner.
 ::: -->
 
+
+:::note
+
+Harness SAST scanner is being gradually rolled out and is currently enabled for some customers. Full availability across all accounts is coming soon.
+:::
+
+
 ## Harness SAST step settings for STO scans
 
 Setting up the Harness SAST scanner is the same as configuring any other [built-in scanner step](/docs/security-testing-orchestration/set-up-scans/built-in-scanners). The required configuration is handled automatically, making the setup process simple and straightforward. Here’s how to set it up:

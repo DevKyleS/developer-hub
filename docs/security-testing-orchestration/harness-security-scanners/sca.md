@@ -42,6 +42,12 @@ import StoMoreInfo from '/docs/security-testing-orchestration/sto-techref-catego
 
 <StoMoreInfo />
 
+
+:::note
+
+Harness SCA scanner is being gradually rolled out and is currently enabled for some customers. Full availability across all accounts is coming soon.
+:::
+
 ## Harness SCA step settings for STO scans
 
 :::info

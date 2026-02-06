@@ -22,6 +22,30 @@ These release notes describe recent changes to Harness Security Testing Orchestr
 
 :::
 
+
+## February 2026
+
+### Version 1.179.4
+
+#### New Features and Enhancements
+
+##### Harness Native SAST and SCA scanners
+
+Harness STO now supports its own native **SAST and SCA** scanners, enabling you to run security scans directly as part of your CI/CD pipelines.
+
+Harness SAST and SCA scanners offer one-click configuration, with Harness automatically managing authentication and licensing. The scanners provide built-in **data flow visualization**, **reachability analysis** to determine whether vulnerabilities are actually exploitable, and **AI-powered remediation** to help developers quickly understand and fix issues. These scanners are now **generally available (GA)**.
+
+- [SAST](https://developer.harness.io/docs/security-testing-orchestration/harness-security-scanners/sast) - Scans source code to identify security issues, exposed secrets, and vulnerable Open Source dependencies. 
+- [SCA](https://developer.harness.io/docs/security-testing-orchestration/harness-security-scanners/sca) - Scans container images to detect vulnerabilities in operating system packages and libraries, with reachability-based risk prioritization.
+
+**Licensing:** Running Harness SAST and SCA scans in pipelines requires the appropriate license. Contact [Harness Sales](mailto:support@harness.io) for licensing details.
+
+**Availability:** Harness SAST and SCA scanners are being gradually rolled out and is currently enabled for some customers. Full availability across all accounts is coming soon.
+
+
+<DocImage path={require('./static/sast-and-sca.png')} width="40%" height="40%" title="Click to view full size image" />
+
+
 ## January 2026
 
 ### Version 1.175.0
