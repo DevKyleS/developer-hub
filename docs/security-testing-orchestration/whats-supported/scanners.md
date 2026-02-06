@@ -21,6 +21,8 @@ For a comprehensive list of all scanners, you can view them by **[Scan Type](#th
 Harness is expanding its native security scanning capabilities. These scanners are developed and maintained directly by Harness.
 
 - **[API DAST](/docs/security-testing-orchestration/sto-techref-category/traceable-step-configuration)** (*previously Traceable*): A Dynamic Application Security Testing scanner for your APIs. This was formerly known as the **Traceable API DAST** scanner.
+- **[SAST](/docs/security-testing-orchestration/harness-security-scanners/sast)**:  A Static Application Security Testing scanner for your Code Repositories.
+- **[SCA](/docs/security-testing-orchestration/harness-security-scanners/sca)**:  A Software Composition Analysis scanner for your Container Images.
 
 ### Third-Party Scanners
 The following are the list of third-party scanners that are categorized by **Scan Type** and **Target Type**. The list includes both commercial and open-source scanners.

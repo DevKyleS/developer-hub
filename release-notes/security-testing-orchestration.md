@@ -28,10 +28,10 @@ These release notes describe recent changes to Harness Security Testing Orchestr
 
 #### New Features and Enhancements
 
-- Added support for surfacing external policy failures as a distinct **Issue Type** in Harness STO. You can now view external policy failures alongside other scan results. Previously, these were treated as `Info` level issues. This feature is currently behind the `STO_EXTERNAL_POLICY_FAILURES_AS_VULNS` feature flag. Learn more about the [supported scanners](/docs/security-testing-orchestration/view-security-test-results/view-scan-results#external-policy-failures) (STO-6493).
+- Added support for surfacing external policy failures as a distinct Issue Type in Harness STO. You can now view external policy failures alongside other scan results. Previously, these were treated as `Info` level issues. This feature is currently behind the `STO_EXTERNAL_POLICY_FAILURES_AS_VULNS` feature flag. Learn more about the [supported scanners](/docs/security-testing-orchestration/view-security-test-results/view-scan-results#external-policy-failures)(STO-6493).
 - Added a support to add the comment to the [checkmarx](/docs/security-testing-orchestration/sto-techref-category/checkmarx/checkmarx-scanner-reference/#additional-cli-flags) scan step. This is useful for attaching metadata. When specified, the value is added under Issue Raw Details in the Issue Details view as a `CLI Comment` (STO-9592).
 <DocImage path={require('./static/checkmarx-cli.png')} width="60%" height="60%" title="Click to view full size image" />
-- Added support for the Components field in Jira tickets to enable better team ownership and routing (STO-10068).
+- Added support for the Components field in Jira ticket. Previously, users had to type values manually, but now they can select from existing components when creating Jira tickets (STO-10068).
 <DocImage path={require('./static/jira-component.png')} width="60%" height="60%" title="Click to view full size image" />
 
 ## December 2025

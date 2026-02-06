@@ -19,6 +19,7 @@ The Harness Policy Library includes the following [policy samples](/docs/platfor
 - [Warn or Block pipeline based on external policy failures](#block-the-pipeline-based-on-external-policy-failures)
 - [Warn or Block vulnerabilities from application layers of your container image](#warn-or-block-vulnerabilities-from-application-layers-of-your-container-image)
 - [Warn or Block vulnerabilities from base image of your container image](#warn-or-block-vulnerabilities-from-base-image-of-your-container-image)
+- [Warn or Block Reachable or Exploitable Vulnerabilities reported by the Harness Scanner ](#warn-or-block-reachable-or-exploitable-vulnerabilities-reported-by-the-harness-scanner)
 
 <!-- TOC end -->
 
@@ -410,6 +411,64 @@ num_compare(a, ">", b) := a > b
 ```
 
 
+#### Warn or Block Reachable or Exploitable Vulnerabilities reported by the Harness Scanner
+
+Apply a policy to the Harness scan step to either warn or block the pipeline based on the reachability or exploitable vulnerabilities reported by the Harness Scanner.
+
+You can use the sample policy Security Tests - Static Reachability of an Issue. Below is a sample policy for reference:
+```
+
+package securityTests
+
+import future.keywords.in
+import future.keywords.if
+
+# maxReachableIssuesCount: maximum allowed count of reachable issues
+deny_list := fill_defaults([
+  {
+    "maxReachableIssuesCount": {"value": 0, "operator": ">"},
+  }
+])
+
+#### DO NOT CHANGE THE FOLLOWING SCRIPT ####
+
+deny[msg] {
+    input[i].name == "securityTestData"
+    issues := input[i].outcome.issues
+    rule := deny_list[_]
+    
+    # Count reachable issues
+    reachable_issues := [issue | 
+        issue := issues[_]
+        issue.reachability == "reachable"
+    ]
+    matched_count := count(reachable_issues)
+    
+    # Check if count exceeds the maximum allowed
+    num_compare(matched_count, rule.maxReachableIssuesCount.operator, rule.maxReachableIssuesCount.value)
+    
+    msg := sprintf("Too many reachable vulnerabilities detected! Found %d reachable issues, maximum allowed is %d", 
+        [matched_count, rule.maxReachableIssuesCount.value])
+}
+
+num_compare(a, "==", b) := a == b
+num_compare(a, "<=", b) := a <= b
+num_compare(a, ">=", b) := a >= b
+num_compare(a, "<", b) := a < b
+num_compare(a, ">", b) := a > b
+num_compare(a, null, b) := a == b if { b != null}
+num_compare(a, null, null) := true
+
+remove_null(obj) := filtered {
+  filtered := {x | x := obj[_]; x.value != null}
+}
+
+fill_defaults(obj) := list {
+    defaults := { 
+        "maxReachableIssuesCount": {"value": null, "operator": null},
+    }
+    list := [x | x := object.union(defaults, obj[_])]      
+}
 
 
-
+```
