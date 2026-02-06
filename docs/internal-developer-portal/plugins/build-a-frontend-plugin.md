@@ -17,6 +17,8 @@ A Backstage Plugin adds functionality to Backstage. In this tutorial we will be 
 
 2. Alternatively you can set up your own Backstage project by creating a [Backstage App](https://backstage.io/docs/getting-started/create-an-app#create-an-app). A Backstage App is a monorepo setup with lerna that includes everything you need to run Backstage in your own environment.
 
+3. Ensure your plugin uses **React version 17.0.2**, **React DOM version 17.0.2**, and **React Router v6** for compatibility with Harness IDP.
+
 ## Create a Plugin
 To create a new frontend plugin, make sure you've run `yarn install` and installed dependencies, then run the following on your command line (a shortcut to invoking the [backstage-cli new --select plugin](https://backstage.io/docs/local-dev/cli-commands#new)) from the root of your project.
 
