@@ -119,6 +119,13 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 - Fixed an issue where pipelines failed to start with a generic error message when the pipeline YAML exceeded the size limit. A clear error message is now displayed indicating the size limit and suggesting mitigation steps. (**PIPE-31336**, **ZD-99604**, **ZD-100342**)
 - Fixed an issue where pipelines were unexpectedly stuck and failing to proceed, preventing deployments from completing for some customers. (**PIPE-31510**, **ZD-100762**, **ZD-100766**, **ZD-100767**, **ZD-100768**, **ZD-100777**, **ZD-100778**, **ZD-100785**)
 
+### GitOps Service 1.48.5, GitOps Agent 0.107.2
+
+#### New Features and Enhancements
+
+- GitOps services with multiple environments now execute in separate stages per service and environment combination, matching the behavior of CD multi-environment execution. This prevents variable clashes between services and environments when using overrides, eliminating unexpected behavior that could occur when aggregating cluster details from each environment in a single stage. (**CDS-114264**, **ZD-91288**)
+
+- The GitOps sync step now supports server-side apply, which helps prevent errors when dealing with large manifests. The step also respects ignore-diff configurations, providing more control over how resources are synchronized. (**CDS-117361**)
 
 ### GitOps Service 1.47.3, GitOps Agent 0.106.0
 
@@ -151,14 +158,6 @@ For more information about this major ArgoCD upgrade, including breaking changes
 #### Fixed issues
 
 - Fixed an issue where application parameters were not appearing in the GitOps UI for organization-level agents. This occurred because the system was incorrectly prefixing *org.* to the agent ID when fetching agent details, resulting in a 404 error and preventing subsequent API calls from completing. The parameters existed in the manifest and sync operations worked correctly, but the UI failed to render them. The agent ID handling has been corrected to work properly for organization-level scopes. (**CDS-117296, ZD-99840**)
-
-### GitOps Service 1.48.5, GitOps Agent 0.107.2
-
-#### New Features and Enhancements
-
-- GitOps services with multiple environments now execute in separate stages per service and environment combination, matching the behavior of CD multi-environment execution. This prevents variable clashes between services and environments when using overrides, eliminating unexpected behavior that could occur when aggregating cluster details from each environment in a single stage. (**CDS-114264**, **ZD-91288**)
-
-- The GitOps sync step now supports server-side apply, which helps prevent errors when dealing with large manifests. The step also respects ignore-diff configurations, providing more control over how resources are synchronized. (**CDS-117361**)
 
 #### Fixed issues
 
