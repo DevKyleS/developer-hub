@@ -82,3 +82,41 @@ Depending on the repository's [branch rules](../config-repos/rules.md), passing 
 </Tabs>
 
 4. If everything looks good, select **Approve** to approve the PR for merge. To request changes, select the dropdown next to **Approve** and select **Request changes**.
+
+## AI Code Review
+
+You can automate an AI-powered review on pull requests by triggering a Harness pipeline on PR create/update events. The pipeline can call the **Code Review Agent** and post feedback as PR comments.
+
+:::note
+AI Code Review Summary requires Harness AI to be enabled in your account settings and may take a few to generate based on the size of your PR diff.
+:::
+
+### How it works
+
+1. A pipeline triggers on PR creation or updates.
+2. A **Run** step calls the Code Review Agent execute API.
+3. The agent analyzes the PR and posts review feedback back to the PR.
+
+### Example: Call the Code Review Agent from a Run step
+
+Use a **Run** step (for example, `curl`) to invoke the agent:
+
+```bash
+POST https://app.harness.io/gateway/agents/api/v1/agents/Code%20Review/execute
+```
+The request body must include an `inputs_yaml` payload containing the following keys:
+
+| Input          | Type   | Description                              |
+| -------------- | ------ | ---------------------------------------- |
+| `llmKey`       | secret | Anthropic API key used by the agent      |
+| `harnessKey`   | secret | Harness API key used to post PR comments |
+| `repo`         | string | Repository name. Consider using `${DRONE_REPO_NAME}` as value|
+| `pullReq`      | string | Pull request number to review. Consider using `<+codebase.prNumber>` as value           |
+
+
+
+The Code Review Agent analyzes the pull request and automatically posts structured feedback directly on the PR. The feedback appears as review comments with explanations and suggested code changes that can be committed from the PR UI.
+
+**The following example shows an AI-generated review comment with a suggested fix**:
+<DocImage path={require('/docs/code-repository/pull-requests/static/ai_code_review_sample.png')} />
+

@@ -35,6 +35,35 @@ The banner appears for **2 hours** after changes are pushed to a branch. Once th
 Only the **three most recently updated branches** are eligible to show the banner.
 :::
 
+## AI PR Summary
+
+Harness AI can automatically generate intelligent summaries for your pull requests based on the code changes and diff. This feature helps streamline code reviews by providing context-aware descriptions of what changed and why.
+
+### Prerequisites
+
+To use AI PR Summary, Harness AI must be enabled in your account settings:
+
+1. Navigate to **Account Settings** in your Harness account
+2. Go to the **Harness AI** section  
+3. Enable **Harness AI** by toggling the switch to **ON**
+
+### Generate an AI summary
+
+When creating or editing a pull request:
+
+1. Open your pull request in Harness Code Repository
+2. In the PR description area, click the **AI Summary** button
+3. Harness AI will analyze the PR diff and generate an intelligent summary describing:
+   - What changes were made
+   - The purpose and impact of the changes
+   - Key modifications across files
+
+The AI-generated summary provides a concise overview that helps reviewers quickly understand the scope and intent of your changes, making the code review process more efficient.
+
+:::note
+AI PR Summary requires Harness AI to be enabled in your account settings and may take a few moments to generate based on the size of your PR diff.
+:::
+
 ## Close a pull request
 
 If you decide a pull request is invalid or not ready for review, you can close it.
