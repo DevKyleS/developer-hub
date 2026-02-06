@@ -120,12 +120,16 @@ The `1.69.x` release focuses on security hardening and reliability improvements 
 * **Bug Fixes & Security**
   - Upgraded the DB DevOps container image to address OpenSSL-related security.
   - Fixed issues in LLM-authored pipeline YAML, improving correctness and execution reliability when using AI-assisted authoring.
+  - Upgraded the DB DevOps container image to address OpenSSL-related security.
+  - Fixed issues in LLM-authored pipeline YAML, improving correctness and execution reliability when using AI-assisted authoring.
 
 ### Release 1.68.x
 The `1.68.x` release improves AI-assisted authoring accuracy and enhances usability for Flyway users.
 
 #### Key Highlights
 * **Feature Enhancements**
+  - LLM-generated pipelines can now correctly include a primary database instance, reducing manual corrections.
+  - Flyway dashboards now display the most recently updated records first, making it easier to track recent changes.
   - LLM-generated pipelines can now correctly include a primary database instance, reducing manual corrections.
   - Flyway dashboards now display the most recently updated records first, making it easier to track recent changes.
 
@@ -136,8 +140,12 @@ The `1.67.x` release strengthens policy enforcement, security, and visibility in
 * **Feature Enhancements**
   - Migration Script Access for Policies: OPA policies can now evaluate migration scripts directly, enabling stronger governance and pre-deployment validation.
   - SQL Script Visibility: Customers can view SQL scripts associated with migrations, improving transparency during reviews and audits.
+  - Migration Script Access for Policies: OPA policies can now evaluate migration scripts directly, enabling stronger governance and pre-deployment validation.
+  - SQL Script Visibility: Customers can view SQL scripts associated with migrations, improving transparency during reviews and audits.
 
 * **Bug Fixes & Security**
+  - Resolved issues affecting AI-assisted chat interactions and accuracy.
+  - To ensure compatibility with the latest version of DB DevOps Plugin Image, memory size needs to be increased to 500MB to avoid OOM issues during large migrations.
   - Resolved issues affecting AI-assisted chat interactions and accuracy.
   - To ensure compatibility with the latest version of DB DevOps Plugin Image, memory size needs to be increased to 500MB to avoid OOM issues during large migrations.
 
@@ -148,6 +156,8 @@ The `1.65.x` release introduces foundational improvements to ensure Flyway migra
 
 #### Key Highlights:
 * **Feature Enhancements**
+  - All Flyway-supported commands now supported in DBOPS service, aligning the Flyway experience similar to Liquibase.
+  - The Flyway container image has been upgraded to support these new data-sync capabilities, improving reliability and ensuring forward compatibility with upcoming Flyway features in Harness.
   - All Flyway-supported commands now supported in DBOPS service, aligning the Flyway experience similar to Liquibase.
   - The Flyway container image has been upgraded to support these new data-sync capabilities, improving reliability and ensuring forward compatibility with upcoming Flyway features in Harness.
 
