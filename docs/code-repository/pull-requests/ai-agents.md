@@ -81,7 +81,7 @@ The API expects the following inputs:
 #### Coverage Agent PR Summary Example
 The following example shows a coverage report posted on a pull request:
 
-<DocImage path={require('/docs/code-repository/pull-requests/static/ai_coverage_summary.png')} />
+<DocImage path={require('/docs/code-repository/pull-requests/static/ai-coverage-summary.png')} />
 
 
 ### AutoFix Agent
@@ -124,5 +124,4 @@ The API expects the following inputs:
 
 #### Autofix Agent PR Summary Example
 The following example shows an AutoFix summary created by the agent:
-<DocImage path={require('/docs/code-repository/pull-requests/static/ai_autofix.png')} />
-
+<DocImage path={require('/docs/code-repository/pull-requests/static/ai-autofix.png')} />

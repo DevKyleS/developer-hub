@@ -118,5 +118,5 @@ The request body must include an `inputs_yaml` payload containing the following 
 The Code Review Agent analyzes the pull request and automatically posts structured feedback directly on the PR. The feedback appears as review comments with explanations and suggested code changes that can be committed from the PR UI.
 
 **The following example shows an AI-generated review comment with a suggested fix**:
-<DocImage path={require('/docs/code-repository/pull-requests/static/ai_code_review_sample.png')} />
+<DocImage path={require('/docs/code-repository/pull-requests/static/ai-code-review-sample.png')} />
 
