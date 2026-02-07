@@ -55,6 +55,11 @@ const Roadmap = () => {
       value: 'cde',
       name: 'Cloud Development Environments',
       icon: 'icon-cde.svg',
+    },
+    {
+      value: 'aisre',
+      name: 'AI SRE',
+      icon: 'icon-ai-sre.svg',
     }
   ];
 

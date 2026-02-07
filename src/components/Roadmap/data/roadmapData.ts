@@ -18,6 +18,7 @@ import { DbdevopsData } from "./dbdevopsData";
 import { AtaData } from "./ataData";
 import { arData } from "./arData"; 
 import { QwietaiData } from "./qwietaidata";
+import { AiSreData } from "./aiSreData";
 
 export interface ModuleData {
   title: string;
@@ -164,6 +165,12 @@ const ModuleData: ModuleData[] = [
     description: "SaaS release status: GA",
     module: MODULES.ar,
     horizon: arData,
+  },
+  {
+    title: "AI SRE",
+    description: "SaaS release status: GA",
+    module: MODULES.aisre,
+    horizon: AiSreData,
   },
 
 ];
