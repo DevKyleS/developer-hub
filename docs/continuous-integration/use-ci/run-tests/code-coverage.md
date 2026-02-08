@@ -1,7 +1,7 @@
 ---
-title: Code coverage
-description: Include code coverage in your CI pipelines.
-sidebar_position: 40
+title: Code Coverage (Third-Party Tools)
+description: Include code coverage in your CI pipelines using third-party tools.
+sidebar_position: 90
 redirect_from:
   - /docs/continuous-integration/use-ci/set-up-test-intelligence/code-coverage
   - /tutorials/ci-pipelines/test/codecov

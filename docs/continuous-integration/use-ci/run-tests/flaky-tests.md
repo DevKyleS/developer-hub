@@ -1,7 +1,7 @@
 ---
-title: Flaky Tests
-description: Use Test Analysis Plugin to manage flaky tests
-sidebar_position: 40
+title: Flaky Tests (Test Analysis Plugin)
+description: Use the Test Analysis Plugin to manage flaky tests with quarantine lists
+sidebar_position: 92
 canonical_url: https://www.harness.io/blog/continuous-integration-testing
 ---
 
