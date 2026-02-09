@@ -1,7 +1,7 @@
 ---
 title: Cloud Cost Management Release Notes
 sidebar_label: Cloud Cost Management
-date: 2026-01-24T18:00
+date: 2026-02-09T18:00
 sidebar_position: 6
 ---
 
@@ -25,9 +25,24 @@ We've migrated to LabelsV2, which preserves your original label keys while drama
 
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
 
+## February 2026 - Version 1.78.21
+## Deployment Date: February 7, 2026 (Prod-1)
 
-## January 2025 - Hotfix: Changes to Anomaly Detection
-#### Deployment Date: January 30, 2025 (Prod-1)
+- **Enhanced Anomaly Detection Logic**: Improved the machine learning models to handle limited data scenarios more effectively. The system now provides more accurate anomaly detection when working with sparse cost data points by better aligning the Prophet and Statistical models. [CCM-29409]
+
+- **Improved Budget Reporting**: Enhanced the display of budget variance percentages by rounding to 2 decimal places for yearly budgets, providing more precise financial reporting. [CCM-29332]
+
+- **Redesigned Cost Category Creation**: Streamlined the user experience by moving the Cost Category creation from a drawer to a dedicated page, matching the familiar workflow of Perspective creation. [CCM-28931]
+- **Standardized Operator Naming**: Reverted the `! IN` and `! NULL` operators back to the more widely recognized `NOT IN` and `NOT NULL` syntax in the Perspective and Cost Category builder for better clarity and consistency. [CCM-25286]
+
+- **Unallocated Cost Label**: Earlier, when the Hidden strategy was selected for Unallocated Cost in cost categories, we stamped a default label (“Cost categories default”) in the data used by the dashboard. Now, we stamp the Unallocated Cost label irrespective of what strategy is selected. This ensures that the dashboard data remains consistent even if the strategy is changed later. [CCM-29236]
+
+### Fixed Issues
+
+- **Governance Recommendations**: Resolved an issue where multiple "remove from ignore list" options were appearing for ignored Governance recommendations. The interface now correctly shows a single option to remove from the appropriate ignore level. [CCM-28071]
+
+## January 2026 - Hotfix: Changes to Anomaly Detection
+#### Deployment Date: January 30, 2026 (Prod-1)
 
 This release focuses on improving the clarity, accuracy, and usability of Anomalies across the product. We’ve enhanced the UI, corrected spend calculations and date logic, expanded API filtering capabilities, and improved alert accuracy so teams can detect, understand, and act on cost anomalies with greater confidence.
 
@@ -39,8 +54,8 @@ This release focuses on improving the clarity, accuracy, and usability of Anomal
 - Enhanced the **Anomalies fetch API** to support **Perspective-based filters**. Anomalies can now be mapped using **AWS Account Name/ID**, **AWS Service**, and **AWS Usage Type**.
 - **Daily budget alert emails** now display the **date the cost was incurred** instead of the alert generation time, ensuring accurate context when cloud cost data arrives with a delay.
 
-## January 2025 - Version 1.75.1
-#### Deployment Date: January 24, 2025 (Prod-1)
+## January 2026 - Version 1.75.1
+#### Deployment Date: January 24, 2026 (Prod-1)
 
 ### Feature Improvements
 
@@ -61,8 +76,8 @@ This release focuses on improving the clarity, accuracy, and usability of Anomal
 - **Bug Fix for Cost Category mapped Jira Ticket:** We fixed an issue where, when the Jira project came from a Cost Category mapping, the issue type wasn’t being fetched automatically on the initial load of the Create Jira Ticket form. [CCM-29166]
 
 
-## January 2025 - Version 1.75.1
-#### Deployment Date: January 16, 2025 (Prod-1)
+## January 2026 - Version 1.75.1
+#### Deployment Date: January 16, 2026 (Prod-1)
 
 ### Feature Improvements
 
@@ -76,8 +91,8 @@ This release focuses on improving the clarity, accuracy, and usability of Anomal
 
 - **New SP roll-down policy option in Commitment Orchestrator renewals** You can now configure a roll-down percentage to control how much of an expiring Savings Plan commitment is renewed during setup. [CCM-27577]
 
-## January 2025 - Hotfix: Changes to AutoStopping Rules
-#### **Deployment Date:** January 12, 2025 
+## January 2026 - Hotfix: Changes to AutoStopping Rules
+#### **Deployment Date:** January 12, 2026 
 
 We have rolled out a hotfix that includes the following major changes:
 
@@ -87,8 +102,8 @@ We have rolled out a hotfix that includes the following major changes:
 
 - Savings will be calculated for rules that are **created** and resources are being utilized. Rules created with valid resources will display savings numbers as long as the resource is valid and cost data is available in the Cloud Usage Report (CUR). Resources that are onboarded in "Down" state and not used after rule creation will not show any savings, as the details of such resources will be completely missing in the CUR.
 
-## January 2025 - Version 1.75.1
-#### Deployment Date: January 8, 2025 (Prod-1)
+## January 2026 - Version 1.75.1
+#### Deployment Date: January 8, 2026 (Prod-1)
 
 ### [New Feature] AutoStopping Alerts
 
