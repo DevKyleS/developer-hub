@@ -19,6 +19,7 @@ For a comprehensive list that includes all Harness modules, go to [Supported pla
 | CD | ✅ | ✅ |
 | CV | ✅ |  |
 | FF | ✅ | ✅ (Beta) |
+| IaCM | ✅ | ✅ (Beta) |
 | SEI|  |  |
 | SRM| ✅ | ✅ (Beta) |
 | STO| ✅ | ✅ (Beta) |
