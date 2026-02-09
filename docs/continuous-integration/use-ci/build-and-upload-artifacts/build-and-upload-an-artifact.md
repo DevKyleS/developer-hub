@@ -47,7 +47,7 @@ The following video demonstrates how to add a **Build and Push** step to a Harne
 
 ### Kubernetes cluster build infrastructures require root access
 
-With Kubernetes cluster build infrastructures, Build and Push steps use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). Other build infrastructures use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md). Kaniko requires root access to build the Docker image. It doesn't support non-root users.
+With Kubernetes cluster build infrastructures, Build and Push steps use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Other build infrastructures use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md). Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations (e.g., installing system packages, modifying root-owned directories).
 
 If your build runs as non-root (`runAsNonRoot: true`), and you want to run the Build and Push step as root, you can set **Run as User** to `0` on the Build and Push step to use the root user for that individual step only.
 

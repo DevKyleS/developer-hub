@@ -18,7 +18,7 @@ CI build infrastructure pods can interact with servers using self-signed certifi
 :::info
 
 - This topic assumes that you are familiar with how to implement SSL in Kubernetes. General information about implementing SSL is outside the scope of this topic.
-- With a Kubernetes cluster build infrastructure, all **Build and Push** steps use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). Kaniko reads certificates from `/kaniko/ssl/certs/additional-ca-cert-bundle.crt`.
+- With a Kubernetes cluster build infrastructure, all **Build and Push** steps use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Kaniko reads certificates from `/kaniko/ssl/certs/additional-ca-cert-bundle.crt`.
 - Harness uses a UBI image for the Git Clone step. UBI reads certificates from `/etc/ssl/certs/ca-bundle.crt`.
 - Different base images use different paths as their default certificate location. For example, Alpine images use the path `/etc/ssl/certs/ca-certificates.crt`. For other images, make sure you verify the default certificate path.
 

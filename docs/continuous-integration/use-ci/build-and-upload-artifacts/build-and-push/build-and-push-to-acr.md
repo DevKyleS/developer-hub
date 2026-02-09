@@ -27,7 +27,7 @@ The **Build and Push to ACR** step is supported for Linux platforms on [Kubernet
 
 ## Root access is required
 
-With Kubernetes cluster build infrastructures, all **Build and Push** steps use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). This tool requires root access to build the Docker image, and it doesn't support non-root users.
+With Kubernetes cluster build infrastructures, all **Build and Push** steps use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations (e.g., installing system packages, modifying root-owned directories).
 
 If your build runs as non-root (`runAsNonRoot: true`), and you want to run the **Build and Push** step as root, you can set **Run as User** to `0` on the **Build and Push** step to use the root user for that individual step only.
 
@@ -126,7 +126,7 @@ This limitation does not apply to following build and push steps only on K8 - AC
 
 ### Optimize
 
-Select this option to enable `--snapshotMode=redo`. This setting causes file metadata to be considered when creating snapshots, and it can reduce the time it takes to create snapshots. For more information, go to the kaniko documentation for the [snapshotMode flag](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md#flag---snapshotmode).
+Select this option to enable `--snapshotMode=redo`. This setting causes file metadata to be considered when creating snapshots, and it can reduce the time it takes to create snapshots. For more information, go to the Kaniko documentation for the [snapshotMode flag](https://github.com/chainguard-forks/kaniko?tab=readme-ov-file#flag---snapshot-mode).
 
 For information about setting other kaniko runtime flags, go to [Environment variables](#environment-variables-plugin-runtime-flags).
 

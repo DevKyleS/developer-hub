@@ -17,14 +17,14 @@ Building with non-root users may be necessary for an organization due to securit
 
 By default, Harness uses Kaniko to build and push images in Kubernetes cluster build infrastructure.
 
-:::note
-We will support a maintained version of Kaniko as our default. More information to come.
+:::note Chainguard Kaniko Fork
+The Drone Kaniko Plugin uses [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md), ensuring continued security updates and improvements.
 :::
 
 - **Kaniko does not require privileged mode** (`privileged: false`).
-- **Kaniko always runs as root** (rootless mode is not supported).
+- **Kaniko can run as non-root** in many cases. Root access is only required when your Dockerfile performs privileged operations.
 - **Security recommendation**: Run Kaniko in root mode only when your Dockerfile requires privileged operations.
-- **If your policy requires non-root for builds:** Kaniko will not meet that requirement. See Buildah below.
+- **If your Dockerfile requires privileged operations and your policy prohibits root:** Use the Buildah plugin described below.
 - Kaniko is recommended for most security-conscious teams as it minimizes risk by not requiring privileged pods.
 
 :::info When to Use Root Mode

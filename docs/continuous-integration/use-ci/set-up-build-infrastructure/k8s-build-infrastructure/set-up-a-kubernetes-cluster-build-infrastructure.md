@@ -70,7 +70,7 @@ If your Kubernetes cluster doesn't support privileged mode, you'll need to use a
 
 ### Build and Push steps require root access
 
-With Kubernetes cluster build infrastructures, [Build and Push steps](/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-upload-an-artifact) use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). Kaniko requires root access to build the Docker image. It doesn't support non-root users.
+With Kubernetes cluster build infrastructures, [Build and Push steps](/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-upload-an-artifact) use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations (e.g., installing system packages, modifying root-owned directories).
 
 If your build [runs as non-root](#run-as-non-root-or-a-specific-user), you can run individual **Build and Push** steps as root by setting **Run as User** to `0` on a specific **Build and Push** step to use the root user for that individual step only.
 
@@ -318,7 +318,7 @@ You can use the **Run as Non-Root** and **Run as User** settings to run builds a
 
 Using a non-root user can require other changes to your pipeline.
 
-With a Kubernetes cluster build infrastructure, all [Build and Push steps](/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-upload-an-artifact) use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). This tool requires root access to build the Docker image. It doesn't support non-root users.
+With a Kubernetes cluster build infrastructure, all [Build and Push steps](/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-upload-an-artifact) use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations (e.g., installing system packages, modifying root-owned directories).
 
 If you enable **Run as Non-Root**, then you must:
 

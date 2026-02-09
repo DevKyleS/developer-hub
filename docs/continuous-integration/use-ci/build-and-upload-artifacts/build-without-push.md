@@ -41,7 +41,7 @@ To enable the `CI_USE_BUILDX_ON_K8` feature flag, contact [Harness Support](mail
 
 ### Kaniko Root Mode Recommendations
 
-When using Kaniko on Kubernetes infrastructure, we recommend running Kaniko in **root mode only when required**. While Kaniko itself requires root user access inside the container (it doesn't support rootless mode), you can optimize security by:
+When using Kaniko on Kubernetes infrastructure, we recommend running Kaniko in **root mode only when required**. Kaniko can run as non-root in many cases, but requires root access when your Dockerfile performs privileged operations. You can optimize security by:
 
 1. **Running the pipeline stage as non-root** (`runAsNonRoot: true`) to comply with cluster security policies
 2. **Running only the Kaniko Build and Push step in root mode** (`runAsUser: 0`) when your Dockerfile requires it

@@ -1616,7 +1616,7 @@ You can [build without pushing](https://developer.harness.io/docs/continuous-int
 
 ### What drives the Build and Push steps? What is kaniko?
 
-With Kubernetes cluster build infrastructures, Build and Push steps use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md). Other build infrastructures use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md). kaniko requires root access to build the Docker image.
+With Kubernetes cluster build infrastructures, Build and Push steps use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). Other build infrastructures use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md). Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations.
 
 For more information, go to:
 
@@ -1629,7 +1629,7 @@ Yes, you can [set plugin runtime flags](https://developer.harness.io/docs/contin
 
 ### Can I run Build and Push steps as non-root? Does kaniko support non-root users?
 
-With a Kubernetes cluster build infrastructure, **Build and Push** steps use the kaniko plugin. kaniko requires root access to build Docker images, and it does not support non-root users. However, you can use the buildah plugin to [build and push with non-root users](https://developer.harness.io/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-push-nonroot).
+With a Kubernetes cluster build infrastructure, **Build and Push** steps use the Kaniko plugin. Kaniko can run as non-root in many cases. Root access is only required when your Dockerfile performs privileged operations (e.g., installing system packages, modifying root-owned directories). If your Dockerfile requires privileged operations and your policy prohibits root, you can use the Buildah plugin to [build and push with non-root users](https://developer.harness.io/docs/continuous-integration/use-ci/build-and-upload-artifacts/build-and-push-nonroot).
 
 ### Can I run Build and Push steps as root if my build infrastructure runs as non-root?
 

@@ -1,8 +1,8 @@
 import Tar from '/docs/continuous-integration/shared/build-and-push-local-tar.md';
 
-**Build and Push** steps use plugins to complete build and push operations. With Kubernetes cluster build infrastructures, these steps use [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md), and, with other build infrastructures, these steps use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md).
+**Build and Push** steps use plugins to complete build and push operations. With Kubernetes cluster build infrastructures, these steps use [Chainguard's maintained Kaniko fork](https://github.com/chainguard-forks/kaniko/blob/main/README.md). With other build infrastructures, these steps use [drone-docker](https://github.com/drone-plugins/drone-docker/blob/master/README.md).
 
-These plugins have a number of additional runtime flags that you might need for certain use cases. For information about the flags, go to the [kaniko plugin documentation](https://github.com/GoogleContainerTools/kaniko/blob/main/README.md#additional-flags) and the [drone-docker plugin documentation](https://plugins.drone.io/plugins/docker).
+These plugins have a number of additional runtime flags that you might need for certain use cases. For information about the flags, go to the [Kaniko plugin documentation](https://github.com/chainguard-forks/kaniko/blob/main/README.md) and the [drone-docker plugin documentation](https://plugins.drone.io/plugins/docker).
 
 In **Environment Variables** for your step, add the environment variable `PLUGIN_BUILDX_OPTIONS` to pass any [supported options](https://docs.docker.com/reference/cli/docker/buildx/build/#options) to the buildx command used by the build and push steps.
 

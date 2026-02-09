@@ -321,7 +321,7 @@ pipeline:
 
 ## Build/scan/push with Kaniko
 
-This workflow is useful if you don't have a CI license and want to use [Kaniko](https://github.com/GoogleContainerTools/kaniko) (which doesn't require Privileged mode) instead of a Docker-in-Docker background step. 
+This workflow is useful if you don't have a CI license and want to use [Kaniko](https://github.com/chainguard-forks/kaniko/blob/main/README.md) (which doesn't require Privileged mode) instead of a Docker-in-Docker background step. 
 
 1. In the Security stage overview, under **Shared Paths**, add a path on the stage volume where you can share the image TAR across steps.
 
