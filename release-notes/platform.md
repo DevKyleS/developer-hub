@@ -186,6 +186,12 @@ The following deprecated API endpoints are longer supported:
 - POST api/resourcegroup/filter
 - GET api/resourcegroup
 
+## February 2026
+
+### Version 1.129.x <!--February 05,2026-->
+
+No enhancements or fixes were released in this cycle.
+
 ## January 2026
 
 ### Version 1.128.x <!--January 29,2026-->
