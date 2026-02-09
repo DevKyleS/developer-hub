@@ -347,6 +347,10 @@
   --ifm-heading-line-height: 120%;
   --ifm-heading-color: var(--gray-800);
 
+  /* Override Infima's base font-size to ensure consistent paragraph sizing */
+  --ifm-font-size-base: 1rem;
+  --ifm-line-height-base: 1.6;
+
   /* here */
   --ifm-color-content-light: var(--gray-800);
   --background-color: white;
@@ -486,6 +490,16 @@ html *:after {
 body {
   font-family: var(--harness-font-family) !important;
   background-color: var(--background-color);
+  font-size: 16px;
+}
+
+/* Ensure paragraphs in documentation maintain 16px font size */
+.markdown p,
+.theme-doc-markdown p,
+article p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 h1,
 h2,
