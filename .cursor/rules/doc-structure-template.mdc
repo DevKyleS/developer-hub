@@ -1,0 +1,89 @@
+---
+description: Standard structure template for new documentation pages
+globs: **/*.md
+alwaysApply: false
+---
+
+# Documentation Structure Template
+
+Follow this structure when creating new documentation pages. Adjust as needed based on content type.
+
+## Standard Structure
+
+### 1. Frontmatter
+```yaml
+---
+title: [Clear, descriptive title]
+description: [One-sentence summary of what this guide covers]
+---
+```
+
+### 2. Introduction (2-3 paragraphs)
+- **Paragraph 1**: What is this feature/capability?
+- **Paragraph 2**: Why use it? What problems does it solve?
+- **Paragraph 3**: Key benefits or use cases
+
+### 3. Prerequisites
+List required setup, permissions, or knowledge:
+```markdown
+## Prerequisites
+
+- Item 1
+- Item 2
+- Item 3
+```
+
+### 4. Step-by-Step Instructions
+Use clear, numbered sections with imperative headers:
+
+```markdown
+## Step 1: [Action verb]
+
+Instructions here.
+
+:::tip
+Add troubleshooting hints inline when they help anticipate common issues.
+:::
+
+## Step 2: [Action verb]
+
+More instructions.
+```
+
+**When to include inline troubleshooting:**
+- Common errors that happen during this specific step
+- Configuration gotchas that prevent progress
+- Quick fixes that keep the user moving forward
+
+### 5. Troubleshooting Section (Optional)
+Only include if there are general issues not tied to specific steps:
+
+```markdown
+## Troubleshooting
+
+### Issue: [Description of problem]
+**Solution:** [How to fix it]
+```
+
+### 6. Next Steps
+Wrap up with:
+- **Brief conclusion** (1-2 sentences): Summarize what was accomplished
+- **2-3 related links**: Most logical next actions or related docs
+
+```markdown
+## Next Steps
+
+You've successfully [accomplished X]. You can now [key capability unlocked].
+
+- [Related doc 1]
+- [Related doc 2]
+- [Related doc 3]
+```
+
+## Content Guidelines
+
+- Use imperative headers (Create, Configure, Set up)
+- Keep prerequisites minimal and relevant
+- Include code examples where helpful
+- Use callouts (:::tip, :::warning, :::info) strategically
+- Link to related concepts inline, not just at the end

@@ -8,9 +8,17 @@
   flex-direction: column;
   gap: 8px;
   border: 2px solid #d9dae5;
+  transition: border-color 0.2s ease;
+  
   &:hover {
     text-decoration: none;
+    border-color: var(--tag-border-color, var(--primary));
   }
+  
+  &:focus {
+    border-color: var(--tag-border-color, var(--primary));
+  }
+  
   // background-color: white;
   .tag {
     width: auto;
@@ -31,7 +39,45 @@
       background: var(--primary-2);
       color: var(--primary-8);
     }
+    
+    // Category-specific tag colors
+    .tagPlatform {
+      background-color: #6BB0EB !important;
+      color: #0A4A7A !important;
+    }
+    
+    .tagOperations {
+      background-color: #AFA0FF !important;
+      color: #3D2B80 !important;
+    }
+    
+    .tagGovernance {
+      background-color: #EB7970 !important;
+      color: #7A1410 !important;
+    }
+    
+    .tagIntegration {
+      background-color: #6DD4A5 !important;
+      color: #0A5D35 !important;
+    }
+    
+    .tagReporting {
+      background-color: #6DD7F1 !important;
+      color: #0A5A6E !important;
+    }
+    
+    .tagAI {
+      background-color: #9F95F4 !important;
+      color: #2E2075 !important;
+    }
+    
+    .tagDeveloperExperience {
+      background-color: #FFC270 !important;
+      color: #804D0A !important;
+    }
   }
+}
+
   h4 {
     font-size: 16px;
     font-weight: 600;
@@ -48,105 +94,46 @@
     text-align: left;
     margin: 0;
   }
-}
-
-.cd:hover {
-  border-color: var(--mod-cd-200);
-}
-.cd:focus {
-  border-color: var(--mod-cd-200);
-}
-
-.ci:hover {
-  border-color: var(--mod-ci-200);
-}
-.ci:focus {
-  border-color: var(--mod-ci-200);
-}
-.ff:hover {
-  border-color: var(--mod-ff-200);
-}
-.ff:focus {
-  border-color: var(--mod-ff-200);
-}
-.fme:hover {
-  border-color: var(--mod-fme-200);
-}
-.fme:focus {
-  border-color: var(--mod-fme-200);
-}
-.ccm:hover {
-  border-color: var(--mod-ccm-200);
-}
-.ccm:focus {
-  border-color: var(--mod-ccm-200);
-}
-.srm:hover {
-  border-color: var(--mod-srm-200);
-}
-.srm:focus {
-  border-color: var(--mod-srm-200);
-}
-.sto:hover {
-  border-color: var(--mod-sto-200);
-}
-.sto:focus {
-  border-color: var(--mod-sto-200);
-}
-.ce:hover {
-  border-color: var(--mod-ce-200);
-}
-.ce:focus {
-  border-color: var(--mod-ce-200);
-}
-.platform:hover {
-  border-color: var(--primary);
-}
-.platform:focus {
-  border-color: var(--primary);
-}
-.iacm:focus {
-  border-color: var(--mod-iacm-200);
-}
-.iacm:hover {
-  border-color: var(--mod-iacm-200);
-}
-.idp:focus {
-  border-color: var(--mod-idp-200);
-}
-.idp:hover {
-  border-color: var(--mod-idp-200);
-}
-.sei:focus {
-  border-color: var(--mod-sei-200);
-}
-.sei:hover {
-  border-color: var(--mod-sei-200);
-}
-
-.code:hover {
-  border-color: var(--mod-code-200);
-}
-.code:focus {
-  border-color: var(--mod-code-200);
-}
-.aida:hover {
-  border-color: var(--purple-700);
-}
-.aida:focus {
-  border-color: var(--purple-700);
-}
-.gitness:focus {
-  border-color: var(--mod-gitness-200);
-}
-.gitness:hover {
-  border-color: var(--mod-gitness-200);
-}
-.cde:focus {
-  border-color: var(--mod-cde-200)
-}
-.cde:hover {
-  border-color: vae(--mod-cde-200)
-}
 
 
+// Dark mode overrides - slightly darker backgrounds with lighter text
+[data-theme='dark'] .card .tag {
+  .tagPlatform {
+    background-color: #5A9DD9 !important;
+    color: #E8F4FC !important;
+  }
+  
+  .tagOperations {
+    background-color: #9D8AED !important;
+    color: #F0EDFC !important;
+  }
+  
+  .tagGovernance {
+    background-color: #D96660 !important;
+    color: #FCE8E6 !important;
+  }
+  
+  .tagIntegration {
+    background-color: #5BC293 !important;
+    color: #E6F9F1 !important;
+  }
+  
+  .tagReporting {
+    background-color: #5BC5DF !important;
+    color: #E6F7FC !important;
+  }
+  
+  .tagAI {
+    background-color: #8D83E2 !important;
+    color: #EFEDFB !important;
+  }
+  
+  .tagDeveloperExperience {
+    background-color: #EDB05E !important;
+    color: #FCF3E6 !important;
+  }
+}
+
+// Module-specific hover/focus styles removed - now using generic tag color approach
+// The border color on hover is controlled by the --tag-border-color CSS variable
+// set dynamically on each card based on the first tag's color
