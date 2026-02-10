@@ -924,6 +924,10 @@ Ensure that the `smp-airgap-bundles/` directory exists before running the comman
 
 ## January 12, 2026, Version 0.35.10
 
+:::note
+No new enhancements, features, or bug fixes were introduced between versions 0.35.4 and 0.35.9.
+:::
+
 This release includes the following Harness module and component versions.
 
 | **Name**                     | **Version**                                                                                  |
