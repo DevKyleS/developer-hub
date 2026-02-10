@@ -5,6 +5,7 @@ hide_table_of_contents: true
 sidebar_position: 2
 redirect_from:
   - /tutorials/cd-pipelines/kubernetes/kustomize
+  - /docs/continuous-delivery/get-started/tutorials/kustomize
 ---
 
 <CTABanner
@@ -189,7 +190,7 @@ A canary deployment updates nodes in a single environment gradually, allowing yo
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Canary](./static/kustomize-tutorial/canary.png)
+![Canary](../static/kustomize-tutorial/canary.png)
 
 </TabItem>
 <TabItem value="bg" label="Blue Green">
@@ -208,7 +209,7 @@ Blue Green deployments involve running two identical environments (stage and pro
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Blue Green](./static/kustomize-tutorial/bluegreen.png)
+![Blue Green](../static/kustomize-tutorial/bluegreen.png)
 
 </TabItem>
 <TabItem value="rolling" label="Rolling">
@@ -227,7 +228,7 @@ Rolling deployments incrementally add nodes in a single environment with a new s
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Rolling](./static/kustomize-tutorial/rolling.png)
+![Rolling](../static/kustomize-tutorial/rolling.png)
 
 </TabItem>
 </Tabs>
@@ -434,7 +435,7 @@ harness pipeline --file kustomize-guestbook/harnesscd-pipeline/canary-pipeline.y
 
 - You can confirm the pipeline, stage, and execution steps are as shown below in the Harness UI.
 
-![Canary](./static/kustomize-tutorial/canary.png)
+![Canary](../static/kustomize-tutorial/canary.png)
 
 </TabItem>
 <TabItem value="bg" label="Blue Green">
@@ -447,7 +448,7 @@ harness pipeline --file kustomize-guestbook/harnesscd-pipeline/bluegreen-pipelin
 
 - You can confirm the pipeline, stage, and execution steps are as shown below in the Harness UI.
 
-![Blue Green](./static/kustomize-tutorial/bluegreen.png)
+![Blue Green](../static/kustomize-tutorial/bluegreen.png)
 
 </TabItem>
 <TabItem value="rolling" label="Rolling">
@@ -460,7 +461,7 @@ harness pipeline --file kustomize-guestbook/harnesscd-pipeline/rolling-pipeline.
 
 - You can confirm the pipeline, stage, and execution steps are as shown below in the Harness UI.
 
-![Rolling](./static/kustomize-tutorial/rolling.png)
+![Rolling](../static/kustomize-tutorial/rolling.png)
 
 </TabItem>
 </Tabs>
@@ -663,7 +664,7 @@ A GitOps Application collects the Repository (**what you want to deploy**), Clus
 
 On successful Application sync, you'll see the below status tree under **Resource View**.
 
-![GitOps](./static/kustomize-tutorial/gitops.png)
+![GitOps](../static/kustomize-tutorial/gitops.png)
 
 ### Congratulations!🎉
 

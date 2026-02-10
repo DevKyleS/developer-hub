@@ -1434,10 +1434,10 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'CD Tutorials',
+          label: 'Tutorials',
           link: {
             type: 'generated-index',
-            title: 'CD Tutorials',
+            title: 'Tutorials',
             description: 'Welcome to Harness Continuous Delivery! Here you will find tutorials and guides to help you do your first deployment using Harness and begin your CD journey with Harness.',
             slug: '/continuous-delivery/tutorials'
           },

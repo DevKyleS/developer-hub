@@ -5,6 +5,7 @@ description: Google Cloud Functions serverless deployments
 redirect_from:
   - /tutorials/cd-pipelines/serverless/gcp-cloud-func
   - /docs/continuous-delivery/get-started/cd-tutorials/gcp-cloud-func
+  - /docs/continuous-delivery/get-started/tutorials/gcp-cloud-func
 ---
 
 <CTABanner
@@ -236,7 +237,7 @@ A canary deployment updates nodes/functions/etc. in a single environment gradual
 3. Select **Save**.
    You can switch to the **Visual** editor and confirm the pipeline stage and execution steps as shown below.
 
-<DocImage path={require('./static/harness-cicd-tutorial/canary-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+<DocImage path={require('../static/harness-cicd-tutorial/canary-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 <TabItem value="bg1g" label="Blue Green">
@@ -254,7 +255,7 @@ Blue Green deployments involve running two identical environments (stage and pro
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-<DocImage path={require('./static/harness-cicd-tutorial/bluegreen-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+<DocImage path={require('../static/harness-cicd-tutorial/bluegreen-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 <TabItem value="basic1g" label="Basic">
@@ -272,7 +273,7 @@ For Google Cloud Functions, the basic deployment execution strategy deploys the 
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-   <DocImage path={require('./static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+   <DocImage path={require('../static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 </Tabs>
@@ -434,7 +435,7 @@ A canary deployment updates nodes in a single environment gradually, allowing yo
    ```
 2. In Harness, you can switch to the **Visual** editor and confirm the pipeline stage and execution steps as shown below.
 
-<DocImage path={require('./static/harness-cicd-tutorial/canary-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+<DocImage path={require('../static/harness-cicd-tutorial/canary-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 <TabItem value="bg2g" label="Blue Green">
@@ -452,7 +453,7 @@ Blue Green deployments involve running two identical environments (stage and pro
    ```
 2. You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-<DocImage path={require('./static/harness-cicd-tutorial/bluegreen-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+<DocImage path={require('../static/harness-cicd-tutorial/bluegreen-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 <TabItem value="basic2g" label="Basic">
@@ -471,7 +472,7 @@ For Google Cloud Functions, the basic deployment execution strategy deploys the 
    ```
 
 2. You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
-   <DocImage path={require('./static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+   <DocImage path={require('../static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 </Tabs>
@@ -659,7 +660,7 @@ For Google Cloud Functions, the basic deployment execution strategy deploys the 
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-<DocImage path={require('./static/harness-cicd-tutorial/rolling-gen1.png')} width="60%" height="60%" title="Click to view full size image" />
+<DocImage path={require('../static/harness-cicd-tutorial/rolling-gen1.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 <TabItem value="cli1g" label="CLI">
@@ -810,7 +811,7 @@ For Google Cloud Functions, the basic deployment execution strategy deploys the 
    ```
 
 2. You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
-   <DocImage path={require('./static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
+   <DocImage path={require('../static/harness-cicd-tutorial/rolling-gen2.png')} width="60%" height="60%" title="Click to view full size image" />
 
 </TabItem>
 </Tabs>

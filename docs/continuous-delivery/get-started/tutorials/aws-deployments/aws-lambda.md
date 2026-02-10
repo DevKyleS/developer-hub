@@ -236,7 +236,7 @@ A pipeline is a comprehensive process encompassing integration, delivery, operat
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-   <DocImage path={require('./static/harness-cicd-tutorial/serverless-aws-lambda.png')}/>
+   <DocImage path={require('../static/harness-cicd-tutorial/serverless-aws-lambda.png')}/>
 
 4. Finally, it's time to execute the pipeline. Select **Run**, and then select **Run Pipeline** to initiate the deployment.
 
@@ -396,7 +396,7 @@ A pipeline is a comprehensive process encompassing integration, delivery, operat
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-   <DocImage path={require('./static/harness-cicd-tutorial/serverless-aws-lambda.png')}/>
+   <DocImage path={require('../static/harness-cicd-tutorial/serverless-aws-lambda.png')}/>
 
 3. Finally, it's time to execute the pipeline. Select **Run**, and then select **Run Pipeline** to initiate the deployment.
 
@@ -701,7 +701,7 @@ A pipeline is a comprehensive process encompassing integration, delivery, operat
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-   <DocImage path={require('./static/harness-cicd-tutorial/serverless-aws-lambda-native.png')}/>
+   <DocImage path={require('../static/harness-cicd-tutorial/serverless-aws-lambda-native.png')}/>
 
 4. Finally, it's time to execute the Pipeline. Select **Run**.
 
@@ -876,7 +876,7 @@ A pipeline is a comprehensive process encompassing integration, delivery, operat
 
    You can switch to the **Visual** pipeline editor and confirm the pipeline stage and execution steps as shown below.
 
-   <DocImage path={require('./static/harness-cicd-tutorial/serverless-aws-lambda-native.png')}/>
+   <DocImage path={require('../static/harness-cicd-tutorial/serverless-aws-lambda-native.png')}/>
 
 3. Finally, it's time to execute the Pipeline. Select **Run**.
 

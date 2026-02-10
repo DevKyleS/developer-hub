@@ -5,6 +5,7 @@ redirect_from:
   - /tutorials/cd-pipelines/continuous-verification/prometheus
   - /tutorials/cd-pipelines/continuous-verification
   - /docs/continuous-delivery/get-started/cd-tutorials/prometheus
+  - /docs/continuous-delivery/get-started/tutorials/prometheus
 ---
 
 <CTABanner
@@ -20,7 +21,7 @@ When validating a deployment, looking at external systems such as APM, logging, 
 
 In this tutorial, we will [deploy an application that writes to a Prometheus](https://github.com/harness-apps/cv-example-app) endpoint and is validated by Harness Continuous Verification.
 
-![Overview](./static/cv-prom/cv-overview.png)
+![Overview](../static/cv-prom/cv-overview.png)
 
 ## Prerequisites
 
@@ -74,7 +75,7 @@ By installing the Prometheus Helm Chart into your Kubernetes cluster, you also g
 
 ## Verifying a Deployment with Harness
 
-There are a few objects to line up in Harness. Starting with the un-validated deployment itself. A deeper dive on deploying a manifest can be found in the [Kubernetes Manifest Tutorial](/docs/continuous-delivery/get-started/tutorials/manifest). Then wiring in the Verify Step to your Pipeline and configuring the Prometheus PromQL queries to validate the application against.
+There are a few objects to line up in Harness. Starting with the un-validated deployment itself. A deeper dive on deploying a manifest can be found in the [Kubernetes Manifest Tutorial](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/manifest). Then wiring in the Verify Step to your Pipeline and configuring the Prometheus PromQL queries to validate the application against.
 
 1. Create a new Harness Kubernetes Deployment.
 2. In the Service Configuration, wire a Kubernetes Manifest to:
@@ -84,7 +85,7 @@ There are a few objects to line up in Harness. Starting with the un-validated de
 4. In the Service Configuration, wire an Artifact to:
    1. `rlachhman/cv-example-app`
 
-![Manifests](./static/cv-prom/manifests.png)
+![Manifests](../static/cv-prom/manifests.png)
 
 You can then pick your deployment strategy. For simplicity in the example, can execute on a Rolling Deployment strategy. Once the deployment step is set up, can add a Verify Step to your pipeline, which is the Continuous Verification Step.
 
@@ -118,25 +119,25 @@ max(
 7. Set Deviation Compared to Baseline to “Higher value is higher risk”.
 8. Set the Service Instance Identifier to “app”.
 
-<DocImage path={require('./static/cv-prom/healthsource.png')} />
+<DocImage path={require('../static/cv-prom/healthsource.png')} />
 
 With the query configured, your Verify Step has all of the necessary pieces.
 
-![Verify Step](./static/cv-prom/verifystep.png)
+![Verify Step](../static/cv-prom/verifystep.png)
 
 You are now ready to run the pipeline.
 
-![Pipeline](./static/cv-prom/pipeline.png)
+![Pipeline](../static/cv-prom/pipeline.png)
 
 ## Running Example Pipeline
 
 Harness Continuous Verification works off the concept of baselines and the ability to perform a before and after analysis of what has been deployed. Deploying the `stable` tag of the Sample Application for the first time will generate a pass.
 
-![Execution](./static/cv-prom/execution.png)
+![Execution](../static/cv-prom/execution.png)
 
 Clicking View Details will allow you to see what values were used for the comparison(s).
 
-![Details](./static/cv-prom/details.png)
+![Details](../static/cv-prom/details.png)
 
 Since Harness Continuous Verification uses AI/ML to help determine regressions, you can also wire in [static values](/docs/continuous-delivery/verify/cv-concepts/machine-learning/#plain-threshold-based-verification) that are known failures such as long response times or deviations from a value. This example is just the start of what is possible with Continuous Verification.
 

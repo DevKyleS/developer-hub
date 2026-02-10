@@ -27,7 +27,7 @@ import DelegateInstall from '/docs/platform/get-started/tutorials/install-delega
 
 [Amazon Elastic Container Service](https://aws.amazon.com/ecs/) is an AWS offering for those looking to run containerized workloads. Define an ECS [Task Definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) describing your workload and a [Service Definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service_definition_parameters.html) where you want to run your workload and you are all set. A Continuous Delivery Pipeline is an excellent spot to orchestrate a deployment to Amazon ECS. In this example, we will go through deploying an image with Amazon ECS inside a Harness Continuous Delivery Pipeline.
 
-![Overview](./static/first-ecs/overview.png)
+![Overview](../static/first-ecs/overview.png)
 
 There are a few AWS Items to setup, such as the ECS Cluster itself, which we will go through configuring. If you have not signed up for Harness CD, sign up now before diving in.
 
@@ -41,19 +41,19 @@ You need access to an [AWS Account](https://aws.amazon.com/console/) to create a
 
 The ECS Instance Role will allow the running containers to call underlying ECS API commands. If you do not have an `ecsInstanceRole`, AWS Provides [documentation to create one](https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html). Make sure to set up the Trust relationships per the AWS documentation so your user can eventually assume the Role.
 
-![ECS Instance Role](./static/first-ecs/ecsinstance-role.png)
+![ECS Instance Role](../static/first-ecs/ecsinstance-role.png)
 
 #### ECS Managed Policy - IAM
 
 The next is to choose or set up a Managed Policy which will allow Harness to call ECS. Just as an example to not set up a more specific [Harness Centric Managed Policy](https://docs.harness.io/article/vytf6s0kwc-ecs-deployment-tutorial#set_up_aws_iam), you can use the generic [AmazonECS_FullAccess](https://docs.aws.amazon.com/AmazonECS/latest/userguide/security-iam-awsmanpol.html) [not recommended in production].
 
-![ECS Full Access Policy](./static/first-ecs/ecs-full-access.png)
+![ECS Full Access Policy](../static/first-ecs/ecs-full-access.png)
 
 #### Attach the Managed Policy to your IAM User
 
 Lastly, the ECS Managed Policy will need to be attached [Add permission] to your user that you will have Harness connect to AWS with.
 
-![Attach Policy](./static/first-ecs/attach-policy.png)
+![Attach Policy](../static/first-ecs/attach-policy.png)
 
 #### VPC/Subnet(s)/Security Group
 
@@ -65,7 +65,7 @@ With the above items created/validated, you are now ready to create an ECS Clust
 
 AWS Console -> ECS -> Clusters -> Create Cluster
 
-![Create ECS Cluster](./static/first-ecs/create-cluster.png)
+![Create ECS Cluster](../static/first-ecs/create-cluster.png)
 
 When filling out the wizard, here are a few prudent details:
 
@@ -77,7 +77,7 @@ When filling out the wizard, here are a few prudent details:
 
 Once set up, you will have an ECS Cluster that is ready to accept workload.
 
-![ECS Ready](./static/first-ecs/ecs-ready.png)
+![ECS Ready](../static/first-ecs/ecs-ready.png)
 
 Now you are ready to wire Harness to deploy on your behalf.
 
@@ -87,11 +87,11 @@ If you do not have a Harness Account, [sign up for a Harness Account](https://ap
 
 When navigating back to Deployments, can set the project context to the Default Project by clicking on the blue chevrons >> and selecting Default Project.
 
-![Default Project](./static/first-ecs/default-project.png)
+![Default Project](../static/first-ecs/default-project.png)
 
 With the Default Project selected, clicking on Overview will bring up a wizard to create your first Pipeline/Deployment.
 
-![First Pipeline](./static/first-ecs/first-pipeline.png)
+![First Pipeline](../static/first-ecs/first-pipeline.png)
 
 There are a few Harness entities that will need to be created in Harness. The needed objects are a Harness Delegate and an AWS Connector for your user credentials.
 
@@ -112,17 +112,17 @@ To get started with creating an AWS Cloud Provider connector, head to Account Se
 
 Name: `my_aws_connector`
 
-![My AWS Connector](./static/first-ecs/my-aws-connector.png)
+![My AWS Connector](../static/first-ecs/my-aws-connector.png)
 
 Click Continue and pick your authentication mechanism. If you have an AWS Access Key and Secret, can enter those as encrypted credentials which gets stored in the Harness Secrets Manager.
 
 For example, you can create “`my_aws_access`” for your Access Key and “`my_aws_secret`” for the Secret.
 
-![AWS Creds](./static/first-ecs/aws-creds.png)
+![AWS Creds](../static/first-ecs/aws-creds.png)
 
 Click continue and select how you will like to connect. You can leverage the Harness Platform or a Delegate to connect. In this example, connecting through Harness is fine.
 
-![AWS Connect Harness](./static/first-ecs/aws-connect-harness.png)
+![AWS Connect Harness](../static/first-ecs/aws-connect-harness.png)
 
 Click Save and Continue and your credentials will be tested. Once successful, you can modify one last item so you can pull images from public Docker Hub in the example.
 
@@ -132,15 +132,15 @@ By default, Harness is wired to the public Docker Hub. Though depending on the i
 
 Harness -> Account Settings -> Account Connectors -> Harness Docker Connector then Edit.
 
-![Edit Harness Docker Connector](./static/first-ecs/edit-dh-conn.png)
+![Edit Harness Docker Connector](../static/first-ecs/edit-dh-conn.png)
 
 Modify the endpoint if not already to `https://registry.hub.docker.com/v2/`.
 
-![Docker Hub Details](./static/first-ecs/dh-details.png)
+![Docker Hub Details](../static/first-ecs/dh-details.png)
 
 Click Continue to save. Running this Connector through the Harness Platform is fine. Then when saved and validated, you will be wired to that API Endpoint.
 
-![Updated Docker Hub](./static/first-ecs/updated-dh.png)
+![Updated Docker Hub](../static/first-ecs/updated-dh.png)
 
 With those wirings out of the way, you are now ready to create an ECS Pipeline. To expedite the creation, we can wire in a pair of configuration files.
 
@@ -160,7 +160,7 @@ Harness -> Account Settings -> Account Resources -> File Store + New.
 
 Can create two new files, one called `ecs_task.json` and one called `service_definition.json` based on the above files in [GitHub](https://github.com/harness-apps/developer-hub-apps/tree/main/applications/first-ecs-example). Copy and paste the contents into each respective file and save each.
 
-![Harness File Store](./static/first-ecs/harness-file-store.png)
+![Harness File Store](../static/first-ecs/harness-file-store.png)
 
 [ECS Task JSON](https://github.com/harness-apps/developer-hub-apps/blob/main/applications/first-ecs-example/ecs_task.json): On lines 3 and 53, replace the value of the `executionRoleArn` with your ecsInstanceRole.
 
@@ -176,105 +176,105 @@ With the Delegate, ECS Cluster, and manifests created, creating a Harness Pipeli
 - Name: my-first-ecs-pipeline
 - Setup: in-line
 
-![New Pipeline](./static/first-ecs/new-pipeline.png)
+![New Pipeline](../static/first-ecs/new-pipeline.png)
 
 Once you click Start, you can add an ECS Deployment Stage.
 Click in + Add Stage then Deployment and select Amazon ECS.
 
 Stage Name: deploy-to-ecs
 
-![Deploy to ECS](./static/first-ecs/deploy-to-ecs.png)
+![Deploy to ECS](../static/first-ecs/deploy-to-ecs.png)
 
 Then click Setup Stage. The next step is to create a Harness Service which will represent the ECS Configurations and Artifact that need to be deployed.
 
 In the Service Configuration, click + New Service.
 
-![New Service](./static/first-ecs/new-service.png)
+![New Service](../static/first-ecs/new-service.png)
 
 In the New Service UI, name the new service `sample-container` and add get ready to add the Task and Service Definitions.
 
-![Sample Container Service](./static/first-ecs/sample-container.png)
+![Sample Container Service](../static/first-ecs/sample-container.png)
 
 To add the Task Definition, click + Add Task Definition. Select Harness as the Task Definition Store.
 
-![Task Definition](./static/first-ecs/task-def.png)
+![Task Definition](../static/first-ecs/task-def.png)
 
 Select and name the ecs_task.json that was created before.
 
 Manifest Name: Task Def
 
-![Task Definition Path](./static/first-ecs/task-path.png)
+![Task Definition Path](../static/first-ecs/task-path.png)
 
 Repeat the same process for the Service Definition once saved. + Add Service Definition.
 
 Name: Service Def
 
-![Service Definition](./static/first-ecs/service-def.png)
+![Service Definition](../static/first-ecs/service-def.png)
 
 Now both are wired. The next step would be to wire in an artifact/image that you want to deploy.
 
-![Manifests Wired](./static/first-ecs/manifests-wired.png)
+![Manifests Wired](../static/first-ecs/manifests-wired.png)
 
 Lastly will wire an artifact to deploy. In the Task Definition, we have added a variable [if you copied from source control] to take in an input from Harness on an image to deploy.
 
-![Input Variable](./static/first-ecs/input-variable.png)
+![Input Variable](../static/first-ecs/input-variable.png)
 
 We can specify that image via the Harness by adding an Artifact Source. + Add Artifact Source.
 
 Select Docker Registry, we will select the Public Docker Hub Connector we re-wired before.
 
-![Docker Artifact Source](./static/first-ecs/docker-source.png)
+![Docker Artifact Source](../static/first-ecs/docker-source.png)
 
 Click Continue. Nginx can be used as an example to start.
 
 - Artifact Source Name: nginx
 - Image Path: library/nginx
 
-![Docker Artifact Source](./static/first-ecs/artifact-details.png)
+![Docker Artifact Source](../static/first-ecs/artifact-details.png)
 
 Click Submit and the Artifact will be wired in. Then click Save.
 
-![Artifact Wired](./static/first-ecs/artifact-wired.png)
+![Artifact Wired](../static/first-ecs/artifact-wired.png)
 
 Click Continue to point Harness to your ECS Cluster.
 
-![Sample Container Complete](./static/first-ecs/sample-container-complete.png)
+![Sample Container Complete](../static/first-ecs/sample-container-complete.png)
 
 ## Pointing Harness to ECS
 
 Harness has a concept of Environments which is the target infrastructure where you want to deploy. In this case, we will be deploying to the ECS Cluster that was created.
 
-![Specifiy Environment](./static/first-ecs/specifiy-env.png)
+![Specifiy Environment](../static/first-ecs/specifiy-env.png)
 
 Click + New Environment
 
 - Name: my-aws-environment
 - Environment Type: Pre-Production
 
-![New Environment](./static/first-ecs/new-env.png)
+![New Environment](../static/first-ecs/new-env.png)
 
 Click Save and next you will point to your specific ECS Cluster by adding that as a piece of Infrastructure. + New Infrastructure
 
-![New Infrastructure](./static/first-ecs/new-infra.png)
+![New Infrastructure](../static/first-ecs/new-infra.png)
 
 - Name: my-ecs-instance
 - Connector: Your AWS Connector
 - Region: Your AWS Region where the ECS Cluster lives
 - Cluster: harness-ecs
 
-![New Infrastructure](./static/first-ecs/pick-ecs.png)
+![New Infrastructure](../static/first-ecs/pick-ecs.png)
 
 Click Save then Continue to define the Execution Strategy.
 
-![My ECS Instance](./static/first-ecs/my-ecs.png)
+![My ECS Instance](../static/first-ecs/my-ecs.png)
 
 In the Execution Strategy, there are several options on how to deploy to ECS. For the example we will leverage a Rolling Deploying strategy.
 
-![Execution Strategy](./static/first-ecs/exec-strat.png)
+![Execution Strategy](../static/first-ecs/exec-strat.png)
 
 Once selected, click Use Strategy. Your Pipeline is now ready to be saved. Click on the Save button in the top right.
 
-![Save Pipeline](./static/first-ecs/save-pipeline.png)
+![Save Pipeline](../static/first-ecs/save-pipeline.png)
 
 Now you are ready to execute.
 
@@ -285,22 +285,22 @@ Selecting your Pipeline from Deployments -> Pipelines, can click on the Run Butt
 - Primary Artifact: nginx
 - Tag: stable
 
-![Run Pipeline](./static/first-ecs/run.png)
+![Run Pipeline](../static/first-ecs/run.png)
 
 Click Run Pipeline and your Pipeline will be executed.
 
 After a few moments, your Pipeline will be successfully deployed to ECS.
 
-![Success](./static/first-ecs/success.png)
+![Success](../static/first-ecs/success.png)
 
 To see your workload in action, head back to the AWS Console and dive into the Task for the public IP.
 
 AWS Console -> ECS -> Clusters -> harness-ecs -> Tasks -> Task UID -> Public IP
 
-![ECS Network](./static/first-ecs/ecs-network.png)
+![ECS Network](../static/first-ecs/ecs-network.png)
 
 Head to the Public IP e.g 52.15.55.133 and you will see a welcome message.
 
-![Welcome](./static/first-ecs/welcome.png)
+![Welcome](../static/first-ecs/welcome.png)
 
 Congratulations on your ECS deployment! This was a vanilla deployment to ECS. Harness has the ability to orchestrate confidence building steps. We used a pre-packaged image, but [Harness CI](/docs/continuous-integration/get-started/overview) can execute a Docker Build for you and create a custom image which you can then deploy with similar into Amazon ECS.

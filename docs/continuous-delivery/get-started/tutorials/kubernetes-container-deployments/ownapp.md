@@ -6,6 +6,7 @@ sidebar_position: 3
 redirect_from:
   - /tutorials/cd-pipelines/kubernetes/ownapp
   - /docs/continuous-delivery/get-started/cd-tutorials/ownapp
+  - /docs/continuous-delivery/get-started/tutorials/ownapp
 canonical_url: https://www.harness.io/blog/delegates-and-agents-onramp-to-scale-with-harness
 ---
 

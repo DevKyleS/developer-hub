@@ -178,7 +178,7 @@ For details on supported Helm versions, tooling, limitations, and repositories, 
 ## See also
 
 * [CD pipeline basics](/docs/continuous-delivery/overview#pipeline)
-* [Deploy using Helm Chart](/docs/continuous-delivery/get-started/tutorials/helm-chart)
+* [Deploy using Helm Chart](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/helm-chart)
 * [Helm and Native Helm Deployment FAQs](/docs/continuous-delivery/deploy-srv-diff-platforms/helm/helm-deployment-faqs)
   
 

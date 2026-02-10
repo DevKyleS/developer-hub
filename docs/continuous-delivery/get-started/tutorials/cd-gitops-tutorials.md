@@ -1,5 +1,5 @@
 ---
-title: CD & GitOps tutorials overview
+title: CD & GitOps Tutorials Overview
 description: Helpful tutorials for using Harness CD and GitOps
 redirect_from:
   - /docs/continuous-delivery/get-started/tutorials/cd-gitops-tutorials
@@ -17,29 +17,38 @@ These tutorials and guides showcase some use cases of Harness CD and GitOps.
 
 Whether you're new to Harness CD or you're an experienced user, check out the [CD resources & onboarding guides](https://developer.harness.io/docs/category/cd-resources) for useful guides and step-by-step onboarding journeys.
 
-## Deployment tutorials
+## Kubernetes & Container Deployments
 
-* [Deploy using Kubernetes Manifest](/docs/continuous-delivery/get-started/tutorials/manifest)
-* [Deploy using Helm Chart](/docs/continuous-delivery/get-started/tutorials/helm-chart)
-* [Deploy using Kustomize](/docs/continuous-delivery/get-started/tutorials/kustomize)
-* [Deploy your own microservice app](/docs/continuous-delivery/get-started/tutorials/ownapp)
-* [Deploy a Docker Image to Amazon ECS](/docs/continuous-delivery/get-started/tutorials/amazon-ecs)
-* [Google Cloud Functions serverless deployments](/docs/continuous-delivery/get-started/tutorials/gcp-cloud-func)
-* [AWS Lambda serverless deployments](/docs/continuous-delivery/get-started/tutorials/aws-lambda)
-* [Deploy to AWS VMs](/docs/continuous-delivery/get-started/tutorials/aws)
-* [Deploy to Azure VMs](/docs/continuous-delivery/get-started/tutorials/azure)
-* [Deploy to a physical data center](/docs/continuous-delivery/get-started/tutorials/pdc)
+* [Deploy using Helm Chart](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/helm-chart)
+* [Deploy using Kustomize](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/kustomize)
+* [Deploy using Kubernetes Manifest](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/manifest)
+* [Deploy your own microservice application](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/ownapp)
+* [Unified CI/CD Docker Hub Kubernetes pipeline](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/e2e-pipeline)
+* [Verify Kubernetes Deployments with Prometheus](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/prometheus)
 
-## Unified CI/CD tutorials
+## Cloud-Native CI/CD Pipelines
 
-* [Unified  CI/CD Docker Hub Kubernetes pipeline](/docs/continuous-delivery/get-started/tutorials/e2e-pipeline)
-* [Unified CI/CD GAR GKE pipeline](/docs/continuous-delivery/get-started/tutorials/gar-gke-pipeline)
+* [Unified CI/CD GAR GKE pipeline](/docs/continuous-delivery/get-started/tutorials/cloud-native-cicd-pipelines/gar-gke-pipeline)
+* [Secure Container Image Signing with Cosign and OPA](/docs/continuous-delivery/get-started/tutorials/cloud-native-cicd-pipelines/cosign-opa)
 
-## Other CD & GitOps tutorials
+## AWS Deployments
 
-* [Verify Kubernetes deployments with Prometheus](/docs/continuous-delivery/get-started/tutorials/prometheus)
-* [AWS CloudFormation infrastructure provisioning](/docs/continuous-delivery/get-started/tutorials/cloudformation)
-* [Secure Container Image Signing with Cosign and OPA](/docs/continuous-delivery/get-started/tutorials/cosign-opa)
+* [Deploy a Docker Image to Amazon ECS](/docs/continuous-delivery/get-started/tutorials/aws-deployments/amazon-ecs)
+* [AWS Lambda serverless deployments](/docs/continuous-delivery/get-started/tutorials/aws-deployments/aws-lambda)
+* [Deploy to AWS VMs](/docs/continuous-delivery/get-started/tutorials/aws-deployments/aws)
+* [AWS CloudFormation infrastructure provisioning](/docs/continuous-delivery/get-started/tutorials/aws-deployments/cloudformation)
+
+## Azure Deployments
+
+* [Deploy to Azure VMs](/docs/continuous-delivery/get-started/tutorials/azure-deployments/azure)
+
+## Google Cloud Deployments
+
+* [Google Cloud Functions serverless deployments](/docs/continuous-delivery/get-started/tutorials/google-cloud-deployments/gcp-cloud-func)
+
+## On-Prem & Hybrid Deployments
+
+* [Deploy to a physical data center](/docs/continuous-delivery/get-started/tutorials/on-prem-hybrid-deployments/pdc)
 
 ## Platform tutorials
 

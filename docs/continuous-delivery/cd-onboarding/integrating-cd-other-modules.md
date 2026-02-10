@@ -158,7 +158,7 @@ It's that simple to integrate Harness CI and CD.
 
 This was just a simple introduction to the integration.
 
-For a longer tutorial of Harness CI and CD integration, go to [End-To-End CI/CD Pipeline](/docs/continuous-delivery/get-started/tutorials/e2e-pipeline).
+For a longer tutorial of Harness CI and CD integration, go to [End-To-End CI/CD Pipeline](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/e2e-pipeline).
 
 ## Harness Chaos Engineering
 

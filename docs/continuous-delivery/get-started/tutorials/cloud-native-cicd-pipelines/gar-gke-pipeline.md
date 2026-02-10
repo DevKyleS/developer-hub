@@ -5,13 +5,14 @@ description: Unified CI/CD GAR GKE pipeline
 redirect_from:
   - /tutorials/cd-pipelines/unified-cicd/gar-gke-pipeline
   - /docs/continuous-delivery/get-started/cd-tutorials/gar-gke-pipeline
+  - /docs/continuous-delivery/get-started/tutorials/gar-gke-pipeline
 ---
 
 In this tutorial, you'll explore how to build a streamlined CI/CD pipeline using the Harness Platform, integrating the robust services of Google Artifact Registry (GAR) and Google Kubernetes Engine (GKE). GAR excels in managing and storing container images securely, while GKE offers a scalable environment for container deployment. The Harness Platform serves as a powerful orchestrator, simplifying the build and push process to GAR and managing complex deployments in GKE. You'll also cover implementing crucial approval steps for enhanced security and setting up Slack notifications for real-time updates, showcasing how these tools together facilitate a robust, streamlined CI/CD process.
 
-![Architectural Diagram](./static/gar-gke/gar-gke-archi.png)
+![Architectural Diagram](../static/gar-gke/gar-gke-archi.png)
 
-![Pipeline Editor](./static/gar-gke/pipeline-editor-view.png)
+![Pipeline Editor](../static/gar-gke/pipeline-editor-view.png)
 
 ## Prerequisites
 
@@ -85,7 +86,7 @@ Your newly created slack webhook will look like this: `https://hooks.slack.com/s
 
     d. GCP Connector: The GCP connector allows you to connect to your Google Cloud Platform resource and perform actions via Harness platform. Give this connector a name and select **Specify credentials here** under the **Details** section. Add a new secret name and upload the GCP service account key JSON file you previously downloaded. Select the connectivity mode as **Connect through Harness Platform**. The connection test should be successful.
 
-    ![GCP Connector Configuration](./static/gar-gke/add-gcp-sa-key.png)
+    ![GCP Connector Configuration](../static/gar-gke/add-gcp-sa-key.png)
 
 ## Build and push image to GAR
 
@@ -99,7 +100,7 @@ Under **Execution**, click **Add Step** → **Add Step** and find **Build and Pu
 
 Now, click **Run** to execute the pipeline. Enter `Master` as the git branch name for the build (or `main` if you're not using the forked CCA app). A successful execution of the pipeline should resemble the following: 
 
-![Successful Build and Push Pipeline Execution](./static/gar-gke/build-and-push.png)
+![Successful Build and Push Pipeline Execution](../static/gar-gke/build-and-push.png)
 
 ## Deploy to GKE
 
@@ -117,7 +118,7 @@ Click on **+ Add Stage** in the pipeline and choose **Deploy** as the stage type
 
 Next, create a service to deploy. Choose **Kubernetes** as the deployment type, select the GitHub connector, and specify the paths for the manifests. For example, for the Captain Canary Adventure App, here are the manifest details:
 
-![Captain Canary K8s Manifest Details](./static/gar-gke/k8s-manifest-details.png)
+![Captain Canary K8s Manifest Details](../static/gar-gke/k8s-manifest-details.png)
 
 Environments represent your deployment targets (such as QA or Prod). Each environment contains one or more Infrastructure Definitions that list your target clusters, hosts, namespaces, etc. Click on **+ New Environment**, give this environment a name (e.g., `cca-env`), select **Pre-Production** as the environment type, and click **Save**.
 
@@ -159,7 +160,7 @@ Now that you've updated the pipeline to pass in the **imageName** and **imageTag
 
 Now, click **Save** and then **Run**. After a successful **gar-build-and-push** stage, you should see an image in the GAR repository with a numeric tag that matches the pipeline sequence ID. Right after, you should see a following prompt for approval:
 
-![Harness Approval](./static/gar-gke/harness-approval.png)
+![Harness Approval](../static/gar-gke/harness-approval.png)
 
 You can (optionally) add a comment and click **Approve**. The pipeline should continue as before and you'll see a deployment on your Kubernetes cluster. However, this time, you'll see a slack notification resulting from your approval. To modify the text that appears on the notification, you can modify the **template** value in the slack plugin step settings.
 
@@ -196,17 +197,17 @@ Harness Policy As Code uses [Open Policy Agent (OPA)](https://www.openpolicyagen
 
 From **Project Setup** → **Policies**, follow the wizard to create a policy from the policy library. Use the **Pipeline - Approval** policy.
 
-![Pipeline Approval Policy](./static/gar-gke/policy-library.png)
+![Pipeline Approval Policy](../static/gar-gke/policy-library.png)
 
 In the next screen, choose **Project** scope, trigger event **On Run**, and for the severity, choose **Error & Exit**. Next, click **Yes** to apply the policy.
 
 Now, let's remove the approval step from the gke-deploy stage. Click on **Edit** on the pipeline and click on the cross button on the Harness Approval step. Click **Save** and then **Run**. You should see the following error:
 
-![Policy Enforcement In Action](./static/gar-gke/policy-evaluation.png)
+![Policy Enforcement In Action](../static/gar-gke/policy-evaluation.png)
 
 Add the Harness Approval back, save and run the pipeline and this time the pipeline should execute successfully. An end to end successful pipeline execution will look like this:
 
-![End to end pipeline execution](./static/gar-gke/full-pipeline-execution.png)
+![End to end pipeline execution](../static/gar-gke/full-pipeline-execution.png)
 
 ## View the running application
 
@@ -227,7 +228,7 @@ cca-app-service         LoadBalancer   34.118.227.33   34.152.47.53   80:30008/T
 
 Navigate to the IP address listed under the EXTERNAL-IP column for your case, and you should see a running Captain Canary Adventure application. As the application is running on port 80, you can omit the port number from the URL.
 
-![Captain Canary Application Running](./static/gar-gke/cca-app.gif)
+![Captain Canary Application Running](../static/gar-gke/cca-app.gif)
 
 ## Homework Task
 

@@ -7,6 +7,7 @@ redirect_from:
   - /tutorials/cd-pipelines/e2e-pipeline
   - /tutorials/cd-pipelines/unified-cicd/e2e-pipeline
   - /docs/continuous-delivery/get-started/cd-tutorials/e2e-pipeline
+  - /docs/continuous-delivery/get-started/tutorials/e2e-pipeline
 ---
 
 <CTABanner
@@ -22,7 +23,7 @@ In this tutorial, we'll use Harness CI, CD, and GitOps to demonstrate an end-to-
 
 The diagram below shows a GitOps-driven CI/CD pipeline. The process involves building the application, pushing it to a Docker registry, and deploying it to a Kubernetes cluster. The pipeline features distinct stages for development and production environments, with an approval step to promote artifacts from dev to prod, ensuring thorough review and validation of changes.
 
-![PR Pipeline Architecture](./static/e2e/pr-pipeline-architecture.png)
+![PR Pipeline Architecture](../static/e2e/pr-pipeline-architecture.png)
 
 :::info
 
@@ -234,7 +235,7 @@ The [Git file generator](https://argocd-applicationset.readthedocs.io/en/stable/
 
 Navigate to **GitOps > Settings > GitOps: Agents** to find the project ID. Update the project in `git-generator-files.yaml` in your **GitHub forked repo** with the ID you see there.
 
-![Argo Project ID](./static/e2e/argo-project-id.png)
+![Argo Project ID](../static/e2e/argo-project-id.png)
 
 Also replace **GITHUB_USERNAME** in the `git-generator-files.yaml` file with your actual GitHub user.
 
@@ -250,7 +251,7 @@ Under **GitOps: Applications**, click on **gitops-application** and click **Sync
 
 Navigate back to **GitOps > Applications**. Repeat the previous step to sync your dev and prod apps. All applications should now be synced and healthy.
 
-![Three GitOps Applications Created](./static/e2e/3-apps-created.png)
+![Three GitOps Applications Created](../static/e2e/3-apps-created.png)
 
 ## Create the PR Pipeline
 
@@ -313,11 +314,11 @@ harness pipeline --file prpipeline.yaml apply
 
 The full pipeline should look as follows in the Harness Pipeline Studio:
 
-![Full pipeline in Harness Pipeline Studio](./static/e2e/complete-pipeline.png)
+![Full pipeline in Harness Pipeline Studio](../static/e2e/complete-pipeline.png)
 
 Finally, [create a trigger](https://developer.harness.io/docs/platform/triggers/triggering-pipelines/) to run the PR pipeline when new code is committed to the **main** branch of your GitHub forked repo. Since some of the GitOps steps also commit to the **main** branch to update the release repo manifest, it's essential to add specific conditions to prevent an infinite loop. Here, **README.md** serves as an example. In practice, you may choose a condition based on any change to the application source code.
 
-![Trigger conditions](./static/e2e/trigger-condition.png)
+![Trigger conditions](../static/e2e/trigger-condition.png)
 
 ## Test the setup
 
@@ -328,4 +329,4 @@ There are two ways to trigger the pipeline:
 
 A successful pipeline execution shows a successful status for each stage in the pipeline.
 
-![A successful pipeline execution](./static/e2e/successful-execution.png)
+![A successful pipeline execution](../static/e2e/successful-execution.png)

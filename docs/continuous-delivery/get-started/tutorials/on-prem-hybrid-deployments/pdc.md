@@ -5,6 +5,7 @@ hide_table_of_contents: true
 redirect_from:
   - /tutorials/cd-pipelines/vm/pdc
   - /docs/continuous-delivery/get-started/cd-tutorials/pdc
+  - /docs/continuous-delivery/get-started/tutorials/pdc
 ---
 
 <CTABanner
@@ -194,7 +195,7 @@ A canary deployment updates nodes in a single environment gradually, allowing yo
 2. Select **Save**.
 3. You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Canary](./static/vm-tutorials/ssh-canary.png)
+![Canary](../static/vm-tutorials/ssh-canary.png)
 
 </TabItem>
 <TabItem value="Rolling">
@@ -210,7 +211,7 @@ Rolling deployments incrementally add nodes in a single environment with a new s
 2. Select **Save**.
 3. You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Rolling](./static/vm-tutorials/ssh-rolling.png)
+![Rolling](../static/vm-tutorials/ssh-rolling.png)
 
 </TabItem>
 <TabItem value="Basic">
@@ -226,7 +227,7 @@ With basic deployments, all nodes (pods, instances, etc) within a single environ
 2. Select **Save**.
 3. You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Basic](./static/vm-tutorials/ssh-basic.png)
+![Basic](../static/vm-tutorials/ssh-basic.png)
 
 </TabItem>
 </Tabs>
@@ -407,7 +408,7 @@ A canary deployment updates nodes in a single environment gradually, allowing yo
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Canary](./static/vm-tutorials/winrm-canary.png)
+![Canary](../static/vm-tutorials/winrm-canary.png)
 
 </TabItem>
 <TabItem value="Rolling">
@@ -423,7 +424,7 @@ Rolling deployments incrementally add nodes in a single environment with a new s
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Rolling](./static/vm-tutorials/winrm-rolling.png)
+![Rolling](../static/vm-tutorials/winrm-rolling.png)
 
 </TabItem>
 <TabItem value="Basic">
@@ -439,7 +440,7 @@ With basic deployments, all nodes (pods, instances, etc) within a single environ
 - Select **Save**.
 - You can switch to the **Visual** editor and confirm the pipeline, stage, and execution steps are as shown below.
 
-![Basic](./static/vm-tutorials/winrm-basic.png)
+![Basic](../static/vm-tutorials/winrm-basic.png)
 
 </TabItem>
 </Tabs>

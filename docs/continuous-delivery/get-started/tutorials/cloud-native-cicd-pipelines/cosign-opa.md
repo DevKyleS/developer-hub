@@ -5,6 +5,7 @@ sidebar_position: 4
 redirect_from:
   - /tutorials/cd-pipelines/kubernetes/cosign-opa
   - /docs/continuous-delivery/get-started/cd-tutorials/cosign-opa
+  - /docs/continuous-delivery/get-started/tutorials/cosign-opa
 canonical_url: https://www.harness.io/blog/balancing-developer-freedom-and-governance-with-opa
 ---
 
@@ -19,7 +20,7 @@ canonical_url: https://www.harness.io/blog/balancing-developer-freedom-and-gover
 
 <DocsTag text="Harness Enterprise Feature" />
 
-Imagine that you're deploying a container image to a Kubernetes cluster. But how can you verify that the container image is safe to deploy? [Cosign](https://github.com/sigstore/cosign) is a tool for container image signing and verification. Open Policy Agent (OPA) is an open-source, general-purpose policy engine that enables policy-based control across various software stacks, including Kubernetes deployments. Harness Continuous Delivery & GitOps includes OPA to ensure compliance in your deployment pipelines. In the [Kubernetes Manifest tutorial](manifest.md), you deployed a container image for the guestbook application to a Kubernetes cluster. In this tutorial, we'll leverage the combined power of Cosign and OPA to ensure the secure deployment of container images to your Kubernetes cluster.
+Imagine that you're deploying a container image to a Kubernetes cluster. But how can you verify that the container image is safe to deploy? [Cosign](https://github.com/sigstore/cosign) is a tool for container image signing and verification. Open Policy Agent (OPA) is an open-source, general-purpose policy engine that enables policy-based control across various software stacks, including Kubernetes deployments. Harness Continuous Delivery & GitOps includes OPA to ensure compliance in your deployment pipelines. In the [Kubernetes Manifest tutorial](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/manifest), you deployed a container image for the guestbook application to a Kubernetes cluster. In this tutorial, we'll leverage the combined power of Cosign and OPA to ensure the secure deployment of container images to your Kubernetes cluster.
 
 This tutorial is also available as a video.
 
@@ -31,14 +32,14 @@ Ensure that you have the following:
 
 1. A Harness Enterprise Account, paid or trial.
    1. If you do not have an account, [can sign up](https://app.harness.io/auth/#/signup/?module=cd&utm_source=website&utm_medium=harness-developer-hub&utm_campaign=cd-plg&utm_content=tutorials-cd-kubernetes-cosign-opa).
-2. Completion of the [Kubernetes Manifest tutorial](manifest.md) (either GitOps Workflow or CD Pipeline). This tutorial is a continuation of that tutorial. You will reuse the existing pipeline and other resources you created there.
+2. Completion of the [Kubernetes Manifest tutorial](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/manifest) (either GitOps Workflow or CD Pipeline). This tutorial is a continuation of that tutorial. You will reuse the existing pipeline and other resources you created there.
 3. Familiarity with Harness [pipelines](/docs/platform/get-started/key-concepts.md#pipelines), [stages](/docs/platform/get-started/key-concepts.md#stages), and [steps](/docs/platform/get-started/key-concepts.md#steps-and-step-groups) concepts.
 
 ## Architectural Diagrams
 
 Without Cosign or OPA in place, your CD pipeline could pull an image and deploy it to your Kubernetes cluster without verification. With Cosign and OPA in place, the flow (simplified version) looks something like this:
 
-![Developer flow with Cosign and OPA](./static/k8s-cosign-opa-tutorial/developer-flow-with-cosign-opa.png)
+![Developer flow with Cosign and OPA](../static/k8s-cosign-opa-tutorial/developer-flow-with-cosign-opa.png)
 
 Let's dive into the project of securing image signing for your containerized applications.
 
@@ -96,7 +97,7 @@ Let's use Docker Hub as an example of an image registry.
 
 Here, the flag `-a` adds an annotation to each signature. A window will open for both commands for you to sign in to your OIDC provider and, once authenticated, you'll see a success message from Sigstore:
 
-![Cosign verify successful](./static/k8s-cosign-opa-tutorial/cosign-verify-success.png)
+![Cosign verify successful](../static/k8s-cosign-opa-tutorial/cosign-verify-success.png)
 
 The response in your terminal should look like this:
 
@@ -132,9 +133,9 @@ Looking at the above example, your goal is to allow the deployment of `dewandemo
 
 ## Image verification using Cosign and OPA
 
-From the [**Kubernetes Manifest tutorial**](manifest.md), you have a stage **deploy-guestbook** within the deployment pipeline **harness_guestbook_pipeline** which has single step **Rollout Deployment**. Add two steps before the **Rollout Deployment** step for image verification using cosign and policy enforcement using open policy agent.
+From the [**Kubernetes Manifest tutorial**](/docs/continuous-delivery/get-started/tutorials/kubernetes-container-deployments/manifest), you have a stage **deploy-guestbook** within the deployment pipeline **harness_guestbook_pipeline** which has single step **Rollout Deployment**. Add two steps before the **Rollout Deployment** step for image verification using cosign and policy enforcement using open policy agent.
 
-![Updated deploy-guestbook stage](./static/k8s-cosign-opa-tutorial/updated-deploy-guestbook-stage.png)
+![Updated deploy-guestbook stage](../static/k8s-cosign-opa-tutorial/updated-deploy-guestbook-stage.png)
 
 For the first step, add a [Shell Script step](https://developer.harness.io/docs/continuous-delivery/x-platform-cd-features/cd-steps/utilities/shell-script-step/). Let's call it **cosign_verify**. Keeping all other settings to default, add the following to the Script section. Replace `YOUR_DOCKERHUB_USERNAME`, `YOUR_OIDC_CERTIFICATE_IDENTITY` (could be your associated email), and `YOUR_OIDC_ISSUER` (google, microsoft, github, or gitlab) accordingly. The oidc-issuer for Google is `https://accounts.google.com`, Microsoft is `https://login.microsoftonline.com`, GitHub is `https://github.com/login/oauth`, and GitLab is `https://gitlab.com`.
 
