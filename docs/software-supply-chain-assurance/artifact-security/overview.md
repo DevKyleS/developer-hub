@@ -100,7 +100,12 @@ The SBOM tab presents details of all the dependencies within the artifact, inclu
 * **Package Manager:** Tool managing the package.
 * **PURL:** Package URL.
 * **Supplier:** Source of the dependency.
-* **Vulnerabilities:** Provides a summary of vulnerabilities found from the Snyk or Aqua Trivy scan, categorized by severity: critical, high, medium, and low.
+* **Vulnerabilities:** Provides a summary of vulnerabilities, categorized by severity: critical, high, medium, and low.
+:::note
+
+The component-level vulnerabilities are mapped from the STO scan. If the user doesn't have an STO license, the vulnerabilities will still get populated from the internal database.
+
+:::
 
 <DocImage path={require('./static/component-sbom-for-artifacts.png')} width="100%" height="100%" title="Click to view full size image" />
 

@@ -34,7 +34,7 @@ After completing the SBOM Orchestration step for your [artifacts](/docs/software
 
 ### Vulnerabilities in SBOM Components (OSS Risk - 1)
 
-After you run the SBOM Orchestration step followed by an STO scan using Snyk or Aqua Trivy, the SBOM tab displays vulnerabilities for the components identified by the selected scan tool. This helps you effectively identify and prioritize open source risks
+After you run the SBOM Orchestration step followed by an STO scan using any scanner required for component-level vulnerability mapping, the SBOM tab displays vulnerabilities for the components identified by the selected scan tool. This helps you effectively identify and prioritize open source risks.
 
 
 You can also filter out the components, based on the OSS Risks.
