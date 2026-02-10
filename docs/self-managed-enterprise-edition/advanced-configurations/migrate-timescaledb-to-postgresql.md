@@ -12,7 +12,9 @@ tags:
 ---
 
 :::note Important
-The TimescaleDB to PostgreSQL migration is triggered as part of the Harness SMP upgrade to version 0.36.0 or later.
+The migration from TimescaleDB to PostgreSQL is automatically triggered as part of the Harness SMP upgrade to version 0.36.x; Before you upgrade to SMP 0.36.x, you must be running version 0.35.x.
+
+TimescaleDB will be present in SMP v0.36.x but will no longer be in use after migration. The TimescaleDB will be completely removed in SMP v0.37.x. 
 :::
 
 Harness is transitioning from TimescaleDB to PostgreSQL to enhance the platform and reduce operational overhead. This page outlines the prerequisites for the migration and provides guidance on resolving common issues that may arise during the process.
@@ -79,26 +81,44 @@ Ensure that your PostgreSQL database is configured to handle the migration workl
 
 The following infrastructure prerequisites must be in place before starting the migration:
 
-1. **TimescaleDB read replica (recommended)**
+1. **TimescaleDB read replica (recommended)**:
    Using a read replica as the migration source helps reduce load on the primary TimescaleDB instance.
 
-2. **Storage capacity**
-   - **External PostgreSQL**: Allocate at least 1.5× the current TimescaleDB data size.
-   - **Internal PostgreSQL**: Plan and provision sufficient persistent volume capacity for both external and internal PostgreSQL deployments.
+2. **Storage capacity**:
+    For External PostgreSQL or Internal PostgreSQL, and the Migrator PVC, allocate at least 1.5× additional storage based on the current TimescaleDB data size.  
 
-3. **Kubernetes capacity**
+      :::note
+      This configuration applies specifically to the Migrator PVC and must be defined in the `overrides.yaml` file.
+      :::
+
+        ```yaml
+         platform:
+            tsdb-to-psql-migrator:
+               persistence:
+                  size: <1.5× the current TimescaleDB data size>
+                  storageClass: "standard-rwo"  
+        ```
+
+3. **Kubernetes capacity**:
    Ensure sufficient cluster resources to handle pod restarts when services switch from TimescaleDB to PostgreSQL.
 
-4. **OpenShift permissions**
+4. **OpenShift permissions**:
    If running on OpenShift, appropriate RBAC permissions must be granted for the migration components.
 
 ---
 ## Migration
 
-To start the migration, upgrade your Harness SMP deployment to **version 0.36.0** you must set the following flag in the `values.yaml` file:
+:::note
+  The migration will automatically start 24 hours after the last upgrade command is run. The migration process will run in the background, taking approximately 1 hour to complete. During this time, there will be no downtime or impact.
+:::
 
-```bash
-ackTsdbMigration: true  # REQUIRED: Must be set to true to acknowledge migration
+To start the migration, upgrade your Harness SMP deployment to **version 0.36.0** by enabling the flags in the `values.yaml` file.
+
+```yaml
+global:
+  airgap: false 
+# Note: This is at the root level, not inside the global section.  
+ackTsdbMigration: true  # REQUIRED: Explicit acknowledgment    
 ```
 
 :::note Important
@@ -117,17 +137,26 @@ After the migration finishes, you can verify the migration status by following t
 
 Throughout the migration, the migrator continuously tracks and maintains detailed state information. This allows the system to reliably monitor progress and determine whether the migration has completed successfully.
 
+You can verify the migration status by checking the TimescaleDB to PostgreSQL migrator statefulset status. If it has been scaled down, that means the migration is complete.
+
+```bash
+kubectl get sts tsdb-to-psql-migrator -n <namespace>
+```
+
 ### Automatic actions after migration
 
 Once the migration completes successfully, the migrator automatically performs the following actions:
 - Updates service endpoints:
     - Updates `url`, `host`, and `port` in ConfigMaps from TimescaleDB to PostgreSQL
     - Updates Deployments and StatefulSets to reference PostgreSQL secrets instead of TimescaleDB secrets
-- Scales down the **TimescaleDB StatefulSet** to zero replicas (when `TSDB_SCALE_DOWN=true`)
 - Scales down the **migrator StatefulSet** to zero replicas (when `MIGRATOR_SCALE_DOWN=true`)
 - Updates the ConfigMap to set `MIGRATION_COMPLETED=true`
 
 These actions help clean up unused components and clearly mark the migration as complete.
+
+:::warning
+Avoid manually scaling down the TimescaleDB StatefulSet, as new pods wait for TimescaleDB readiness and may not start properly if it is unavailable. The pods do not connect to or use TimescaleDB; however, the init containers still wait for the TimescaleDB pods. This dependency will be removed in version 0.37.0.
+:::
 
 ---
 
@@ -139,6 +168,10 @@ The migration is carried out in three main phases:
   - Database preparation and data migration - Schema extraction, function recreation, hypertable setup, and full data dump/restore from TimescaleDB to PostgreSQL
   - Update endpoints - Automatic update of ConfigMaps, Deployments, and StatefulSets to switch from TimescaleDB to PostgreSQL connections
   - Incremental sync - Synchronization of any new data written during cutover to minimize data loss
+
+### When can I scale down timescaledb?
+
+In version `0.37.0`, the TimescaleDB StatefulSet will be removed, and no manual action is required. We strongly advise against manually scaling down the TimescaleDB StatefulSet, as service pods depend on TimescaleDB being available during startup.
 
 ### Why is my ArgoCD showing OutOfSync after migration?
 
@@ -278,18 +311,6 @@ If the issue persists, please share the master log file along with the migration
 
 This section describes all supported configuration options for installing, controlling, and tuning the migrator.
 
-### Installation
-
-To install and enable the migrator in your Harness SMP deployment, set the following Helm values:
-
-```yaml
-global:
-  database:
-    tsdbtopsqlmigrator:
-      enabled: true
-      ackTsdbMigration: true  # REQUIRED: Explicit acknowledgment
-```
-
 ### SSL Configuration for External PostgreSQL
 
 If your external PostgreSQL instance requires SSL connections, configure the SSL mode as follows:
@@ -309,41 +330,6 @@ To automatically start the migration after installation, enable the following en
 extraEnvVars:
   - name: MIGRATION_ENABLED
     value: "true"
-```
-
-### Performance Tuning
-
-Use these settings to control parallelism, compression, and retry behavior:
-
-```yaml
-extraEnvVars:
-  # Parallel processing
-  - name: MAX_PARALLEL_JOBS
-    value: "8"
-
-  - name: RESTORE_PARALLEL_WORKERS
-    value: "8"
-
-  # Compression
-  - name: DUMP_COMPRESSION_LEVEL
-    value: "7"
-
-  # Retry behavior
-  - name: MAX_RETRIES
-    value: "3"
-
-  - name: RETRY_DELAY_SECONDS
-    value: "30"
-```
-
-### Storage Configuration
-
-Configure persistent storage for migration artifacts such as logs, dumps, and backups:
-
-```yaml
-persistence:
-  size: "50Gi"
-  storageClass: "standard-rwo"
 ```
 
 ---
