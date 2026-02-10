@@ -1,11 +1,11 @@
 {
-  "label": "Cross-platform CD features",
+  "label": "CD Building Blocks",
   "position": "7",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Cross-platform CD features"
+      "title": "CD Building Blocks"
   }
 }

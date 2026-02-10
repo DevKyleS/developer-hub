@@ -1,5 +1,5 @@
 {
-  "label": "PR pipelines",
+  "label": "PR Pipelines",
   "position": "600",
   "collapsible": "true",
   "collapsed": "true",
@@ -7,6 +7,6 @@
   "description": "Learn how to use PR pipelines to manage your applications",
   "link": {
       "type": "generated-index",
-      "title": "PR pipelines"
+      "title": "PR Pipelines"
   }
 }

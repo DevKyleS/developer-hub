@@ -1,11 +1,11 @@
 {
-  "label": "Verify deployments",
+  "label": "Verify Deployments",
   "position": "600",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Verify deployments"
+      "title": "Verify Deployments"
   }
 }

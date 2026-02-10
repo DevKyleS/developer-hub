@@ -1,10 +1,10 @@
 {
-   "label":"Get started",
+   "label":"Get Started",
    "position": 20,
    "collapsible":"true",
    "collapsed":"true",
    "link":{
       "type":"generated-index",
-      "title":"Get started with Harness CV"
+      "title":"Get Started with Harness CV"
    }
    }

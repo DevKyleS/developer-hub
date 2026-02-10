@@ -1,5 +1,5 @@
 ---
-title: What's supported
+title: What's Supported
 description: Supported CD features and integrations. 
 sidebar_position: 4
 ---

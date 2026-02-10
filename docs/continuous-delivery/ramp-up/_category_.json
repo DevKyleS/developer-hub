@@ -1,11 +1,11 @@
 {
-  "label": "Ramp-up guides",
+  "label": "Ramp-Up Guides",
   "position": "2",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Role-based ramp-up guides"
+      "title": "Role-Based Ramp-Up Guides"
   }
 }

@@ -1,11 +1,11 @@
 {
-  "label": "Monitor deployments",
+  "label": "Monitor Deployments",
   "position": "9",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Monitor deployments"
+      "title": "Monitor Deployments"
   }
 }

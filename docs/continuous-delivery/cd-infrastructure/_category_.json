@@ -1,12 +1,12 @@
 {
-    "label": "Provision infrastructure",
+    "label": "Provision Infrastructure",
     "position": "5",
     "collapsible": "true",
     "collapsed": "true",
     "className": "red",
     "link": {
         "type": "generated-index",
-        "title": "Provision infrastructure"
+        "title": "Provision Infrastructure"
     },
     "customProps": {
         "helpdocs_category_id": "wg94socpyo"

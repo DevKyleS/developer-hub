@@ -41,58 +41,6 @@ import { MODULES } from "@site/src/constants";
         "",
       list: [ 
         {
-          title: "Common CD features across platforms",
-          module: MODULES.cd,
-          description:
-            "Learn about the CD features that are common to all deployment types.",
-          link: "/docs/category/cross-platform-cd-features",
-          /*children: [
-            {
-              title: "Services",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/services",
-            },
-            {
-              title: "Environments",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/environments",
-            },
-            {
-              title: "Executions",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/executions",
-            },
-
-            {
-              title: "Steps",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/steps",
-            },
-            {
-              title: "Templates",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/templates",
-            },
-            {
-              title: "Advanced CD use cases",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/advanced-cd-use-cases",
-            },
-          ]*/
-        },
-        {
           title: "Deploy services on different platforms",
           module: MODULES.cd,
           description:
@@ -177,6 +125,88 @@ import { MODULES } from "@site/src/constants";
               link: "/docs/continuous-delivery/deploy-srv-diff-platforms/custom-deployment-tutorial",
             },
           ]*/  
+        },
+        {
+          title: "Provision infrastructure",
+          module: MODULES.cd,
+          description:
+            "Provision infrastructure as part of your deployment process.",
+          link: "/docs/category/provision-infrastructure",
+          /*children: [
+            {
+              title: "Terraform",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/terraform",
+            },
+            {
+              title: "CloudFormation",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/cloudformation",
+            },
+            {
+              title: "Terragrunt",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/continuous-delivery/cd-infrastructure/terragrunt/terragrunt-howtos",
+            },
+          ]*/  
+        },
+        {
+          title: "CD Building Blocks",
+          module: MODULES.cd,
+          description:
+            "Learn about the CD features that are common to all deployment types.",
+          link: "/docs/category/cd-building-blocks",
+          /*children: [
+            {
+              title: "Services",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/services",
+            },
+            {
+              title: "Environments",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/environments",
+            },
+            {
+              title: "Executions",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/executions",
+            },
+
+            {
+              title: "Steps",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/steps",
+            },
+            {
+              title: "Templates",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/templates",
+            },
+            {
+              title: "Advanced CD use cases",
+              module: MODULES.cd,
+              description:
+                "",
+              link: "/docs/category/advanced-cd-use-cases",
+            },
+          ]*/
         }, 
         {
           title: "Manage deployments",
@@ -242,36 +272,6 @@ import { MODULES } from "@site/src/constants";
           description:
             "Use DORA and other advanced metrics for deployments.",
           link: "/docs/category/monitor-deployments",
-        },
-        {
-          title: "Provision infrastructure",
-          module: MODULES.cd,
-          description:
-            "Provision infrastructure as part of your deployment process.",
-          link: "/docs/category/provision-infrastructure",
-          /*children: [
-            {
-              title: "Terraform",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/terraform",
-            },
-            {
-              title: "CloudFormation",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/category/cloudformation",
-            },
-            {
-              title: "Terragrunt",
-              module: MODULES.cd,
-              description:
-                "",
-              link: "/docs/continuous-delivery/cd-infrastructure/terragrunt/terragrunt-howtos",
-            },
-          ]*/  
         },
         {
           title: "Deploy services using GitOps",

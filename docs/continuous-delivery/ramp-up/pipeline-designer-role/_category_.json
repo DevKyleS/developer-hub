@@ -1,11 +1,11 @@
 {
-  "label": "Pipeline designer role",
+  "label": "Pipeline Designer Role",
   "position": "3",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Pipeline designer role"
+      "title": "Pipeline Designer Role"
   }
 }

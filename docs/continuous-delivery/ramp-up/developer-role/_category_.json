@@ -1,11 +1,11 @@
 {
-  "label": "Developer role",
+  "label": "Developer Role",
   "position": "1",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Developer role"
+      "title": "Developer Role"
   }
 }

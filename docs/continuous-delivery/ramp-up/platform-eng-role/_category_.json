@@ -1,11 +1,11 @@
 {
-  "label": "Platform engineer role",
+  "label": "Platform Engineer Role",
   "position": "4",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Platform engineer role"
+      "title": "Platform Engineer Role"
   }
 }

@@ -1,11 +1,11 @@
 {
-  "label": "Deploy services on different platforms",
+  "label": "Deploy Services on Different Platforms",
   "position": "7",
   "collapsible": "true",
   "collapsed": "true",
   "className": "red",
   "link": {
       "type": "generated-index",
-      "title": "Deploy services on different platforms"
+      "title": "Deploy Services on Different Platforms"
   }
 }
