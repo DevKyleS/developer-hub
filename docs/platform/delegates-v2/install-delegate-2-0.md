@@ -930,3 +930,18 @@ This video walks through an end to end demo of the delegate installation, includ
 
 <DocVideo src="https://www.loom.com/share/1e292d0f51004882bfd5462ef0553222?sid=487e23cb-28fc-4d2e-ac66-07197fa7dafe" />
 
+## Troubleshooting
+
+### Issue: Docker client not initialized
+
+This error can occur when using Rancher Desktop as your Docker runtime. Every time Rancher Desktop is restarted, the Docker socket symlink needs to be recreated.
+
+To fix this, remove the existing socket and create a new symlink pointing to the Rancher Desktop socket:
+
+```bash
+sudo rm /var/run/docker.sock
+sudo ln -s ~/.rd/docker.sock /var/run/docker.sock
+```
+
+After recreating the symlink, restart the runner for the changes to take effect.
+

@@ -11,17 +11,17 @@ The new Harness Delegate is currently in closed beta. Features and capabilities 
 
 :::
 
-This page provides a comparison between the new delegate and the legacy delegate, including details about supported features, planned enhancements, and architectural differences. This information can help determine which delegate is appropriate for specific workflows and use cases.
+This page compares the new and legacy delegates, including details on supported features, planned enhancements, and architectural differences. This information can help determine which delegate is appropriate for specific workflows and use cases.
 
 ## Architectural differences
 
-The new delegate and legacy delegate are built on different architectural foundations, reflecting different design goals and execution models.
+The new delegate and legacy delegates are built on different architectural foundations, reflecting various design goals and execution models.
 
 ### Execution models
 
-The legacy delegate uses a task-based execution model where each operation is an independent task. Tasks are assigned to delegates based on capability checks, where delegates verify they can reach required external systems before accepting work. This model has been effective for supporting the broad range of Harness modules and integrations.
+The legacy delegate uses a task-based execution model where each operation is an independent task. Tasks are assigned to delegates based on capability checks, during which they verify they can access the required external systems before accepting work. This model has been effective for supporting the broad range of Harness modules and integrations.
 
-The new delegate uses a transaction-based execution model where stages are treated as atomic units of work. A transaction consists of initialization, execution, and cleanup phases that are guaranteed to execute on the same delegate. This model provides stronger guarantees about resource cleanup and state consistency within a stage.
+The new delegate uses a transaction-based execution model, treating each stage as an atomic unit of work. A transaction consists of initialization, execution, and cleanup phases that are guaranteed to execute on the same delegate. This model provides stronger guarantees about resource cleanup and state consistency within a stage.
 
 ### Task routing
 
@@ -33,11 +33,11 @@ For more information about configuring selectors, go to [Use delegate selectors]
 
 ### Capacity management
 
-Both delegates support capacity limits, but at different granularities. The legacy delegate uses `DELEGATE_TASK_CAPACITY` to limit the total number of concurrent tasks across all types. The new delegate uses `MAX_STAGES` to limit concurrent CI stage executions. When capacity limits are reached, additional work is queued until capacity becomes available.
+Both delegates support capacity limits, but at different levels of granularity. The legacy delegate uses `DELEGATE_TASK_CAPACITY` to limit the total number of concurrent tasks across all types. The new delegate uses `MAX_STAGES` to limit concurrent CI stage executions. When capacity limits are reached, additional work is queued until capacity becomes available.
 
 ## Module support
 
-The new delegate currently supports only Continuous Integration (CI) pipelines, and support within CI is limited to specific infrastructure types, connectors, and step types.
+The new delegate currently supports only Continuous Integration (CI) pipelines, and CI support is limited to specific infrastructure types, connectors, and step types.
 
 All other Harness modules require the legacy delegate:
 
@@ -49,11 +49,11 @@ All other Harness modules require the legacy delegate:
 - Service Reliability Management (SRM)
 - Infrastructure as Code Management (IACM)
 
-Expanding support beyond CI is not currently planned. The new delegate is optimized for CI workloads, particularly those that benefit from local machine execution such as mobile application development.
+Expanding support beyond CI is not currently planned. The new delegate is optimized for CI workloads, particularly those that benefit from local machine execution, such as mobile application development.
 
 ## CI stage routing
 
-To route a CI stage to the new delegate, the stage must be explicitly configured. Two routing mechanisms are available:
+To route a CI stage to the new delegate, the stage must be explicitly configured to do so. Two routing mechanisms are available:
 
 - **Per-stage routing**: Set the stage variable `HARNESS_CI_INTERNAL_ROUTE_TO_RUNNER` to `true` for each stage that should use the new delegate.
 - **Feature flag routing**: Enable account-level feature flags to route all CI stages for specific infrastructure types. For example, `CI_V0_LOCAL_BUILDS_USE_RUNNER` routes all local (Docker) CI stages to the new delegate when enabled.
@@ -62,15 +62,15 @@ Without explicit configuration, all stages are routed to legacy delegates by def
 
 ### Feature flags controlling delegate routing
 
-The transition from legacy delegates to the new delegate is controlled through a series of feature flags that manage task submission and execution workflows. These flags enable gradual rollout and testing of the new delegate functionality. The following feature flags are available:
+The transition from legacy delegates to the new delegate is controlled through a series of feature flags that manage task submission and execution workflows. These flags enable the gradual rollout and testing of the new delegate functionality. The following feature flags are available:
 
 **Core routing flags:**
 
 - **`PL_ENABLE_UNIFIED_TASKS`**: Controls dual task submission behavior. When enabled, the submit API sends tasks to both legacy delegates and the new delegate (Runner). When disabled, tasks are sent only to the new delegate. This flag enables safe testing and rollback during migration. Status: GA'd in QA and Prod0.
 
-- **`PL_USE_UNIFIED_TASK_FLOW`**: Enables the unified task submission flow for all tasks. When enabled, tasks that can be handled by the new delegate (such as plugins, init, and cleanup) include both `RunnerTask` and `DelegateTaskSpec` in the request. Tasks that cannot be handled by the new delegate include only `DelegateTaskSpec` and are handled by the Runner with delegate-sidecar integration. This flag is the primary switch for adopting the new task execution framework.
+- **`PL_USE_UNIFIED_TASK_FLOW`**: Enables the unified task submission flow for all tasks. When enabled, functions that can be handled by the new delegate (such as plugins, init, and cleanup) are included in the request for both `RunnerTask` and `DelegateTaskSpec`. Tasks that the new delegate cannot handle include only `DelegateTaskSpec` and are managed by the Runner with delegate-sidecar integration. This flag is the primary switch for adopting the new task execution framework.
 
-- **`PL_USE_RUNNER`**: Routes connector validation and connection tests to the new delegate. This flag is waiting on git-sync tests and automations to pass before general availability.
+- **`PL_USE_RUNNER`**: Routes connector validation and connection tests to the new delegate. This flag is waiting on Git-sync tests and automations to pass before general availability.
 
 **CI infrastructure routing flags:**
 
@@ -82,15 +82,13 @@ The transition from legacy delegates to the new delegate is controlled through a
 
 **Optional behavior flags:**
 
-- **`CI_V0_ENABLE_OPTIONAL_DOCKER_ON_RUNNER`**: When enabled, stages that don't require Docker (no container steps) are executed on the new delegate without Docker. Status: GA'd in QA.
-
 - **`CI_INVALID_SECRET_ERROR`**: When enabled, execution fails if the referred secret is invalid. Earlier in hosted builds, execution never failed for such scenarios, but this was not in line with Kubernetes behavior (which always fails the execution). This ensures consistent behavior across infrastructure types and helps catch secret configuration issues early. Protected by feature flag `CI_RUNNER_FRAMEWORK_SECRET_EVAL` for rollback.
 
 - **`CI_RUNNER_FRAMEWORK_SECRET_EVAL`**: Controls secret evaluation in the new delegate's execution framework. Acts as a rollback protection mechanism for `CI_INVALID_SECRET_ERROR`.
 
-- **`CI_UNIFIED_RUNNER_REPLACE_STEP_ID_BY_TASK_ID_IN_V0_PIPELINES`**: Changes field population in the new delegate's ExecuteRequest to use task IDs instead of step IDs. This affects v0 pipelines only (v1 pipelines always use task IDs with empty string passed in Runner Task API). When disabled, v0 pipelines use step ID (legacy behavior). When enabled, v0 pipelines use task ID.
+- **`CI_UNIFIED_RUNNER_REPLACE_STEP_ID_BY_TASK_ID_IN_V0_PIPELINES`**: Changes field population in the new delegate's ExecuteRequest to use task IDs instead of step IDs. This affects v0 pipelines only (v1 pipelines always use task IDs with an empty string passed in the Runner Task API). When disabled, v0 pipelines use step ID (legacy behavior). When enabled, v0 pipelines use the task ID.
 
-- **`CI_ADD_CONNECTOR_REF_TO_IMPLICIT_GIT_CLONE_STEP`**: Enables implicit git clone to work with the unified task workflow. Without this flag, implicit git clone does not function properly when using the new delegate.
+- **`CI_ADD_CONNECTOR_REF_TO_IMPLICIT_GIT_CLONE_STEP`**: Enables implicit git clone to work with the unified task workflow. Without this flag, an implicit git clone does not work correctly with the new delegate.
 
 Feature flags are managed at the account level by Harness and are enabled as part of the closed beta program. Contact your Harness representative to discuss which flags are appropriate for your use case and testing requirements.
 
@@ -132,8 +130,8 @@ Connector support is limited during the closed beta phase. The following connect
 
 - **HashiCorp Vault**: Supported with AppRole and Token authentication methods. The Renewal Interval must be set to 0.
 - **AWS Secrets Manager**: Supported with Access Key and IAM Role credential types.
-- **Google Secret Manager**: Planned for future releases.
-- **Azure Key Vault**: Not supported; requires legacy delegate.
+- **Google Secret Manager**: Supported.
+- **Azure Key Vault**: Supported.
 - **Custom secret managers**: Planned for future releases.
 
 ### Artifact repositories
@@ -156,31 +154,31 @@ The new delegate supports three infrastructure types for executing CI stages:
 
 Other infrastructure types including cloud VMs and Harness Cloud are not supported.
 
-## Roadmap
+## What's coming next
 
 The development roadmap includes enhancements across several areas. Items are categorized by priority based on customer demand and architectural dependencies.
 
-### High priority
+### Near-term
 
-High priority items are currently in active development or scheduled for near-term release:
+These items are currently in active development or scheduled for upcoming releases:
 
 - **Connector expansion**: Support for GitLab, Bitbucket, Harness Code, and generic Git repositories. Additional secret manager support including Google Secret Manager.
 - **CI step expansion**: Build and push support for Docker, ECR, and GAR registries. Run Tests step and Test Intelligence capabilities.
 - **Platform features**: Complete proxy and custom certificate support. Perpetual task framework for artifact triggers and polling. Delegate sidecar integration for legacy task compatibility.
 - **Installation and deployment**: Improved installation experience and packaging for different operating systems.
 
-### Medium priority
+### Mid-term
 
-Medium priority items are planned but not yet in active development:
+These items are planned but not yet in active development:
 
 - **Kubernetes enhancements**: Pod Spec Overlay for customizing pod specifications. Improved debugging and troubleshooting capabilities.
 - **Security**: Mutual TLS (mTLS) support for enhanced authentication in zero-trust environments.
 - **Infrastructure**: VM pool support for executing builds on dynamically provisioned virtual machines.
 - **CI integrations**: Additional plugin support. Alternative Docker runtime support (Rancher, Colima). Enhanced volume mounting capabilities.
 
-### Lower priority
+### Future
 
-Lower priority items are under consideration for future releases:
+These items are under consideration for future releases:
 
 - **Advanced build features**: Kaniko and Buildx support for container image building. HAR (HTTP Archive) integration for debugging.
 - **Platform enhancements**: Support for pipeline executions longer than 24 hours. Secret output variables. Enhanced debug mode. Additional proxy variable support.
