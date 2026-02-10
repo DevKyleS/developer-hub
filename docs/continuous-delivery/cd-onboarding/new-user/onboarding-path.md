@@ -1,5 +1,5 @@
 ---
-title: CD onboarding path
+title: 1. Harness Deployments Onboarding Path
 description: Ramp up on Harness CD
 redirect_from:
   - /docs/continuous-delivery/cd-onboarding/new-user/onboarding-path

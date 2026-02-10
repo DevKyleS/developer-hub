@@ -1,6 +1,6 @@
 ---
-title: MS Teams notification setup for pipeline events and approvals
-description: Integrate your Harness User Group with Microsoft Teams and receive pipeline status updates and approval notifications in Teams channels.
+title: 14. MS Teams Notification Setup for Deploy Events and Approvals
+description: Integrate your Harness User Group with Microsoft Teams and receive deployment status updates and approval notifications in Teams channels.
 sidebar_position: 14
 redirect_from:
   - /docs/continuous-delivery/cd-onboarding/existing-user/ms-teams-notification-for-events-approvals
@@ -13,7 +13,7 @@ Using MS Teams integration, developers can log into Harness and approve deployme
 
 Setup is a simple process of generating a Webhook in Microsoft Teams and adding it to a Harness User Group's Notification Preferences.
 
-## Set up MS Teams pipeline approvals
+## Set up MS Teams deploy approvals
 
 There are three key steps to perform this task: 
 - Configure a Harness user group.

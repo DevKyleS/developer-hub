@@ -1,5 +1,5 @@
 ---
-title: Developer day to day guide
+title: 3. Developer Day-to-Day Guide
 description: Daily deployment tasks for devs.
 sidebar_position: 3
 redirect_from:

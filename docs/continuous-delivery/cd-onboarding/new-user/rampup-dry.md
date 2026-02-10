@@ -1,5 +1,5 @@
 ---
-title: Keep your pipelines DRY
+title: 10. Keep Your Deployment Pipelines DRY
 description: Use a DRY approach for efficiency and consistency.
 sidebar_position: 10
 redirect_from:

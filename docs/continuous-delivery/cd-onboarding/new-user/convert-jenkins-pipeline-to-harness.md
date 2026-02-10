@@ -1,5 +1,5 @@
 ---
-title: Convert a Jenkins pipeline to a Harness CD pipeline
+title: 8. Convert a Jenkins Pipeline to Harness Deployments
 description: Ensure a smooth migration from Jenkins to Harness.
 sidebar_position: 8
 redirect_from:

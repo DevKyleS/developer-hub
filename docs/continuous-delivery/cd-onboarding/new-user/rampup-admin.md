@@ -1,5 +1,5 @@
 ---
-title: Administrator day to day guide
+title: 2. Administrator Day-to-Day Guide
 description: Account rampup tasks include just a few steps.
 sidebar_position: 2
 redirect_from:

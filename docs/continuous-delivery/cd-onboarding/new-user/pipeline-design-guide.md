@@ -1,5 +1,5 @@
 ---
-title: Pipeline design guide
+title: 6. Deployment Pipeline Design Guide
 description: Reliably automate your CD release process.
 sidebar_position: 6
 redirect_from:

@@ -1,5 +1,5 @@
 ---
-title: Template design guide
+title: 7. Deployment Template Design Guide
 description: Standardize patterns, streamline processes, eliminate duplication.
 sidebar_position: 7
 redirect_from:

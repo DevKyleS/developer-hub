@@ -1,6 +1,6 @@
 ---
-title: CD pipeline execution walkthrough
-description: Learn how a CD pipeline execution uses Harness entities and settings.
+title: 5. Deployment Pipeline Execution Walkthrough
+description: Learn how a deployment pipeline execution uses Harness entities and settings.
 sidebar_position: 5
 redirect_from:
   - /docs/continuous-delivery/get-started/pipeline-execution-walkthrough

@@ -1,5 +1,5 @@
 ---
-title: Prevent devs from deploying to higher level environments
+title: 13. Prevent Devs from Deploying to Higher-Level Environments
 description: Control the environments where devs can deploy.
 sidebar_position: 13
 redirect_from:

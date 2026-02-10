@@ -1,5 +1,5 @@
 ---
-title: Manage input sets at scale
+title: 12. Manage Deployment Input Sets at Scale
 description: Best practices to help with the management of input sets
 sidebar_position: 12
 redirect_from:

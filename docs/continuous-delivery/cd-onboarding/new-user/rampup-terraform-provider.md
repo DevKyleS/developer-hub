@@ -1,5 +1,5 @@
 ---
-title: Automation with the Terraform Provider
+title: 15. Deployment Automation with the Terraform Provider
 description: Build automation using the Harness Terraform Provider.
 sidebar_position: 15
 redirect_from:

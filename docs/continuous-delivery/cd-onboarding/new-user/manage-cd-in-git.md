@@ -1,5 +1,5 @@
 ---
-title: Managing Harness CD resources in Git
+title: 11. Managing Harness Deployment Resources in Git
 description: Provide version control and collaboration among teams using Git.
 sidebar_position: 11
 redirect_from:

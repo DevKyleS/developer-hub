@@ -1,5 +1,5 @@
 ---
-title: Migrating from GitHub Actions to Harness Continuous Delivery
+title: 9. Migrate GitHub Actions to Harness Deployments
 description: A step-by-step tutorial on how you can migrate from GitHub Actions to Harness CD.
 sidebar_position: 9
 redirect_from:
