@@ -114,7 +114,7 @@ const getFaultDetails = (
     if (category === "aws") categoryPath = "aws";
     else if (category === "gcp") categoryPath = "gcp";
     else if (category === "kubernetes") categoryPath = "kubernetes";
-    details.link = `/docs/chaos-engineering/guides/probes/probe-templates/${categoryPath}/${normaliseForURL(faultName)}/`;
+    details.link = `/docs/resilience-testing/chaos-testing/probes/probe-templates/${categoryPath}/${normaliseForURL(faultName)}/`;
     details.anchorLink = `${normaliseForURL(faultName)}`;
     return details;
   }
@@ -126,7 +126,7 @@ const getFaultDetails = (
   )) {
     details.icon = `${path}/kubernetes.svg`;
     // Use the category directly for action templates
-    details.link = `/docs/chaos-engineering/guides/actions/action-templates/${category}/${normaliseForURL(faultName)}/`;
+    details.link = `/docs/resilience-testing/chaos-testing/actions/action-templates/${category}/${normaliseForURL(faultName)}/`;
     details.anchorLink = `${normaliseForURL(faultName)}`;
     return details;
   }

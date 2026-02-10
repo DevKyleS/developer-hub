@@ -157,8 +157,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: 7035b94e3fa40ca0d141e84bae671bb39a14c87607df12e987c795c13ff0a88
-        checksum/secret: 9e0e62b1a5d981d355a1098af3828757de0c4a287fb6657566da29bea504dc0
+        checksum/configmap: <checksum-value>
+        checksum/secret: <checksum-value>
         prometheus.io/path: /api/metrics
         prometheus.io/port: "3460"
         prometheus.io/scrape: "true"

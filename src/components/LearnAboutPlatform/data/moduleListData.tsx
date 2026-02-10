@@ -102,12 +102,19 @@ export const moduleList: CardItem[] = [
     link: 'docs/sast-and-sca',
   },
   {
-    title: 'Chaos Engineering',
-    module: MODULES.ce,
+    title: 'Resilience Testing',
+    module: MODULES.rt,
     icon: "img/icon_ce.svg",
-    description: <>Measure the resilience posture of applications.</>,
-    link: 'docs/chaos-engineering',
+    description: <>Test resilience with Chaos, Load, and DR Testing.</>,
+    link: 'docs/resilience-testing',
   },
+  // {
+  //   title: 'Chaos Engineering',
+  //   module: MODULES.ce,
+  //   icon: "img/icon_ce.svg",
+  //   description: <>Measure the resilience posture of applications.</>,
+  //   link: 'docs/chaos-engineering',
+  // },
   {
     title: 'AI SRE',
     module: MODULES.aisre,

@@ -2148,6 +2148,17 @@ html[data-theme='dark'] .sidebar-opensource > a::before {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.sidebar-rt > div > a::before,
+.sidebar-rt > a::before {
+  content: ' ';
+  display: inline-block;
+  height: 24px;
+  min-width: 24px;
+  margin-right: 8px;
+  background-image: url('/img/icon_ce.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .sidebar-application-api-protection > div > a::before,
 .sidebar-application-api-protection > a::before {
   content: ' ';
@@ -2509,25 +2520,42 @@ html[data-theme='dark'] .navbar .dropdown__menu .dropdown__section-header {
   content: 'NEW';
   position: absolute;
   right: 3.5rem;
-  transform: translateY(-50%);
-  z-index: 2;
 
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  padding: 2px 6px;
-
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
+  padding: 2px 6px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: white;
+  letter-spacing: 0.3px;
+  line-height: 1;
 
-  background: #0278d5;
-  border-radius: 4px;
+  color: #0278d5;
+
+  background: transparent;
+  border: 1px solid #0278d5;
+  border-radius: 999px;
 
   animation: newBadgePulse 3s ease-in-out infinite;
   flex-shrink: 0;
+}
+
+/* For HTML type items (horizontal bars) with NEW badge */
+.horizontal-bar.sidebar-item-new::after {
+  content: 'NEW';
+  background: transparent;
+  border: 1px solid #0278d5;
+  border-radius: 999px;
+  color: #0278d5;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  animation: newBadgePulse 3s ease-in-out infinite;
 }
 
 /* Subtle pulse animation for NEW badge */
@@ -2598,6 +2626,70 @@ html[data-theme='dark'] .navbar .dropdown__menu .dropdown__section-header {
 
   animation: newBadgePulse 3s ease-in-out infinite;
   flex-shrink: 0;
+}
+
+/* ============ Coming Soon Badge for Sidebar ============ */
+/* Add `className: "sidebar-item-coming-soon"` to show a "Coming Soon" badge */
+.sidebar-item-coming-soon > .menu__list-item-collapsible > .menu__link,
+.sidebar-item-coming-soon > a.menu__link {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* FOLDER (category) badge – sits left of caret */
+.sidebar-item-coming-soon > .menu__list-item-collapsible > .menu__link::after {
+  content: 'COMING SOON';
+  background: transparent;
+  border: 1px solid var(--ifm-color-warning);
+  border-radius: 4px;
+  color: var(--ifm-color-warning);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+/* SINGLE DOC badge – near right edge */
+.sidebar-item-coming-soon > a.menu__link::after {
+  content: 'COMING SOON';
+  position: absolute;
+  right: 3.5rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-warning);
+  border-radius: 4px;
+  color: var(--ifm-color-warning);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* For HTML type items (horizontal bars) with coming-soon badge */
+.horizontal-bar.sidebar-item-coming-soon::after {
+  content: 'COMING SOON';
+  background: transparent;
+  border: 1px solid var(--ifm-color-warning);
+  border-radius: 4px;
+  color: var(--ifm-color-warning);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Category Card/Tile - Add NEW badge for delegate-closed-beta */

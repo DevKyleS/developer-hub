@@ -32,7 +32,8 @@ export enum MODULES {
   adra = 'adra',
   tbh = 'tbh',
   hsf = 'hsf',
-  rm = 'rm'
+  rm = 'rm',
+  rt = 'rt'
 }
 
 export const MODULE_DISPLAY_NAME = {
@@ -66,7 +67,8 @@ export const MODULE_DISPLAY_NAME = {
     [MODULES.ata]: 'AI Test Automation',
     [MODULES.tbh]: 'Traceable by Harness',
     [MODULES.hsf]: 'Harness Solutions Factory',
-    [MODULES.qwietai]: "SAST and SCA"
+    [MODULES.qwietai]: "SAST and SCA",
+    [MODULES.rt]: 'Resilience Testing'
 }
 
 export const MODULE_ICON = {
@@ -99,5 +101,6 @@ export const MODULE_ICON = {
     [MODULES.ata]: 'img/logo-ata.svg',
     [MODULES.tbh]: 'img/icon_tbh.svg',
     [MODULES.hsf]: 'img/icon-hsf.svg',
-    [MODULES.qwietai]: 'img/qwiet-icon.svg'
+    [MODULES.qwietai]: 'img/qwiet-icon.svg',
+    [MODULES.rt]: 'img/icon_ce.svg'
 }

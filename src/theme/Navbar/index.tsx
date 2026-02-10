@@ -67,10 +67,15 @@ const docDropdownItems = [
     icon: "/img/icon_ff.svg",
   },
   {
-    to: "/docs/chaos-engineering",
-    label: "Chaos Engineering",
+    to: "/docs/resilience-testing",
+    label: "Resilience Testing",
     icon: "/img/icon_ce.svg",
   },
+  // {
+  //   to: "/docs/chaos-engineering",
+  //   label: "Chaos Engineering",
+  //   icon: "/img/icon_ce.svg",
+  // },
   {
     to: "/docs/ai-test-automation",
     label: "AI Test Automation",

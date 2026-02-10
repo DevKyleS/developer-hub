@@ -79,11 +79,17 @@ export const categories: Category[] = [
         description: "Control rollouts and run experiments."
       },
       {
-        name: "Chaos Engineering",
-        href: "/docs/chaos-engineering",
-        module: "ce",
-        description: "Inject faults to test resilience."
+        name: "Resilience Testing",
+        href: "/docs/resilience-testing",
+        module: "rt",
+        description: "Test resilience with Chaos, Load, and DR."
       },
+      // {
+      //   name: "Chaos Engineering",
+      //   href: "/docs/chaos-engineering",
+      //   module: "ce",
+      //   description: "Inject faults to test resilience."
+      // },
       {
         name: "AI Test Automation",
         href: "/docs/ai-test-automation",

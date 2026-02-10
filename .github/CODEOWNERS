@@ -116,6 +116,14 @@ static/  @rohanmaharjan100 @wei-harness
 /docs/faqs/chaos-engineering-faqs @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya
 /docs/faqs/static @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya
 
+# Resilience Testing Docs
+/docs/resilience-testing/ @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya @richardblack-Harness
+/release-notes/resilience-testing.md @Jonsy13 @Ashutosh-Bhadauriya @richardblack-Harness
+/src/components/Roadmap/data/resilienceTestingData.ts @Ashutosh-Bhadauriya @richardblack-Harness
+/src/components/Docs/data/resilienceTestingData* @Ashutosh-Bhadauriya @richardblack-Harness
+# Resilience Testing FAQs
+/docs/faqs/resilience-testing-faqs @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya @richardblack-Harness
+
 # Platform Docs
 /docs/platform/ @pratmit @GokulBansal0 @abhishekharness @ivikramsahu
 /release-notes/delegate.md @pratmit @abhishekharness @anshul-harness @ivikramsahu 

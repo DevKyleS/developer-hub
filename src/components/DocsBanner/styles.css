@@ -1,0 +1,76 @@
+.docs-banner {
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background-color: var(--ifm-alert-background-color);
+}
+
+.docs-banner-info {
+  border-left-color: var(--ifm-color-info);
+  background-color: var(--ifm-alert-background-color-info);
+}
+
+.docs-banner-warning {
+  border-left-color: var(--ifm-color-warning);
+  background-color: var(--ifm-alert-background-color-warning);
+}
+
+.docs-banner-tip {
+  border-left-color: var(--ifm-color-success);
+  background-color: var(--ifm-alert-background-color-success);
+}
+
+.docs-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.docs-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.docs-banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+}
+
+.docs-banner-message {
+  font-size: 14px;
+  color: var(--ifm-font-color-base);
+}
+
+.docs-banner-link {
+  padding: 8px 16px;
+  background-color: var(--ifm-color-primary);
+  color: white !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.docs-banner-link:hover {
+  background-color: var(--ifm-color-primary-dark);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .docs-banner-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .docs-banner-link {
+    width: 100%;
+    text-align: center;
+  }
+}

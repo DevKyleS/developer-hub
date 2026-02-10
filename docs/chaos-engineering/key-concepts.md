@@ -19,8 +19,6 @@ redirect_from:
   - /docs/chaos-engineering/chaos-infrastructure/openshift-infra
   - /docs/chaos-engineering/concepts/deployment-architecture
   - /docs/chaos-engineering/concepts/explore-architecture
-  - /docs/chaos-engineering/concepts/chaos101
-  - /docs/category/understand-concepts
 ---
 
 # Key Concepts
