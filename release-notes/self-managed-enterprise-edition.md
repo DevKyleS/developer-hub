@@ -13,16 +13,25 @@ import ReleaseNotesSearch from '@site/src/components/ReleaseNotesSearch';
 
 <DocsButton icon = "fa-solid fa-square-rss" text="Subscribe via RSS" link="https://developer.harness.io/release-notes/self-managed-enterprise-edition/rss.xml" />
 
-These release notes describe recent changes to Harness Self-Managed Enterprise Edition, NextGen.
-
-<ReleaseNotesSearch />
-
 :::info About Harness Release Notes
+
+These release notes describe recent changes to Harness Self-Managed Enterprise Edition, NextGen.
 
 - **Security advisories:** Harness publishes security advisories for every release. Go to the [Harness Trust Center](https://trust.harness.io/?itemUid=c41ff7d5-98e7-4d79-9594-fd8ef93a2838&source=documents_card) to request access to the security advisories.
 - **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, FirstGen Self-Managed Enterprise Edition, and FirstGen release notes.
-
 :::
+
+<ReleaseNotesSearch />
+
+:::warning Important: Harness Self-Managed Platform v0.36.0 is transitioning from TimescaleDB to PostgreSQL
+
+Harness Self-Managed Platform [v0.36.0](#february-09-2026-version-0360) is transitioning from TimescaleDB to PostgreSQL. This change is designed to improve reliability, scalability, and long-term maintainability of the platform.
+
+Please follow the prerequisites and instructions [here](/docs/self-managed-enterprise-edition/advanced-configurations/tsdb-to-postgresql-migration) to prepare your environment for the migration. During this transition, existing data is migrated automatically using a dedicated migration process. No manual action is required from customers during migration. However, we strongly recommend validating your deployment after the upgrade to ensure dashboards, metrics, and reports behave as expected.
+
+If you have custom integrations, queries, or monitoring workflows that depend on TSDB-specific behavior, review them carefully after the upgrade. For any issues, contact [Harness Support](mailto:support@harness.io) before proceeding with further upgrades.
+:::
+
 
 :::info MongoDB Upgrade to Version 7.x in SMP Environments
 
@@ -62,184 +71,135 @@ upgrades:
 ```
 :::
 
-### Breaking change - Ingress
+:::danger Breaking change
+<details>
+  <summary>Ingress: Important upgrade instructions for versions from 0.17.x to 0.24.x</summary>
+    <p>
+    When upgrading to SMP versions 0.17.x and above, the installation may fail if you have any admission webhooks configured for Ingress that do not permit Ingress objects with different names but identical paths. To prevent installation issues, please follow these steps before proceeding with the upgrade:
 
-:::danger important upgrade instructions for versions 0.17.x, 0.18.x, 0.19.x, 0.20.x, 0.21.x, 0.22.x, 0.23.x and 0.24.x
+    1.	Download the `update-ingress-objects.sh` script from this URL: [update-ingress-objects.sh](https://raw.githubusercontent.com/harness/helm-charts/main/src/harness/scripts/update-ingress-objects.sh).
+    ```
+    # Using curl
+    curl -s https://raw.githubusercontent.com/harness/helm-charts/main/src/harness/scripts/update-ingress-objects.sh -o update-ingress-objects.sh
+    chmod +x update-ingress-objects.sh
+    ./update-ingress-objects.sh
+    ```
 
-When upgrading to SMP versions 0.17.x and above, the installation may fail if you have any admission webhooks configured for Ingress that do not permit Ingress objects with different names but identical paths. To prevent installation issues, please follow these steps before proceeding with the upgrade:
+    2. The script will prompt you to enter the namespace where Harness is installed.
 
-  1.	Download the `update-ingress-objects.sh` script from this URL: [update-ingress-objects.sh](https://raw.githubusercontent.com/harness/helm-charts/main/src/harness/scripts/update-ingress-objects.sh).
-  ```
-  # Using curl
-  curl -s https://raw.githubusercontent.com/harness/helm-charts/main/src/harness/scripts/update-ingress-objects.sh -o update-ingress-objects.sh
-  chmod +x update-ingress-objects.sh
-  ./update-ingress-objects.sh
-  ```
+    3.	You will then be asked to provide the version you are upgrading to.
+          For instance, if you are upgrading to Harness 0.21.0, you should input 0.21.0.
+    4. For versions 0.21.x and above, you will be asked to enter the release name as well. You can check release name by running 'helm ls -n $NAMESPACE'
 
-  2. The script will prompt you to enter the namespace where Harness is installed.
+    5. The script will automatically update the Ingress objects as needed.
 
-  3.	You will then be asked to provide the version you are upgrading to.
-        For instance, if you are upgrading to Harness 0.21.0, you should input 0.21.0.
-  4. For versions 0.21.x and above, you will be asked to enter the release name as well. You can check release name by running 'helm ls -n $NAMESPACE'
+  Note: Ensure you have access to the Kubernetes cluster where Harness is running and have the necessary permissions to GET, DELETE, and APPLY Ingress objects.
+  </p>
+</details>
+<details>
+  <summary>Minio: Important upgrade instructions for patch releases 0.15.1, 0.14.6, 0.13.4, and 0.12.1</summary>
+    <p>
+    If you are currently on version 0.12.0, you must follow the applicable upgrade process below to upgrade your version to the latest stable release, 0.12.1.
 
-  5. The script will automatically update the Ingress objects as needed.
+    If you are currently on version 0.13.0, 0.13.1, 0.13.2, or 0.13.3, you must follow the applicable upgrade process below to upgrade your version to the latest stable release, 0.13.4.
 
-Note: Ensure you have access to the Kubernetes cluster where Harness is running and have the necessary permissions to GET, DELETE, and APPLY Ingress objects.
-:::
+    If you are currently on version 0.14.3, 0.14.4, 0.14.5, or 0.14.6, you must follow the applicable upgrade process below to latest stable release, 0.15.1.
 
-### Breaking change - Minio
+    You can perform your normal upgrade process if you are currently on a version earlier than 0.12.0. Harness recommends that you upgrade to 0.15.1.
 
-:::danger important upgrade instructions for patch releases 0.15.1, 0.14.6, 0.13.4, and 0.12.1
+    **Upgrade version 0.12.1 or 0.13.4 using Helm**
 
-If you are currently on version 0.12.0, you must follow the applicable upgrade process below to upgrade your version to the latest stable release, 0.12.1.
+    If you use `helm` to upgrade Harness Self-Managed Enterprise Edition, follow the upgrade process below.
 
-If you are currently on version 0.13.0, 0.13.1, 0.13.2, or 0.13.3, you must follow the applicable upgrade process below to upgrade your version to the latest stable release, 0.13.4.
+    1. Set `global.database.minio.mergeLogs` to `true` in your override file.
+    2. Perform your Harness upgrade.
 
-If you are currently on version 0.14.3, 0.14.4, 0.14.5, or 0.14.6, you must follow the applicable upgrade process below to latest stable release, 0.15.1.
+    **All other customers**
 
-You can perform your normal upgrade process if you are currently on a version earlier than 0.12.0. Harness recommends that you upgrade to 0.15.1.
+    If you don't use Helm to upgrade Harness Self-Managed Enterprise Edition, follow the upgrade process below.
 
-**Upgrade version 0.12.1 or 0.13.4 using Helm**
+    1. Exec into your MinIO pod.
+    2. Run the following command and copy the `MINIO_ROOT_PASSWORD`.
 
-If you use `helm` to upgrade Harness Self-Managed Enterprise Edition, follow the upgrade process below.
+      ```
+        env | grep MINIO_ROOT_PASSWORD
+      ```
 
-1. Set `global.database.minio.mergeLogs` to `true` in your override file.
-2. Perform your Harness upgrade.
+    3. Run the following commands.
 
-**All other customers**
+      ```
+      bin/mc alias set minio http://minio:9000
+            # Access Key: admin
+            # Secret Key: <PASTE_THE_PASSWORD_COPIED_IN_STEP_2>
+      ```
 
-If you don't use Helm to upgrade Harness Self-Managed Enterprise Edition, follow the upgrade process below.
+      ```
+      mkdir /data/backup/
+      bin/mc cp --recursive minio/logs /data/backup/
+      ```
+    4. Perform your Harness upgrade.
+    5. Exec into your MinIO pod after the upgrade has been completed.
+    6. Run the following command, and then copy the `MINIO_ROOT_PASSWORD`.
 
-1. Exec into your MinIO pod.
-2. Run the following command and copy the `MINIO_ROOT_PASSWORD`.
+      ```
+        env | grep MINIO_ROOT_PASSWORD
+      ```
 
-   ```
-    env | grep MINIO_ROOT_PASSWORD
-   ```
+    7. Run the following commands.
 
-3. Run the following commands.
+      ```
+      bin/mc alias set minio http://minio:9000
+            # Access Key: admin
+            # Secret Key: <PASTE_THE_PASSWORD_COPIED_IN_STEP_6>
+      ```
 
-   ```
-   bin/mc alias set minio http://minio:9000
-        # Access Key: admin
-        # Secret Key: <PASTE_THE_PASSWORD_COPIED_IN_STEP_2>
-   ```
+      ```
+      bin/mc cp --recursive /bitnami/minio/data/backup/logs/ minio/logs
+      ```
+    </p>
+</details>
+<details>
+  <summary>Important changes to looker images</summary>  
+    <p>
+    Starting with version 0.17.0, Harness no longer publishes Looker images to the DockerHub public repository. The repository has been transitioned to private.
 
-   ```
-   mkdir /data/backup/
-   bin/mc cp --recursive minio/logs /data/backup/
-   ```
-4. Perform your Harness upgrade.
-5. Exec into your MinIO pod after the upgrade has been completed.
-6. Run the following command, and then copy the `MINIO_ROOT_PASSWORD`.
+    Looker is required for custom dashboards, a feature not enabled by default in Harness Self-Managed Enterprise Edition. To set up custom dashboards, you must contact [Harness Support](mailto:support@harness.io) to enable the feature.
 
-   ```
-    env | grep MINIO_ROOT_PASSWORD
-   ```
+    **For non-air gap packages**
 
-7. Run the following commands.
+    If you require custom dashboards, you can request onboarding. Harness will generate an access token, allowing you to pull the Looker image from DockerHub. Subsequently, Harness will provide you with the Looker license key and DockerHub credentials to update your `override.yaml` file.
 
-   ```
-   bin/mc alias set minio http://minio:9000
-        # Access Key: admin
-        # Secret Key: <PASTE_THE_PASSWORD_COPIED_IN_STEP_6>
-   ```
+    You must replace your Looker license after deployment.
 
-   ```
-   bin/mc cp --recursive /bitnami/minio/data/backup/logs/ minio/logs
-   ```
+    Create a new secret and replace `<YOUR_SECRET_NAME>` in the YAML.
 
-:::
+    ```yaml
+    looker:
+        # -- replace looker license at runtime (after deployment)
+        # -- reach out to the SMP team
+        image:
+          imagePullSecrets: [<YOUR_SECRET_NAME>]
+    ```
 
-### Breaking change - Looker images
+    For more information about creating the secret, go to [Pull an image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line) in the Kubernetes documentation.
 
-:::danger important changes to looker images
+    **For air gap packages**
 
-Starting with version 0.17.0, Harness no longer publishes Looker images to the DockerHub public repository. The repository has been transitioned to private.
+    Harness no longer includes the Looker image in air gap bundles. You can still request onboarding for custom dashboards. Upon request, Harness will generate an access token for pulling the Looker image from DockerHub. Following this, Harness will provide you with the Looker license key and DockerHub credentials.
 
-Looker is required for custom dashboards, a feature not enabled by default in Harness Self-Managed Enterprise Edition. To set up custom dashboards, you must contact [Harness Support](mailto:support@harness.io) to enable the feature.
+    You must replace your Looker license after deployment.
 
-**For non-air gap packages**
+    Harness has implemented updates to the `harness-airgap-images.sh` shell script in the Helm chart repository. These changes facilitate the utilization of the access token for pushing the Looker image to your private repository. Now, the script will inquire whether you wish to install custom dashboards (`ng-dashboard`). If you respond affirmatively, it will then prompt you to provide your DockerHub credentials and image details.
 
-If you require custom dashboards, you can request onboarding. Harness will generate an access token, allowing you to pull the Looker image from DockerHub. Subsequently, Harness will provide you with the Looker license key and DockerHub credentials to update your `override.yaml` file.
+    To acquire the necessary `DOCKERHUB_USERNAME` and `DOCKERHUB_PASSWORD`, contact [Harness Support](mailto:support@harness.io). When prompted for the `RELEASE_VERSION`, input the desired version of the Helm chart, such as `0.17.0`.
 
-You must replace your Looker license after deployment.
-
-Create a new secret and replace `<YOUR_SECRET_NAME>` in the YAML.
-
-```yaml
-looker:
-    # -- replace looker license at runtime (after deployment)
-    # -- reach out to the SMP team
-    image:
-      imagePullSecrets: [<YOUR_SECRET_NAME>]
-```
-
-For more information about creating the secret, go to [Pull an image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line) in the Kubernetes documentation.
-
-**For air gap packages**
-
-Harness no longer includes the Looker image in air gap bundles. You can still request onboarding for custom dashboards. Upon request, Harness will generate an access token for pulling the Looker image from DockerHub. Following this, Harness will provide you with the Looker license key and DockerHub credentials.
-
-You must replace your Looker license after deployment.
-
-Harness has implemented updates to the `harness-airgap-images.sh` shell script in the Helm chart repository. These changes facilitate the utilization of the access token for pushing the Looker image to your private repository. Now, the script will inquire whether you wish to install custom dashboards (`ng-dashboard`). If you respond affirmatively, it will then prompt you to provide your DockerHub credentials and image details.
-
-To acquire the necessary `DOCKERHUB_USERNAME` and `DOCKERHUB_PASSWORD`, contact [Harness Support](mailto:support@harness.io). When prompted for the `RELEASE_VERSION`, input the desired version of the Helm chart, such as `0.17.0`.
-
-Upon providing your credentials and the release version, the script will proceed to push the Looker image to your private repository.
-
-:::
-
-### Note for Argo CD based installations
-
-:::warning important instructions for Argo CD based deployments and upgrades
-
-If you’re using Argo CD to deploy Harness with Custom Dashboards (Looker) enabled, you might run into issues during upgrades with the encryption/decryption key. Argo CD re-generates the Looker encryption key with every upgrade because it uses helm template to inflate resources. To avoid this, you need to ensure the key remains consistent across upgrades.
-
-To fix this issue, follow these steps
-
-  1. Retrieve the Looker secret using this command:
-
-  ```bash
-  kubectl get secrets looker-secrets -o yaml -n <namespace>
-  kubectl get secrets harness-looker-secrets -o yaml -n <namespace>
-  ```
-
-  2. Copy the value of lookerMasterKey from the secret looker-secrets and decode it using the following command or any base64 decoder. You’ll need to decode it twice.
-  It's required to decode the secret value twice because during creation, first it's encoded by the helm function in the charts and then Kubernetes encodes it again while creating the secret.
-
-  ```bash
-  echo "<base64-encoded-lookerMasterKey>" | base64 --decode | base64 --decode
-  ```
-
-  3. Copy the decrypted secrets for the following attributes lookerClientId lookerClientSecret lookerEmbedSecret lookerSignupUrl in harness-looker-secrets.
-
-  4. After decoding, update your Argo CD values override with the decoded key:
-
-  ```yaml
-  platform:
-  looker:
-    secrets:
-      lookerMasterKey: "<your-decoded-key>"
-      lookerClientId: "<your-decoded-key>"
-      lookerClientSecret: "<your-decoded-key>"
-      lookerEmbedSecret: "<your-decoded-key>"
-      lookerSignupUrl: "<your-decoded-key>"
-  ```
-
-By doing this, you ensure that the same lookerMasterKey is used during upgrades, avoiding encryption issues.
-:::
-
-:::info Harness Helm Chart Provenance
-
-Harness Helm charts are now signed to ensure they are secure and trustworthy. Click [here](../docs/self-managed-enterprise-edition/install/helm-chart-provenance) to learn more. 
-
-:::
-
-:::danger Important
-  
-  For customers using Argo CD and upgrading to version 0.26.x for the first time, ensure that:
+    Upon providing your credentials and the release version, the script will proceed to push the Looker image to your private repository.
+    </p>
+</details>
+<details>
+  <summary>Important: For customers using Argo CD and upgrading to version 0.26.x</summary>  
+    <p>
+    For customers using Argo CD and upgrading to version 0.26.x for the first time, ensure that:
       - The required flag is enabled and set `timescale-backup-minio` secret to be ignored by Argo CD, similar to other secrets.
       - For subsequent upgrades from 0.26.x to any other version, disable the flag to prevent Argo CD from overwriting the secret, which could lead to authentication issues. 
 
@@ -270,63 +230,443 @@ Harness Helm charts are now signed to ensure they are secure and trustworthy. Cl
                     timescaledb:
                       archive_minio_secret: false
             ```
+    </p>
+</details>
+<details>
+  <summary>Migration Notice: Bitnami Repository Changes</summary>  
+    <p>
+    Customers directly pulling from `docker.io` registry for Bitnami images and are currently on version `<0.32.0` are affected.
+  
+    Bitnami has moved many of its container images from the default `bitnami` repository on Docker Hub to a new repository called `bitnamilegacy`.
+    
+    Since Harness relies on public Bitnami images, customers pulling directly from Docker Hub must update their configuration to point to `bitnamilegacy`.
+    
+    **Customers using private or air-gapped image sources are not affected.**
+    
+    **Reference:** [Upcoming changes to the Bitnami catalog (effective August 28th, 2025)](https://github.com/bitnami/charts/issues/28508)
+
+      ### Required Override
+      
+      To ensure compatibility, update your Harness overrides/add additional overrides in your install/upgrade commands as shown below:
+
+        ```yaml
+        platform:
+          bootstrap:
+            database:
+              mongodb:
+                image:
+                  repository: bitnamilegacy/mongodb
+              postgresql:
+                image:
+                  repository: bitnamilegacy/postgresql
+              minio:
+                image:
+                  repository: bitnamilegacy/minio
+              clickhouse:
+                image:
+                  repository: bitnamilegacy/clickhouse
+              timescaledb:
+                tsdbarchive:
+                  image:
+                    repository: bitnamilegacy/minio
+        upgrades:
+          mongoFCVUpgrade:
+            image:
+              repository: bitnamilegacy/mongodb
+        ```
+
+      After applying this change, Harness will continue pulling the required Bitnami images without disruption.
+
+      ### Example
+      
+      Save the above override file as `bitnami-migration.yaml`:
+
+        ```bash
+        helm upgrade -i harness harness/harness -f override-prod.yaml -f bitnami-migration.yaml
+        ```
+    </p>
+</details>    
 :::
 
-:::warning Breaking Change: Bitnami Repository Migration
-  
-  **Migration Notice: Bitnami Repository Changes**
-  
-  Customers directly pulling from `docker.io` registry for Bitnami images and are currently on version `<0.32.0` are affected.
-  
-  Bitnami has moved many of its container images from the default `bitnami` repository on Docker Hub to a new repository called `bitnamilegacy`.
-  
-  Since Harness relies on public Bitnami images, customers pulling directly from Docker Hub must update their configuration to point to `bitnamilegacy`.
-  
-  **Customers using private or air-gapped image sources are not affected.**
-  
-  **Reference:** [Upcoming changes to the Bitnami catalog (effective August 28th, 2025)](https://github.com/bitnami/charts/issues/28508)
+:::warning
+<details>
+  <summary>Important instructions for Argo CD based deployments and upgrades</summary>
+  <p>
+    If you’re using Argo CD to deploy Harness with Custom Dashboards (Looker) enabled, you might run into issues during upgrades with the encryption/decryption key. Argo CD re-generates the Looker encryption key with every upgrade because it uses helm template to inflate resources. To avoid this, you need to ensure the key remains consistent across upgrades.
 
-    ### Required Override
-    
-    To ensure compatibility, update your Harness overrides/add additional overrides in your install/upgrade commands as shown below:
+    To fix this issue, follow these steps
+
+      1. Retrieve the Looker secret using this command:
+
+      ```bash
+      kubectl get secrets looker-secrets -o yaml -n <namespace>
+      kubectl get secrets harness-looker-secrets -o yaml -n <namespace>
+      ```
+
+      2. Copy the value of lookerMasterKey from the secret looker-secrets and decode it using the following command or any base64 decoder. You’ll need to decode it twice.
+      It's required to decode the secret value twice because during creation, first it's encoded by the helm function in the charts and then Kubernetes encodes it again while creating the secret.
+
+      ```bash
+      echo "<base64-encoded-lookerMasterKey>" | base64 --decode | base64 --decode
+      ```
+
+      3. Copy the decrypted secrets for the following attributes lookerClientId lookerClientSecret lookerEmbedSecret lookerSignupUrl in harness-looker-secrets.
+
+      4. After decoding, update your Argo CD values override with the decoded key:
 
       ```yaml
       platform:
-        bootstrap:
-          database:
-            mongodb:
-              image:
-                repository: bitnamilegacy/mongodb
-            postgresql:
-              image:
-                repository: bitnamilegacy/postgresql
-            minio:
-              image:
-                repository: bitnamilegacy/minio
-            clickhouse:
-              image:
-                repository: bitnamilegacy/clickhouse
-            timescaledb:
-              tsdbarchive:
-                image:
-                  repository: bitnamilegacy/minio
-      upgrades:
-        mongoFCVUpgrade:
-          image:
-            repository: bitnamilegacy/mongodb
+      looker:
+        secrets:
+          lookerMasterKey: "<your-decoded-key>"
+          lookerClientId: "<your-decoded-key>"
+          lookerClientSecret: "<your-decoded-key>"
+          lookerEmbedSecret: "<your-decoded-key>"
+          lookerSignupUrl: "<your-decoded-key>"
       ```
-
-    After applying this change, Harness will continue pulling the required Bitnami images without disruption.
-
-    ### Example
-    
-    Save the above override file as `bitnami-migration.yaml`:
-
-      ```bash
-      helm upgrade -i harness harness/harness -f override-prod.yaml -f bitnami-migration.yaml
-      ```
+    By doing this, you ensure that the same lookerMasterKey is used during upgrades, avoiding encryption issues.
+  </p>
+</details>  
 :::
 
+## February 09, 2026, Version 0.36.0 <!-- Draft : Feb 09, 2026 -->
+
+:::Note Important
+The migration from TimescaleDB to PostgreSQL is automatically triggered as part of the Harness SMP upgrade to version 0.36.0. Before you upgrade to SMP 0.36.0, you must be running version 0.35.x. Learn more about the migration in the [migration guide](https://docs.harness.io/docs/self-managed-enterprise-edition/advanced-configurations/migrate-timescaledb-to-postgresql).
+:::
+
+This release includes the following Harness module and component versions.
+
+| **Name**                     | **Version**                                                                                  |
+|------------------------------|----------------------------------------------------------------------------------------------|
+| Helm Chart                   | [0.36.0](https://github.com/harness/helm-charts/releases/tag/harness-0.36.0)                 |
+| Air Gap Bundle               | [0.36.0](https://console.cloud.google.com/storage/browser/smp-airgap-bundles/harness-0.36.0) |
+| Access Control               | 1.184.0                                                                                      |
+| Anomaly Detection            | 1.20.0                                                                                       |
+| Audit Event Streaming        | 1.73.0                                                                                       |
+| Batch Processing             | 1.75.16                                                                                      |
+| Bootstrap                    | 1.64.0                                                                                       |
+| CE Nextgen                   | 1.77.11                                                                                      |
+| Change Data Capture          | 1.49.4                                                                                       |
+| Chaos CRD                    | 1.72.0                                                                                       |
+| Chaos K8s IFS                | 1.72.5                                                                                       |
+| Chaos Linux IFC              | 1.72.2                                                                                       |
+| Chaos Linux IFS              | 1.72.2                                                                                       |
+| Chaos Manager                | 1.72.18                                                                                      |
+| Chaos Machine IFS            | 1.72.3                                                                                       |
+| Chaos Machine IFC            | 1.72.2                                                                                       |
+| Chaos Web                    | 1.72.10                                                                                      |
+| CI Manager                   | 1.119.8                                                                                      |
+| Cloud Info                   | 1.13.2                                                                                       |
+| CV Nextgen                   | 1.53.1                                                                                       |
+| DB Devops Service            | 1.76.2                                                                                       |
+| Debezium Service             | 1.25.0                                                                                       |
+| Delegate Proxy               | 1.6.0                                                                                        |
+| Delegate Version (Immutable) | 26.01.88201                                                                                  |
+| Event Service                | 1.14.0                                                                                       |
+| Feature Flag Pushpin Service | 1.1132.0                                                                                     |
+| Feature Flag Service         | 1.1148.0                                                                                     |
+| Gateway Service              | 1.59.2                                                                                       |
+| GitOps Service               | 1.49.1                                                                                       |
+| Harness Manager              | 1.127.0                                                                                      |
+| LE Nextgen                   | 1.12.2                                                                                       |
+| Log Service                  | 1.38.8                                                                                       |
+| Looker                       | 1.8.9                                                                                        |
+| Next Gen UI                  | 1.114.2                                                                                      |
+| NG Auth UI                   | 1.37.4                                                                                       |
+| NG CE UI                     | 1.73.7                                                                                       |
+| NG Custom Dashboards         | 1.98.0                                                                                       |
+| NG Dashboard Aggregator      | 1.92.0                                                                                       |
+| NG Manager                   | 1.128.4                                                                                      |
+| Pipeline Service             | 1.168.5                                                                                      |
+| Platform Service             | 1.106.3                                                                                      |
+| Policy Management            | 1.35.6                                                                                       |
+| SCM Service                  | 1.43.0                                                                                       |
+| Service Discovery Manager    | 0.52.3                                                                                       |
+| SRM UI                       | 1.16.0                                                                                       |
+| SSCA Manager                 | 1.48.32                                                                                      |
+| SSCA UI                      | 0.37.9                                                                                       |
+| STO Core                     | 1.175.7                                                                                      |
+| Telescopes                   | 1.6.0                                                                                        |
+| Template Service             | 1.130.0                                                                                      |
+| Test Intelligence Service    | 1.60.4                                                                                       |
+| Queue Service                | 1.8.0                                                                                        |
+| Code API                     | 1.73.2                                                                                       |
+| Code GitRPC                  | 1.73.1                                                                                       |
+| Code GitHA                   | 1.73.1                                                                                       |
+| Code Search                  | 1.73.1                                                                                       |
+| IAC Server                   | 1.296.0                                                                                      |
+| IACM Manager                 | 1.125.0                                                                                      |
+| IDP Service                  | 1.36.9                                                                                       |
+| IDP Admin                    | 1.36.2                                                                                       |
+| IDP App UI                   | 1.36.8                                                                                       |
+
+**Alternative air gap bundle download method**
+
+Some admins might not have Google account access to download air gap bundles. As an alternative, you can use either **`gsutil`** or **`curl`**.
+
+<details>
+  <summary>Option 1: Using `gsutil`</summary>
+    <p>
+      For `gsutil` installation instructions, go to [Install gsutil](https://cloud.google.com/storage/docs/gsutil_install) in the Google Cloud documentation.
+      ```bash
+      gsutil -m cp \
+        "gs://smp-airgap-bundles/harness-0.36.0/ccm_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/cdng_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/ce_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/cet_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/ci_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/ff_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/platform_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/sto_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/iacm_images.tgz" \
+        "gs://smp-airgap-bundles/harness-0.36.0/idp_images.tgz" \
+        .
+      ```
+    </p>
+</details>
+
+<details>
+  <summary>Option 2: Using `curl`</summary>
+    <p>
+        You can also download the images directly using curl:
+        ```bash
+        curl -f -s -L -o smp-airgap-bundles/ccm_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/ccm_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/cdng_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/cdng_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/ce_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/ce_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/cet_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/cet_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/ci_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/ci_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/ff_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/ff_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/platform_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/platform_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/sto_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/sto_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/iacm_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/iacm_images.tgz
+        curl -f -s -L -o smp-airgap-bundles/idp_images.tgz https://app.harness.io/public/harness-airgap-bundle/harness-0.36.0/idp_images.tgz
+      ```
+    </p>
+</details>  
+
+:::info Note
+Ensure that the `smp-airgap-bundles/` directory exists before running the command.
+:::
+
+### Fixed issues
+
+#### Harness Platform
+
+- Resolved a virtual service conflict impacting delegate resources. [PL-67525]
+- Enhanced delegate existence checks by including Delegate Group Name along with hostname and IP address, enabling the creation of delegates with identical hostnames and IPs in different infrastructures. [PL-67497]
+- Resolved an issue where ingress routes were updated as part of the change that moved Delegate APIs from ng-manager to harness-manager, but required Istio routes were missing, causing routing issues. The missing routes have now been added to ensure correct traffic routing. [PL-67487]
+- Improved secret handling by correcting metadata mismatches between secrets and their encrypted records. [PL-67321]
+- Resolved an issue where user search on the **Access Control > Users** page did not work correctly for emails containing special characters. The search query is now parsed correctly and matches user emails and names as expected. [PL-67083]
+- Resolved an issue where User Group identifiers are now enforced to be unique within the same Account, Organization, or Project scope, preventing the creation of duplicate User Groups. [PL-65838]
+- Resolved an issue where deleting a user now also removes them from all child scopes. [PL-65635]
+- Resolved an issue that now allows users to right-click and select "open link in new tab," or use Cmd+click or middle mouse click to open pages from the settings page in a new tab without leaving the current one. [PL-65502]
+- Resolved an issue where deleting a dashboard from the UI did not remove it from the dashboard listing page. This has been fixed and now dashboards are now correctly removed from the list when deleted or moved to the trash. [PL-64817]
+
+#### GitOps
+
+- Improved user experience for GitOps applications updated through ApplicationSets. Setup usage events are now sent when applications are updated through ApplicationSets, providing better tracking and visibility into application lifecycle events. [CDS-117821, ZD-101609]
+- Fixed an issue where Harness Support Group users authenticated via OKTA SSO received 403 Permission Denied errors when accessing GitOps resources. The fix ensures support user tokens are properly forwarded to the Access Control Service for elevated access detection. [CDS-116751]
+- The resource view now sorts by date by default, providing a more intuitive view of resources with the most recent items appearing first. [CDS-117862]
+- Fixed an issue where the Update Release Repo step was incorrectly wrapping all YAML values, including command fields, in double quotes, causing deployments to break. The step now preserves existing values without modifying them. [CDS-114900]
+- Fixed an issue where the Fetch Linked Apps step, when filtering by service environment and cluster, did not provide sufficient logging to explain why applications were filtered out. Now, the logs include details when applications are filtered out due to agent identifier mismatches between the linked service and the application, providing better visibility into the filtering process. [CDS-117383]
+- Fixed an issue in GitOps project settings where users were incorrectly redirected when attempting to access GnuPG keys and repository certificates. Users are now directed to the correct locations for managing these settings. [CDS-117513]
+- Fixed an issue where pagination controls were not visible in the Applications list view, making it difficult to navigate through large numbers of applications. Users can now properly navigate through all applications using the pagination controls. [CDS-117553]
+- Fixed an issue where application parameters were not appearing in the GitOps UI for organization-level agents. This occurred because the system was incorrectly prefixing *org.* to the agent ID when fetching agent details, resulting in a 404 error and preventing subsequent API calls from completing. The parameters existed in the manifest and sync operations worked correctly, but the UI failed to render them. The agent ID handling has been corrected to work properly for organization-level scopes. [CDS-117296, ZD-99840]
+- Fixed an issue where the GitOps UI incorrectly displayed deployment activities as *Running* even after they had completed. This occurred in multi-source applications with multiple revisions, where the sync history was showing incorrect status. The UI now accurately reflects the completed state of deployments. [CDS-115737, ZD-96501]
+- Fixed an issue where users were unable to delete a GitOps agent from the UI. This occurred when the agent had tags configured, causing the delete operation to fail due to a tags field decoding error. The agent would remain stuck in a *deleting* state. Agents with tags can now be deleted successfully. [CDS-116263, ZD-97644]
+- Fixed the following security vulnerabilities in GitOps components:
+  - Fixed a high-severity vulnerability in the gitops-agent-installer-helper component. The vulnerability **CVE-2025-22874** in the crypto/x509 package (Go 1.24.2) has been resolved by upgrading to Go 1.24.4. This fix is included in gitops-agent-installer-helper v0.0.7.
+  - Fixed multiple high-severity vulnerabilities in the Redis component. The vulnerabilities **CVE-2022-30632** (path/filepath), **CVE-2023-29403** (runtime), and **CVE-2022-30630** (io/fs) affecting Go 1.18.2 in Redis images 7.4.1-alpine and 6.2.14-alpine have been resolved. Harness has rebuilt a custom Redis image harness/redis:7.4.7-alpine with the latest fixes.
+  - Fixed a high-severity vulnerability in the gitops-service component. The vulnerability **CVE-2024-25621** in containerd v1.7.28 has been resolved by upgrading to containerd v1.7.29. This fix is included in gitops-service-signed:1.45.2.
+  - Fixed critical and high-severity vulnerabilities in the harness/argocd component. The vulnerabilities **CVE-2024-24790** (critical, net/netip) and **CVE-2024-45338** (high, golang.org/x/net/html) have been addressed in argocd v2.14.16.
+  - Fixed multiple high-severity vulnerabilities in the gitops-agent component. The vulnerabilities **CVE-2025-59531**, **CVE-2025-59537**, and **CVE-2025-59538** affecting github.com/argoproj/argo-cd/v2 have been addressed in gitops-agent v0.102.0 with argo-cd v2.14.16.
+- Fixed an issue where duplicate log lines appeared when viewing logs from the Resource View panel in GitOps applications. This issue affected both SaaS and SMP installations. Logs now display correctly without duplication. [CDS-114656, ZD-94084, ZD-95360]
+
+#### Continuous Delivery
+
+- Fixed an issue where nexus connector experiencing 504 errors due to socket exhaustion potentially related to `http/2 → http/1.1` traffic handling. Added env variable to `DISABLE_NEXUS_DOCKER_V2_CATALOG`, `DISABLE_NEXUS_DOCKER_ARTIFACT_VALIDATION`, and `MAX_BUILD_NEXUS_TRIGGERS` to restrict the api calls to `/v2/_catalog`. [CDS-118102, ZD-101720, ZD-102180]
+- Fixed an issue where a pipeline step's *When* condition was not re-evaluated on retry attempts after an initial evaluation failure. This could lead to the step incorrectly executing on a retry. Now, the *When* condition is always re-evaluated on each retry attempt, ensuring consistent and correct execution behavior. Currently, this fix is governed by the feature flag `PIPE_SKIP_EXECUTE_WHEN_CONDITION_ON_RETRY_STEP`. Contact [Harness Support](mailto:support@harness.io) to enable it. [PIPE-31684, ZD-101561]
+- Fixed an issue where *send status back to git* does not publish commit status when pipeline is triggered via harness code trigger in custom stages. Status handling was missing in the Harness code repository because it lacks a connector reference. Added proper handling for the code repository. [PIPE-31736, ZD-100597]
+- Fixed an issue where sensitive information was being stored in ConfigMaps within Kubernetes clusters, making it potentially accessible to unauthorized users with cluster view access. To resolve this, the release history storage logic has been updated to store release history in Secrets when pruning is enabled, providing a more secure storage mechanism. Currently, this fix is governed by the feature flag `CDS_STORE_PRUNING_RELEASE_HISTORY_IN_SECRET`. Contact [Harness Support](mailto:support@harness.io) to enable it. [CDS-117631]
+- Fixed an issue where navigating between search results in pipeline execution logs would scroll to the log row but not to the precise location of the highlighted match. For log lines with content extending beyond the visible area, users had to manually scroll to locate the highlighted text; the search now automatically scrolls the highlighted match into view, ensuring visibility regardless of its position within long log lines. [CDS-117728, ZD-101156]
+- Fixed an issue where the environment service override API displayed a misleading error when Environment YAML was stored on a non-default Git branch. The error incorrectly stated the file was missing from the master branch, even though it existed on the selected branch. [CDS-117803, ZD-101368]
+- Fixed an issue where the service dashboard displayed an incorrect instance count in the final detail view compared to the summary rows when GitOps was enabled. [CDS-117222, ZD-99969]
+- Fixed an issue where child pipelines were incorrectly marked as failed and triggered failure notifications when the parent pipeline failed, even if the child pipeline completed successfully. This was due to the failure strategy propagating the parent pipeline's user-initiated failure status to the child pipeline. [PIPE-30821, ZD-97666, ZD-99055]
+- Fixed an issue where pipelines were not correctly identified as CI or CD pipelines in the API and SDK, causing filtering and other operations based on module type to be inaccurate. [PIPE-30921, ZD-98003]
+- Fixed an issue where interrupting a pipeline execution (for example, marking it as failed or expiring it) sometimes failed to stop all running tasks, leading to resource locking and potential pipeline stalls. The system now correctly handles these interruptions, ensuring all tasks are stopped and resources are released. This fix is behind the feature flag `PIPE_FAIL_USER_MARKED_FAIL_ALL_INTERRUPT_WITHOUT_LEAF_NODES`. Contact [Harness Support](mailto:support@harness.io) to enable it. [PIPE-31334, ZD-99055]
+- Fixed an issue where pipelines failed to start with a generic error message when the pipeline YAML exceeded the size limit. A clear error message is now displayed indicating the size limit and suggesting mitigation steps. [PIPE-31336, ZD-99604, ZD-100342]
+- Fixed an issue where pipelines were unexpectedly stuck and failing to proceed, preventing deployments from completing for some customers. [PIPE-31510, ZD-100762, ZD-100766, ZD-100767, ZD-100768, ZD-100777, ZD-100778, ZD-100785]
+- Fixed an issue where the *Deploy to All* setting appeared as an unsaved change in the UI, even after being initially set. [CDS-116815, ZD-72196, ZD-98671]
+- Fixed an issue where the *Services* page for some customers loaded very slowly on the first visit. The initial loading time has been significantly improved, even with a large number of services. [CDS-116985, ZD-99097]
+- Fixed an issue where the Fetch Linked App step didn't provide details about why applications were filtered out, making it difficult to troubleshoot linked service configurations with agent identifier mismatches. Logs now include information about applications filtered out due to agent identifier mismatches, improving troubleshooting. [CDS-117383, ZD-100157]
+- Fixed an issue where artifact paths were not being listed for artifacts configured with the production Artifactory instance, preventing users from selecting the correct artifact during runtime. [CDS-116713, ZD-98601]
+- Fixed an issue where the *Create Github Repo* step failed with an error when used within an insert step in a templated pipeline, preventing users from templating approval flows. [CDS-117231, ZD-99763]
+- Fixed an issue where pipeline execution status was not being sent to Git, preventing users from monitoring pipeline progress within their Git repository. This was due to a Git connector configuration issue, which has now been resolved. [PIPE-30761, ZD-97158, ZD-99034]
+- Fixed an issue where the repository list failed to populate when creating a new remote pipeline, requiring users to manually enter the repository name. [PIPE-31217, ZD-98885, ZD-99375, ZD-99394, ZD-99657, ZD-99963, ZD-100020]
+- Fixed an issue where Air Canada's Serverless Deployments were failing in the production environment. The issue was isolated to one production cluster and has been resolved. [CDS-117323, ZD-100051]
+- Fixed an issue where account-level templates could have duplicate identifiers and multiple stable versions, leading to conflicts and unexpected behavior. This has been resolved to ensure template identifiers are unique and only one stable version exists per template. [PIPE-30923, ZD-97931, ZD-98071, ZD-99525]
+- Fixed an issue where dynamic stages failed to parse Base64 encoded YAML configurations when the encoded string contained multiline formatting. This prevented users from deploying pipelines using dynamically generated configurations in certain formats. [PIPE-31041, ZD-98187]
+- Fixed an issue where environment details were truncated in the Harness UI, preventing users from seeing the complete information. [PIPE-31194, ZD-99027]
+- Fixed an issue where the repository list failed to populate when creating a new remote pipeline, requiring users to manually enter the repository name. [PIPE-31217, ZD-98885, ZD-99375, ZD-99394, ZD-99657, ZD-99963, ZD-100020]
+- Fixed an issue where rerunning a pipeline from the last failed stage or a specific stage failed when the pipeline YAML was stored in a non-default branch. The rerun now correctly uses the original branch for pipeline execution. [PIPE-31293, ZD-98968, ZD-99377, ZD-99465, ZD-99565, ZD-99595, ZD-99596, ZD-99652, ZD-99935]
+- Fixed an issue where the error message displayed during environment branch selection in service overrides was misleading when using InputSet triggers. The error message has been improved to provide clearer guidance on the actual issue. This feature is behind the feature flag `PIPE_USE_ENV_REF_BRANCH_IN_SERVICE_OVERRIDE_FOR_INPUTSET_TRIGGER`. Contact [Harness Support](mailto:support@harness.io) to enable it. [CDS-113820, ZD-89141]
+- Fixed an issue where policy evaluation displayed *No Policy Set Description* even when the referenced PolicySet had a proper description, specifically when enforcement was applied at the service level. The description is now correctly included in the response for CD entities. [CDS-116824, ZD-97171]
+- Fixed an issue where the Microsoft Teams approval notification link was malformed due to improper special character handling. The notification URL generation has been corrected to ensure approval links work properly in MS Teams. [CDS-116863, ZD-97579, ZD-98879]
+- Fixed an issue where post-production rollback failed when selecting an environment from the pipeline execution page. The rollback workflow now correctly handles environment selection during the post-production rollback process. [CDS-117023, ZD-98881]
+- Fixed an issue where the GAR (Google Artifact Registry) artifact runtime package path was being returned in an encoded format, causing pipeline failures. The package value is now properly decoded to display correct values in the UI. [CDS-116703, ZD-98357]
+- Fixed an issue where Azure ARM Template deployments failed with NPE (Null Pointer Exception) and template parsing errors when no parameters file was provided. The parameters file field is now optional. [CDS-116706, ZD-98571]
+- Fixed an issue where pipelines were hard failing due to secrets referencing null expressions. This occurred when expressions evaluated to null, causing unexpected failures. The "Fail on missing secrets" functionality has been adjusted to restore the previous soft-fail behavior. [CDS-116786, ZD-98673]
+- Fixed an issue where the Wiz security scanning step was failing intermittently in containerized step groups. This occurred because the StageId was being generated as a UUID, which caused regex matching failures for the STO API calls. The StageId is now set to the stage name for consistent behavior. This fix is behind the feature flag `CDS_CONTAINER_STEP_USE_STAGE_IDENTIFIER`. Contact [Harness Support](mailto:support@harness.io) to enable it. [CDS-116801, ZD-98547, ZD-98911]
+- Fixed an issue where pipeline executions were being auto-aborted unexpectedly, even when auto-abort was disabled on the trigger. This occurred because the auto-abort feature was terminating all executions with the same execution tag, regardless of which trigger initiated them. The feature now only aborts executions that were fired from the same trigger. This fix is behind the feature flag `PIPE_ABORT_ONLY_TRIGGERED_BY_SAME_TRIGGER`. Contact [Harness Support](mailto:support@harness.io) to enable it. [PIPE-30843, ZD-97860, ZD-98660]
+
+#### Security Testing Orchestration
+
+- Removed the dind step from the Harness SCA scanner [STO-10662].
+- Fixed an issue where Sonar Scan output variables were not populated when executed as part of a template, causing OPA policies to evaluate against null data. Scan results are now correctly available [STO-10561]
+- Fixed an issue where External Policies on the Default Settings page could be saved without a severity. Severity is now mandatory to save [STO-10555]
+- Removed the Target Language field from the Harness SCA Scanner, as it is not required to scan the container images [STO-10541].
+- Fixed an issue where an invalid value was selected when no option was chosen in External Policy failure settings [STO-10641]
+
+#### Continuous Integration
+- Fixed gRPC retry issues that were causing unnecessary retries. [CI-19192]
+- Fixed Run step issues for Docker/VM infrastructure with Delegate 2.0. [CI-20070]
+- Fixed log streaming for parallel build stages. [CI-18653]
+- Fixed race conditions in pipeline state transitions (queued to running). [CI-19974]
+- Fixed dynamic parallelism behavior. [CI-20317]
+- Fixed double-quoted secrets in expressions causing Run step failures. [CI-20256]
+- Security patches for Artifactory and S3 plugins. [CI-20217]
+- Security vulnerability patches for Kaniko plugins. [CI-20230]
+- Security vulnerability patch for Artifactory plugin. [CI-20462]
+
+#### Chaos Engineering
+
+- Fixed an issue where Node Network faults were not impacting node network connectivity and were instead affecting only the helper pod running the `tc` command. [CHAOS-10652]
+- Fixed an issue where the Prometheus APM Probe did not apply TLS configuration during experiment execution. [CHAOS-10720]
+- Fixed an issue where the Chaos step checks API returned a 500 error when a pipeline stage included parallel steps or a string-type resilience score. [CHAOS-10721]
+- Fixed an issue with New Relic Connector ID derivation during execution. [CHAOS-10735]
+- Fixed an issue with template preview when using org- or account-scoped templates within a project-scoped template. [CHAOS-10785]
+- Fixed an issue in Datadog metric evaluation where the Datadog Probe succeeded even when the raise condition was not met. [CHAOS-8960]
+
+### New Features and Enhancements
+
+#### Harness Platform
+
+- We’ve added support for using external secrets directly through an [External Secret Manager (currently available only for HashiCorp Vault)](https://developer.harness.io/docs/self-managed-enterprise-edition/advanced-configurations/configure-hashicorp-vault). [PL-64589]
+- Upgraded yq to version 4.50.1 in the base image to address CVE-2025-61729. [PL-67706]
+- Upgraded the Java OpenJDK to version 17.0.17 to improve stability, security, and performance. [PL-67529]
+- Updated the Bouncy Castle (BC) libraries to version 1.80 in the Docker configuration and associated scripts. [PL-67468]
+- The **Renewal Interval (minutes)** field has been removed from the **App Role** authentication method in the HashiCorp Vault connector, as token caching now depends solely on the vault's native TTL. This change enhances clarity and eliminates an unnecessary setting. [PL-66935]
+- Improved audit logging now captures failed login attempts across all authentication methods, offering improved visibility into security events. [PL-66585]
+- Implemented reference creation between user groups and notification channels at the project scope, ensuring user groups cannot be deleted while they are referenced by one or more notification channels. [PL-66281]
+- OPA policies are now enforced during token rotation, ensuring rotated tokens follow policy limits and do not use long expiration times. [PL-65141]
+
+#### GitOps 
+
+- GitOps services with multiple environments now execute in separate stages per service and environment combination, matching the behavior of CD multi-environment execution. This prevents variable clashes between services and environments when using overrides, eliminating unexpected behavior that could occur when aggregating cluster details from each environment in a single stage. [CDS-114264, ZD-91288]
+- The GitOps sync step now supports server-side apply, which helps prevent errors when dealing with large manifests. The step also respects ignore-diff configurations, providing more control over how resources are synchronized. [CDS-117361]
+
+- **ArgoCD Upgraded to 3.1.8**  
+  Harness GitOps has upgraded to ArgoCD 3.1.8 (from 2.x), bringing significant security improvements, enhanced functionality, and updated tooling. This major version upgrade includes:
+  
+  **Security Enhancements:**
+  - **Symlink Protection:** The API server's `--staticassets` directory is now protected against out-of-bounds symlinks to prevent symlink attacks
+  - **Sanitized Project API Response:** Project API responses have been sanitized to remove sensitive information (addresses GHSA-786q-9hcg-v9ff)
+  - **Enhanced OpenID Connect Flow:** The authorization code flow with PKCE is now handled server-side instead of in the UI, improving security and consistency
+  
+  **Tool Updates:**
+  - **Helm:** Upgraded to version 3.18.4 (from previous version)
+  - **Kustomize:** Upgraded to version 5.7.0 (from previous version)
+  
+  **API Changes:**
+  - The `/api/v1/applications/{name}/resource/actions` endpoint is deprecated in favor of `/api/v1/applications/{name}/resource/actions/v2`. Users should migrate to the new v2 endpoint
+  
+  For complete details on the ArgoCD upgrade, refer to the official ArgoCD upgrade documentation:
+  - [Upgrading from v2.14 to v3.0](https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/2.14-3-0/)
+  - [Upgrading from v3.0 to v3.1](https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/3.0-3.1/)
+
+- **ArgoCD Helm Chart Upgraded to 9.0.0**  
+  The GitOps Helm chart has been upgraded from version 7.x to 9.0.0 to align with the ArgoCD 3.1.8 release. This update incorporates necessary configuration changes and improvements for the new ArgoCD version. For detailed information on the Helm chart changes, see the [argo-cd Helm chart release notes](https://github.com/argoproj/argo-helm/releases).
+
+  For more information about this major ArgoCD upgrade, including breaking changes and compatibility considerations, see [ArgoCD 3.1.8 upgrade](/docs/continuous-delivery/gitops/gitops-entities/agents/argocd-3-upgrade).
+
+- **GitOps ApplicationSets as First-Class Entities**  
+  Harness now supports GitOps ApplicationSets as first-class entities, enabling you to create and manage multiple GitOps applications from a single template through an intuitive UI wizard. Key capabilities include:
+  - Full CRUD operations via UI and API
+  - Support for all Argo CD generator types (List, Git, Cluster, Matrix, and more)
+  - Seamless integration with Harness Services and Environments
+  - Import existing ApplicationSets from your Argo CD instances
+  - PR pipeline integration for automated configuration updates
+  - Automatic generation and sync of child applications with configurable lifecycle policies
+  
+  This provides a scalable solution for multi-environment and multi-cluster deployments. Currently, this feature is controlled by Feature Flag `GITOPS_APPLICATIONSET_FIRST_CLASS_SUPPORT`. Please contact [Harness Support](mailto:support@harness.io) to enable this feature flag. For more information, go to [ApplicationSets](/docs/category/applicationsets). [CDS-105825]
+
+- **Harness Secret Expressions in Application Manifests**: You can now use Harness secret expressions directly in Kubernetes manifests using `<+secrets.getValue()>` syntax. Secrets are resolved and decrypted during manifest rendering for Kubernetes `Secret` objects. Supports account, org, and project-level secrets configured in HashiCorp Vault or Harness Secret Manager. This feature requires Feature Flag `CDS_GITOPS_SECRET_RESOLUTION_ENABLED` and enabling the Argo CD Harness Plugin during agent installation. Please contact [Harness Support](mailto:support@harness.io) to enable this feature. For more information, go to [Harness Secret Expressions in Application Manifests](/docs/continuous-delivery/gitops/application/manage-gitops-applications/#harness-secret-expressions-in-application-manifests).
+
+- Added an **Allow Syncing** toggle switch to the Agent Details page for managing system-managed sync windows during disaster recovery (DR) switchover workflows. This enhancement provides better control over automated sync window management without affecting user-configured windows. [CDS-115196]
+
+#### Continuous Delivery
+
+- Harness now supports Blue-Green deployments to [**Google Cloud Platform Managed Instance Groups**](/docs/continuous-delivery/deploy-srv-diff-platforms/google-cloud-functions/mig). Deploy GCP VM workloads with zero downtime, gradual traffic shifting using Cloud Service Mesh, and instant rollback. Currently, this feature is governed by the `CDS_GOOGLE_MIG` feature flag. Contact [Harness Support](mailto:support@harness.io) to enable it. [CDS-114547]
+- Harness now supports **multi-account deployments for AWS CDK**, allowing you to deploy to different AWS accounts using a single connector by overriding the region and assuming a different IAM role at the step level. [CDS-114915]
+- Harness now supports **GCP connector credentials for Terraform steps**, enabling authentication with Google Cloud Platform using Manual Credentials, Inherit From Delegate, or OIDC Authentication methods. This feature requires delegate version 88303 or later. [CDS-115648]
+- Harness now supports **cross-project access for Google Cloud Operations health sources**. You can now specify a GCP Project ID to query metrics and logs from a different project than your connector's default, eliminating the need to create separate connectors for each GCP project. [CDS-114447]
+- Harness now supports **Git-based pipeline YAMLs in Dynamic Stages**, allowing you to execute pipeline YAMLs stored in Git repositories in addition to inline and runtime-provided YAML. You can optionally specify a commit hash to use a specific version of the file. [PIPE-30849]
+- Harness now supports a new **"Waiting for User Action" pipeline notification event**. You can configure pipeline notifications that are sent whenever a pipeline pauses for user input, such as approvals, manual interventions, or file uploads. [PIPE-24734]
+- Harness has improved **trigger evaluation resilience**. A failure in one trigger no longer blocks or skips the evaluation of other triggers, ensuring all eligible triggers are evaluated independently when an event is received. [PIPE-31331]
+- **Harness Artifact Registry now supported as an artifact source** for all CD deployment types (except Helm). HAR provides native integration for both container images and packaged artifacts (Maven, npm, NuGet, generic). For more information, go to [Harness Artifact Registry](/docs/continuous-delivery/x-platform-cd-features/services/artifact-sources#harness-artifact-registry).
+- Continuous Verification now supports custom webhook notifications for verification sub-tasks, providing real-time updates on data collection, analysis, and verification status with correlation IDs for event tracking. This feature is behind the feature flag `CDS_CV_SUB_TASK_CUSTOM_WEBHOOK_NOTIFICATIONS_ENABLED`. Contact [Harness Support](mailto:support@harness.io) to enable it. For more information, go to [Sub-Task Notifications](/docs/continuous-delivery/verify/configure-cv/verify-deployments#sub-task-notifications).
+- Continuous Verification now supports custom webhook notifications for verification sub-tasks, enabling real-time monitoring of data collection, analysis, and verification results. Notifications include correlation IDs for tracking related events and can be delivered via Platform or Delegate with custom headers support. This feature is behind the feature flag `CDS_CV_SUB_TASK_CUSTOM_WEBHOOK_NOTIFICATIONS_ENABLED`. Contact [Harness Support](mailto:support@harness.io) to enable it. For more information, go to [Sub-Task Notifications](/docs/continuous-delivery/verify/configure-cv/verify-deployments#sub-task-notifications).
+- ECS Blue-Green deployments now automatically discover the correct stage target group when not explicitly provided, preventing production outages caused by manual selection errors. Harness identifies the target group with 0% traffic and validates distribution patterns before deployment. For more information, go to [ECS Blue-Green Traffic Shifting](/docs/continuous-delivery/deploy-srv-diff-platforms/aws/ecs/traffic-shifting).
+- New Docker images are now available for AWS SAM and Serverless Framework deployments. These updated plugin images provide improved performance and stability. For more information, see the [AWS SAM plugin](https://hub.docker.com/r/harness/aws-sam-plugin/tags) and [Serverless plugin](https://hub.docker.com/r/harness/serverless-plugin/tags) images on Docker Hub.
+
+#### Security Testing Orchestration
+- Added a new setting at the account level to treat External Policy failures from scanners as Vulnerabilities (Critical, High, Medium, Low). [STO-9122]
+
+#### Continuous Integration
+- Pod failure error messages now stream directly to the console UI, improving visibility into Kubernetes build failures. [CI-19573]
+- CI now skips git status updates when custom pipeline-level status reporting is enabled. [CI-19762]
+- Build Intelligence now works on Windows containers on Kubernetes. [CI-17571]
+- Cache step improvements for Docker infrastructure with Delegate 2.0. [CI-20100]
+- Added additional debug logging for troubleshooting. [CI-19193]
+- Flex compute option removed from Build stage UI (YAML configuration still supported). [CI-20286]
+- Enhanced log streaming for builds. [CI-19389]
+- Harness CLI can now reach Kubernetes infrastructure. [CI-20279]
+- Added support for HCLI 0.4 in custom delegates. [CI-19522]
+- Enhanced logging for SCM operations. [CI-20370]
+- Improved expression resolution for codebase configurations. [CI-20053]
+- Build Intelligence templates are now fetched with `enabled:true` for v1 YAML. [CI-20340]
+- Build Intelligence logs now stream live during stage execution. [CI-17104]
+- Kubernetes pod YAML size optimization using ConfigMap (behind `CI_COMMON_ENV_POD` feature flag). [CI-20022]
+- Step execution improvements for local runner. [CI-19863]
+
+#### Chaos Engineering
+
+- Added support for Windows command probes in the v1beta1 experiment type. [CHAOS-10789]
+- Enabled runtime inputs for metric queries used in APM probes. [CHAOS-10733]
+- Introduced support for using chaos templates during step template creation. [CHAOS-10754, CHAOS-10753]
+- Added Harness as an event source for the Datadog annotation event action. [CHAOS-10677]
+- Enabled HSM secrets to be used in environment variables for Probes and Actions. [CHAOS-10667]
+- Added a whitelist-based SSH filter for the aws-ec2-network-chaos experiment. [CHAOS-10566]
+
+#### Cloud Cost Management
+
+- Default Folder Visibility: Perspectives moved to Default folder after a folder deletion will now show up during the creation of a new folder [CCM-26370] 
+- Recommendations Breakdown: We’ve added realized savings from Recommendations to the Recommendations Breakdown widget on the CCM Overview page. [CCM-26915]“Others” cost preference now supports negative values: Previously, when Show Others (not in top 12) was enabled, negative costs in the “Others” category were shown as zero. We’ve fixed this—negative values will now display correctly in Perspectives. [CCM-28678]
+- Perspective chart x-axis now shows only valid dates: Fixed an issue where extra dates appeared at the beginning and end of the chart timeline. The x-axis now reflects only the dates present in the dataset. [CCM-28640]
+- Accurate Budget Reporting: Refined budget spend calculations to show true costs-to-date by excluding future pre-allocated costs. This provides more accurate and actionable "Spend till date" values for better financial planning. [CCM-27253]
+- Perspective Cloning: Implemented perspective cloning capability, allowing users to create copies of existing perspectives with custom names and save them to their preferred destination folders. [CCM-25667]
+
+#### Internal Developer Platform
+
+- Introduced hierarchy and layout support in Catalog entities for improved organization and version visualization (IDP-7817, IDP-7741).
+- Enhanced Self Service Workflow performance and responsiveness for environment creation and dropdown-triggered APIs (IDP-7733, IDP-7732).
+- Strengthened rule computation and aggregation logic within Scorecards for accurate metric rollups (IDP-7130, IDP-7259).
+- Enhanced Git Experience with better YAML error messaging, consistent identifier logic, and improved commit dialog (IDP-7667, IDP-7451).
+- Expanded Plugin capabilities with CMDB Integration UI, IACM plugin upgrade, and Kafka onboarding (IDP-7588, IDP-7624, IDP-7682).
+- Resolved issues in rule computation and aggregation rollups for Scorecards, ensuring accurate multi-scope evaluations (IDP-7721, IDP-7127).
+- Fixed YAML import and validation failures in Git-based workflows (IDP-7667).
+- Addressed inconsistencies in identifier generation between UI and IDP services (IDP-7700).
 
 ## February 3, 2026, Version 0.35.12
 
