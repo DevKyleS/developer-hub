@@ -257,21 +257,33 @@ The delegate runs as a user service (LaunchAgent), not a system service. It only
 
 **Docker configuration for container-based steps:**
 
-If you plan to use Docker with container-based CI steps on macOS, you need to configure your Docker Desktop or Rancher Desktop settings to avoid permission-related issues. The delegate requires proper filesystem access between your local machine and the Docker VM.
+If you plan to use Docker with container-based CI steps on macOS, you need to configure your Docker/Rancher Desktop settings to avoid permission-related issues. The delegate requires proper filesystem access between your local machine and the Docker VM.
 
-For optimal compatibility, configure the following settings in your Docker runtime preferences:
+#### Docker/Rancher Desktop
 
-1. **Filesystem Mount Type**: Select **reverse-sshfs** as your mount type
-   - In Rancher Desktop: Go to **Preferences** > **Virtual Machine** > **Volumes** tab  
-   - Choose reverse-sshfs instead of 9p or virtiofs
+For optimal compatibility, configure the following settings in your Docker/Rancher Desktop preferences:
 
-2. **Virtual Machine Type**: Select **QEMU** as your emulation type
-   - In Rancher Desktop: Go to **Preferences** > **Virtual Machine** > **Emulation** tab
-   - Choose the QEMU option instead of VZ (Apple Virtualization framework)
+1. **Filesystem Mount Type**: Select **reverse-sshfs** as your mount type.
+   - Go to **Preferences** > **Virtual Machine** > **Volumes** tab.
+   - Choose reverse-sshfs instead of 9p or virtiofs.
+
+2. **Virtual Machine Type**: Select **QEMU** as your emulation type.
+   - Go to **Preferences** > **Virtual Machine** > **Emulation** tab.
+   - Choose the QEMU option instead of VZ (Apple Virtualization framework).
 
 ![Rancher Desktop Preferences Configuration](./static/rancher-desktop-preferences.png)
 
 These settings ensure proper permission mapping between your local filesystem and the Docker VM. Without them, you may encounter "Permission denied" errors when running containerized steps, as the default mount configurations don't always map filesystem permissions correctly.
+
+#### Colima
+
+If you are using [Colima](https://github.com/abiosoft/colima) as your Docker runtime on macOS, start it with the following recommended settings:
+
+```bash
+colima start --vm-type qemu --mount-type sshfs
+```
+
+This ensures the VM uses QEMU emulation and sshfs mounts, which provide the correct filesystem permission mapping needed by the delegate.
 
 **Proxy configuration:**
 
@@ -961,16 +973,40 @@ Harness does not handle secret rotation. It is the customer's responsibility to 
 
 ## Troubleshooting
 
-### Issue: Docker client not initialized
+### Docker client not initialized
 
-This error can occur when using Rancher Desktop as your Docker runtime. Every time Rancher Desktop restarts, the Docker socket symlink must be recreated.
+If your Local (Docker) infrastructure stages fail with a **"docker client is not initialized"** error, the delegate is likely using the wrong Docker socket path. This commonly occurs when using Rancher Desktop as your Docker runtime, where the Docker socket symlink must be recreated after every restart.
 
-To fix this, remove the existing socket and create a new symlink pointing to the Rancher Desktop socket:
+To resolve this, identify the correct Docker socket path for your runtime by running:
+
+```bash
+docker context ls
+```
+
+This outputs a table showing each configured Docker context and its socket endpoint:
+
+```
+NAME                DESCRIPTION                               DOCKER ENDPOINT                                   ERROR
+default             Current DOCKER_HOST based configuration   unix:///var/run/docker.sock
+desktop-linux       Docker Desktop                            unix:///Users/myUser/.docker/run/docker.sock
+rancher-desktop *   Rancher Desktop moby context              unix:///Users/myUser/.rd/docker.sock
+```
+
+Find the context that matches your active Docker runtime (marked with `*`), and copy its `DOCKER ENDPOINT` value. Then add it to the runner's `config.env` file:
+
+```bash
+DOCKER_HOST="unix:///Users/myUser/.rd/docker.sock"
+```
+
+Replace the path with the correct socket endpoint for your setup. After updating `config.env`, restart the runner for the change to take effect.
+
+:::tip Rancher Desktop users
+If you're using Rancher Desktop and see this error after restarting it, the Docker socket symlink may need to be recreated. Run the following commands, then restart the runner:
 
 ```bash
 sudo rm /var/run/docker.sock
 sudo ln -s ~/.rd/docker.sock /var/run/docker.sock
 ```
 
-After recreating the symlink, restart the runner for the changes to take effect.
+:::
 
