@@ -88,21 +88,7 @@ import { MODULES } from "@site/src/constants";
           module: MODULES.rt,
           description:
             "Simulate realistic user traffic to validate performance under expected and peak demand.",
-          link: "#",
-        },
-        {
-          title: "Performance Metrics",
-          module: MODULES.rt,
-          description:
-            "Monitor response time, throughput, and error rates during load tests.",
-          link: "#",
-        },
-        {
-          title: "Auto-scaling Validation",
-          module: MODULES.rt,
-          description:
-            "Test that your system scales appropriately under increasing load.",
-          link: "#",
+          link: "/docs/resilience-testing/load-testing/get-started",
         },
       ],
     },
@@ -116,26 +102,12 @@ import { MODULES } from "@site/src/constants";
           module: MODULES.rt,
           description:
             "Validate backup systems, failover mechanisms, and recovery procedures.",
-          link: "#",
-        },
-        {
-          title: "RTO/RPO Validation",
-          module: MODULES.rt,
-          description:
-            "Ensure your Recovery Time and Recovery Point Objectives are met.",
-          link: "#",
-        },
-        {
-          title: "Failover Testing",
-          module: MODULES.rt,
-          description:
-            "Test region failures, network partitions, and cross-region failover scenarios.",
-          link: "#",
+          link: "/docs/resilience-testing/dr-testing/get-started",
         },
       ],
     },
     {
-      name: "Platform Capabilities",
+      name: "Shared Capabilities",
       description:
         "",
       list: [
@@ -144,21 +116,21 @@ import { MODULES } from "@site/src/constants";
           module: MODULES.rt,
           description:
             "Conduct controlled production testing exercises to validate incident response.",
-          link: "/docs/chaos-engineering/guides/gamedays",
+          link: "/docs/resilience-testing/chaos-testing/gamedays",
         },
         {
           title: "Governance & ChaosGuard",
           module: MODULES.rt,
           description:
             "Control who can run which tests, when, and where with enterprise governance.",
-          link: "/docs/chaos-engineering/guides/governance/rbac",
+          link: "/docs/resilience-testing/chaos-testing/governance/rbac",
         },
         {
           title: "CI/CD Integration",
           module: MODULES.rt,
           description:
             "Integrate resilience tests into your deployment pipelines.",
-          link: "/docs/chaos-engineering/integrations/cicd/one-click-cd-onboard",
+          link: "/docs/resilience-testing/chaos-testing/integrations/cicd/one-click-cd-onboard",
         },
       ],
     } 

@@ -117,10 +117,10 @@ static/  @rohanmaharjan100 @wei-harness
 /docs/faqs/static @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya
 
 # Resilience Testing Docs
-/docs/resilience-testing/ @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya @richardblack-Harness
-/release-notes/resilience-testing.md @Jonsy13 @Ashutosh-Bhadauriya @richardblack-Harness
-/src/components/Roadmap/data/resilienceTestingData.ts @Ashutosh-Bhadauriya @richardblack-Harness
-/src/components/Docs/data/resilienceTestingData* @Ashutosh-Bhadauriya @richardblack-Harness
+/docs/resilience-testing/ @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya
+/release-notes/resilience-testing.md @Jonsy13 @Ashutosh-Bhadauriya
+/src/components/Roadmap/data/resilienceTestingData.ts @Ashutosh-Bhadauriya
+/src/components/Docs/data/resilienceTestingData* @Ashutosh-Bhadauriya @Jonsy13
 # Resilience Testing FAQs
 /docs/faqs/resilience-testing-faqs @Jonsy13 @ksatchit @umamukkara @Ashutosh-Bhadauriya @richardblack-Harness
 
