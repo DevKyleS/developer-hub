@@ -20,6 +20,27 @@ The release notes describe recent changes to Harness Chaos Engineering.
 
 :::
 
+## February 2026
+### Version 1.74.1
+
+#### Images required
+Listed below are the images to download to use [image registry with Harness Delegate](https://developer.harness.io/docs/chaos-engineering/guides/image-registry).
+
+- harness/chaos-ddcr:1.74.1
+- harness/chaos-ddcr-faults:1.74.0
+- harness/chaos-log-watcher:1.74.0
+- harness/service-discovery-collector:0.54.0
+
+#### New Features and Enhancements
+
+- Updated Overview Page in chaos to incorporate Resilience Testing and YT videos (CHAOS-10770)
+- Added Risk UI present in the project, org and account level scopes (CHAOS-10729)
+- Added Resilience Risk backend and DB schema with the new db approach (CHAOS-10870)
+- Moved application maps to chaos testing and added banner for simplified nav (CHAOS-10961)
+- Added aks-node-down fault (CHAOS-10845)
+- Added Experiment Timeline Builder with options menu by hovering over existing node (CHAOS-8897)
+- Added initial setup for load test (CHAOS-10915)
+
 ## January 2026
 ### Version 1.73.1
 
