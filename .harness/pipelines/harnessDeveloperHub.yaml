@@ -251,3 +251,8 @@ pipeline:
       description: ""
       required: false
       value: netiflySiteId
+    - name: GEMINI_API_KEY
+      type: Secret
+      description: Gemini API Key for dynamically generated AI content, e.g. Release Notes landing page.
+      required: true
+      value: hdhGeminiApiKey
