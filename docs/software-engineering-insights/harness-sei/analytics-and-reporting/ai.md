@@ -65,8 +65,6 @@ Use the **All Assistants** dropdown menu to control which assistant's data is ca
 
 Without a comparison selected, every chart in the AI Insights dashboard uses its own Y-axis; percentage of adoption in **Adoption**, number of lines added in **Lines Added Per Contributor**, and percentage of acceptance rate in **Acceptance Rate** sections. When you select **PR Velocity Per Developer** or **PR Cycle Time**, a second Y-axis appears on the right side of each chart, and displays the selected Productivity metric (such as PR Cycle Time in hours). This allows you to see how AI adoption and outcomes move alongside productivity over time.
 
-To export the Productivity Insights dashboard data, click the kebab menu (⋮) and select **Export as PDF** or **Export as CSV**. For more information, see [Exporting SEI 2.0 Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/export).
-
 Below is a brief overview of each widget in **AI Insights** on the **Insights** page:
 
 ![](../static/ai-2.png)

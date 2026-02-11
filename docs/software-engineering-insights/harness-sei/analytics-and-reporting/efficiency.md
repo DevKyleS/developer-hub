@@ -104,13 +104,13 @@ Click the **View By** dropdown menu to choose whether sprint metrics are display
 * **Story Points**: Metrics reflect the estimated effort of work items based on story point values.
 * **Work Item Count**: Metrics reflect the number of items regardless of point estimates.
 
-You can also click the **Show trendline** checkbox to toggle a trend line overlay to visualize performance changes over time.
+You can also click the **Show trendline** checkbox to toggle a trend line overlay to visualize performance changes over time. To export the Sprint Insights dashboard data, click the **Export** button. For more information, see [Exporting SEI 2.0 Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/export).
 
 This dashboard highlights:
 
 * Planning effectiveness (Sprint Commit, Sprint Creep, Sprint Size)
 * Delivery performance (Delivered Commit, Missed Commit)
-* Delivery efficiency (Total Work Delivered %, Committed Work Delivered %, Creep Work Delivered %)
+* Delivery efficiency (Total Work Delivered %, Committed Work Delivered %, Creep Work Delivered %, Work Removal Rate %)
 * Team stability and predictability (Churn Rate, Predictability)
 
 You can analyze the data by selecting a time range (for example, the last several weeks or months) and a time granularity (weekly, monthly, or quarterly), which determines how the data is grouped and displayed in the charts. Additional sprint-specific grouping is available to view performance at the individual sprint level. By default, the data is aggregated by month, with bar charts displaying columns for work and delivery.
@@ -149,11 +149,11 @@ import TabItem from '@theme/TabItem';
 
 Each sprint appears as a single aggregated performance record for high-level sprint comparison.
 
-### Sprint delivery drilldown
+### Sprint details drilldown
 
-Sprint metrics provide sprint-level and sprint-specific drilldowns for deeper analysis in the **Sprint Delivery Drilldown** section.
+Sprint metrics provide sprint-level and sprint-specific drilldowns for deeper analysis in the **Sprint Details Drilldown** section.
 
-The default sprint view displays metrics across all selected sprints, including `Start Date`, `End Date`, `Sprint Commit`, `Delivered Commit`, `Sprint Creep`, `Delivered Creep`, `Committed Work Delivered`, `Total Work Delivered`, and `Creep Work Delivered`. 
+The default sprint view displays metrics across all selected sprints, including `Start Date`, `End Date`, `Sprint Commit`, `Delivered Commit`, `Sprint Creep`, `Delivered Creep`, `Committed Work Delivered`, `Total Work Delivered`, `Creep Work Delivered`, and `Work Removal Rate`. 
 
 <Tabs queryString="point-or-work-item">
 <TabItem value="point" label="Story Points">
