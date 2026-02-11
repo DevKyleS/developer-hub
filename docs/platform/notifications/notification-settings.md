@@ -10,35 +10,74 @@ redirect_from:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-With notification settings, you can enable or disable notification channels at an account level. By default, all notification channels are enabled on an account. Organizations and projects in the account inherit the account-level settings.
+Notification settings allow you to control which notification channels are available across your Harness account. These settings are managed at the account scope and apply to all organizations and projects within the account.
 
-When a notification channel is in the disabled state, no notification is sent for that channel, whether existing or new, until you enable the channel again.
+By default, all supported notification channels are enabled. Organizations and projects inherit the account-level notification settings and cannot override them.
 
-You can enable or disable the following notification channels:
-- Slack
-- Microsoft Teams
-- Webhooks
-- PagerDuty
+When a notification channel is disabled at the account level:
+   - No notifications are sent through that channel.
+   - This applies to both existing and newly configured notifications.
+   - Notifications resume automatically when the channel is enabled.
 
-To disable a given notification channel, in Harness, go to **Account Settings** > **Account Resources** > **Default Settings** > **Notifications**, and then turn off the corresponding toggle.
+Harness supports the following notification channels:
+   - Slack
+   - Microsoft Teams
+   - Webhooks
+   - PagerDuty
+   - Email
+   - Datadog
 
-With notification settings, you can add domain allowlists for notification channels at the account level. This feature enables you to specify fixed URL domains to which notifications can be sent. Expression URLs are not yet supported.
+---
 
-To add a domain filter to a notification channel, navigate to **Account Settings** > **Account Resources** > **Default Settings** > **Notifications** in the Harness platform and add the fixed URL domain to the corresponding notification setting.
+## Manage notification 
+
+To enable or disable a notification channel, navigate to **Account Settings** > **Account Resources** > **Default Settings** > **Notifications**, and use the corresponding toggle.
 
 ![](./static/notification-settings-url-filters.png)
 
-You can add domain filter to the following notification channels:
-- Email
-- Slack
-- Microsoft Teams
-- Webhooks
-- PagerDuty
-- Datadog
+### Email filters
 
-When a domain is added to a notification channel's domain allowlist, only recipients whose domains are present in the allowlist will receive notifications from that channel. This applies to both existing and new recipients until their domain is added to the channel's domain allowlist.
+Email filters allow you to restrict where notifications are sent by enforcing a domain allowlist at the account level. When enabled, notifications are delivered only to email addresses included in the allowlist.
 
-## Get started with notifications
+Only fixed domains are supported. Expression-based URLs or dynamic domains are not allowed.
+
+**Example**: If you add `example.com` to the email filters, only email addresses from that domain such as `alerts@example.com` will receive notifications.
+
+### Emails for platform limit alerts
+
+:::note Feature Availability
+Currently, the platform limit alerts feature is behind the feature flag `PL_ENABLE_LIMIT_ALERTS_NOTIFICATIONS`. Please, contact [Harness Support](mailto:support@harness.io) to enable this feature.
+:::
+
+You can configure email recipients to receive alerts as your account approaches the default [platform resource limits](/docs/platform/account-license-limits). Email alerts are sent when usage reaches 80%, 95%, and 100% of the allowed limit, giving you visibility and time to act. You can add up to five email addresses to receive these alerts.
+
+Platform limits are enforced at the account level, and these alerts help you proactively manage usage before limits are reached.
+
+#### Platform Resource Mapping 
+
+These variables are used in email notifications to alert users when platform resources are approaching their limits. You can find more about the platform resource limits [here](/docs/platform/account-license-limits/).
+
+| Resource Name    | Resource Variable                                   |
+| ---------------- | ------------------------------------------ |
+| Organizations    | `MULTIPLE_ORGANIZATIONS`                   |
+| Projects         | `MULTIPLE_PROJECTS`                        |
+| Secrets          | `MULTIPLE_SECRETS`                         |
+| User Groups      | `MULTIPLE_USER_GROUPS`                     |
+| Users            | `MULTIPLE_USERS`                           |
+| Service Accounts | `MULTIPLE_SERVICE_ACCOUNTS`                |
+| Variables        | `MULTIPLE_VARIABLES`                       |
+| API Keys         | `MULTIPLE_API_KEYS`                        |
+| API Key Tokens   | `MULTIPLE_API_TOKENS`                      |
+| Connectors       | `MULTIPLE_CONNECTORS`                      |
+| Secret Managers  | `SECRET_MANAGERS`                          |
+| Roles            | `CUSTOM_ROLES`                             |
+| Resource Groups  | `CUSTOM_RESOURCE_GROUPS`                   |
+| Role Bindings    | `ROLE_ASSIGNMENT`                          |
+| Audit streaming  | `AUDIT_STREAMING_DESTINATION`              |
+| Delegates        | `MULTIPLE_DELEGATES`                       |
+| Data Sinks       | `DATA_SINKS`                               |
+
+## Get started with pipeline notifications
 
 Learn how to notify users of different pipeline events using popular notification methods.
 
@@ -71,7 +110,7 @@ A new channel can be configured across all scopes. To set up a channel, go to Se
    If you select the Connectivity Mode as "Connect through a Harness Delegate" and Channel Type as "Email", ensure to add an [SMTP configuration](https://developer.harness.io/docs/platform/notifications/add-smtp-configuration) to which the Harness delegate has access. If this is not done, then the Email notifications will fail.
    :::
 
-  ![](./static/create-new-channel.png)
+   ![](./static/create-new-channel.png)
 
 ### Configure pipeline notifications
 
