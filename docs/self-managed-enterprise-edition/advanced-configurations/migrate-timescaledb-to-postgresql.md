@@ -14,7 +14,11 @@ tags:
 :::note Important
 The migration from TimescaleDB to PostgreSQL is automatically triggered as part of the Harness SMP upgrade to version 0.36.x; Before you upgrade to SMP 0.36.x, you must be running version 0.35.x.
 
-TimescaleDB will be present in SMP v0.36.x but will no longer be in use after migration. The TimescaleDB will be completely removed in SMP v0.37.x. 
+TimescaleDB will be present in SMP v0.36.x but will no longer be in use after migration. The TimescaleDB will be completely removed in SMP v0.37.x.
+:::
+
+:::warning CRITICAL
+Once you have successfully upgraded to SMP 0.36.0, do not re-run the Helm upgrade command (`helm upgrade`) for version 0.36.0 again. Re-running the upgrade can issues with the migration process resulting in data loss. If you encounter any issues after the initial upgrade, contact [Harness Support](https://support.harness.io) for assistance before taking any further action.
 :::
 
 Harness is transitioning from TimescaleDB to PostgreSQL to enhance the platform and reduce operational overhead. This page outlines the prerequisites for the migration and provides guidance on resolving common issues that may arise during the process.

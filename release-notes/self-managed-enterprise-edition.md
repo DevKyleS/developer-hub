@@ -29,9 +29,12 @@ Harness Self-Managed Platform [v0.36.0](#february-09-2026-version-0360) is trans
 
 Please follow the prerequisites and instructions [here](/docs/self-managed-enterprise-edition/advanced-configurations/tsdb-to-postgresql-migration) to prepare your environment for the migration. During this transition, existing data is migrated automatically using a dedicated migration process. No manual action is required from customers during migration. However, we strongly recommend validating your deployment after the upgrade to ensure dashboards, metrics, and reports behave as expected.
 
-If you have custom integrations, queries, or monitoring workflows that depend on TSDB-specific behavior, review them carefully after the upgrade. For any issues, contact [Harness Support](mailto:support@harness.io) before proceeding with further upgrades.
-:::
+If you have custom integrations, queries, or monitoring workflows that depend on TSDB-specific behavior, review them carefully after the upgrade. 
 
+**CRITICAL:** Once you have successfully upgraded to SMP 0.36.0, do not re-run the Helm upgrade command (`helm upgrade`) for version 0.36.0 again. Re-running the upgrade can issues with the migration process resulting in data loss. 
+
+If you encounter any issues after the initial upgrade, contact [Harness Support](https://support.harness.io) for assistance before taking any further action. 
+:::
 
 :::info MongoDB Upgrade to Version 7.x in SMP Environments
 
