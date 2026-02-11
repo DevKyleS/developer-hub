@@ -334,8 +334,8 @@ upgrades:
 
 ## February 09, 2026, Version 0.36.0 <!-- Draft : Feb 09, 2026 -->
 
-:::Note Important
-The migration from TimescaleDB to PostgreSQL is automatically triggered as part of the Harness SMP upgrade to version 0.36.0. Before you upgrade to SMP 0.36.0, you must be running version 0.35.x. Learn more about the migration in the [migration guide](https://docs.harness.io/docs/self-managed-enterprise-edition/advanced-configurations/migrate-timescaledb-to-postgresql).
+:::note Important
+The migration from TimescaleDB to PostgreSQL is automatically triggered as part of the Harness SMP upgrade to version 0.36.0. Before you upgrade to SMP 0.36.0, you must be running version 0.35.x. Learn more about the migration in the [migration guide](/docs/self-managed-enterprise-edition/advanced-configurations/tsdb-to-postgresql-migration).
 :::
 
 This release includes the following Harness module and component versions.
