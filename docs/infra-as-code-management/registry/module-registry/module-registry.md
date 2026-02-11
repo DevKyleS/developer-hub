@@ -51,6 +51,27 @@ Follow the steps in the guide below to register a new module.
 </TabItem>
 </Tabs>
 
+#### Register modules with OpenTofu or Terraform
+
+You can also register modules programmatically using the Harness OpenTofu or Terraform Provider with the `harness_platform_infra_module` resource.
+
+:::warning Repository Field Format
+When using the `harness_platform_infra_module` resource, the `repository` field must be **the repository name only**, not the full URL.
+
+```hcl
+resource "harness_platform_infra_module" "example" {
+  name                = "my-module"
+  description         = "Example module"
+  system              = "provider"
+  repository          = "tf-aws-vpc"  # Repository name only
+  repository_branch   = "main"
+  repository_connector = "account.mygithub"
+}
+```
+:::
+
+---
+
 ## Review module settings
 Harness pulls various details from your module and makes it easy to review them.
 
