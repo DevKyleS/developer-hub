@@ -994,5 +994,11 @@
     "description": "FF to support GitX webhook audit events",
     "gaStartDate": "2026-02-05",
     "module": "Pipeline"
+  },
+  {
+    "flagKey": "CDS_GITOPS_ENABLE_ENV_PROPAGATION_UX",
+    "description": "Enables the environment propagation UX in GitOps pipeline stages",
+    "gaStartDate": "2026-02-11",
+    "module": "Continuous Delivery"
   }
 ]
