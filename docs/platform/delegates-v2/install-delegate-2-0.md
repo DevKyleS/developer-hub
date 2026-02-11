@@ -871,6 +871,11 @@ $env:HARNESS_WORKDIR="C:\custom\path\to\workdir"
 
 - The delegate automatically creates the directory and subdirectories. Ensure the delegate process has read/write permissions for this directory.
 
+### Configure Init Script
+
+The INIT_SCRIPT feature allows you to execute a pre-startup script before the delegate makes its registration call and loads configurations. This enables you to install tools, set up environment variables, and perform other initialization tasks.
+
+For complete documentation on configuring and using init scripts, including command-line flags, environment variables, and Kubernetes deployment examples, see [Run Initialization Scripts Before Delegate Startup](./configure-init-script).
 
 ## Debugging
 
