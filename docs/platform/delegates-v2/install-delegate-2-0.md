@@ -924,17 +924,41 @@ Get-Content -Path "C:\HarnessDelegate\logs\delegate.log" -Tail 20 -Wait
 
 The New Delegate exposes metrics on the `/metrics` endpoint for monitoring and observability. By default, the metrics endpoint is available at `http://localhost:3000/metrics`.
 
-## End to End Demo
+## End-to-End Demo
 
-This video walks through an end to end demo of the delegate installation, including usage and a pipeline execution.
+This video walks through an end-to-end demo of the delegate installation, including usage and a pipeline execution.
 
 <DocVideo src="https://www.loom.com/share/1e292d0f51004882bfd5462ef0553222?sid=487e23cb-28fc-4d2e-ac66-07197fa7dafe" />
+
+## Upgrading the Delegate
+
+There is currently no automated upgrade mechanism for the new delegate. The upgrade process is the same as installation — stop the delegate, download the latest binary, and start it again.
+
+1. Stop the running delegate.
+2. Download the latest binary from the [installation step](#download-and-install-the-delegate), replacing the existing `delegate` file.
+3. Start the delegate.
+
+Refer to the [Manage the Delegate](#manage-the-delegate) instructions for the stop and start commands specific to your operating system.
+
+## Token Management
+
+### Token creation
+
+The delegate token is automatically generated when a project is created. You can view it by navigating to **Project Settings** > **Delegates** > **Tokens** in the Harness UI.
+
+### Token storage
+
+The token is stored in the delegate's `config.env` file as the `HARNESS_TOKEN` value. For Kubernetes-based delegates, the token is stored as a Kubernetes secret. If someone gains access to the Kubernetes pod, they can view the token. The same applies to local runners — if the VM or machine is compromised, the token can be accessed.
+
+### Token rotation
+
+Harness does not handle secret rotation. It is the customer's responsibility to rotate their delegate tokens and update the corresponding Kubernetes secret or `config.env` file.
 
 ## Troubleshooting
 
 ### Issue: Docker client not initialized
 
-This error can occur when using Rancher Desktop as your Docker runtime. Every time Rancher Desktop is restarted, the Docker socket symlink needs to be recreated.
+This error can occur when using Rancher Desktop as your Docker runtime. Every time Rancher Desktop restarts, the Docker socket symlink must be recreated.
 
 To fix this, remove the existing socket and create a new symlink pointing to the Rancher Desktop socket:
 
