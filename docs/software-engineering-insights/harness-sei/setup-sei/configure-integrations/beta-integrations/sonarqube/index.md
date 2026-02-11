@@ -1,27 +1,36 @@
 ---
 title: Connect with SonarQube
-description: Integrate Harness SEI with SonarQube for code quality and security insights.
+description: Configure the SonarQube integration in Harness SEI to ingest code quality data.
 sidebar_position: 1
 sidebar_label: SonarQube
 ---
 
 :::tip
-Security Insights is in beta. To request access, contact [Harness Support](/docs/software-engineering-insights/sei-support).
+The SonarQube integration is in beta. To request access, contact [Harness Support](/docs/software-engineering-insights/sei-support).
 :::
 
 [SonarQube](https://docs.sonarsource.com/) is an open-source platform for continuous inspection of code quality. It performs automatic static analysis to detect bugs, code quality issues, and security vulnerabilities.
 
-On initial setup, Harness SEI backfills up to 6 months of historical code quality findings. Once connected, the Open vulnerabilities by severity metric updates on the Security Insights dashboard in the **Security** tab of the **Insights** page.
-
-Once connected, code quality findings from SonarQube contribute to organization-wide and team-level Security Insights metrics, including total open vulnerabilities.
+On initial setup, Harness SEI backfills up to 6 months of historical code quality findings. When configured, Harness SEI can ingest and validate SonarQube code quality data.
 
 ## Prerequisites
 
-Ensure that you have the [SEI Admin role](/docs/software-engineering-insights/harness-sei/get-started/rbac#sei-admin-account--project-level) and an SonarQube API token.
+Before you begin, ensure that you have:
 
-### Create a SonarQube API token
+- An [SEI Admin role](/docs/software-engineering-insights/harness-sei/get-started/rbac#sei-admin-account--project-level)
+- Access to a SonarQube or SonarQube Cloud account and can generate a SonarQube API token with read access to the required organizations and projects
 
-To configure the SonarQube integration, you must create an API token in SonarQube. The token must be either a **User Token** or a **Global Analysis Token**, and have sufficient permissions to access organization and project-level analysis data. For [SonarQube Cloud](https://docs.sonarsource.com/sonarqube-cloud/managing-your-account/managing-tokens), the token is associated with a user and scoped by that user's organization access.
+## Create a SonarQube API token
+
+To configure the SonarQube integration, create an API token in SonarQube. The token must be either a **User Token** or a **Global Analysis Token**, and have permission to read organization and project-level analysis data. For [SonarQube Cloud](https://docs.sonarsource.com/sonarqube-cloud/managing-your-account/managing-tokens), tokens are associated with a user and scoped by that user's organization access.
+
+The token must have access to all organizations and projects you want SEI to monitor, and the following required permission:
+
+| Permission | Why it’s required |
+|-----------|-------------------|
+| **Browse** | Allows SEI to access projects, metrics, issues, and quality gate status |
+
+Harness recommends using a service account user token with **read-only access** and **no expiry or a long-term expiry (1+ year)**. This helps ensure uninterrupted ingestion and avoids issues caused by employee turnover. 
 
 SonarQube tokens can also be scoped at the **organization** level. For more information about creating scoped organization tokens, see the [official SonarQube documentation](https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/managing-organization/scoped-organization-tokens).
 
@@ -35,7 +44,7 @@ To add the integration:
 
 1. From the SEI navigation menu, click **Account Management**.
 1. On the **Integrations** page, select the **Available Integrations** tab.
-1. Locate the **ArmorCode** integration and click **Add Integration**.
+1. Locate the **SonarQube** integration and click **Add Integration**.
 1. In the **Overview** section, provide a name for the integration (for example, `SonarQube Production`) and optionally, add tags.
 1. Click **Continue**.
 1. Add your SonarQube instance URL (for example, `https://sonarcloud.io`) in the `SonarQube URL` field.
@@ -51,31 +60,19 @@ To add the integration:
 
 ## Integration monitoring
 
-To monitor ingestion and aggregation activity, navigate to the **Monitoring** tab for the SonarQube integration. This tab displays ingestion logs, which show the status and execution details of each data sync.
+Once you've configured the integration, you can monitor ingestion activity on the **Monitoring** tab in the SonarQube integration page.
 
-You can click the **Filters** button to filter these logs by **Status** (for example: `Success`, `Failed`, `Pending`, or `Scheduled`). These statuses reflect the state of ingestion or aggregation jobs.
+The **Monitoring** tab displays ingestion logs that show the status and execution details of each sync. You can filter logs by **Status**, such as `Success`, `Failed`, `Pending`, or `Scheduled`.
 
-### Ingestion Logs
+### Ingestion logs
 
-The following information is available for each ingestion and aggregation run.
+You can use ingestion logs to validate successful syncs and troubleshoot ingestion issues. Each ingestion run includes the following information:
 
 | Column | Description |
 |------|-------------|
-| **Scan Range Time** | The time range for which data was fetched during ingestion. |
-| **Data Retrieval Process** | The ingestion or aggregation method used to fetch and process data. If multiple aggregations occur, this reflects the most recent aggregation status. |
-| **Task Start Time** | The timestamp when the ingestion or aggregation job started. |
-| **Status** | The execution status of the job (for example, `Success` or `Failed`). |
-| **Time to Complete** | Total time taken for the job to finish execution. |
-| **Retries** | Number of times the job was retried before completion. |
-
-:::tip
-Use ingestion logs to troubleshoot missing data, validate successful syncs, or identify delays in Security Insights reporting.
-:::
-
-## Next steps
-
-After configuring the SonarQube integration, you can:
-
-- Select the SonarQube integration from the `Code Quality Tools` section on the **Integrations** tab in [**Team Settings**](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=security-settings#configure-integrations-for-a-team)
-- View organization-wide security metrics in the [Security Insights dashboard](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/security)
-- Drill down into team-level vulnerabilities by selecting a team in the **Org Tree**
+| **Scan Range Time** | The time window for which data was retrieved. |
+| **Data Retrieval Process** | The ingestion process used. |
+| **Task Start Time** | When the job started. |
+| **Status** | Execution status (for example, `Success` or `Failed`). |
+| **Time to Complete** | Total runtime for the job. |
+| **Retries** | Number of retries before completion. |
