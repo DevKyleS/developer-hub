@@ -1000,5 +1000,11 @@
     "description": "Enables the environment propagation UX in GitOps pipeline stages",
     "gaStartDate": "2026-02-11",
     "module": "Continuous Delivery"
+  },
+  {
+    "flagKey": "GITOPS_APPLICATIONSET_FIRST_CLASS_SUPPORT",
+    "description": "Enables ApplicationSet first class support.",
+    "gaStartDate": "2026-02-11",
+    "module": "GitOps"
   }
 ]
