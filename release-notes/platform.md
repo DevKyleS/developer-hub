@@ -188,6 +188,13 @@ The following deprecated API endpoints are longer supported:
 
 ## February 2026
 
+### Version 1.130.x <!--February 12,2026-->
+
+#### Fixed issues
+
+- Fixed an issue where permission checks for the split user group permissions were not properly controlled by the feature flag. [PL-68252]
+- Addressed CVE-2026-24049 by pinning the JaCoCo version used in Python. [PL-68039]
+
 ### Version 1.129.x <!--February 05,2026-->
 
 No enhancements or fixes were released in this cycle.
