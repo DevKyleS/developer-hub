@@ -1,5 +1,5 @@
 ---
-title: Interpret log verification results
+title: Interpret Log Verification Results
 sidebar_position: 3
 description: Learn how to interpret log verification results. 
 ---
@@ -46,7 +46,7 @@ Harness CV classifies the error clusters identified by the ML model during log a
 
 Harness CV provides a powerful mechanism to visualize and interpret the log verification results.
 
-**Prerequisite**: You should have added a health source to the Verify step and run the pipeline. To learn more about how to add a health source to the verify step and run the pipeline, go to [Configure CV](/docs/category/configure-cv).
+**Prerequisite**: You should have added a health source to the Verify step and run the pipeline. To learn more about how to add a health source to the verify step and run the pipeline, go to [Configure verification](/docs/category/configure-cv).
 
 To view log verification results for a pipeline:
 

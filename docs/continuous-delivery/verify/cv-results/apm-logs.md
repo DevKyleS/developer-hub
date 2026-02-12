@@ -1,5 +1,5 @@
 ---
-title: APM and logging tools
+title: APM and Logging Tools
 sidebar_position: 1
 description: Understand APM and logging tools.
 ---
@@ -13,7 +13,7 @@ APM tools automate the monitoring of various aspects of a web application's perf
 
 You can configure your APM tool (also known as a health source) in Harness Continuous Verification (CV). Harness CV uses the data provided from your APM tool to analyze variations in different metrics. Harness CV supports all major APM tools, such as AppDynamics, New Relic, Google Cloud Operations, Prometheus, Datadog, and Dynatrace. To see the list of APM tools supported by Harness, go to [What's supported in CV](../cv-whats-supported.md).
 
-To know how to configure CV and set up your APM tool as a health source, go to [Configure CV](/docs/category/configure-cv).
+To know how to configure CV and set up your APM tool as a health source, go to [Configure verification](/docs/category/configure-cv).
 
 
 ## What is a logging tool?
@@ -22,7 +22,7 @@ Logging tools are software solutions that facilitate the management and analysis
 
 You can configure your logging tool (also known as a health source) in Harness CV. Harness CV uses the logs provided by your logging tool to analyze errors. Harness CV supports all major APM tools, such as Splunk and Google Cloud Operations. To see the list of logging tools supported by Harness, go to [What's supported in CV](../cv-whats-supported.md).
 
-To know how to configure Harness CV and set up your logging tool as a health source, go to [Configure CV](/docs/category/configure-cv).
+To know how to configure Harness CV and set up your logging tool as a health source, go to [Configure verification](/docs/category/configure-cv).
 
 
 ## Next steps

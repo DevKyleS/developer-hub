@@ -1,5 +1,5 @@
 ---
-title: Machine learning usage
+title: Machine Learning Usage
 sidebar_position: 1
 description: Learn how the machine learning of Continuous Verification works. 
 slug: /continuous-delivery/verify/cv-concepts/machine-learning

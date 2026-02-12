@@ -1,5 +1,5 @@
 ---
-title: Node filtering
+title: Node Filtering
 description: Learn how to filter nodes in the verify step.
 sidebar_position: 200
 ---

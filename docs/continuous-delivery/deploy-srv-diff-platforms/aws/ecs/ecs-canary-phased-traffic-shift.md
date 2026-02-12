@@ -117,7 +117,7 @@ The ECS basic strategy with phased traffic shifting and scaling performs the fol
 
 1. **ECS Service Setup step:** Create a new ECS service with 0 instances.
 2. **First ECS Upgrade Container step:** Upgrade instances of new service by X% (or count) and decrease instances of old service by Y% (or count).
-   1. (Optional) Perform Harness [Continuous Verification (CV)](/docs/continuous-delivery/verify/cv-getstarted/verify-deployments-with-the-verify-step). Once CV is performed, step 2 is run again.
+   1. (Optional) Perform Harness [Continuous Verification (CV)](/docs/continuous-delivery/verify/verify-deployments-with-the-verify-step). Once CV is performed, step 2 is run again.
 3. **Additional ECS Upgrade Container step(s):** ECS Upgrade Container: Upgrade new service to 100% (or count) and old service to 0% (or count).
 
 ![picture 0](static/86df8a74474e01a5a6469a9fbc0b8ff60b1dc4366c22be3184a3afacadf5eee6.png)

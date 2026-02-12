@@ -112,7 +112,7 @@ To experience the full power of Harness Continuous Delivery, we recommend the fo
         3.  [API](https://apidocs.harness.io/tag/Pipeline-Execute#operation/postPipelineExecuteWithInputSetList). 
     2.  You can customize you pipelines further by adding steps such as approvals, policy checks, Jira change management, etc. For more information, go to:
         1.  [Jira Approval step](/docs/platform/approvals/adding-jira-approval-stages). 
-        2.  [Verify step](/docs/continuous-delivery/verify/cv-getstarted/configure-first-cv) (integrating logging and application monitoring tools). 
+        2.  [Verify step](/docs/continuous-delivery/verify/configure-cv/simple-verification) (integrating logging and application monitoring tools). 
 7.  Configure deployment dashboards.
     1.  Harness provides out of the box dashboards for development teams to track their deployed services. For more information, go to [Monitor deployments and services in CD dashboards](/docs/continuous-delivery/monitor-deployments/monitor-cd-deployments). 
     2.  You can also customize the dashboards and build your own via our [custom dashboards](/docs/platform/dashboards/create-dashboards). 

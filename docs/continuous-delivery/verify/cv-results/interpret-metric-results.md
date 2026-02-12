@@ -1,5 +1,5 @@
 ---
-title: Interpret metric verification results
+title: Interpret Metric Verification Results
 sidebar_position: 2
 description: Learn how to interpret metric verification results. 
 ---

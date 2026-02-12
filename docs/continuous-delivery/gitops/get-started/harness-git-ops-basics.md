@@ -98,7 +98,7 @@ Harness GitOps benefits from all Harness platform features, such as:
 
 - **Monitoring & Auditing** – Track changes and ensure compliance using [Harness Dashboard](/docs/continuous-delivery/monitor-deployments/monitor-cd-deployments.md).
 
-- **Continuous Verification (CV)** - Automatically detect anomalies and reduce deployment risks using [Harness CV](/docs/continuous-delivery/verify/cv-getstarted/configure-first-cv).
+- **Continuous Verification (CV)** - Automatically detect anomalies and reduce deployment risks using [Harness CV](/docs/continuous-delivery/verify/configure-cv/simple-verification).
 
 While the GitOps Agent runs in your environment, all other GitOps functionalities are managed through Harness SaaS—eliminating the need to manage separate dashboards or administrative frontends.
 

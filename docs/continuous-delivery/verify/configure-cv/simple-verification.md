@@ -1,15 +1,16 @@
 ---
-title: Set up your first CV
-description: Learn how to set up a simple CV in your Harness CD pipeline.
-sidebar_position: 20
-canonical_url: https://www.harness.io/blog/ci-cd-pipeline-as-code-with-harness
+title: Configure Threshold-Based Verification
+description: Learn how to configure threshold-based verification in your Harness CD pipeline.
+sidebar_position: 2
+redirect_from:
+  - /docs/continuous-delivery/verify/cv-getstarted/configure-first-cv/
 ---
 
 :::info note
 Currently, this feature is behind the feature flag `SRM_ENABLE_SIMPLE_VERIFICATION`. Contact Harness Support to enable the feature.
 :::
 
-This section outlines the process of adding a Harness Continuous Verification (CV) step into a Harness CD pipeline, configuring a health source, and conducting deployment verification.
+This topic outlines the process of adding a Verify step into a Harness CD pipeline, configuring a health source, and conducting deployment verification using threshold analysis (no ML).
 
 For illustration purposes, this topic uses SumoLogic as a sample health source to guide you through the health source configuration steps.
 
@@ -20,7 +21,7 @@ Make sure that you have created:
 
 - A connector for your health source in Harness. To learn how to add a connector, go to [Connect to monitoring and logging systems](/docs/platform/connectors/monitoring-and-logging-systems/connect-to-monitoring-and-logging-systems).
 
-- A CD deployment pipeline in Harness. To learn how to create a CD pipeline in Harness yet, go to [Create your first CD pipeline](/docs/continuous-delivery/cd-onboarding/onboarding-guide#step-2-create-your-first-cd-pipeline). 
+- A CD deployment pipeline in Harness. To learn how to create a CD pipeline, go to [Create your first CD pipeline](/docs/continuous-delivery/cd-onboarding/onboarding-guide#step-2-create-your-first-cd-pipeline). 
 
 
 ## Add a Verify step to your CD pipeline  
@@ -32,7 +33,7 @@ To add a Verify step to your pipeline, use one of the methods below.
 2. Select the pipeline to which you want to add the **Verify** step.
    The Pipeline Studio page appears.
 
-3. Select the stage where you want to add the Verify step. 
+3. Select the stage where you want to add the Verify step. 
 
 4. On the stage settings pane, select the **Execution** tab.
 
@@ -50,9 +51,9 @@ You can add a step at various points in the pipeline, such as the beginning, end
 
 On the Verify settings page, do the following:
 
-1. In **Name**, enter a name for the Verification step.
+1. In **Name**, enter a name for the Verification step.
    
-2. In **Timeout**, enter a timeout value for the step. Harness uses this information to time out the verification. Use the following syntax to define a timeout:
+2. In **Timeout**, enter a timeout value for the step. Harness uses this information to time out the verification. Use the following syntax to define a timeout:
    - **w** for weeks.
    - **d** for days.
    - **h** for hours.
@@ -62,7 +63,7 @@ On the Verify settings page, do the following:
 
    For example, use 1w for one week, 7d for 7 days, 24h for 24 hours, 100m for 100 minutes, 500s for 500 seconds, and 1000ms for 1000 milliseconds.
    
-   The maximum timeout value you can set is **53w**. You can also set timeouts at the pipeline level.
+   The maximum timeout value you can set is **53w**. You can also set timeouts at the pipeline level.
 
 
 ## Select the continuous verification type and duration
@@ -78,7 +79,7 @@ On the Verify settings page, do the following:
 
 ## Create a monitored service
 
-The next step is to create a monitored service for the Verify step. Harness CV uses a monitored service to monitor health trend deviations using logs and metrics obtained from your SumoLogic health source.
+The next step is to create a monitored service for the Verify step. Continuous Verification uses a monitored service to monitor health trend deviations using logs and metrics obtained from your SumoLogic health source.
 
 
 :::info note
@@ -90,7 +91,7 @@ For instance, when you run the pipeline, if you input the service as `todolist` 
 
 To create a monitored service, on the Verify settings page, do the following:
 
-1. In the **Monitored Service Name** section, select **Click to autocreate a monitored service**.
+1. In the **Monitored Service Name** section, select **Click to autocreate a monitored service**.
 
       Harness automatically generates a monitored service name by combining the service and environment names. The generated name appears in the **Monitored Service Name** field. Note that you cannot edit the monitored service name.
 
@@ -180,7 +181,7 @@ The following steps describe defining a query and configuring a risk profile:
 
 #### Configure threshold
 
-Harness CV evaluates the metrics based on the fail-fast threshold you configure. If the metrics exceed the fail-fast threshold, the verification step fails. In the context of the [SumoLogic query](#define-a-query) you defined, the threshold sets a memory usage limit beyond which the application is considered to be in a problematic state, and the verification fails.
+Continuous Verification evaluates the metrics based on the fail-fast threshold you configure. If the metrics exceed the fail-fast threshold, the verification step fails. In the context of the [SumoLogic query](#define-a-query) you defined, the threshold sets a memory usage limit beyond which the application is considered to be in a problematic state, and the verification fails.
 
 To set a fail-fast threshold, follow these steps:
 
@@ -188,9 +189,9 @@ To set a fail-fast threshold, follow these steps:
 
 2. From the **Metric** dropdown, select **SumoLogic Metric**. This is the metric you created in the [Define metric configuration settings](#define-metric-configuration-settings) step.
 
-3. In the **Action** field, select what the CV should do when applying the rule. Let's select **Fail Immediately**.
+3. In the **Action** field, select what action should be taken when applying the rule. Select **Fail Immediately**.
 
-4. In the **Criteria** field, choose **Percentage Deviation**, and from the greater than select **1**. This sets a threshold for memory usage beyond which the system or application is considered to be in a problematic state, and action should be taken.  Please note that when using **Percentage Deviation**, to observe results using [Normalized Views](https://developer.harness.io/docs/continuous-delivery/verify/cv-results/interpret-metric-results/#filter-metric-summary).
+4. In the **Criteria** field, choose **Percentage Deviation**, and from the greater than select **1**. This sets a threshold for memory usage beyond which the system or application is considered to be in a problematic state, and action should be taken. When using **Percentage Deviation**, observe results using [Normalized Views](https://developer.harness.io/docs/continuous-delivery/verify/cv-results/interpret-metric-results/#filter-metric-summary).
 
 ![Configure threshold](./static/cv-simple-cv-select-failfast-threshold.png)
 
@@ -203,7 +204,7 @@ To set a fail-fast threshold, follow these steps:
    
 3. Select **Save**.
    
-   You have successfully added and configured CV in your Harness pipeline.
+   You have successfully added and configured verification in your Harness pipeline.
 
 ![Configure threshold](./static/cv-simple-cv-healthsource-added.png)
 
@@ -247,4 +248,3 @@ The following screenshots show the console view of successful and failed verific
 **Failed verification**
 
 ![Failed verification step](./static/cv-simple-cv-fail.png)
-

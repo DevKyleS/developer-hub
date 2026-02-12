@@ -1,5 +1,5 @@
 ---
-title: Create and use a monitored service template in a verify step
+title: Create and Use a Monitored Service Template in a Verify Step
 sidebar_position: 3
 description: Learn about strategies to template out CV workflow items. 
 slug: /continuous-delivery/verify/cv-concepts/templates

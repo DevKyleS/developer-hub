@@ -1,7 +1,7 @@
 ---
-title: What's supported in Harness CV
-description: APM tools and log management tools supported by Harness CV.
-sidebar_label: What's supported
+title: What's Supported
+description: APM tools and log management tools supported by Continuous Verification.
+sidebar_label: What's Supported
 sidebar_position: 10
 ---
 
@@ -28,7 +28,7 @@ For example, if you test a deployment with just 1 instance (replica), the CV ste
 If needed, you can request an increase in the rate limit from DataDog to accommodate larger deployments.
 :::
 
-To learn how to add a health source, go to [Configure CV](/docs/category/configure-cv).
+To learn how to add a health source, go to [Configure verification](/docs/category/configure-cv).
 
 For information about what's supported for other Harness modules and the Harness Platform overall, go to [Supported platforms and technologies](/docs/platform/platform-whats-supported.md).
 

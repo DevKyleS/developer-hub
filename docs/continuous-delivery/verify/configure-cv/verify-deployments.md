@@ -3,20 +3,18 @@ title: Configure the Verify Step
 description: Learn how to verify deployments.
 sidebar_position: 1
 redirect_from:
-  - /docs/first-gen/continuous-delivery/continuous-verification/continuous-verification-overview/concepts-cv/24-7-service-guard-overview/
-  - /docs/first-gen/continuous-delivery/continuous-verification/continuous-verification-overview/concepts-cv/instana-verification-overview/
   - /docs/first-gen/continuous-delivery/continuous-verification/instana-verification/instana-service-guard/
 ---
 
-Harness Continuous Verification (CV) integrates with [various health sources](/docs/category/health-sources) to:
+Continuous Verification integrates with [various health sources](/docs/category/health-sources) to:
 
 - Verify that the deployed service is running safely.
 - Perform automatic rollbacks.
 - Apply machine learning to every deployment to identify and flag anomalies in future deployments.
 
-This topic covers how to add and configure health sources for the verify step.
+This topic covers how to add and configure health sources for the Verify step.
 
-## Review: CV setup options
+## Review: Verification setup options
 
 To use the verify step, you will need a [Harness Monitored Service](/docs/platform/monitored-service). In the simplest terms, a monitored service is basically a mapping of a Harness Service to a service monitored by your APM or logging tool.
 
@@ -35,13 +33,17 @@ There are two ways to add the verify step:
     - When you select the deployment strategy you want to use, there is also an **Enable Verification** option. Select it.  
     - Harness will automatically add the **Verify** step. For example, here is a stage where Canary strategy and the **Enable Verification** option were selected 
 
-![](./static/verify-deployments-1.png)
+<div style={{textAlign: 'center'}}>
+  <DocImage path={require('./static/verify-deployments-1.png')} width="50%" height="50%" title="Click to view full size image" />
+</div>
 
 2. **Add the Verify step to an existing Execution setup:** 
     - You can also add the Verify step to the Execution section of a CD stage in a Pipeline you previously created. 
     - Simply click **Add Step** after the deployment step, and then select **Verify**.
 
-![](./static/verify-deployments-2.png)
+<div style={{textAlign: 'center'}}>
+  <DocImage path={require('./static/verify-deployments-2.png')} width="50%" height="50%" title="Click to view full size image" />
+</div>
 
 ## Step 2: Enter a name and timeout
 
@@ -64,7 +66,6 @@ The maximum is `53w`. Timeouts can be set at the Pipeline level also.
 
 In **Continuous Verification Type**, select a type that matches your [deployment strategy](./../verify-deployments-with-the-verify-step.md#continuous-verification-type)
 
-![](./static/verify-deployments-3.png)
 
 ## Step 4: Create a Monitored Service
 
@@ -116,7 +117,9 @@ To configure:
 2. Under the **Configurable Properties** section, select **deploymentStartTime** from the dropdown for Command type.
 3. Enter the desired start time, which is a UTC zone
 
-![](./static/deployment-start-time.png)
+<div style={{textAlign: 'center'}}>
+  <DocImage path={require('./static/deployment-start-time.png')} width="50%" height="50%" title="Click to view full size image" />
+</div>
 
 This time represents the deployment start time, allowing the system to collect pre-deployment data for the configured duration (in minutes) before this specified time.
 
@@ -310,7 +313,9 @@ You can see that the verification takes a few minutes.
 
 Once verification is complete, the Verify step shows the following:
 
-![](./static/verify-deployments-4.png)
+<div style={{textAlign: 'center'}}>
+  <DocImage path={require('./static/verify-deployments-4.png')} width="50%" height="50%" title="Click to view full size image" />
+</div>
 
 The risk level might initially display a number of violations, but the red and orange colored host often change to green over the duration.
 
