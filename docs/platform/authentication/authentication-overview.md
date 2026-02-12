@@ -181,3 +181,129 @@ To configure your account's absolute session timeout, do the following:
 :::info
 When both the session inactivity timeout and the absolute session timeout are set, the condition that is met first will be honored.
 :::
+
+---
+## Audit Logs for Authentication
+
+Harness audit trails record login attempts across all supported authentication methods. These audit events help administrators monitor authentication activity and investigate both successful and failed login attempts. Audit logs are generated for the following methods:
+   * LDAP
+   * SAML
+   * Two-Factor Authentication (2FA)
+   * Password-based authentication
+
+Each audit entry shows **how the login was attempted**, whether it was successful or failed, and the reason for failure, if applicable. Audit logs are only created for users who exist in your Harness account and are associated with a valid email address. No audit log is generated for login attempts by users who do not exist in the account.
+
+While successful login events are common, you should pay closer attention to unsuccessful attempts. You may encounter the following failure reasons in the audit trail or in the JSON output when audit streaming is enabled for your account.
+
+### 1. LDAP authentication
+
+Unsuccessful login attempts can occur for the following reasons:
+   * **Domain not whitelisted:** The user’s email domain is not permitted for the account.
+   * **LDAP not configured for the account:** LDAP authentication is not set up.
+   * **Invalid credentials:** The username or password provided is incorrect.
+   * **Unable to fetch LDAP configuration:** Harness could not retrieve LDAP settings due to an internal error.
+   * **LDAP not configured for NextGen:** LDAP authentication is not configured for NextGen in the account.
+   * **LDAP authentication error:** An unexpected error occurred during the LDAP authentication process.
+
+   **Example JSON:**
+   ```json
+   {
+   "module": "CORE",
+   "resource": {
+      "type": "USER",
+      "identifier": "demouser@harness.io",
+      "labels": {
+         "resourceName": "Demo Test",
+         "userId": "68xLsmP7RzOJ_F3M_LBBHw"
+      }
+   },
+   "action": "UNSUCCESSFUL_LOGIN",
+   "auditEventData": {
+      "type": "UnsuccessfulLoginEventData",
+      "loginType": "LDAP",
+      "failureReason": "Invalid LDAP credentials"
+   }
+   }
+   ```
+
+### 2. SAML authentication
+
+Unsuccessful login attempts can occur for the following reasons:
+
+* **Domain not whitelisted:** The user’s email domain is not included in the account’s allowed domain list.
+* **Replay attack:** A previously used SAML login request was detected and blocked for security reasons.
+
+**Example JSON:**
+
+```json
+{
+  "module": "CORE",
+  "resource": {
+    "type": "USER",
+    "identifier": "demouser@harness.io",
+    "labels": {
+      "resourceName": "Demo Test",
+      "userId": "jWF23r4XQjyRTLVsAS_mVw"
+    }
+  },
+  "action": "UNSUCCESSFUL_LOGIN",
+  "auditEventData": {
+    "type": "UnsuccessfulLoginEventData",
+    "loginType": "SAML",
+    "failureReason": "Domain not whitelisted"
+  }
+}
+```
+
+### 3. Two-Factor Authentication (2FA)
+
+Unsuccessful login attempts can occur for the following reasons:
+
+* **Invalid two-factor configuration:** Two-factor authentication is not properly set up for the account or user.
+* **Invalid TOTP token:** The one-time password provided is incorrect or has expired.
+* **Two-factor authentication failed:** The security code could not be verified.
+
+**Example JSON:**
+
+```json
+{
+  "module": "CORE",
+  "resource": {
+    "type": "USER",
+    "identifier": "demouser@harness.io",
+    "labels": {
+      "resourceName": "Demo Test",
+      "userId": "jWF23r4XQjyRTLVsAS_mVw"
+    }
+  },
+  "action": "UNSUCCESSFUL_LOGIN",
+  "auditEventData": {
+    "type": "UnsuccessfulLoginEventData",
+    "loginType": "TWOFA",
+    "failureReason": "Invalid TOTP token"
+  }
+}
+```
+
+### 4. Username/password authentication
+
+Failed login attempts using username/password occur when:
+
+* Credentials are incorrect
+* The user's account temporarily locked, deactivated, or their access has been revoked.
+
+**Example JSON:**
+
+```json  
+   {
+    "metaData": null,
+    "resource": null,
+    "responseMessages": [
+        {
+            "code": "INVALID_CREDENTIAL",
+            "level": "ERROR",
+            "message": "Invalid credentials: INVALID_CREDENTIAL"
+        }
+    ]
+}
+```
