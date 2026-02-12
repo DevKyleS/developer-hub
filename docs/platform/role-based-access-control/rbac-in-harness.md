@@ -524,3 +524,82 @@ To avoid any disruption, ensure your automations are updated to include `core_se
 :::
 
 Learn more about permissions [here](/docs/platform/role-based-access-control/permissions-reference/#shared-resources).
+
+## Split Manage Permissions
+
+### User Groups
+
+Harness now supports granular permissions for [User Groups](/docs/platform/role-based-access-control/add-user-groups). Instead of a single broad Manage permission that allowed full control, you can now grant access only to the specific actions required.
+
+#### Feature Flag Rollout Process
+
+This feature is controlled by two feature flags that must be enabled in the following order:
+
+- `PL_USER_GROUPS_MANAGE_PERMISSION_SPLIT_MIGRATION`: This flag enables migration — roles are migrated into granular permissions as shown in the [table below](#user-group-permissions).
+- `PL_USER_GROUPS_MANAGE_PERMISSION_SPLIT_ENFORCE`: Permissions are now enforced — UI changes and access checks depend on the split permissions.
+
+
+:::note 
+Reach out to [Harness Support](mailto:support@harness.io) to enable these feature flags..
+:::
+
+#### User Group Permissions
+
+The **View** permission remains unchanged and is always available. The **Manage** permission for User Groups has been split into multiple granular permissions to provide administrators with finer control, as shown below.:
+
+:::note
+`core_usergroup_manage` permission is a no longer available once the feature flag is enabled.
+:::
+   
+| **Action**              | **Permission**              | **Description**                                                               |
+| ----------------------- | -------------------------------------- | ----------------------------------------------------------------------------- |
+| Create                  | `core_usergroup_create`                | Permission to create a user group                                             |
+| Edit (metadata)         | `core_usergroup_editMetadata`          | Permission to edit metadata of a user group                                   |
+| Delete                  | `core_usergroup_delete`                | Permission to delete a user group                                             |
+| Manage Users            | `core_usergroup_manageUsers`           | Permission to manage users in a user group                                    |
+| Manage SSO              | `core_usergroup_manageSSO`             | Permission to perform SSO-related operations within the scope of a user group |
+| Manage SCIM             | `core_usergroup_manageSCIM`            | Permission to manage a user group through SCIM                                |
+| Manage Notifications    | `core_usergroup_manageNotifications`   | Permission to manage notification settings for a user group                   |
+| Manage Role Assignments | `core_usergroup_manageRoleAssignments` | Permission to manage role assignments for a user group                        |
+
+
+<details>
+<summary>View all User Group permissions</summary>
+
+The following permissions are always available:
+
+- `core_usergroup_view` — permission to view a user group  
+- `core_usergroup_manage` — permission to manage a user group
+
+**With feature flag enabled**:
+
+- `core_usergroup_create` — permission to create a user group  
+- `core_usergroup_editMetadata` — permission to edit metadata of a user group  
+- `core_usergroup_delete` — permission to delete a user group  
+- `core_usergroup_manageUsers` — permission to manage users in a user group  
+- `core_usergroup_manageSSO` — permission to perform SSO-related operations within the scope of a user group.  
+- `core_usergroup_manageSCIM` — permission to manage user group through SCIM. 
+- `core_usergroup_manageNotifications` — permission to manage notifications settings for a user group.
+- `core_usergroup_manageRoleAssignments` — permission to manage role assignments for a user group
+
+</details>
+
+:::warning 
+When the feature flag is enabled, review your existing permissions carefully to understand how they are used and which additional permissions may be required.
+
+* If your automation assigns the `core_usergroup_manage` permission to the user, then it now needs to assign the new permissions. Otherwise, users will not be able to perform the intended operations.
+* Any APIs that were previously accessed using the `core_usergroup_manage` permission now require new granular permissions. Review the APIs calls and add the required permissions for each operation; otherwise, those API requests will fail after the feature flag is enabled.
+
+**New permission behavior**
+
+* **Creating a user group**
+  The `core_usergroup_create` permission is mandatory. If additional permissions (such as `core_usergroup_manageUsers`, `core_usergroup_manageSSO`, or `core_usergroup_manageNotifications`) are missing, the request still succeeds, but only the components covered by the granted permissions are created.
+
+* **Updating a user group**
+  At least one relevant edit or manage permission is required (for example, `core_usergroup_editMetadata`, `core_usergroup_manageUsers`, `core_usergroup_manageSSO`, or `core_usergroup_manageNotifications`).
+
+  * If none of these permissions are present, the request fails.
+  * If some permissions are present, only the components covered by those permissions are updated.
+:::
+
+

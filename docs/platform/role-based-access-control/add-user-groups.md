@@ -88,6 +88,12 @@ To inherit user groups in Harness, you need the following [permissions](./permis
 
 * **View** user groups at the original scope. For example, if the group originates from the account scope, you must have the ability to view user groups at the account scope.
 * **Manage** user groups at the inheritance scope. For example, if you want to inherit a group at a project scope, you must have the ability to manage user groups at that project scope.
+   
+   :::note More granular control over Manage permissions
+   Now, you can split the **Manage** permission into more granular permissions, so you can give users access only to the actions they actually need when managing user groups.
+
+   Learn more about split Manage permissions [here](/docs/platform/role-based-access-control/rbac-in-harness#split-manage-permissions).
+   :::
 
 1. In Harness, go to the [scope](./rbac-in-harness.md#permissions-hierarchy-scopes) where you want to inherit the user group.
 
