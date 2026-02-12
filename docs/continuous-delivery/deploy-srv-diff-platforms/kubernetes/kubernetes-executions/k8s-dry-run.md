@@ -36,7 +36,7 @@ You can add an [Approval](/docs/category/approvals/) step after the Dry Run step
 
 For example, here is a stage with a Dry Run step followed by an Approval step and subsequent Rolling Deployment step.
 
-![dry run](static/9feaeaab45b1c59f1ca71b4d1eb9936a03690198586f9f1d752b98710d6ccd6a.png)
+![Dry Run step configuration](static/k8s-dry-run-step-config.png)
 
 To add the Dry Run step, do the following:
 
@@ -52,7 +52,8 @@ import TabItem from '@theme/TabItem';
 1. In the CD stage **Execution**, select **Add Step**.
 2. Select the **Dry Run** step.
 3. Enter a name for the step.
-4. In **Timeout**, enter how long this step should run before failing and initiating the step or stage [failure strategy](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-on-stages-and-steps).
+4. (Optional) Enable **Encrypt Yaml Output** if you want the entire step output to be treated as a Harness secret. For more details on how this affects secret masking, go to [Secret masking in Dry Run output](#secret-masking-in-dry-run-output).
+5. In **Timeout**, enter how long this step should run before failing and initiating the step or stage [failure strategy](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-on-stages-and-steps).
 
     You can use:
 
@@ -66,7 +67,7 @@ import TabItem from '@theme/TabItem';
    The maximum is `53w`.
 
    Timeouts can be set at the pipeline-level also, in the pipeline **Advanced Options**.
-5. Select **Apply Changes**.
+6. Select **Apply Changes**.
 
 The Dry Run step is ready.
 
@@ -78,19 +79,46 @@ The Dry Run step is ready.
 1. In **Pipeline Studio**, select **YAML**.
 2. Paste the following YAML example and select **Save**:
 
-```
+```yaml
               - step:
                   type: K8sDryRun
                   name: Output Service Manifests
                   identifier: OutputService
-                  spec: {}
+                  spec:
+                    encryptYamlOutput: false
                   timeout: 10m
 ```
+
+Set `encryptYamlOutput` to `true` to treat the entire manifest output as a Harness secret. For more details on how this affects secret masking, go to [Secret masking in Dry Run output](#secret-masking-in-dry-run-output).
 
 
 </TabItem>
 </Tabs>
 
+
+## Secret masking in Dry Run output
+
+By default, the Dry Run step masks sensitive values in the rendered manifest output. When your service manifests include Kubernetes `Secret` resources, Harness replaces the values inside the `data` field with a masked placeholder. The masked value appears as `Kioq`, which is the Base64-encoded form of `***`.
+
+For example, if your Secret manifest contains a `data` field like `password: cGFzc3dvcmQxMjM=`, the Dry Run step output will instead show `password: Kioq`. Other resource types such as Deployments, ConfigMaps, and Services are rendered as-is without masking.
+
+This default masking prevents accidental exposure of sensitive data in step logs and the Harness UI while still producing a structurally valid Kubernetes manifest.
+
+### Encrypt Yaml Output
+
+The Dry Run step includes a **Encrypt Yaml Output** toggle that changes how the step handles secret masking. When this option is enabled, Harness does **not** mask individual secret values during manifest rendering. Instead, it marks the entire step output as a Harness secret.
+
+With this toggle enabled:
+
+- The rendered manifest retains the original secret values (no per-field masking).
+- The entire `manifestDryRun` step output is marked as a secret, so it displays as `***` in the Harness UI and logs.
+- You can still reference the output using the Harness expression in subsequent steps, and the expression resolves to the full, unmasked manifest at runtime.
+
+```
+<+pipeline.stages.[Stage_Id].spec.execution.steps.[Step_Id].k8s.manifestDryRun>
+```
+
+This is useful when downstream steps need access to the complete, unmasked manifest for processing, while still ensuring the raw output is not visible in the pipeline execution UI.
 
 ## Step output example
 
