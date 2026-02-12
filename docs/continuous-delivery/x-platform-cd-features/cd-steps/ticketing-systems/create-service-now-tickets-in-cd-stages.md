@@ -37,6 +37,7 @@ This integration is currently supported for the following ServiceNow versions:
    - Vancouver
    - Washington DC
    - Yokohama
+   - Zurich
 
 For more information, go to the [ServiceNow installation guide](https://store.servicenow.com/appStoreAttachments.do?sys_id=1fc1632b872f4dd0970e2178cebb35ba).
 
