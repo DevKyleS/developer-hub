@@ -36,6 +36,7 @@ The Integration for Harness Software Delivery Platform app is required to create
 This integration is currently supported for the following ServiceNow versions:
    - Vancouver
    - Washington DC
+   - Xanadu
    - Yokohama
    - Zurich
 
