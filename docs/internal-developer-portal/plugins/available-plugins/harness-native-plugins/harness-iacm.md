@@ -15,6 +15,7 @@ redirect_from:
 | **Category**   | Infrastructure                                         |
 | **Source**     | [GitHub](https://github.com/harness/backstage-plugins) |
 | **Type**       | Open-source plugin                                     |
+| **Listed on**  | [Backstage Plugin Directory](https://backstage.io/plugins/) |
 
 ## Configuration
 
@@ -73,24 +74,31 @@ Also, you could add a conditional like `isHarnessIacmAvailable` which is met whe
               component: EntityIacmContent
 ```
 
-![](./static/harness-iacm-backstage-plugin-screenshot.png)
+The IACM plugin displays comprehensive workspace information including:
+- **Resources**: All provisioned infrastructure resources (VMs, databases, networks, etc.)
+- **Data Sources**: External data referenced by the workspace
+- **Outputs**: Exported values from the workspace state
+
+![](./static/harness-iacm-workspace-resources.png)
 
 ## Annotations
 
-To configure the plugin for a service in the software catalog, set one or both of the following annotations in its `catalog-info.yaml` definition file, you can fetch the workspaces URL from the [workspaces](https://developer.harness.io/docs/infra-as-code-management/use-iacm/create-workspace) page. Note that the URL should be in the format of `https://app.harness.io/ng/account/<ACCOUNT_ID>/module/iacm/orgs/<ORGANIZATION_ID/projects/<PROJECT_ID/workspaces/<WORKSPACE_ID/resources`
+Set the `harness.io/workspace-url` annotation in its `catalog-info.yaml` definition file to configure the plugin for a service in the software catalog.
+
+The URL format should be: `https://app.harness.io/ng/account/<ACCOUNT_ID>/module/iacm/orgs/<ORGANIZATION_ID>/projects/<PROJECT_ID>/workspaces/<WORKSPACE_ID>/resources`
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  # ...
+  name: payment-service
+  description: Payment processing service
   annotations:
-    harness.io/workspace-url: |
-      labelA: <harness_iacm_workspace_url>
-      labelB: <harness_iacm_workspace_url>
+    harness.io/workspace-url: https://app.harness.io/ng/account/<ACCOUNT_ID>/module/iacm/orgs/<ORGANIZATION_ID>/projects/<PROJECT_ID>/workspaces/<WORKSPACE_ID>/resources
 spec:
   type: service
-  # ...
+  lifecycle: production
+  owner: team-platform
 ```
 
 ## Support
