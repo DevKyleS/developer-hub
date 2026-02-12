@@ -320,10 +320,13 @@ resource "aws_iam_role_policy" "harness_describe_permissions" {
   })
 }
 
-resource "harness_cluster_orchestrator" "cluster_orchestrator" {
+data "aws_region" "current" {}
+
+resource "harness_cluster_orchestrator" "test_region" {
   name             = substr(data.aws_eks_cluster.cluster.name, 0, 40)
   cluster_endpoint = data.aws_eks_cluster.cluster.endpoint
   k8s_connector_id = var.cluster.k8s_connector_id
+  region           = data.aws_region.current.name 
 }
 
 resource "harness_platform_service_account" "cluster_orch_service_account" {
