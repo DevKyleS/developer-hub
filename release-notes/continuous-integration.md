@@ -14,7 +14,7 @@ These release notes describe recent changes to Harness Continuous Integration.
 
 :::info About Harness Release Notes
 
-- **Progressive deployment:** Harness deploys changes to Harness SaaS clusters on a progressive basis. This means that the features described in these release notes may not be immediately available in your cluster. To identify the cluster that hosts your account, go to your **Account Overview** page in Harness. In the new UI, go to **Account Settings**, **Account Details**, **General**, **Account Details**, and then **Platform Service Versions**.
+- Addressed a security vulnerability in the cache-service image by updating the crypto/x509 package. (CI-20463)
 - **Security advisories:** Harness publishes security advisories for every release. Go to the [Harness Trust Center](https://trust.harness.io/?itemUid=c41ff7d5-98e7-4d79-9594-fd8ef93a2838&source=documents_card) to request access to the security advisories.
 - **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 
@@ -61,6 +61,32 @@ Check out [Harness Cloud VM Images Docs](/docs/platform/references/harness-cloud
 :::
 
 ## February 2026
+
+### Version 1.121.0
+
+<!-- February 9, 2026 -->
+
+#### New Features and Enhancements
+
+- Build and Push to Azure Container Registry (ACR) steps now support authentication using delegate-based User Assigned Managed Identity (Azure Workload Identity). (CI-20436)
+
+#### Fixed Issues
+
+- Improved GitLab merge request status updates so pipeline status now reflects execution progress in real time instead of only after stage completion. (CI-20533, ZD-102326)
+
+- Fixed an issue where pipeline re-runs could fail when delegate selectors were used with codebase tasks (SCM_GIT_REF_TASK). (CI-20360, ZD-101102)
+
+- Addressed a vulnerability in cache-service image security by vulnerability in the crypto/x509 package. (CI-20463)
+
+#### Harness Images Updates
+
+| Image | Change | Previous Version | New Version |
+|-------|--------|------------------|-------------|
+| `harness/harness-cache-server` | Security dependency update | 1.7.9 | 1.7.10 |
+| `plugins/kaniko-acr` | Azure Workload Identity support | 1.13.4 | 1.13.5 |
+| `plugins/buildx-acr` | Azure Workload Identity support | 1.4.3 | 1.4.4 |
+| `harness/ci-addon` | Version upgrade | 1.18.6 | 1.18.7 |
+| `harness/ci-lite-engine` | Version upgrade | 1.18.6 | 1.18.7 |
 
 ### Version 1.120.0
 
