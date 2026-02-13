@@ -3180,10 +3180,6 @@ For more information, go to:
 
 You can now proceed with your deployment without configuring a `values.yaml` file or an override file in the **manifest configuration** of a Kubernetes service.
 
-:::note
-This feature is behind the feature flag `CDS_OPTIONAL_VALUES_YAML`. Contact [Harness Support](mailto:support@harness.io) to enable it.
-:::
-
 ### Optional Values File
 
 To skip the `values.yaml` file:

@@ -266,10 +266,6 @@ You can also use a local Helm chart if you are deploying the same Helm chart and
 
 You can now proceed with your Helm chart deployment without configuring a `values.yaml` file in the **manifest configuration** of a Helm service.
 
-:::note
-This feature is behind the feature flag `CDS_OPTIONAL_VALUES_YAML`. Contact [Harness Support](mailto:support@harness.io) to enable it.
-:::
-
 To enable this option, go to the **Service Configuration**. Under the **Manifests** section, click **Add Manifest** or edit the existing Helm chart.
 
 Enable the **Optional** checkbox in the **Manifest Details** tab, below to the **Values.yaml** field.

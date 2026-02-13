@@ -1290,8 +1290,7 @@ Supported Deployment Types:
   - Kubernetes (K8s/Helm Chart): Optional field appears under the values.yaml section.
   - Kubernetes/Native Helm (Values YAML): Optional checkbox appears under the File field.
   - Native Helm (Helm Chart): Optional field is rendered under the values.yaml section.
-Overrides: The file path field can also be marked as Optional.
-Currently, this feature is behind the feature flag `CDS_OPTIONAL_VALUES_YAML`. Contact [Harness Support](mailto:support@harness.io) to enable the feature. (**CDS-85487,CDS-106960,CDS-106961,CDS-106962**) 
+Overrides: The file path field can also be marked as Optional. (**CDS-85487, CDS-106960, CDS-106961, CDS-106962**)
 
 - Users can now enforce Oauth for commits by enbaling the setting **Enforce Oauth For Commits** in the Account Setting under **Git Experience**. (**PIPE-25432**)
 
