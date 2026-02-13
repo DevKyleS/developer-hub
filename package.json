@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/generate-feature-flags-rss.js",
+    "prebuild": "node scripts/generate-feature-flags-rss.js && node scripts/generate-release-notes-summaries.mjs",
     "docusaurus": "docusaurus",
     "start": "docusaurus start --host 0.0.0.0",
     "build": "export NODE_OPTIONS=--max-old-space-size=10240 && DOCUSAURUS_IGNORE_SSG_WARNINGS=true  docusaurus build",
@@ -63,6 +63,7 @@
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/tsconfig": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
+    "@google/generative-ai": "^0.21.0",
     "@types/html2pdf.js": "^0.10.0",
     "dictionary-en": "^4.0.0",
     "eslint": "^8.56.0",

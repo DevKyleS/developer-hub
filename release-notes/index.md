@@ -7,8 +7,7 @@ slug: /
 date: 2024-11-13T10:00
 ---
 
-<!-- Custom component -->
 
-import ReleaseNotes from '@site/src/components/ReleaseNotes/ReleaseNotes';
+import ReleaseNotesSummaries from '@site/src/components/ReleaseNotesSummaries/ReleaseNotesSummaries';
 
-<ReleaseNotes />
+<ReleaseNotesSummaries />

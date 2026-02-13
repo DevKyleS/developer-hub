@@ -11,6 +11,7 @@ const sidebars: SidebarsConfig = {
       },
       collapsed: true,
       items: [
+         "all-modules",
     "platform",
     "delegate",
     "harness-solutions-factory",
@@ -47,7 +48,7 @@ const sidebars: SidebarsConfig = {
           type: "html",
           value: "AI for Cost & Optimization",
           className: "horizontal-bar",
-    }, 
+    },
     "cloud-cost-management",
     "software-engineering-insights"
   ],
