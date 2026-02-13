@@ -160,12 +160,18 @@ The **Execution** tab is where you add steps to the stage. For details about dif
 
 ## Advanced
 
-The **Advanced** tab contains settings for [delegate selectors](/docs/platform/delegates/manage-delegates/select-delegates-with-selectors.md), [conditional executions](/docs/platform/pipelines/step-skip-condition-settings), [looping strategies](/docs/platform/pipelines/looping-strategies/looping-strategies-matrix-repeat-and-parallelism), and [failure strategies](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-on-stages-and-steps). 
+The **Advanced** tab contains settings for [delegate selectors](/docs/platform/delegates/manage-delegates/select-delegates-with-selectors.md), [conditional executions](/docs/platform/pipelines/step-skip-condition-settings), [looping strategies](/docs/platform/pipelines/looping-strategies/looping-strategies-matrix-repeat-and-parallelism), [failure strategies](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-on-stages-and-steps), and [Send status to Git](/docs/platform/triggers/triggering-pipelines#send-stage-execution-status-to-git-on-pull-requests).
 
 :::info
 
 If you use a delegate selector with a Kubernetes cluster build infrastructure, and your delegate selector specifies a Docker delegate, your Kubernetes cluster connector must be set to [Specify Master URL and Credentials](/docs/platform/connectors/cloud-providers/ref-cloud-providers/kubernetes-cluster-connector-settings-reference.md#specify-master-url-and-credentials).
 
 Kubernetes cluster connectors can't inherit delegate credentials (use the credentials of a specific Harness Delegate) from Docker delegates because they are not in the same environment.
+
+:::
+
+:::tip Send status to Git
+
+The **Send status to Git** option lets you control how CI stages report build status to Git providers for Pull Request builds, including custom status check names and deduplication of status updates. For details, go to [Send Stage Execution Status to Git on Pull Requests](/docs/platform/triggers/triggering-pipelines#send-stage-execution-status-to-git-on-pull-requests).
 
 :::
