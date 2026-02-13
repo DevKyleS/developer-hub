@@ -1,12 +1,14 @@
 ---
-title: FME Audit Logs
+title: Admin Audit Logs
 sidebar_position: 2
-description: Learn about audit logs in Harness FME and admin audit logs in legacy Split.
+description: Learn about admin audit logs in Harness FME and legacy Split.
 redirect_from:
   - /docs/feature-management-experimentation/management-and-administration/account-settings/audit-logs/admin
 ---
 
-## Overview
+Admin audit logs capture every change made to objects in Harness FME by users with enhanced permissions. 
+
+These logs provide a record of who made a change, what was changed, and when, helping teams track configuration updates, ensure accountability, and support governance.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -14,7 +16,7 @@ import TabItem from '@theme/TabItem';
 <Tabs>
 <TabItem value="Harness FME (Recommended)">
 
-FME-specific audit logs are captured every time a user creates, changes, or deletes any of the below objects. These logs provide detailed records of every change that took place and who made them.
+The following objects in Harness FME are tracked in admin audit logs:
 
 - SDK API keys
 - Environments
@@ -23,21 +25,16 @@ FME-specific audit logs are captured every time a user creates, changes, or dele
 - Security settings
 - General settings
 - Monitor window and statistics
-- Amplitude integrations
-- AppDynamics integrations
-- Datadog integrations
-- Email integrations
-- Jira integrations
-- mParticle integrations
-- New Relic integrations
-- Outgoing webhook (audit logs) integrations
-- Outgoing webhook (impressions) integrations
-- Rollbar integrations
-- Segment integrations
-- Sentry integrations
-- Slack integrations
-- SumoLogic integrations
-- Outgoing webhook (admin audit logs) integrations
+
+import { Section, supportedAdminAuditLogs } from '/src/components/Docs/data/fmeAdminAuditlogs';
+
+<Section 
+  title="Supported Integrations" 
+  items={supportedAdminAuditLogs} 
+  perRow={6} 
+  rowSpacing="20px" 
+  description="Harness FME integrations tracked in admin audit logs allow you to manage changes to your feature flags, environments, and experiment configurations." 
+/>
 
 :::tip
 Over time, these audit log entries will move to the Harness platform’s [Audit Trails](https://developer.harness.io/docs/platform/governance/audit-trail/) feature, but for now they are only accessible in the FME UI or by FME’s [Audit Log webhook](/docs/feature-management-experimentation/api/webhooks/admin-audit-logs).
@@ -46,7 +43,7 @@ Over time, these audit log entries will move to the Harness platform’s [Audit 
 </TabItem>
 <TabItem value="Legacy Split">
 
-Admin audit logs are captured every time an admin creates, changes, or deletes any of the below objects. These logs provide detailed records of every change that took place and who made them.
+The following objects in legacy Split are tracked in admin audit logs:
 
 - SDK API keys
 - Admin API keys
@@ -58,21 +55,14 @@ Admin audit logs are captured every time an admin creates, changes, or deletes a
 - Security settings
 - General settings
 - Monitor window and statistics
-- Amplitude integrations
-- AppDynamics integrations
-- Datadog integrations
-- Email integrations
-- Jira integrations
-- mParticle integrations
-- New Relic integrations
-- Outgoing webhook (audit logs) integrations
-- Outgoing webhook (impressions) integrations
-- Rollbar integrations
-- Segment integrations
-- Sentry integrations
-- Slack integrations
-- SumoLogic integrations
-- Outgoing webhook (admin audit logs) integrations
+
+<Section 
+  title="Supported Integrations" 
+  items={supportedAdminAuditLogs} 
+  perRow={6} 
+  rowSpacing="20px" 
+  description="Harness integrations allow you to access and manage your feature flags and experiments directly within the Harness modules your team already uses." 
+/>
 
 </TabItem>
 </Tabs>
@@ -82,11 +72,11 @@ Admin audit logs are captured every time an admin creates, changes, or deletes a
 <Tabs>
 <TabItem value="Harness FME (Recommended)">
 
-Access audit logs by navigating to **FME Settings**, select **Security**, and click the **Admin audit logs** tab. You can see a table of all changes that are made by users against the objects listed above.
+Access admin audit logs by navigating to **FME Settings**, select **Security**, and click the **Admin audit logs** tab. You can see a table of all changes that are made by users against the objects listed above.
 
 ![](./static/admin-audit-log-1.png)
 
-When hovering over the row for an audit log, click on the object name for that change to see more information about each update, including a diff view of what elements of the object were edited.
+When hovering over the row for an admin audit log, click on the object name for that change to see more information about each update, including a diff view of what elements of the object were edited.
 
 ![](./static/admin-logs-1.png)
 
@@ -104,4 +94,4 @@ When hovering over the row for an audit log, click on the object name for that c
 </TabItem>
 </Tabs>
 
-Monitor this data using the user interface to more easily audit every modification made to feature flags over time or to troubleshoot any issues that occur during rollout. You can also pull out this data via the [outgoing webhook](/docs/feature-management-experimentation/api/webhooks/admin-audit-logs) for analysis within other tools.
+Monitor this data using the user interface to more easily audit every modification made to these administrative settings over time, or to troubleshoot any issues that occur with your integrations. You can also pull out this data using the [outgoing webhook](/docs/feature-management-experimentation/api/webhooks/admin-audit-logs) for analysis within other tools.
