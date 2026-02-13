@@ -25,7 +25,29 @@ These release notes describe recent changes to Harness Platform.
 * **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 
 :::
+
+---
 ## Important feature change notice
+
+:::danger BREAKING CHANGE: Page Size Validation for Role Assignment Filter APIs (Effective: April 3, 2026)
+
+We are introducing validation on the `pageSize` parameter for the following Role Assignment APIs:
+  - [Role Assignment Filter API](https://apidocs.harness.io/role-assignments/getfilteredroleassignmentlist)
+  - [Role Assignment Filter by Scope API](https://apidocs.harness.io/role-assignments/getfilteredroleassignmentbyscopelist)
+
+**What’s changing**:
+
+- The `pageSize` field will now have a **maximum allowed value of 100**.
+- Requests with a `pageSize` greater than 100 will fail validation.
+
+**Why this change**:
+This update improves API reliability and enforces consistent pagination limits.
+
+**Action Required**:
+If you are currently using these APIs with a `pageSize` greater than 100, please update your requests to use a value of **100 or less** to avoid request failures after this change takes effect on April 3, 2026.
+
+Please reach out to [Harness support](mailto:support@harness.io) in case of any concerns.
+:::
 
 :::danger OIDC ID Token API Access Update (Effective: Mar 20, 2026)
 To strengthen security and reduce potential risks, the [**OIDC ID token–related APIs**](https://apidocs.harness.io/oidc-id-token) will be made internal to Harness and will no longer be available for direct access.
