@@ -56,6 +56,20 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 ## February 2026
 
+### Version 1.130.4
+
+#### Fixed issues
+
+- Fixed an issue where the Jenkins step stopped working after upgrading to 2.516.1.28665. Added query params (tree) to Jenkins API calls to unblock API calls in the latest CloudBees Jenkins integration. (**CDS-117294**, **ZD-99947**)
+- Fixed an issue where the WinRM service artifact source displayed every artifact as a Docker artifact in the UI. The artifact source template now shows the actual artifact type in the icon if the user has not provided a custom icon. (**CDS-117751**, **ZD-101243**)
+- Fixed an issue where the tag dropdown was not populating with any tags generated in the last day. (**CDS-117808**, **ZD-101214**)
+- Fixed an issue where Google Cloud Run deployments did not work on rerun when a service was scaled to zero. (**CDS-118269**)
+- Fixed an issue where Harness ASG deployment did not fail when the AWS instance refresh was manually moved to a rollback state. (**CDS-118529**, **ZD-101769**)
+- Fixed an issue where bulk reconciliation of pipelines referencing shared templates and stored in remote repositories could fail. The error occurred when the system incorrectly attempted to access a "HARNESS" branch in the remote repository. Improved logging has been added to provide better visibility into the Git branch and repository being accessed during reconciliation. (**PIPE-31123**, **ZD-98783**)
+- Fixed an issue where the "Enforce OAuth For Commits" setting incorrectly blocked pipeline saves, even when users had already configured Bitbucket OAuth with a custom provider. Users with Bitbucket OAuth configured can now successfully save pipelines when "Enforce OAuth For Commits" is enabled. (**PIPE-31586**, **ZD-95814**, **ZD-100787**)
+- Fixed an issue where the account-level "Skip Git Webhook Registration" setting incorrectly restricted administrators from enabling or disabling Git webhooks. Administrators can now manage all Git webhooks, regardless of the "Skip Git Webhook Registration" setting, respecting their administrative permissions. (**PIPE-31922**, **ZD-102235**)
+- Fixed an issue where the log viewer would unexpectedly jump to the bottom, interrupting users while reviewing logs during pipeline executions. The log viewer now maintains the user's scroll position when manually scrolling or when a log section is collapsed, preventing unwanted auto-scrolling behavior. (**PIPE-32017**, **ZD-101156**)
+
 ### GitOps Service 1.50.3, GitOps Agent 0.109.0
 
 #### New Features and Enhancements
