@@ -56,6 +56,17 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 ## February 2026
 
+### GitOps Service 1.50.3, GitOps Agent 0.109.0
+
+#### New Features and Enhancements
+
+- GitOps service now integrates with Open Policy Agent (OPA) for applications, enabling policy-based governance and validation for GitOps applications. (**CDS-117468**)
+
+#### Fixed Issues
+
+- Fixed an issue in the GitOps UI where ApplicationSet validation was not functioning correctly. Users can no longer create ApplicationSets with invalid YAML configurations, preventing deployment errors. (**CDS-117861**, **ZD-101656**)
+- Fixed an issue in the GitOps AppSet details view where the manifest status and progressive sync strategy data were not displayed. Users can now view the correct status and progressive sync strategy information for their AppSets. (**CDS-117172**)
+
 ### GitOps Service 1.49.1, GitOps Agent 0.108.0
 
 #### Fixed issues
