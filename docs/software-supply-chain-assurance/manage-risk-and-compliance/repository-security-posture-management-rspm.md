@@ -91,12 +91,29 @@ By clicking on a specific evaluation status, you can access detailed information
 
 ## SBOM(Software Bill of Materials) Tab
 
-The SBOM section presents a comprehensive list of all the repository dependencies. Detailed information is provided for each dependency, including the name, version, license, package manager, PURL (Package URL), and supplier.
+The SBOM section provides a comprehensive view of your repository’s dependencies. It includes a total dependency count and a detailed, searchable inventory. For each dependency, it surfaces key information such as name, version, OSS Risks, license, package manager, PURL (Package URL), supplier, and vulnerabilities.
 
-Filters are available to refine the list of dependencies, allowing users to find specific dependencies based on version, license, and package manager. Additionally, a search function enables users to locate dependencies based on the supplier. These filtering options make it easier to navigate through the dependencies and focus on particular aspects that may require attention.
+Use the following options to filter and refine the dependency list:
+
+* **Dependency**: Find specific dependencies based on the dependency name and values. Click Dependency to specify the condition for the `Dependency` Name. Optionally, you can specify the condition for the Dependency Version as well.
+* **License**: Find specific dependencies based on the type of license associated with them. Click `License` to specify the condition for the License associated with a dependency.
+* **OSS Risks**: Filter and refine all the dependencies related to particular OSS Risks. Click `OSS Risks` and then select the checkboxes next to the desired risks in the list to filter the dependencies accordingly. The available options are [Known vulnerabilities in dependencies](/docs/software-supply-chain-assurance/manage-risk-and-compliance/opensource-security-risk-management#vulnerabilities-in-sbom-components-oss-risk---1), [Unmaintained Components Identified](/docs/software-supply-chain-assurance/manage-risk-and-compliance/opensource-security-risk-management#unmaintained-components-oss-risk---4), [Outdated Components Identified](/docs/software-supply-chain-assurance/manage-risk-and-compliance/opensource-security-risk-management#outdated-components-oss-risk---5), [End of Life](/docs/software-supply-chain-assurance/manage-risk-and-compliance/opensource-security-risk-management#end-of-life-components), and [Close to End of Life](/docs/software-supply-chain-assurance/manage-risk-and-compliance/opensource-security-risk-management#close-to-end-of-life-components).
+* **Dependency Type**: Filter dependencies based on the dependency relationship to your project. Click `Dependency Type` and then select the checkboxes next to the desired dependency type to filter the dependencies. The available options are `Direct`, `Indirect`, and `No relationship`.
+  * **Direct** - Dependencies explicitly declared in your project configuration.
+  * **Indirect** - Transitive dependencies brought in by other dependencies.
+  * **No relationship** - Components present in the SBOM but not currently mapped to your project’s dependency graph.
+  :::note
+
+  Filtering dependencies via dependency type is available only for code repositories.
+
+  :::
+
+* **Package Manager**: Filter dependencies by package manager. Enter a package manager name in the corresponding search box to view all matching dependencies.
+* **Supplier**: Filter dependencies by supplier. Enter a supplier name in the corresponding search box to view all matching dependencies.
+
+Additionally, click the `Download SBOM` button to download the dependency list in JSON format.
 
 <DocImage path={require('./static/rspm-sbom-view.png')} width="100%" height="100%" title="Click to view full size image" />
-
 
 
 ## Vulnerabilities Tab
