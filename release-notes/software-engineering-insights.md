@@ -1,7 +1,7 @@
 ---
 title: Software Engineering Insights release notes
 sidebar_label: Software Engineering Insights
-date: 2026-01-30T10:00:10
+date: 2026-02-13T10:00:10
 sidebar_position: 15
 ---
 
@@ -12,13 +12,41 @@ import TabItem from '@theme/TabItem';
 
 These release notes describe recent changes to Harness Software Engineering Insights.
 
-#### Last updated: January 30, 2026
+#### Last updated: February 13, 2026
 
 :::info About Harness Release Notes
 * **Progressive deployment:** Harness deploys changes to Harness SaaS clusters on a progressive basis. This means that the features described in these release notes may not be immediately available in your cluster. To identify the cluster that hosts your account, go to your **Account Overview** page in Harness. In the new UI, go to **Account Settings**, **Account Details**, **General**, **Account Details**, and then **Platform Service Versions**.
 * **Security advisories:** Harness publishes security advisories for every release. Go to the [Harness Trust Center](https://trust.harness.io/?itemUid=c41ff7d5-98e7-4d79-9594-fd8ef93a2838&source=documents_card) to request access to the security advisories.
 * **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 :::
+
+## February 2026
+
+### [New Feature] Select multiple SCM integrations in Team Settings
+----
+#### 2026-02-13
+
+SEI 2.0 now supports selecting multiple source code management (SCM) integrations per team on the **Integrations** tab in Team Settings. This enables more accurate insights and metrics across all repositories your team contributes to.
+
+![](./static/sei/multi-scm.png)
+
+When multiple SCM integrations are configured, a single developer may have several identities. To ensure contributions from all repositories are correctly attributed, the **Developers** tab displays all linked [developer identifiers](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=scm-settings#developer-identifies-in-multiple-scm-integrations) per SCM integration. 
+
+![](./static/sei/multi-dev.png)
+
+You can specify all the repositories your team develops in, select the destination branches used to measure delivery metrics, and exclude non-deployment changes using labels or custom filters (for example, `chore` or `documentation`) on the **Source Code Management** tab. This ensures [Lead Time for Change](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/efficiency#lead-time-for-changes) and [Deployment Frequency](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/efficiency#deployment-frequency) reflect only production-relevant work.
+
+![](./static/sei/multi-tab.png)
+
+Correct configuration of repositories, branches, and deployment-related criteria on the **Source Code Management** tab is required to ensure SEI 2.0 calculates accurate Efficiency and Productivity metrics across all SCM integrations.
+
+This feature provides a comprehensive view of team activity across multiple repositories and SCMs, improving attribution accuracy and reducing noise in insights.
+
+#### Related documentation
+
+- [Configure Teams](/docs/software-engineering-insights/harness-sei/setup-sei/setup-teams?team-settings=scm-settings)
+- [Efficiency Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/efficiency)
+- [Productivity Insights](/docs/software-engineering-insights/harness-sei/analytics-and-reporting/productivity)
 
 ## January 2026
 

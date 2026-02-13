@@ -32,9 +32,9 @@ While teams are automatically derived from your organization's hierarchy, they m
 
 ![](../static/teams-2.png)
 
-Optionally, you can access the **Team Settings** side panel by navigating to a leaf node (team) in the Org Tree and clicking the **Team Settings** icon on the **Insights** page. Each team has its own configuration that determines how DORA metrics are calculated. 
+Optionally, you can access the **Team Settings** side panel by navigating to a leaf node (team) in the Org Tree and clicking the **Team Settings** icon on the **Insights** page. Each team has its own configuration that determines how Insight metrics are calculated. 
 
-You can also manage developer records, integrations, repositories, pipelines, and destination branches. Instead of relying on defaults or incomplete mapping, this configuration layer helps ensure metrics reflect the actual scope, ownership, and delivery workflow of each team.
+You can configure multiple source code management (SCM) integrations per team, enabling more accurate insights and metrics across all repositories your team contributes to. This is useful for teams working across GitHub, GitLab, Azure DevOps, Bitbucket, and other supported SCMs.
 
 ## Configure integrations for a team
 
@@ -49,17 +49,17 @@ The integrations available are determined by the profile applied to the team. Fo
 * **Lead Time to Change (LTTC)** and **Mean Time to Restore (MTTR)** requires an issue management tool.
 * **Deployment Frequency** and **Change Failure Rate** requires a continuous deployment integration.
 
-In this situation, a team manager must select and save both issue management and continuous deployment integrations to proceed.
-
-![](../static/teams-3.png)
+In this situation, a team manager must select and save both issue management and continuous deployment integrations to proceed on the **Teams** page or in **Team Settings**.
 
 To select and save integrations:
 
 1. Navigate to the **Integrations** tab in **Team Settings**.
-1. Select integrations from the following sections: **Issue Management**, **Source Code Management**, **Continuous Deployment**, **Security**, and **Code Quality**.
+1. Select integrations from the following sections: **Issue Management**, **Source Code Management**, **Continuous Deployment**, **Security**, and **Code Quality**. You can select multiple SCM integrations per team.
 1. Click **Save Integrations**.
 
-Once saved, SEI 2.0 uses these integrations to scope data ingestion, developer activity, and metric calculations for the team.
+   ![](../static/teams-13.png)
+
+Once saved, SEI 2.0 aggregates developer activity across all connected SCMs for **Efficiency** and **Productivity** insights, providing a complete picture of team work.
 
 ## Review & update developer identifiers
 
@@ -75,6 +75,18 @@ The **Developer Records** table on the **Developers** tab in **Team Settings** i
 However, some contributors, such as engineering managers or individual developers who regularly contribute across teams, may not belong to the selected team's leaf node in the Org Tree. For these cases, you can add them as shared developers, which appear with `Shared: Yes` and `Source: Manual`.
 
 Both automatically added developers and manually added shared developers must have correct identity mappings to ensure the accuracy of DORA, sprint, and productivity metrics.
+
+### Developer identities in multiple SCM integrations
+
+When a team is configured with multiple SCM integrations on the **Integrations** tab, a single developer may be associated with multiple SCM identities on the **Developers** tab in Team Settings. Each SCM integration contributes its own developer identifier. 
+
+![](../static/teams-16.png)
+
+If a developer appears to be missing activity after enabling multiple SCM integrations, verify that all relevant SCM identities are mapped correctly by using the `Developer Identities` dropdown menu to filter on `Missing`. 
+
+![](../static/teams-17.png)
+
+SEI 2.0 uses all mapped identities to attribute commits, pull requests, and repository activity accurately across all selected SCM integrations.
 
 ### Cloud identifiers by integration
 
@@ -141,8 +153,8 @@ Use this setting to specify which metrics should calculate results **only from a
 
 To configure metric-level developer filtering:
 
-1. Navigate to **Team Settings → Developers → Advanced Settings**.
-1. Select the Harness SEI metrics that should honor developer filters for this team.
+1. Navigate to the **Developers** tab in Team Settings. 
+1. In the **Advanced Settings** section, select the Harness SEI metrics that should honor developer filters for this team.
 
    - **Productivity**: Measures individual and team-level development activity, such as code contributions and work item completion, based on data from your integrated SCM and Issue Management systems.
    - **Business Alignment**: Evaluates how development effort is distributed across business priorities and investment categories, helping ensure engineering work aligns with organizational goals.
@@ -290,18 +302,28 @@ After completing all Issue Management filters, click **Save IM Settings** to app
 <TabItem value="scm-settings" label="Source Code Management Settings">
 
 :::info Productivity vs. SCM Configuration
-Source Code Management (SCM) settings are not required for Productivity metrics. Productivity in SEI 2.0 is measured holistically across a developer's total contributions spanning all repositories and all branches where those contributions exist. 
+Source Code Management (SCM) settings are required for delivery metrics such as **Lead Time for Change** and **Deployment Frequency**, but not required for holistic Productivity metrics. 
 
 ![](../static/teams-10.png)
 
-The only required configuration for Productivity metrics are the developer identifiers. Developer identifiers can be:
-
-- Automatically discovered when the source system supports [Auto Identity Discovery](/docs/software-engineering-insights/harness-sei/manage/automatch-developers).
-- Manually configured if Auto Identity Discovery is not available.
-
+Developer identifiers can be automatically discovered using [Auto Identity Discovery](/docs/software-engineering-insights/harness-sei/manage/automatch-developers) or manually configured if needed. If you select multiple SCM integrations on the **Integrations** tab, you must include all repositories your team contributes to for more complete metric calculations.
 :::
 
-Use the **Source Code Management** tab in **Team Settings** to define which branches are relevant for your team's delivery metrics, such as production deployments and **Lead Time for Change**.
+Use the **Source Code Management** tab in **Team Settings** to define which repositories represent your team's development work, and how SEI 2.0 identifies deployment-related changes from your SCM data. These setting impact delivery metrics such as Lead Time for Change and Deployment Frequency.
+
+### Repositories
+
+Select the repositories your team actively contributes to. SEI 2.0 uses this configuration to scope developer activity and delivery metrics to relevant codebases.
+
+![](../static/teams-14.png)
+
+| Filter field   | Available options                                     |
+| -------------- | ----------------------------------------------------- |
+| **Properties** | Repositories                                          |
+| **Conditions** | Equals, Not Equals, Contains, Does Not Contain, Starts With, Ends With                                                |
+| **Values**     | One or more repositories selected from connected SCMs |
+
+Select only the repositories your team owns or contributes to regularly, for example, use `Repositories Equals documentation`.
 
 ### Destination and target branches
 
@@ -317,10 +339,24 @@ Determine which branches are considered production or deployment targets.
 
 To include the main branch, use `Destination Branch Equals main`. To include release branches, use `Destination Branch Starts With release/`.
 
-After defining the destination branch for your SCM integration, click **Save SCM Settings** to apply the configuration to the team.
+### Change exclusion criteria
+
+Exclude non-deployment changes, such as automated or administrative commits, from delivery metrics.
+
+![](../static/teams-15.png)
+
+| Filter field   | Available options                                       |
+| -------------- | ------------------------------------------------------- |
+| **Properties** | Labels                                                  |
+| **Conditions** | Equals, Not Equals, Contains, Does Not Contain, Starts With, Ends With                                        |
+| **Values**     | Custom label values (for example, `chore`, `docs-only`) |
+
+To exclude maintenance changes, use `Labels Does Not Contain chore`. This helps prevent noise from inflating deployment metrics.
+
+Label-based filters apply across all selected SCM integrations, ensuring deployment-related changes are identified consistently even when multiple SCM tools are configured. Once you've configured the repositories, branches, and deployment criteria, click **Save SCM Settings** to apply the configuration to the team.
 
 :::tip
-Correct destination branch definition ensures SEI 2.0 accurately calculates **Lead Time for Change**.
+Correctly defining repositories, branches, and deployment-related criteria ensures SEI 2.0 accurately calculates **Lead Time for Change** and **Deployment Frequency**, especially when multiple SCM integrations are configured.
 :::
 
 </TabItem>
