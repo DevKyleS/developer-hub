@@ -3,10 +3,6 @@ title: Failure strategy support for Service and Environment
 description: Learn how you can apply failure strategy to services and environment.
 ---
 
-:::info
-Currently, this feature is behind the feature flag, `CDS_SERVICE_INFRA_FAILURE_STRATEGY`. Contact [Harness Support](mailto:support@harness.io) to enable the feature.
-:::
-
 [Failure strategies](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-for-pipelines.md) can be applied to [Service](./services/services-overview.md) and [Environment](./environments/environment-overview.md) steps, allowing users to define failure actions like retries, abort etc. in case of failure. This approach helps maintain deployment stability by allowing the system to handle unexpected issues gracefully. By default, the failure strategy for Service and Environment steps is inherited from the stage configuration.
 
 ## Supported Failure Strategies

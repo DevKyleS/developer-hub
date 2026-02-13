@@ -2045,7 +2045,7 @@ Harness now supports applying failure strategies during multi-service, multi-inf
 
 - **Service Failure Strategy**
 
-We have introduced a failure strategy for the service, where the service step will, by default, inherit the failure strategy from the stage. Currently this feature is behing the Feature Flag `CDS_SERVICE_INFRA_FAILURE_STRATEGY`. Please contact [Harness support](mailto:support@harness.io) to enable this feature.(CDS-96876, ZD-63199, ZD-64391, ZD-64465, ZD-66720)
+We have introduced a failure strategy for the service, where the service step will, by default, inherit the failure strategy from the stage. (CDS-96876, ZD-63199, ZD-64391, ZD-64465, ZD-66720)
 
 - **Infrastructure Scope Selector**
 
