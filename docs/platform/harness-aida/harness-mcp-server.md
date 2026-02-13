@@ -1,11 +1,11 @@
 ---
-title: Harness MCP Server (Beta)
+title: Harness MCP Server
 description: A unified interface for AI agents to interact with Harness tools and services using the Model Context Protocol (MCP).
-sidebar_label: MCP Server (Beta)
+sidebar_label: MCP Server
 sidebar_position: 10
 ---
 
-The Harness Model Context Protocol (MCP) Server (in Beta) enables integration with Harness tools, providing endpoints for pipelines, pull requests, and more. This guide outlines the installation, configuration, and usage of the MCP server.
+The Harness Model Context Protocol (MCP) Server enables integration with Harness tools, providing endpoints for pipelines, pull requests, and more. This guide outlines the installation, configuration, and usage of the MCP server.
 
 ## Introduction
 
@@ -29,14 +29,14 @@ MCP solves this problem by:
 
 Why not just use function calls for each API?
 
-1. **Limited Support for External Tools:** Function calling is often restricted to the model’s internal tools. MCP enables integration with external tools like Windsurf, Cursor, and Claude Desktop.
+1. **Limited Support for External Tools:** Function calling is often restricted to the model's internal tools. MCP enables integration with external tools like Windsurf, Cursor, and Claude Desktop.
 2. **Inconsistent Implementations:** Without MCP, each agent would need to implement the same logic in different languages/frameworks, increasing the risk of errors.
 3. **Scalability and Reuse:** MCP provides a standardized protocol, allowing reusable implementations across various agents and tools.
 
 ## Requirements
 
 * **Harness API Token:** Generate one through the Harness UI. Learn more: [Manage API Keys](/docs/platform/automation/api/add-and-manage-api-keys/)
-* **Go 1.23 or later:** Ensure **Go** is installed on your system.
+* **Go 1.23 or later:** Ensure **Go** is installed on your system (required only when building from source).
 
 ### Video Walkthrough (Installation and Setup)
 
@@ -44,6 +44,10 @@ Why not just use function calls for each API?
 
 
 ## Configuration
+
+The MCP server supports two modes:
+- **stdio mode:** For local integrations with AI assistants (default)
+- **http-server mode:** For running as an HTTP server
 
 ### Windsurf Configuration
 
@@ -128,41 +132,61 @@ Why not just use function calls for each API?
 
 ```json
 {
-  "servers": {
-    "harness-mcp-server": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "HARNESS_API_KEY",
-        "-e",
-        "HARNESS_DEFAULT_ORG_ID",
-        "-e",
-        "HARNESS_DEFAULT_PROJECT_ID",
-        "-e",
-        "HARNESS_BASE_URL",,
-        "harness/mcp-server",
-        "stdio"
-      ],
-      "env": {
-        "HARNESS_API_KEY": "<YOUR_API_KEY>",
-        "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
-        "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>",
-        "HARNESS_BASE_URL": "<YOUR_BASE_URL>"
+  "mcp": {
+    "servers": {
+      "harness": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "-e",
+          "HARNESS_API_KEY",
+          "-e",
+          "HARNESS_DEFAULT_ORG_ID",
+          "-e",
+          "HARNESS_DEFAULT_PROJECT_ID",
+          "-e",
+          "HARNESS_BASE_URL",
+          "harness/mcp-server",
+          "stdio"
+        ],
+        "env": {
+          "HARNESS_API_KEY": "<YOUR_API_KEY>",
+          "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
+          "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>",
+          "HARNESS_BASE_URL": "<YOUR_BASE_URL>"
+        }
       }
     }
-  },
-  "inputs": []
+  }
 }
-
 ```
 
 [VS Code MCP Guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 
-### Using Claude Code
+### Claude Desktop Configuration
+
+On MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "harness": {
+      "command": "/path/to/harness-mcp-server",
+      "args": ["stdio"],
+      "env": {
+        "HARNESS_API_KEY": "<YOUR_API_KEY>",
+        "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
+        "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>"
+      }
+    }
+  }
+}
+```
+
+### Claude Code Configuration
 
 ```bash
 claude mcp add harness -- docker run -i --rm \
@@ -175,12 +199,61 @@ claude mcp add harness -- docker run -i --rm \
 
 [Claude Code MCP Guide](https://docs.claude.com/en/docs/claude-code/mcp)
 
+### Gemini CLI Configuration
+
+Add the server configuration to your Gemini config file at: `~/.gemini/settings.json`
+
+```json
+{
+  "mcpServers": {
+    "harness": {
+      "command": "/path/to/harness-mcp-server",
+      "args": ["stdio"],
+      "env": {
+        "HARNESS_API_KEY": "<YOUR_API_KEY>",
+        "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
+        "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>"
+      }
+    }
+  }
+}
+```
+
+You can also install using Gemini CLI Extensions:
+
+```bash
+gemini extensions install https://github.com/harness/mcp-server
+export HARNESS_API_KEY="your_api_key_here"
+gemini
+```
+
+### Amazon Q Developer CLI Configuration
+
+Add the server configuration to your Amazon Q config file at: `~/.aws/amazonq/mcp.json`
+
+```json
+{
+  "mcpServers": {
+    "harness": {
+      "command": "/path/to/harness-mcp-server",
+      "args": ["stdio"],
+      "env": {
+        "HARNESS_API_KEY": "<YOUR_API_KEY>",
+        "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
+        "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>",
+        "HARNESS_BASE_URL": "<YOUR_BASE_URL>"
+      }
+    }
+  }
+}
+```
+
 ### Building from Source
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/harness/mcp-server  
+git clone https://github.com/harness/mcp-server
 cd mcp-server
 ```
 
@@ -190,18 +263,27 @@ cd mcp-server
 go build -o cmd/harness-mcp-server/harness-mcp-server ./cmd/harness-mcp-server
 ```
 
-3. Run the server:
+3. Run the server in stdio mode:
 
 ```bash
 HARNESS_API_KEY=your_api_key \
+HARNESS_BASE_URL="https://app.harness.io" \
 ./cmd/harness-mcp-server/harness-mcp-server stdio
+```
+
+4. Or run in HTTP server mode:
+
+```bash
+HARNESS_API_KEY=your_api_key \
+HARNESS_BASE_URL="https://app.harness.io" \
+./cmd/harness-mcp-server/harness-mcp-server http-server
 ```
 
 ### Use Docker Image
 
-Alternatively, you can use the pre-built Docker image:
+#### Stdio Mode
 
-```
+```bash
 docker run -i --rm \
   -e HARNESS_API_KEY=your_api_key \
   -e HARNESS_DEFAULT_ORG_ID=your_org_id \
@@ -210,10 +292,18 @@ docker run -i --rm \
   harness/mcp-server stdio
 ```
 
+#### HTTP Server Mode
+
+```bash
+docker run -i --rm \
+  -e HARNESS_API_KEY=your_api_key \
+  -e HARNESS_BASE_URL=your_base_url \
+  harness/mcp-server http-server
+```
 
 ## Authentication
 
-Set the `HARNESS_API_KEY` environment variable for authentication. Learn more: [Manage API Keys](/docs/platform/automation/api/add-and-manage-api-keys/).
+Set the `HARNESS_API_KEY` environment variable for authentication. The Account ID is automatically extracted from the API key. Learn more: [Manage API Keys](/docs/platform/automation/api/add-and-manage-api-keys/).
 
 ```bash
 export HARNESS_API_KEY=<your_api_key>
@@ -221,30 +311,403 @@ export HARNESS_API_KEY=<your_api_key>
 
 ## Command Line Arguments
 
-Please refer to the [Harness MCP Server Command Line Arguments documentation](https://github.com/harness/mcp-server#command-line-arguments) for a full list of available command line arguments.
+The Harness MCP Server supports the following command line arguments:
+
+| Argument | Description |
+|----------|-------------|
+| `--toolsets` | Comma-separated list of toolsets to enable. Use `--toolsets=all` to enable all available toolsets. If not set, only the default toolset is enabled. |
+| `--read-only` | Run the server in read-only mode |
+| `--log-file` | Path to log file for debugging |
+| `--log-level` | Set the logging level (debug, info, warn, error) |
+| `--version` | Show version information |
+| `--help` | Show help message |
+| `--base-url` | Base URL for Harness (default: `https://app.harness.io`) |
+| `--output-dir` | Directory where the tool writes output files (e.g., pipeline logs) |
+
+For more details, visit the [Harness MCP Server Command Line Arguments documentation](https://github.com/harness/mcp-server#command-line-arguments).
 
 ## Environment Variables
 
-You can customize and configure your Harness MCP server with environment variables. For a full list of options, visit the [MCP Environment Variables documentation](https://github.com/harness/mcp-server#environment-variables).
+| Variable | Description |
+|----------|-------------|
+| `HARNESS_API_KEY` | Harness API key (required). Account ID is automatically extracted from the API key. |
+| `HARNESS_DEFAULT_ORG_ID` | Default Harness organization ID (optional). If not specified, it must be passed in the request when required. |
+| `HARNESS_DEFAULT_PROJECT_ID` | Default Harness project ID (optional). If not specified, it must be passed in the request when required. |
+| `HARNESS_TOOLSETS` | Comma-separated list of toolsets to enable (default: `default`). Example: `pipelines,sei,scs,sto` |
+| `HARNESS_READ_ONLY` | Set to `true` to run in read-only mode |
+| `HARNESS_LOG_FILE` | Path to log file |
+| `HARNESS_LOG_LEVEL` | Logging level (debug, info, warn, error) |
+| `HARNESS_BASE_URL` | Base URL for Harness (default: `https://app.harness.io`) |
 
-## MCP Server Tool Sets Overview
+For more details, visit the [MCP Environment Variables documentation](https://github.com/harness/mcp-server#environment-variables).
 
-[MCP Tools](https://modelcontextprotocol.io/docs/concepts/tools#overview) allow servers to expose executable functions that can be invoked by clients and used by LLMs to perform actions. 
+## MCP Server Toolsets
 
-For a full list of tools and toolsets available, visit the [Harness MCP toolsets documentation](https://github.com/harness/mcp-server?tab=readme-ov-file#tools).
+[MCP Tools](https://modelcontextprotocol.io/docs/concepts/tools#overview) allow servers to expose executable functions that can be invoked by clients and used by LLMs to perform actions.
 
-By default, we currently support the following set of tools under the `default` toolset:
+To enable specific toolsets, use the `HARNESS_TOOLSETS` environment variable or the `--toolsets` command line argument:
 
-  - `get_connector_details`: Get details of a specific connector
-  - `list_connector_catalogue`: List the Harness connector catalogue
-  - `list_connectors`: List connectors with filtering options
-  - `list_pipelines`: List pipelines in a repository
-  - `get_pipeline`: Get details of a specific pipeline
-  - `get_execution`: Get details of a specific pipeline execution
-  - `list_executions`: List pipeline executions
-  - `fetch_execution_url`: Fetch the execution URL for a pipeline execution
-  - `list_dashboards`: Lists all available Harness dashboards
-  - `get_dashboard_data`: Retrieves the data from a specific Harness dashboard
+```bash
+HARNESS_TOOLSETS="pipelines,ccm,sto,scs" ./harness-mcp-server stdio
+```
+
+### Default Toolset
+
+Toolset name: `default`
+
+The default toolset contains essential tools from various services:
+
+| Tool | Description |
+|------|-------------|
+| `get_connector_details` | Get details of a specific connector |
+| `list_connector_catalogue` | List the Harness connector catalogue |
+| `list_connectors` | List connectors with filtering options |
+| `list_pipelines` | List pipelines in a repository |
+| `get_pipeline` | Get details of a specific pipeline |
+| `get_execution` | Get details of a specific pipeline execution |
+| `list_executions` | List pipeline executions |
+| `fetch_execution_url` | Fetch the execution URL for a pipeline execution |
+| `list_dashboards` | List all available Harness dashboards |
+| `get_dashboard_data` | Retrieve data from a specific Harness dashboard |
+
+### Pipelines Toolset
+
+Toolset name: `pipelines`
+
+| Tool | Description |
+|------|-------------|
+| `get_pipeline` | Get details of a specific pipeline |
+| `list_pipelines` | List pipelines in a repository |
+| `get_execution` | Get details of a specific pipeline execution |
+| `list_executions` | List pipeline executions |
+| `fetch_execution_url` | Fetch the execution URL for a pipeline execution |
+| `list_input_sets` | List input sets for a pipeline |
+| `get_input_set` | Get details of a specific input set for a pipeline |
+| `get_pipeline_summary` | Get a concise summary of a pipeline's structure and execution info |
+| `list_triggers` | List triggers in a Harness pipeline |
+
+### Pull Requests Toolset
+
+Toolset name: `pullrequests`
+
+| Tool | Description |
+|------|-------------|
+| `get_pull_request` | Get details of a specific pull request |
+| `list_pull_requests` | List pull requests in a repository |
+| `get_pull_request_checks` | Get status checks for a specific pull request |
+| `get_pull_request_activities` | Get activities and comments for a specific pull request |
+| `create_pull_request` | Create a new pull request |
+
+### Services Toolset
+
+Toolset name: `services`
+
+| Tool | Description |
+|------|-------------|
+| `get_service` | Get details of a specific service |
+| `list_services` | List services |
+
+### Environments Toolset
+
+Toolset name: `environments`
+
+| Tool | Description |
+|------|-------------|
+| `get_environment` | Get details of a specific environment |
+| `list_environments` | List environments |
+| `move_environment_configs` | Move environment YAML from inline to remote |
+
+### Infrastructure Toolset
+
+Toolset name: `infrastructure`
+
+| Tool | Description |
+|------|-------------|
+| `list_infrastructures` | List infrastructure definitions |
+| `move_infrastructure_configs` | Move infrastructure YAML between inline and remote |
+
+### Connectors Toolset
+
+Toolset name: `connectors`
+
+| Tool | Description |
+|------|-------------|
+| `list_connector_catalogue` | List the Harness connector catalogue |
+| `get_connector_details` | Get details of a specific connector |
+| `list_connectors` | List connectors with filtering options |
+
+### Secrets Toolset
+
+Toolset name: `secrets`
+
+| Tool | Description |
+|------|-------------|
+| `list_secrets` | List secrets from Harness with filtering and pagination options |
+| `get_secret` | Get a secret by identifier from Harness |
+
+### Delegate Tokens Toolset
+
+Toolset name: `delegatetokens`
+
+| Tool | Description |
+|------|-------------|
+| `list_delegate_tokens` | List delegate tokens with filtering and pagination options |
+| `get_delegate_token` | Get a delegate token by name |
+| `create_delegate_token` | Create a new delegate token |
+| `revoke_delegate_token` | Revoke a delegate token |
+| `delete_delegate_token` | Delete a revoked delegate token |
+| `core_get_delegate_by_token` | Get all delegates using a given delegate token name |
+
+### Delegate Toolset
+
+Toolset name: `delegate`
+
+| Tool | Description |
+|------|-------------|
+| `core_list_delegates` | List all delegates filtered by status, name, type, and version status |
+
+### Repositories Toolset
+
+Toolset name: `repositories`
+
+| Tool | Description |
+|------|-------------|
+| `get_repository` | Get details of a specific repository |
+| `list_repositories` | List repositories |
+
+### Registries Toolset
+
+Toolset name: `registries`
+
+| Tool | Description |
+|------|-------------|
+| `get_registry` | Get details of a specific registry in Harness artifact registry |
+| `list_artifact_files` | List files for a specific artifact version |
+| `list_artifact_versions` | List artifact versions in a registry |
+| `list_artifacts` | List artifacts in a registry |
+| `list_registries` | List registries in Harness artifact registry |
+
+### Dashboards Toolset
+
+Toolset name: `dashboards`
+
+| Tool | Description |
+|------|-------------|
+| `list_dashboards` | List all available Harness dashboards |
+| `get_dashboard_data` | Retrieve data from a specific Harness dashboard |
+
+### Cloud Cost Management (CCM) Toolset
+
+Toolset name: `ccm`
+
+| Tool | Description |
+|------|-------------|
+| `get_ccm_overview` | Retrieve the cost overview for an account |
+| `list_ccm_cost_categories` | List all cost category names for an account |
+| `list_ccm_perspectives_detail` | List all perspectives for an account |
+| `get_ccm_perspective` | Retrieve a perspective by ID |
+| `create_ccm_perspective` | Create a perspective |
+| `update_ccm_perspective` | Update a perspective |
+| `delete_ccm_perspective` | Delete a perspective |
+| `list_ccm_recommendations` | List cost-optimization recommendations |
+| `get_ccm_anomalies_summary` | Get a summary of cost anomalies |
+| `list_ccm_anomalies` | List cost anomalies |
+
+For the complete list of CCM tools, visit the [Harness MCP toolsets documentation](https://github.com/harness/mcp-server#cloud-cost-management-toolset).
+
+### Chaos Engineering Toolset
+
+Toolset name: `chaos`
+
+| Tool | Description |
+|------|-------------|
+| `chaos_experiments_list` | List chaos experiments based on scope and filters |
+| `chaos_experiment_describe` | Get details of a specific chaos experiment |
+| `chaos_experiment_run` | Run a specific chaos experiment |
+| `chaos_experiment_run_result` | Get the result of a chaos experiment run |
+| `chaos_probes_list` | List chaos probes based on scope and filters |
+| `chaos_probe_describe` | Get details of a specific chaos probe |
+| `chaos_create_experiment_from_template` | Create a chaos experiment from a template |
+| `chaos_experiment_template_list` | List chaos experiment templates |
+| `chaos_experiment_variables_list` | List variables for a specific chaos experiment |
+
+### Supply Chain Security (SCS) Toolset
+
+Toolset name: `scs`
+
+| Tool | Description |
+|------|-------------|
+| `scs_list_artifact_sources` | List artifact sources in Harness SCS |
+| `scs_list_artifacts_per_source` | List artifacts within a specific artifact source |
+| `scs_get_artifact_overview` | Get metadata, security findings, SBOM, and compliance status |
+| `scs_get_artifact_component_view` | Retrieve component view including dependencies and license info |
+| `scs_get_artifact_component_remediation` | Get remediation recommendations for a component |
+| `scs_get_artifact_chain_of_custody` | Retrieve the full chain of custody for an artifact |
+| `scs_list_code_repos` | List code repositories scanned by Harness SCS |
+| `scs_create_opa_policy` | Create an OPA policy based on denied licenses |
+| `scs_download_sbom` | Get the download URL for SBOM |
+
+### Security Test Orchestration (STO) Toolset
+
+Toolset name: `sto`
+
+| Tool | Description |
+|------|-------------|
+| `get_all_security_issues` | List and filter security issues by target, pipeline, tool, severity |
+| `global_exemptions` | List all global exemptions |
+| `promote_exemption` | Promote an exemption to global |
+| `approve_exemption` | Approve a specific exemption |
+
+### Logs Toolset
+
+Toolset name: `logs`
+
+| Tool | Description |
+|------|-------------|
+| `download_execution_logs` | Download logs for a pipeline execution |
+
+### Templates Toolset
+
+Toolset name: `templates`
+
+| Tool | Description |
+|------|-------------|
+| `list_templates` | List templates at a given scope |
+
+### Internal Developer Portal (IDP) Toolset
+
+Toolset name: `idp`
+
+| Tool | Description |
+|------|-------------|
+| `get_entity` | Get details of a specific entity in the IDP Catalog |
+| `list_entities` | List entities in the IDP Catalog |
+| `get_scorecard` | Get details of a specific scorecard |
+| `list_scorecards` | List scorecards in the IDP Catalog |
+| `get_score_summary` | Get score summary for scorecards |
+| `get_scores` | Get scores for scorecards |
+| `execute_workflow` | Execute a workflow in the IDP Catalog |
+| `search_tech_docs` | Search documentation related to Harness entities |
+
+### Audit Trail Toolset
+
+Toolset name: `audit`
+
+| Tool | Description |
+|------|-------------|
+| `list_user_audits` | Retrieve the complete audit trail for a specified user |
+
+### Feature Management and Experimentation (FME) Toolset
+
+Toolset name: `fme`
+
+| Tool | Description |
+|------|-------------|
+| `list_fme_workspaces` | List all FME workspaces |
+| `list_fme_environments` | List environments for a specific workspace |
+| `list_fme_feature_flags` | List feature flags for a specific workspace |
+| `get_fme_feature_flag_definition` | Get the definition of a specific feature flag |
+
+### SEI Toolset
+
+Toolset name: `sei`
+
+| Tool | Description |
+|------|-------------|
+| `sei_productivity_feature_metrics` | Get productivity metrics for a collection |
+| `sei_efficiency_lead_time` | Get lead time for a project |
+| `sei_deployment_frequency` | Get deployment frequency metrics |
+| `sei_change_failure_rate` | Get change failure rate metrics |
+| `sei_mttr` | Get Mean Time to Restore metrics |
+| `sei_get_team` | Get team information by team reference ID |
+| `sei_get_teams_list` | Get list of teams with pagination |
+
+For the complete list of SEI tools, visit the [Harness MCP toolsets documentation](https://github.com/harness/mcp-server#sei-toolset).
+
+### GitOps Toolset
+
+Toolset name: `gitops`
+
+| Tool | Description |
+|------|-------------|
+| `gitops_list_agents` | List all GitOps agents (ArgoCD instances) |
+| `gitops_get_agent` | Get detailed information about a GitOps agent |
+| `gitops_list_applications` | List all GitOps applications |
+| `gitops_get_application` | Get detailed information about a GitOps application |
+| `gitops_get_app_resource_tree` | Get the resource tree for a GitOps application |
+| `gitops_list_clusters` | List all clusters connected to GitOps agents |
+| `gitops_list_repositories` | List all Git repositories configured in GitOps |
+| `gitops_get_dashboard_overview` | Get GitOps dashboard overview with sync statistics |
+
+For the complete list of GitOps tools, visit the [Harness MCP toolsets documentation](https://github.com/harness/mcp-server#gitops-toolset).
+
+## Tool Usage Guide
+
+### Download Execution Logs
+
+#### Using Docker
+
+Mount the logs directory to the container to download logs to your host machine:
+
+```bash
+docker run -d --name mcp-server -p 8080:8080 \
+  -v /path/to/logs/on/host:/logs \
+  harness/mcp-server --output-dir=/logs
+```
+
+Sample MCP configuration with logs toolset:
+
+```json
+{
+  "mcpServers": {
+    "harness": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "/Users/testuser/logs:/logs",
+        "-e",
+        "HARNESS_API_KEY",
+        "-e",
+        "HARNESS_DEFAULT_ORG_ID",
+        "-e",
+        "HARNESS_DEFAULT_PROJECT_ID",
+        "-e",
+        "HARNESS_BASE_URL",
+        "harness/mcp-server",
+        "stdio",
+        "--output-dir=/logs",
+        "--toolsets=logs"
+      ],
+      "env": {
+        "HARNESS_API_KEY": "<YOUR_API_KEY>",
+        "HARNESS_DEFAULT_ORG_ID": "<YOUR_ORG_ID>",
+        "HARNESS_DEFAULT_PROJECT_ID": "<YOUR_PROJECT_ID>",
+        "HARNESS_BASE_URL": "<YOUR_BASE_URL>"
+      }
+    }
+  }
+}
+```
+
+Example tool input:
+
+```json
+{
+  "logs_directory": "pipeline-logs",
+  "org_id": "<YOUR_ORG_ID>",
+  "plan_execution_id": "<YOUR_PLAN_EXECUTION_ID>",
+  "project_id": "<YOUR_PROJECT_ID>"
+}
+```
+
+#### Using Local Binary
+
+```bash
+./harness-mcp-server stdio --toolsets=logs --output-dir=/Users/testuser/log-files
+```
 
 ## Use Cases
 
@@ -256,9 +719,19 @@ Watch the use case demo for a walkthrough of MCP server functionality:
 
 ### Using Artifact Registry Tools Demo
 
-Watch this demo to see the use of Artifact Registry tools in action. 
+Watch this demo to see the use of Artifact Registry tools in action.
 
 <DocVideo src="https://www.loom.com/share/1fb5694359204d7ab62688f899cd427e?sid=669f2ec4-9170-4804-88ea-d357ad38cb44" />
+
+## Debugging
+
+Since MCP servers run over stdio, debugging can be challenging. For the best debugging experience, use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
+
+```bash
+npx @modelcontextprotocol/inspector /path/to/harness-mcp-server stdio
+```
+
+The Inspector will display a URL that you can access in your browser to begin debugging.
 
 ## References
 
