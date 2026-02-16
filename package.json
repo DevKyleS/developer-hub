@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "node scripts/generate-feature-flags-rss.js && node scripts/generate-release-notes-summaries.mjs",
     "docusaurus": "docusaurus",
-    "start": "docusaurus start --host 0.0.0.0",
+    "start": "node scripts/generate-release-notes-summaries.mjs --skip-if-exists && docusaurus start --host 0.0.0.0",
     "build": "export NODE_OPTIONS=--max-old-space-size=10240 && DOCUSAURUS_IGNORE_SSG_WARNINGS=true  docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

@@ -17,14 +17,21 @@ const DAYS_BACK = parseInt(process.env.AI_SUMMARY_DAYS || '30', 10);
 
 const ROOT_DIR = path.join(__dirname, '..');
 
-console.log('[rn-summaries] Starting release notes summaries generation...');
+// Check for --skip-if-exists flag
+const skipIfExists = process.argv.includes('--skip-if-exists');
+
+// Skip if output file exists and flag is set
+if (skipIfExists && fs.existsSync(OUTPUT_FILE)) {
+  console.log('[rn-summaries] Output file exists, skipping generation...');
+  process.exit(0);
+}
 
 function getGitLastUpdated(filePath) {
   try {
     const output = execSync(`git log --format="%aI" -1 -- "${filePath}"`, {
       cwd: ROOT_DIR,
       encoding: 'utf-8',
-      timeout: 10000,
+      timeout: 30000,
     }).trim();
     if (output) {
       const date = new Date(output);
@@ -39,22 +46,20 @@ function getGitLastUpdated(filePath) {
   return null;
 }
 
-
-
 function createFallbackCategories(enhancements, fixes) {
   const categories = [];
 
   if (enhancements && enhancements.length > 0) {
     categories.push({
       name: 'New Features & Enhancements',
-      items: enhancements
+      items: enhancements,
     });
   }
 
   if (fixes && fixes.length > 0) {
     categories.push({
       name: 'Fixes',
-      items: fixes
+      items: fixes,
     });
   }
 
@@ -82,7 +87,7 @@ async function main() {
       generated_at: new Date().toISOString(),
       generation_method: useGemini ? 'gemini-api' : 'fallback-parser',
       days_included: DAYS_BACK,
-      categories: []
+      categories: [],
     };
 
     let totalModulesProcessed = 0;
@@ -115,8 +120,10 @@ async function main() {
           continue;
         }
 
-        if ((!parsedData.enhancements || parsedData.enhancements.length === 0) &&
-            (!parsedData.fixes || parsedData.fixes.length === 0)) {
+        if (
+          (!parsedData.enhancements || parsedData.enhancements.length === 0) &&
+          (!parsedData.fixes || parsedData.fixes.length === 0)
+        ) {
           console.log(`[rn-summaries]   - ${module.id}: no recent content`);
           continue;
         }
@@ -124,15 +131,15 @@ async function main() {
         const entry = { categoryName: category.name, module, parsedData, markdownPath };
         moduleEntries.push(entry);
 
-        if (useGemini && ((parsedData.enhancements?.length > 0) || (parsedData.fixes?.length > 0))) {
+        if (useGemini && (parsedData.enhancements?.length > 0 || parsedData.fixes?.length > 0)) {
           console.log(`[rn-summaries]   - ${module.id}: queued for AI categorization`);
           geminiTasks.push({
             entry,
             promise: generateSummary(
               module.title,
               parsedData.enhancements || [],
-              parsedData.fixes || []
-            )
+              parsedData.fixes || [],
+            ),
           });
         }
       }
@@ -141,15 +148,19 @@ async function main() {
     //  Await all Gemini API calls in parallel
     const geminiResults = new Map();
     if (geminiTasks.length > 0) {
-      console.log(`[rn-summaries] Calling Gemini API for ${geminiTasks.length} modules in parallel...`);
-      const results = await Promise.allSettled(geminiTasks.map(t => t.promise));
+      console.log(
+        `[rn-summaries] Calling Gemini API for ${geminiTasks.length} modules in parallel...`,
+      );
+      const results = await Promise.allSettled(geminiTasks.map((t) => t.promise));
       for (let i = 0; i < geminiTasks.length; i++) {
         const { entry } = geminiTasks[i];
         const result = results[i];
         if (result.status === 'fulfilled') {
           geminiResults.set(entry.module.id, result.value);
         } else {
-          console.warn(`[rn-summaries]   - ${entry.module.id}: Gemini call rejected: ${result.reason?.message || result.reason}`);
+          console.warn(
+            `[rn-summaries]   - ${entry.module.id}: Gemini call rejected: ${result.reason?.message || result.reason}`,
+          );
           geminiResults.set(entry.module.id, null);
         }
       }
@@ -167,11 +178,16 @@ async function main() {
         if (aiSummary && aiSummary.categories) {
           finalData = { categories: aiSummary.categories };
           totalGeminiSuccess++;
-          console.log(`[rn-summaries]   - ${module.id}: AI categorization successful (${aiSummary.categories.length} categories)`);
+          console.log(
+            `[rn-summaries]   - ${module.id}: AI categorization successful (${aiSummary.categories.length} categories)`,
+          );
         } else {
           totalGeminiFallback++;
           console.log(`[rn-summaries]   - ${module.id}: AI failed, using fallback categorization`);
-          finalData = createFallbackCategories(parsedData.enhancements || [], parsedData.fixes || []);
+          finalData = createFallbackCategories(
+            parsedData.enhancements || [],
+            parsedData.fixes || [],
+          );
         }
       } else {
         finalData = createFallbackCategories(parsedData.enhancements || [], parsedData.fixes || []);
@@ -193,11 +209,13 @@ async function main() {
         title: module.title,
         last_updated: gitDate || parsedData.lastUpdated || 'N/A',
         link: module.link,
-        categories: finalData.categories
+        categories: finalData.categories,
       });
 
       const totalItems = finalData.categories.reduce((sum, cat) => sum + cat.items.length, 0);
-      console.log(`[rn-summaries]   - ${module.id}: ${finalData.categories.length} categories, ${totalItems} total items`);
+      console.log(
+        `[rn-summaries]   - ${module.id}: ${finalData.categories.length} categories, ${totalItems} total items`,
+      );
     }
 
     // Preserve original category ordering from sidebar
