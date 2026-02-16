@@ -18,10 +18,20 @@ description: [One-sentence summary of what this guide covers]
 ---
 ```
 
-### 2. Introduction (2-3 paragraphs)
+### 2. Introduction (2-3 lines)
 - **Paragraph 1**: What is this feature/capability?
 - **Paragraph 2**: Why use it? What problems does it solve?
 - **Paragraph 3**: Key benefits or use cases
+
+#### What will you learn?
+Optionally include a brief list of key outcomes or topics covered in this guide:
+```markdown
+### What will you learn?
+
+- **Topic 1:** Brief description of what they'll learn.
+- **Topic 2:** Another key outcome or skill.
+- **Topic 3:** Additional learning objective.
+```
 
 ### 3. Prerequisites
 List required setup, permissions, or knowledge:

@@ -20,17 +20,17 @@ import { MODULES } from "@site/src/constants";
             link: "/docs/code-repository/code-supported",
           },
           {
-            title: "Get started with Code",
+            title: "Overview & Key Concepts",
             module: MODULES.code,
             description:
               "Learn the benefits, features, and key concepts of the Harness Code Repository module.",
-            link: "/docs/category/get-started-with-code",
+            link: "/docs/code-repository/get-started/overview",
           },
           {
-            title: "Onboarding guide",
+            title: "Get Started",
             module: MODULES.code,
             description:
-              "Start using Harness Code.",
+              "A self-service onboarding guide for Harness Code Repository.",
             link: "/docs/code-repository/get-started/onboarding-guide",
           },
         ],
