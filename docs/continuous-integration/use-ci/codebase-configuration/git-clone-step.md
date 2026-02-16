@@ -88,6 +88,12 @@ An optional target path in the pipeline workspace where you want to clone the re
 
 You can't specify `/harness/` as a target directory for a **Git Clone** step because this folder is reserved for the **Build** stage's [codebase](./create-and-configure-a-codebase.md). You can specify **Shared Paths** in your [CI Build stage settings](../set-up-build-infrastructure/ci-stage-settings.md) to share data across steps in your **Build** stage.
 
+:::info macOS workspace path
+
+On Harness macOS build infrastructure, `/harness` is a protected system directory. The workspace is `/tmp/harness` instead (`/tmp/harness` is a symlink to `/private/tmp/harness`; both paths work). If you use macOS infrastructure, specify clone directory paths using either the full macOS workspace path (for example, `/tmp/harness/my-repo`) or a relative path (for example, `./my-repo`). For more information, go to [How can I share cache between different OS types?](/docs/continuous-integration/ci-articles-faqs/continuous-integration-faqs#how-can-i-share-cache-between-different-os-types-linuxmacos).
+
+:::
+
 ## Additional Configuration
 
 The following settings are available when you click **Additional Configuration**.

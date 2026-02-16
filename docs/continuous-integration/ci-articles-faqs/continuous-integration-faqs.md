@@ -2554,7 +2554,7 @@ If there are too many nested directories in your cached files, you can use a **R
 
 ### How can I share cache between different OS types (Linux/macOS)?
 
-Cache sharing between Linux and macOS might not work because the home/workspace directories differ between operating systems. On macOS, `/harness` is a protected directory, and the workspace is located at `/private/tmp/harness`.
+Cache sharing between Linux and macOS might not work because the home/workspace directories differ between operating systems. On macOS, `/harness` is a protected directory, and the workspace is at `/tmp/harness`, which is a symlink to `/private/tmp/harness`.
 
 To ensure compatibility, use a relative path like `./FOLDER` instead of an absolute path such as `/harness/FOLDER`. This resolves the issue and allows cache sharing between Linux and macOS.
 
