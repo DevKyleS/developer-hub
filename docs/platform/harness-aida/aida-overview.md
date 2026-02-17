@@ -56,7 +56,7 @@ For more information about navigation 2.0, go to [Harness navigation 2.0](https:
 | **SEI** | [AI Productivity Insights](/docs/software-engineering-insights/propelo-sei/ai-productivity-insights/aipi-overview) | AI-powered analysis of developer productivity, AI tool adoption impact, and engineering metrics including DORA and SPACE frameworks. | Generally available |
 | **AI SRE** | AI Scribe Agent | Automated incident documentation with real-time communication monitoring across Slack, Zoom, and Microsoft Teams. | Generally available |
 | **AI Test** | [AI Test Copilot](/docs/ai-test-automation/test-authoring/harness-ai-copilot/natural-language-tests) | Natural language test generation with intent-driven testing, automated step decomposition, and AI assertions. | Generally available |
-| **Platform** | [Harness Agents](/docs/platform/harness-aida/harness-agents) | Autonomous AI agents that run inside pipelines — building, deploying, testing, remediating, and optimizing the SDLC from commit to production. | Alpha |
+| **Platform** | [Harness Agents](/docs/platform/harness-aida/harness-agents) | Autonomous AI agents that run inside pipelines — building, deploying, testing, remediating, and optimizing the SDLC from commit to production. | Generally available |
 
 ## Harness AI terms and data privacy information
 

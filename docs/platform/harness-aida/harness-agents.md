@@ -10,15 +10,15 @@ import TabItem from '@theme/TabItem';
 
 # Harness Agents
 
-:::info Alpha · Limited Preview
-Harness Agents is currently in **alpha** and available as a limited preview. Agent templates are open source and available on [GitHub](https://github.com/thisrohangupta/agents).
+:::info
+Agent templates are open source and available on [GitHub](https://github.com/thisrohangupta/agents).
 :::
 
 Harness Agents are **AI-powered autonomous workers** that execute DevOps tasks inside Harness pipelines. Instead of relying on brittle scripts or external bots, teams can use Harness pipelines as a secure control plane for AI-driven automation — combining governance, observability, and flexibility in one flow.
 
 Agents are pipeline-native — they inherit your pipeline's context, permissions, secrets, and governance controls while taking multi-step actions across your SDLC. Pipelines become the orchestration layer for your AI automation — able to generate, fix, and optimize your software delivery while staying under enterprise controls.
 
-**Runtime:** Harness Pipeline Engine &nbsp;|&nbsp; **Models:** Anthropic, OpenAI, Gemini &nbsp;|&nbsp; **Stage:** Alpha
+**Runtime:** Harness Pipeline Engine &nbsp;|&nbsp; **Models:** Anthropic, OpenAI, Gemini
 
 ---
 
@@ -288,7 +288,7 @@ Agentic automation introduces new attack surfaces — prompt injection, tool sid
 All dates below are tentative forecasts and subject to change.
 :::
 
-### February 2026 — Foundation release (Alpha)
+### February 2026 — Foundation release
 
 Agent runtime, LLM Connectors (Anthropic, OpenAI, Gemini — SaaS and self-hosted), and System Agent templates including: Autofix, Code Coverage, Code Review, FF Cleanup, Manifest Remediator, Helm Chart Autofix, Onboarding, Library Upgrades (Java, React, Python), Vulnerability Remediation, and Unified Agent. Pipeline YAML integration, Step Templates, Agent RBAC, and Harness Auth for agent execution.
 
