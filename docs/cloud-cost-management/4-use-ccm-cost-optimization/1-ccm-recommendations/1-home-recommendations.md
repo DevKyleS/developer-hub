@@ -6,7 +6,6 @@ redirect_from:
   - /docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/ec2-recommendations
   - /docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/ecs-recommendations
   - /docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/governance
-  - /docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/node-pool-recommendations
   - /docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/workload-recommendations
 
 # sidebar_position: 2
@@ -17,6 +16,18 @@ import TabItem from '@theme/TabItem';
 :::info
 After you enable CCM, it may take up to 48 hours for the recommendations to appear in Cloud Costs. It depends on the time at which CCM receives the utilization data for the service. 
 :::
+
+<div style={{background: 'linear-gradient(90deg, #eafaf4, #f7fbf0)', borderRadius: '8px', padding: '16px', margin: '20px 0', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.03)', color: '#000000'}}>
+  <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+    <div style={{fontSize: '20px', marginRight: '10px'}}>🚀</div>
+    <h3 style={{margin: 0, fontSize: '18px', fontWeight: 600, color: '#000000'}}>What's New?</h3>
+  </div>
+  <p style={{margin: 0, fontSize: '15px'}}>
+    <strong>Auto-Inferences for Recommendations:</strong> Harness CCM now automatically detects when recommendations have been implemented and tracks the actual savings achieved eliminating manual tracking and providing real-time ROI measurement. See here for more details. 
+  </p>
+</div>
+
+
 
 ## What are Recommendations?
 
@@ -38,9 +49,6 @@ Harness CCM Recommendations are data-driven insights that help you optimize your
 
 ## Recommendations Homepage
 
-<Tabs>
-<TabItem value="recommendations-info" label="Open, Applied Recommendations and Filters">
-
  <DocImage path={require('./static/output.gif')} width="90%" height="90%" title="Click to view full size image" />
 
 - **Recommendation Type**: CCM has six types of recommendations: `AZURE_INSTANCE`, `EC2_INSTANCE`, `GOVERNANCE`, `NODE_POOL` and `WORKLOAD`. See details about all the types of recommendations [here](#recommendations-per-cloud-provider).
@@ -50,15 +58,31 @@ Harness CCM Recommendations are data-driven insights that help you optimize your
   - **AWS-Specific Filters**: Instance Type
   - **Azure-Specific Filters**: VM Size, Resource Group
   - **Container-Specific Filters**: Kubernetes Cluster Name, Kubernetes Namespace, ECS Cluster Name, ECS Launch Type
+
+<DocImage path={require('./static/outputwo.gif')} width="90%" height="90%" title="Click to view full size image" />
+
+- **Export CSV:** Option to export your Recommendations as comma-separated values (CSV) files. Exporting allows you to use the data in other software. Export respects the filters applied by the user in the filter panel. Only comma-separated values files (CSV) are supported and the maximum number of rows allowed in one export is 10,000 rows.
+- **Ignore & Reject Lists:** This contains: Ignore list and Rejected Auto-Inferences.
+    - **Ignore List:** Adding resources to the Ignore list will stop Harness from displaying recommendations for those resources. You can view the Ignore list with details by clicking on "Manage Ignore List" on the overview page.
+    - {(() => { const launchDate = new Date('2026-02-11T00:00:00'); const currentDate = new Date(); const daysSinceLaunch = Math.ceil((currentDate - launchDate) / (1000 * 60 * 60 * 24)); return daysSinceLaunch >= 0 && daysSinceLaunch <= 7 ? (<span style={{backgroundColor: '#10b981', color: 'white', padding: '1px 6px', borderRadius: '3px', fontSize: '10px', fontWeight: 'bold', marginLeft: '4px', verticalAlign: 'middle'}}>NEW</span>) : null; })()} **Rejected Auto-Inferences:**  Recommendations that were auto-inferred as applied but later rejected will appear here. Review rejection reasons and identify resources that may need to be ignored. You can see the rejected inference, recommendation type, rejected on, rejected by and on and the reason for rejection.
+
+
+### Open and Applied Recommendations
+<Tabs>
+<TabItem value="recommendations-info" label="Open Recommendations">
+
 - **Open Recommendations**: List of [recommendations](#recommendations-per-cloud-provider) that are not applied yet. [All the types of recommendations](#recommendations-per-cloud-provider) are listed here. You can view:
   - Potential Monthly Savings that can be achieved with the recommendation
   - Potential Monthly Spend without applying recommendations.
   - Table with columns: 
     - Resource Name
+    - Recommended Action/Resource
     - Potential Monthly Savings
     - Potential Monthly Spend
-    - Recommended Action
-    - Jira Ticket Status
+    - Jira/Servicenow Ticket Status
+  
+</TabItem>
+<TabItem value="applied-recommendations" label="Applied Recommendations">
 - **Applied Recommendations:** When you click on an individual recommendation, you'll be able to view a detailed breakdown of the recommendation, including relevant insights, suggested actions, and any supporting information. See how to apply recommendations [here](#apply-recommendations).
 
     <DocImage path={require('./static/output-hist.gif')} width="100%" height="100%" title="Click to view full size image" />
@@ -72,41 +96,39 @@ Harness CCM Recommendations are data-driven insights that help you optimize your
 
   - **Breakdown of Marked as Applied:** Shows the distribution of applied recommendations by number of recommendations and associated savings to identify which optimization strategies are most frequently implemented.
 
+  - **Applied Recommendations:** Number of recommendations marked as applied and the timeperiod. 
+
   - **Details Table:** Provides a comprehensive view of each applied recommendation with the following information:
     - Resource name
-    - Potential Monthly Savings
-    - Recommended Action
+    - Recommended Action/Resource
+    - Monthly Savings
     - Associated ticket
-    - Applied by which user and when
+    - Applied on
+    - Applied by (Also shows if a recommendation was inferred )
 
 :::note
 Marking a recommendation as "Applied" assumes all resources are actioned and full savings are recorded. If only a subset is applied, the user must manually update the realized savings using the “Edit savings amount” option.
 ::::
 
-
 </TabItem>
-<TabItem value="export-ignore-settings" label="Export, Ignore List">
+</Tabs>
 
 
- <DocImage path={require('./static/outputwo.gif')} width="90%" height="90%" title="Click to view full size image" />
+### Recommendation Settings
 
-- **Export CSV:** Option to export your Recommendations as comma-separated values (CSV) files. Exporting allows you to use the data in other software. Export respects the filters applied by the user in the filter panel. Only comma-separated values files (CSV) are supported and the maximum number of rows allowed in one export is 10,000 rows.
-- **Manage Ignore List:** Adding resources to the Ignore list will stop Harness from displaying recommendations for those resources. You can view the Ignore list with details by clicking on "Manage Ignore List" on the overview page.
-</TabItem>
-
-<TabItem value="recommendation-settings" label="Settings">
 <Tabs>
-  <TabItem value="preferences" label="Preferences">
+<TabItem value="preferences" label="Preferences">
   <DocImage path={require('./static/preferences.png')} width="80%" height="80%" title="Click to view full size image" />
     - **General Preferences:**
+      - **Automatically Detect when recommendations are applied**: When enabled, Harness will analyze billing data to automatically identify when recommendations are applied, without having to manually mark them as applied.
       - **Show Recommendations on Parent Resources** - Enables recommendations for parent-level resources such as Nodepool, EC2, and ECS Services. This ensures users receive optimization suggestions for high-level infrastructure components.
       - **Show Recommendations on Child Resources** - Displays recommendations for individual workloads, allowing users to optimize specific application components rather than just the underlying infrastructure.
       - **Show Recommendations on Resources Added to the Ignore List** - If enabled, recommendations will still be displayed for resources that have been manually marked as ignored. 
     - **Resource Specific Preferences:** Over here, users can select the presets for each resource type and also set the default time range. 
 
     New Recommendation Preferences may take up to 24 hours to fully update across the platform. However, changes will be reflected immediately on the drill-down page, while the Overview page may take additional time to reflect updates.
-  </TabItem>
-  <TabItem value="manage-presets" label="Manage Presets">
+</TabItem>
+<TabItem value="manage-presets" label="Manage Presets">
   <DocImage path={require('./static/manage-presets.png')} width="80%" height="80%" title="Click to view full size image" />
     This helps users to create and save customized configurations for their recommendations. These presets capture specific user preferences, such as tuning parameters for resource types like workloads, nodepools, ECS, and EC2 instances.  
 
@@ -144,8 +166,8 @@ Marking a recommendation as "Applied" assumes all resources are actioned and ful
         | **Buffer Percentage** | Additional resource margin to ensure containers have sufficient resources during peak usage. Helps prevent throttling and performance issues while maintaining efficient resource allocation. |
       </TabItem>
     </Tabs>
-  </TabItem>
-  <TabItem value="status-mapping" label="Ticketing Tool Mapping">
+</TabItem>
+<TabItem value="status-mapping" label="Ticketing Tool Mapping">
 
       <DocImage path={require('./static/ticketing-tool-mapping.png')} width="80%" height="80%" title="Click to view full size image" />
 
@@ -174,8 +196,7 @@ Marking a recommendation as "Applied" assumes all resources are actioned and ful
       By mapping cost categories to specific Jira projects, you ensure that recommendations reach the right stakeholders without manual routing, reducing response time and increasing the likelihood of implementation. This is especially valuable in large organizations where different teams are responsible for different resource types. 
       
       To configure this feature, click on **+Add mapping** to add a new mapping, then select the cost category, cost bucket, and Jira project.
-  </TabItem>
-</Tabs>
+
 </TabItem>
 </Tabs>
 
@@ -220,6 +241,59 @@ Applying recommendations is easy! You just need to:
 3. **Implement Changes and Track using Jira/ServiceNow** -  Apply the optimizations manually in your cloud environment. [Create and manage Jira or ServiceNow tickets](#managing-recommendations-via-jira-servicenow-tickets) to monitor implementation progress
 5. **Update Status** - Mark recommendations as applied in the CCM platform once implemented. Once applied, recommendations show up in the **Applied** tab.
 
+### Auto Inferences
+
+Auto Inferences is an intelligent feature in Harness Cloud Cost Management (CCM) that automatically detects when recommendations have been implemented and tracks the actual savings realized. This eliminates the need for manual tracking and provides accurate ROI measurement for your cost optimization efforts.
+
+Auto Inferences runs as part of daily batch jobs. Typically, implemented recommendations are detected within 24-48 hours after the recommendation expires.
+
+#### What is Auto Inferences?
+
+When you receive recommendations (such as rightsizing EC2 instances, changing Azure VM SKUs, or implementing governance policies), Auto Inferences automatically monitors your infrastructure to detect if these recommendations have been applied in your cloud environment. Once detected, the system:
+
+- Marks the recommendation as "Applied"
+- Calculates and records the actual monthly savings achieved
+
+
+When a recommendation is auto-inferred, it shows up with a banner.
+<DocImage path={require('./static/auto-inference-banner.png')} width="70%" height="70%" title="Click to view full size image" />
+
+You can choose to verify the recommendation or reject it. Upon clicking verify, you can choose to confirm whether the inferred savings matched the actual amount saved to ensure more accurate savings calculations.
+
+<DocImage path={require('./static/verify-inference.png')} width="50%" height="50%" title="Click to view full size image" />
+
+If you reject an inference, it will show under **Rejected Auto-Inferences** in **Ignore and Reject Lists**
+
+<DocImage path={require('./static/rejected-inference.png')} width="70%" height="70%" title="Click to view full size image" />
+
+
+#### How It Works
+Auto Inferences runs as a scheduled background process that:
+- **Identifies Candidate Recommendations:** Scans for recommendations that have passed their validity period and focuses on recommendations that haven't been manually marked as applied or ignored
+- **Monitors Infrastructure State:** Continuously queries your cloud infrastructure inventory and compares current resource configurations against recommended changes
+- **Validates Implementation:** Checks if resources match the recommended configuration and verifies that changes align with the original recommendation
+- **Records Results:** Automatically marks validated recommendations as "Inferred as Applied" and tracks actual monthly savings realized from the implementation
+
+#### Enabling Auto Inferences
+
+Auto Inferences is controlled at the account level through Recommendation Preferences:
+
+1. Navigate to **Cloud Cost Management** → **Recommendations** → **Settings** → **Preferences**
+2. Locate the **Automatically detect when recommendations are applied** toggle under General Preferences
+3. Save your preferences
+
+We also have added new filters to the recommendations page to help you manage auto-inferred recommendations under "Verification Status":
+
+- **Inferred - Pending Review**: Recommendations automatically detected as implemented but awaiting your verification. You can verify, reject, or edit the savings amount.
+- **Inferred - Verified**: Auto-detected recommendations that have been verified by a user and are confirmed as accurately applied. 
+
+:::note Important
+
+- Currently, Auto Inferences supports AWS EC2 instances, Azure Virtual Machines, and Governance recommendations. Support for additional cloud providers and resource types is planned for future releases.
+
+- Manual actions take precedence. Once you manually mark a recommendation as applied or ignored, Auto Inferences will not override your action.
+
+::: 
 -------
 
 ## Managing Recommendations via Jira/ServiceNow Tickets 
