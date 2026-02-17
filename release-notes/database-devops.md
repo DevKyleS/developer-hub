@@ -22,6 +22,114 @@ These release notes describe recent changes to Harness Database DevOps.
 - **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 :::
 
+## February 2026
+
+### Release 1.79.x
+
+The `1.79.x` release improves onboarding experience, rollback accuracy, and adds advanced database configuration support for Liquibase users.
+
+#### Key Highlights
+
+* **Feature Enhancements**
+  - Introduced a guided configuration wizard to simplify schema and instance setup, improving onboarding for new users.
+  - Added a `usePercona` option in DB Schema configuration (Liquibase type only), enabling selection of a Percona-enabled execution image when required.
+  - Enhanced plugin image to support Kerberos authentication for MSSQL and Oracle databases.
+
+* **Bug Fixes**
+  - Ensured the latest applied tag is correctly derived from migration state during partial rollback failures.
+  - Corrected `deployedAt` timestamps for cancelled or partially failed changesets to maintain proper ordering in migration state views.
+  - Resolved an issue where Test & Preview executions could fail due to missing connector scope in delegate selection.
+
+#### Image Upgrades
+
+| **Image Name**                    |  **Current Version**   | **Past Version**             |
+| --------------------------------- | ---------------------- | ---------------------------- | 
+| plugins/download-artifactory      | 1.0.0                  | 1.0.0                        |
+| plugins/drone-liquibase           | 1.23.0-4.33            | 1.22.0-4.33                  |
+| plugins/drone-liquibase-mongo     | 1.23.0-4.33-mongo      | 1.22.0-4.33-mongo            |
+| plugins/drone-liquibase-spanner   | 1.23.0-4.33-spanner    | 1.22.0-4.33-spanner          |
+| plugins/drone-liquibase-snowflake | 1.23.0-4.33-snowflake  | 1.22.0-4.33-snowflake        |
+| plugins/drone-liquibase-percona   | 1.23.0-4.33-percona    | 1.22.0-4.33-percona          |
+| harness/drone-git                 | 1.6.4-rootless         | 1.6.4-rootless               |
+
+### Release 1.78.x
+
+The `1.78.x` release enhances Liquibase execution flexibility for Percona users.
+
+#### Key Highlights
+* **Feature Enhancements**
+  - Added execution configuration and image selection logic based on the `usePercona` schema property (Liquibase type only).
+
+#### Image Upgrades
+
+| **Image Name**                    |  **Current Version**   | **Past Version**             |
+| --------------------------------- | ---------------------- | ---------------------------- | 
+| plugins/download-artifactory      | 1.0.0                  | 1.0.0                        |
+| plugins/drone-liquibase           | 1.22.0-4.33            | 1.21.0-4.33                  |
+| plugins/drone-liquibase-mongo     | 1.22.0-4.33-mongo      | 1.21.0-4.33-mongo            |
+| plugins/drone-liquibase-spanner   | 1.22.0-4.33-spanner    | 1.21.0-4.33-spanner          |
+| plugins/drone-liquibase-snowflake | 1.22.0-4.33-snowflake  | 1.21.0-4.33-snowflake        |
+| plugins/drone-liquibase-percona   | 1.22.0-4.33-percona    | 1.21.0-4.33-percona          |
+| harness/drone-git                 | 1.6.4-rootless         | 1.6.4-rootless               |
+
+### Release 1.77.x
+
+The `1.77.x` release expands database compatibility and improves migration tracking accuracy.
+
+#### Key Highlights
+* **Feature Enhancements**
+  - Added support for Snowflake in execution configuration, including OAuth, PKI, and username/password authentication for apply and rollback steps.
+  - Added Snowflake Liquibase Plugin Support. Learn more about it in the [docs](https://developer.harness.io/docs/database-devops/use-database-devops/set-up-connectors/#setting-up-snowflake).
+
+* **Bug Fixes**
+  - Corrected logic to use the latest sync tag when determining migration history state.
+
+#### Image Upgrades
+
+| **Image Name**                    |  **Current Version**   | **Past Version**             |
+| --------------------------------- | ---------------------- | ---------------------------- | 
+| plugins/download-artifactory      | 1.0.0                  | 1.0.0                        |
+| plugins/drone-liquibase           | 1.21.0-4.33            | 1.20.0-4.33                  |
+| plugins/drone-liquibase-mongo     | 1.21.0-4.33-mongo      | 1.20.0-4.33-mongo            |
+| plugins/drone-liquibase-spanner   | 1.21.0-4.33-spanner    | 1.20.0-4.33-spanner          |
+| plugins/drone-liquibase-snowflake | 1.21.0-4.33-snowflake  | 1.20.0-4.33-snowflake        |
+| plugins/drone-liquibase-percona   | 1.21.0-4.33-percona    | 1.20.0-4.33-percona          |
+| harness/drone-git                 | 1.6.4-rootless         | 1.6.4-rootless               |
+
+### Release 1.76.x
+The `1.76.x` release focuses on security hardening and execution stability.
+
+#### Key Highlights
+
+* **Bug Fixes & Security**
+  - Fixed an issue where Test & Preview executions displayed outdated pipeline identifiers.
+
+#### Image Upgrades
+
+| **Image Name**                    |  **Current Version**   | **Past Version**             |
+| --------------------------------- | ---------------------- | ---------------------------- | 
+| plugins/download-artifactory      | 1.0.0                  | 1.0.0                        |
+| plugins/drone-liquibase           | 1.20.0-4.33            | 1.19.0-4.33                  |
+| plugins/drone-liquibase-mongo     | 1.20.0-4.33-mongo      | 1.19.0-4.33-mongo            |
+| plugins/drone-liquibase-spanner   | 1.20.0-4.33-spanner    | 1.19.0-4.33-spanner          |
+| plugins/drone-liquibase-snowflake | 1.20.0-4.33-snowflake  | 1.19.0-4.33-snowflake        |
+| harness/drone-git                 | 1.6.4-rootless         | 1.6.4-rootless               |
+
+### Release 1.75.x
+
+No customer-facing updates were introduced in this release.
+
+#### Image Upgrades
+
+| **Image Name**                    |  **Current Version**   | **Past Version**             |
+| --------------------------------- | ---------------------- | ---------------------------- | 
+| plugins/download-artifactory      | 1.0.0                  | 1.0.0                        |
+| plugins/drone-liquibase           | 1.19.0-4.33            | 1.18.0-4.33                  |
+| plugins/drone-liquibase-mongo     | 1.19.0-4.33-mongo      | 1.18.0-4.33-mongo            |
+| plugins/drone-liquibase-spanner   | 1.19.0-4.33-spanner    | 1.18.0-4.33-spanner          |
+| plugins/drone-liquibase-snowflake | 1.19.0-4.33-snowflake  | 1.18.0-4.33-snowflake        |
+| harness/drone-git                 | 1.6.4-rootless         | 1.6.4-rootless               |
+
 ## January 2026
 
 ### Release 1.74.x

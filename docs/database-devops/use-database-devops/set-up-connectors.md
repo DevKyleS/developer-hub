@@ -45,13 +45,14 @@ The JDBC connector is used for connecting to your database instance.
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | **ORACLE**         | `jdbc:oracle:thin:@//{host}:{port}/{servicename}`                                                                                |
 | **POSTGRES**       | `jdbc:postgresql://{host}:{port}/{dbName}?sslmode=disable`                                                                       |
-| **COCKROACHDB**    | `jdbc:postgresql://{HOST}:{PORT}/{DBNAME}`                                                                                       |
+| **COCKROACHDB**    | `jdbc:postgresql://{host}:{port}/{dbName}`                                                                                       |
 | **SQLSERVER**      | `jdbc:sqlserver://{host}:{port};trustServerCertificate=true;databaseName={dbName}`                                               |
 | **MYSQL**          | `jdbc:mysql://{host}:{port}/{dbName}`                                                                                            |
 | **MONGODB**        | `mongodb://{host}:{port}/{dbName}?authSource=admin`                                                                              |
 | **MongoDB Atlas**  | `mongodb+srv://{username}:{password}@{cluster}/{dbName}?authSource=admin`                                                        |
 | **GOOGLE SPANNER** | `jdbc:cloudspanner:/projects/{project-id}/instances/{instance-id}/databases/{database-name}?lenient=true`                        |
-| **GOOGLE ALLOYDB** | `jdbc:postgresql://{HOST}:{PORT}/{DBNAME}`                                                                                       |
+| **GOOGLE ALLOYDB** | `jdbc:postgresql://{host}:{port}/{dbName}`                                                                                       |
+| **SNOWFLAKE**      | `jdbc:snowflake://{host}/?warehouse={wh}&db={dbName}&schema={dbSchema}&role={authRole}`                                          |
 | **MongoDB SSL**    | `mongodb://{host}:{port}/{dbName}?tls=true&authSource=admin`                                                                     |
 | **POSTGRES SSL**   | `jdbc:postgresql://{host}:{port}/{dbName}?ssl=true`                                                                              |
 | **SQLSERVER SSL**  | `jdbc:sqlserver://{host}:{port};databaseName={dbName};encrypt=true;trustServerCertificate=false;`                                |
@@ -85,6 +86,8 @@ MongoDB connections in Harness DB DevOps support both self-hosted and cloud-base
 - The target `database` must be specified in the URL path
 - The database user must have appropriate read/write permissions on the target database
 
+---
+
 ## Setting Up Google Spanner
 
 Google Spanner uses a unique JDBC URL format and does not require a password for authentication. Instead, authentication is handled via **Service Account (SA)** credentials.
@@ -109,6 +112,24 @@ AlloyDB connections in Harness DB DevOps require a **Host**, **Port**, and **Dat
    - **Username/Password**: Database user credentials
 3. **Network Access**:  
    - Ensure the Harness Delegate has network connectivity to the AlloyDB instance. (Both are in same VPC, which is also default behavior in GCP).
+
+---
+
+## Setting Up Snowflake
+Snowflake connections in Harness DB DevOps require a specific JDBC URL format that includes the account identifier, warehouse, database, schema, and role. If the role is not specified, the default role for the user will be used. Either username/password or PKI authentication can be used to authenticate to Snowflake.
+
+### Prerequisites for Snowflake
+To connect to Snowflake, you need to provide the following information:
+1. **Username and Password**: Provide the Snowflake username and password as secrets in the JDBC connector configuration.
+2. **PKI Authentication**: Use Public Key Infrastructure (PKI) authentication by providing the username, private key file reference, and an optional private key passphrase reference while configuring the JDBC connector. 
+
+The private key file reference is a secret file, and the passphrase reference is a secret text. If your private key is encrypted, you can provide the passphrase to decrypt it. For example:
+
+```text
+"username": "john_doe",
+         "privateKeyFileRef": "snowflake-trial-private-key",
+         "privateKeyPassphraseRef": "snowflake-trial-passphrase"
+```
 
 ---
 
