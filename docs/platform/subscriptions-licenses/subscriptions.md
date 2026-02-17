@@ -139,7 +139,7 @@ STO tracks **Security Scans** license consumption, instead of **Developers**. **
 <details>
 <summary>Supply Chain Security (SCS) Supply Chain Executions</summary>
 
-A **Supply Chain Execution** is defined as the execution of the Supply Chain Security (SCS) step in a pipeline. Generating SBOMs, enforcing SBOM policies, generating SLSA provenance, or verifying SLSA provenance are all counted as unique SCS steps.
+A **Supply Chain Execution** is defined as the execution of the Supply Chain Security (SCS) step in a pipeline. Generating SBOMs, enforcing SBOM policies, SCS compliance, generating SLSA provenance, or verifying SLSA provenance, signing artifacts or verifying the artifacts are all counted as unique SCS steps.
 
 SCS tracks **Supply Chain Executions** license consumption, instead of **Developers**. **Supply Chain Executions** are tracked over a *last 30 days* active window.
 

@@ -37,7 +37,7 @@ For more information about **What's Supported** for other Harness modules, see t
    * [Security Testing Orchestration](/docs/security-testing-orchestration/whats-supported/sto-deployments)
    * [Service Reliability Management](/docs/service-reliability-management/srm-whats-supported)
    * [Software Engineering Insights](/docs/software-engineering-insights/sei-supported-platforms)
-   * [Software Supply Chain Assurance](/docs/software-supply-chain-assurance/ssca-supported)
+   * [Supply Chain Security](/docs/software-supply-chain-assurance/ssca-supported)
 
 To see supported technologies and features for the **Self-Managed Enterprise Edition**, refer to the following resources:
    - [Overview](/docs/self-managed-enterprise-edition/smp-overview)
