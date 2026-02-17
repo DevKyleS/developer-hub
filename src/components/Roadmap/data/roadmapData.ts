@@ -1,7 +1,6 @@
 import { MODULES } from "../../../constants";
 import { CdData } from "./cdData";
 import { CiData } from "./ciData";
-import { FfData } from "./ffData";
 import { FmeData } from "./fmeData";
 import { CcmData } from "./ccmData";
 import { StoData } from "./stoData";
@@ -78,12 +77,6 @@ const ModuleData: ModuleData[] = [
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.ci,
     horizon: CiData,
-  },
-  {
-    title: "Feature Flags",
-    description: "SaaS release status: GA, SMP release status: GA",
-    module: MODULES.ff,
-    horizon: FfData,
   },
   {
     title: "Feature Management & Experimentation",

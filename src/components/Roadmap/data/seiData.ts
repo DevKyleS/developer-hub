@@ -2,12 +2,12 @@ import { Horizon } from "./roadmapData";
 
 export const SeiData: Horizon = {
   Now: {
-    description: "Q4, Nov 2025 - Jan 2026",
+    description: "Q1 2026, Feb-Apr 2026",
     feature: [
       {
         tag: [{ value: "AI" }, { value: "Insights" }],
         title: "AI Insights",
-        description: "Track usage, cost, and impact of AI agent(s) across Productivity and Efficiency dashboards, reported across organization and teams.",
+        description: "Track usage, cost, and impact of AI agent(s) with support for custom dashboards, Windsurf, GitHub CoPilot, and Claude Code.",
       },
       {
         tag: [{ value: "AI" }, { value: "Insights" }],
@@ -15,61 +15,56 @@ export const SeiData: Horizon = {
         description: "AI-first summarization of insights, including clear recommendations and summaries for managers and leaders to drive measurable change.",
       },
       {
-        tag: [{ value: "Dashboards" }],
+        tag: [{ value: "Custom Dashboards" }],
         title: "Canvas",
-        description: "Visualize and interact with your SEI data using custom dashboards.",
+        description: "Define and track custom metrics with your SEI data, reported consistently across the organization.",
       },
       {
-        tag: [{ value: "Insights" }],
-        title: "Insights",
-        description: "Code Rework, Sprint Insights, Security Insights, and Test Insights.",
+        tag: [{ value: "Onboarding" }],
+        title: "Intelligent Team Onboarding",
+        description: "Automatically detect and configure all the right IM projects, SCM repos, CI/CD pipelines for a team, to make the onboarding process seamless.",
       },
       {
         tag: [{ value: "Integrations" }],
         title: "ServiceNow Integration",
-        description: "Integrate ServiceNow incident data to compute and track MTTR and CFR.",
+        description: "Integrate ServiceNow incident data to compute and track Mean Time to Recovery, Change Failure Rate, and Deployment Frequency.",
       },
     ],
   },
 
   Next: {
-    description: "Q1, Feb 2026 - April 2026",
+    description: "Q2 2026, May-Jul 2026",
     feature: [
       {
         tag: [{ value: "Actionability" }],
-        title: "Scoring, Goals, KPIs, and Benchmarks",
-        description: "Track scores, compare with benchmarks, define goals, and drive accountability.",
+        title: "Goals, KPIs, and Benchmarks",
+        description: "Track goals and KPIs while leveraging benchmarks to drive accountability.",
       },
       {
         tag: [{ value: "Insights" }],
-        title: "Conversational Analytics & Canvas",
-        description: "Converse with the Efficiency Agent to generate custom metrics, charts, and arrange them on a Canvas.",
-      },
-      {
-        tag: [{ value: "Onboarding" }],
-        title: "Automated Team Onboarding",
-        description: "Automatically detect and configure all the right IM projects, SCM repos, CI/CD pipelines for a team, to make the onboarding process seamless.",
-      },
-      {
-        tag: [{ value: "Integrations" }],
-        title: "Integrations",
-        description: "Includes GitLab CI/CD, Jira Services Management, Harness IDP, and Harness STO.",
-      },
-     ],
-  },
-  
-  Later: {
-    description: "May 2026 & Beyond",
-    feature: [
-      {
-        tag: [{ value: "Insights" }, { value: "New Feature" }],
-        title: "DevSecOps Insights",
-        description: "Deep insights into the build, test, secure, deploy, and feature flagging workflows through the DevSecOps user journey.",
+        title: "Conversational Analytics",
+        description: "Converse with the Efficiency Agent to generate custom metrics, charts, and access actionable insights.",
       },
       {
         tag: [{ value: "Insights" }, { value: "New Feature" }],
         title: "Surveys",
         description: "Measure Developer Satisfaction with built-in surveys. Correlate developer sentiment with metrics for deeper insights.",
+      },
+      {
+        tag: [{ value: "Insights" }, { value: "New Feature" }],
+        title: "Executive Reporting",
+        description: "Generate personalized executive reports that connect company-wide goals and KPIs to team-level performance, helping leaders identify where to focus support and how to drive better outcomes.",
+      },
+     ],
+  },
+  
+  Later: {
+    description: "Q3 2026+, August 2026 & beyond",
+    feature: [
+      {
+        tag: [{ value: "Insights" }, { value: "New Feature" }],
+        title: "Automation",
+        description: "Convert insights into actions based on the goals you define. Allow the Harness Efficiency Agent to optimize CI/CD pipelines, OPA policies, SLO budgets, feature flag rollouts, and more.",
       },
       {
         tag: [{ value: "New Feature" }],
@@ -106,6 +101,13 @@ export const SeiData: Horizon = {
         description:
           "Improved granular role-based access for more control and increased reusability.",
         link:"https://developer.harness.io/docs/software-engineering-insights/harness-sei/get-started/rbac/",
+      },
+      {
+        tag: [{ value: "Insights" } ],
+        title: "Beta Availability",
+        description:
+          "Beta availability of new features in SEI 2.0, including the Windsurf and Cursor integrations for AI Insights, AI Recommendations, the ArmorCode integration for Security Insights, and the SonarQube integration for Test Insights.",
+        link:"https://developer.harness.io/release-notes/software-engineering-insights/#january-2026",
       },
     ],
   },

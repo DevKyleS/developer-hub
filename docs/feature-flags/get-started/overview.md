@@ -20,6 +20,10 @@ redirect_from:
   target="_self"
 />
 
+:::warning Roadmap Update
+New roadmap items are now tracked under Feature Management and Experimentation (FME), which extends the capabilities previously delivered through Harness Feature Flags. Visit the [Product Roadmap for Harness FME](/roadmap/#fme) to see what's coming next.
+:::
+
 Harness Feature Flags (FF) is a feature management solution with smart capabilities, such as GitOps, pipelines, automations, and monitoring.
 
 Watch this video for an introduction to Harness Feature Flags:

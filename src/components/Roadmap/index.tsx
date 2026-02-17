@@ -26,7 +26,6 @@ const Roadmap = () => {
       name: 'Infrastructure as Code Management',
       icon: 'icon_iacm.svg',
     },
-    { value: 'ff', name: 'Feature Flags', icon: 'icon_ff.svg' },
     {
       value: 'fme',
       name: 'Feature Management & Experimentation',

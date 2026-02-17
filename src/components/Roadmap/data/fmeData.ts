@@ -2,54 +2,65 @@ import { Horizon } from "./roadmapData";
 
 export const FmeData: Horizon = {
   Now: {
-    description: "Q4 2025, Nov-Jan 2026",
-    feature: [
-      {
-        tag: [{ value: "Better Together" }],
-        title: "Split integration into Harness",
-        description:
-          "Support for additional Harness environments, including Prod 3.",
-      },
-      {
-        tag: [{ value: "Better Together" }],
-        title: "Automated release pipelines",
-        description: "Leverage Harness pipelines for feature flags to automate release processes.",
-      },
-      {
-        tag: [{ value: "Feature Management" }],
-        title: "Flag archiving",
-        description: "Archive feature flags to streamline flag management and console visualization.",
-      },
-      {
-        tag: [{ value: "Experimentation" }],
-        title: "Warehouse-native experimentation",
-        description: "Experiment directly on impressions & events in your data warehouse.",
-      },
-    ],
-  },
-  Next: {
     description: "Q1 2026, Feb-Apr 2026",
     feature: [
       {
         tag: [{ value: "Better Together" }],
-        title: "Split integration into Harness",
+        title: "Harness multi-environment support",
         description:
-          "Support for additional Harness environments, including Prod 0, EU, and Single Tenancy.",
+          "Support for additional Harness environments, including Prod0, EU, and Single Tenancy.",
       },
       {
         tag: [{ value: "Better Together" }],
-        title: "Automated release pipelines continued",
-        description: "Leverage Harness pipelines for segment changes to automate release processes.",
+        title: "Data checks in automated release pipelines",
+        description: "Add built-in data checks and use segment changes to automate release processes.",
       },
       {
-        tag: [{ value: "Better Together" }],
-        title: "Policy as code",
-        description: "Leverage Harness policy as code to enforce governance policies across your feature management lifecycle.",
+        tag: [{ value: "Dashboards" }],
+        title: "Harness dashboards for FME",
+        description: "A unified set of dashboards that combine production activity and usage insights to keep teams aligned on system health and impact.",
       },
       {
         tag: [{ value: "SDK" }],
         title: "Remote evaluation client-side SDKs",
         description: "No rules are exposed to client-side. Instead, these thin clients utilize a secure cloud service for flag evaluations.",
+      },
+      {
+        tag: [{ value: "Better Together" }],
+        title: "Unified UI",
+        description: "A platform-wide design system. Modern and designed for action, clarity, and cohesiveness.",
+      },
+      {
+        tag: [{ value: "Monitoring" }, {value: "Experimentation"}],
+        title: "Expanded guardrail metric insights",
+        description: "Make data-driven decisions at every stage of your rollout, even if it doesn't meet the requirements for statistical comparison.",
+      },
+    ],
+  },
+  Next: {
+    description: "Q2 2026, May-Jul 2026",
+    feature: [
+      {
+        tag: [{ value: "Better Together" }],
+        title: "Unified billing and setting management",
+        description: "Unified control plane for billing and subscription management with streamlined FME settings.",
+      },
+      {
+        tag: [{ value: "Configuration" }],
+        title: "Config and AI config management",
+        description: "Enterprise cloud config management, leveraging FME's real-time flag delivery infrastructure.",
+      },
+      {
+        tag: [{value: "Experimentation"}],
+        title: "Experiment pipeline support",
+        description:
+          "Include experiment steps in FME pipelines.",
+      },
+      {
+        tag: [{value: "Better Together"}],
+        title: "Policy as code for experiments",
+        description:
+          "Leverage Harness Policy as Code to enforce governance policies on experiment changes.",
       },
       {
         tag: [{value: "Targeting"}, {value: "Better Together"}],
@@ -63,42 +74,49 @@ export const FmeData: Horizon = {
         description:
           "Extend Warehouse Native Experimentation to support Trino and BigQuery.",
       },
+    ],
+  },
+  Later: {
+    description: "Q3 2026+, August 2026 & beyond",
+    feature: [
+      {
+        tag: [{ value: "Better Together" }],
+        title: "Project movement support",
+        description: "Allow FME projects to be moved from one Harness organization to another.",
+      },
+      {
+        tag: [{ value: "SDKs" }],
+        title: "Extend SDK support",
+        description: "Support additional SDKs.",
+      },
+      {
+        tag: [{ value: "Audit Trail" }],
+        title: "Audit log unification with Harness Audit Trail",
+        description: "Deliver FME audit logs and admin audit log events in Harness Audit Trail to support a single source of truth.",
+      },
       {
         tag: [{value: "Experimentation"}],
         title: "CUPED",
         description:
           "Introduce CUPED to leverage pre-experiment data to reduce variance.",
       },
-    ],
-  },
-  Later: {
-    description: "Q2 2026+, May 2026 & beyond",
-    feature: [
       {
-        tag: [{ value: "Better Together" }],
-        title: "Data checks in automated release pipelines",
-        description: "Add built-in data checks to increase safety for feature flag-driven releases.",
-      },
-      {
-        tag: [{ value: "SDK" }],
-        title: "Extend SDK support",
-        description: "Support additional SDKs.",
-      },
-      {
-        tag: [{ value: "Monitoring" }, {value: "Experimentation"}],
-        title: "Expanded guardrail metric insights",
-        description: "Make data-driven decisions at every stage of your rollout, even if it doesn't meet the requirements for statistical comparison.",
-      },
-      {
-        tag: [{ value: "Better Together" }],
-        title: "Config management",
-        description: "Enterprise cloud config management, leveraging FME's real-time flag delivery infrastructure.",
+        tag: [{value: "Experimentation"}],
+        title: "Dimensional Analysis for WHN",
+        description:
+          "Introduce dimensional analysis for Warehouse Native Experimentation (WHN) to uncover deeper trends and segment-level impact.",
       },
     ],
   },
   Released: {
     description: "What has been released",
     feature: [
+      {
+        tag: [{ value: "Better Together" }],
+        title: "Split integration into Harness",
+        description:
+          "Support for additional Harness environments, including Prod 3.",
+      },
       {
         tag: [{ value: "SDK" }],
         title: "OpenFeature provider updates",

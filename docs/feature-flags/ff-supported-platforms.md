@@ -14,6 +14,10 @@ sidebar_position: 10
   target="_self"
 />
 
+:::warning Roadmap Update
+New roadmap items are now tracked under Feature Management and Experimentation (FME), which extends the capabilities previously delivered through Harness Feature Flags. Visit the [Product Roadmap for Harness FME](/roadmap/#fme) to see what's coming next.
+:::
+
 Harness Feature Flags support [client-side and server-side SDKs](/docs/feature-flags/use-ff/ff-sdks/sdk-overview/client-side-and-server-side-sdks.md) for a number of programming languages.
 
 ## Supported client-side SDKs

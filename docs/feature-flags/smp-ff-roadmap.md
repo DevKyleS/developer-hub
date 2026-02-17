@@ -18,6 +18,11 @@ sidebar_position: 200
 />
 
 # Self-Managed Enterprise Edition - Roadmap and feature availability
+
+:::warning Roadmap Update
+New roadmap items are now tracked under Feature Management and Experimentation (FME), which extends the capabilities previously delivered through Harness Feature Flags. Visit the [Product Roadmap for Harness FME](/roadmap/#fme) to see what's coming next.
+:::
+
 The Harness Self-Managed Enterprise Edition of Feature Flags is a smart feature flags solution focused on helping you roll out changes with end-to-end governance, auditing, and automation.
 
 The table below outlines the roadmap for the Harness Self-Managed Enterprise Edition of Feature Flags:
