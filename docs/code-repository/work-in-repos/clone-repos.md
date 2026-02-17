@@ -109,3 +109,34 @@ git clone --depth=1 --filter=blob:none <REPO_URL>
 :::note
 Make sure your Git version is 2.19 or later to use filtering options.
 :::
+
+## Troubleshooting (clone and push)
+
+### HTTP 500 or curl 22 when cloning or pushing
+
+**Error:** `HTTP 500` or `curl 22 The requested URL returned error: 500`
+
+The server returned an internal error. During clone or push this often means the HTTP request size exceeded the client-side buffer limit. Increase the HTTP post buffer so larger requests can be sent:
+
+```bash
+git config http.postBuffer 524288000
+```
+
+This sets the buffer to 500 MiB for this repository. Retry your clone or push. If the error continues, [contact Harness Support](mailto:support@harness.io).
+
+### Unexpected disconnect while reading sideband packet
+
+**Error:** `unexpected disconnect while reading sideband packet`
+
+The connection dropped while Git was receiving data (for example during a long clone or large transfer). Common causes include network instability, timeouts, or server-side limits.
+
+[Contact Harness Support](mailto:support@harness.io) to diagnose. If you work with large files (1 GiB or more), use [Git Large File Storage (LFS)](./git-lfs.md) or contact Support for options.
+
+### Large files (+4 GiB) on Git for Windows
+
+Clone or push of files larger than 4 GiB may fail or not complete when using Git for Windows (the transfer can stop or the file may not be fully sent). For further details, see the [Git for Windows large-file issue](https://github.com/git-for-windows/git/issues/6055).
+
+**What to do:**
+
+1. Use Windows Subsystem for Linux (WSL) and run Git from a Linux environment, or  
+2. [Contact Harness Support](mailto:support@harness.io) for alternatives such as [Harness Artifact Registry](/docs/artifact-registry) for very large artifacts.
