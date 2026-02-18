@@ -118,6 +118,11 @@ import Deleos from '/docs/platform/shared/delegate-legacy-eos.md'
 
 ## February 2026
 
+### Version 26.02.88404 <!-- February 18, 2026 -->
+
+#### Hotfix
+- ASG steps using AWS Connector with authentication type OIDC or IRSA will be properly used for deployments [CDS-118683]
+
 ### Version 26.02.88400 <!--February 04, 2026-->
 
 #### Fixed issues
