@@ -7,7 +7,20 @@ sidebar_position: 1
 
 import DocImage from '@site/src/components/DocImage';
 
-Release Orchestration (BETA) offers a unified framework for modeling, scheduling, automating, and tracking complex software releases across multiple functions, teams, environments, and delivery tools. It orchestrates every step of the software release, from planning releases using Harness AI to production deployments, feature flag enablement, and end-to-end visibility throughout the software release/delivery lifecycle. 
+Release Orchestration offers a unified framework for modeling, scheduling, automating, and tracking complex software releases across multiple functions, teams, environments, and delivery tools. It orchestrates every step of the software release, from planning releases using Harness AI to production deployments, feature flag enablement, and end-to-end visibility throughout the software release/delivery lifecycle.
+
+## Prerequisites
+
+Before using Release Orchestration, ensure the following feature flags are enabled in your Harness account:
+
+- **`RMG_RELEASE_MANAGEMENT_ENABLED`:** Enables the Release Management module
+- **`RMG_PROCESS_ENABLED`:** Enables the Process functionality for creating release blueprints
+
+:::info
+
+Contact [Harness Support](mailto:support@harness.io) to enable these feature flags for your account.
+
+::: 
 
 <DocImage path={require('../static/overview.png')} title="Click to view full size image" />
 
