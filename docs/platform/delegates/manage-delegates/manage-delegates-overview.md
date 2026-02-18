@@ -5,6 +5,10 @@ sidebar_label: Overview
 sidebar_position: 1
 ---
 
+:::note Feature Availability
+This feature is currently behind the `PL_SHOW_DELEGATE_STATUS_CARDS` feature flag. To enable it, please contact [Harness Support](mailto:support@harness.io).
+:::
+
 Delegates are only backward compatible up to a certain version and may not support new features. Running outdated delegates can lead to task failures, caching issues, and inconsistent behavior. 
 
 To prevent such issues, proactively manage and upgrade delegates. Options to manage delegates include:
