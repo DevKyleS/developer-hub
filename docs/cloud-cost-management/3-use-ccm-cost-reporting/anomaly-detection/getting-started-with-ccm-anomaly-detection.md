@@ -110,8 +110,14 @@ On Overview page:
 
 - **Time Range Selection:** Quick select options include 7, 30, or 90 days, or you can pick a custom date range with specific start and end dates.
 
+- **View By**: This option allows you to organize and view anomalies in two different ways:
+    - **Resource**: Displays anomalies grouped by individual cloud resources. This view helps you identify which specific resources are experiencing unusual cost patterns.
+    - **Cost Buckets**: Displays anomalies organized by [specific Cost Buckets in your Cost Categories](/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-cost-categories/cost-categories). When you select this option, an additional **Cost Category Name** filter appears, allowing you to narrow down anomalies to a specific Cost Bucket. This view is useful for understanding cost anomalies at a higher organizational level rather than at the individual resource level. 
+
+    <DocImage path={require('./static/cost-category-support.png')} width="100%" height="100%" title="Click to view full size image" />
+
 - **Filters:** You can filter anomalies by multiple dimensions:
-    - **Generic Filters:** Actual Spend, Anomalous Spend, Cost Category
+    - **Generic Filters:** Total Actual Spend, Unusual Spend, Cost Category
     - **Cluster Filters** (for Kubernetes): Cluster Name, Namespace, Workload, Service
     - **GCP Filters:** GCP Project, GCP Product, GCP SKU Description
     - **AWS Filters:** AWS Account, AWS Service, AWS Usage Type
