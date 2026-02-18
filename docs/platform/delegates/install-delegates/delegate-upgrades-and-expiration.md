@@ -165,6 +165,53 @@ In case of a successful upgrade, the old container is stopped within a 1 hour ti
 User information is not propagated when a delegate is started from external sources. All delegate operations are recorded under the SYSTEM user in the audit trail, especially during the scale-up and scale-down processes. The **Action** column displays actions when a delegate is created, updated, or upserted. For more information about the audit trail, go to [View audit trail](/docs/platform/governance/audit-trail/).
 :::
 
+## Upgrade Delegate through Harness UI
+
+:::note Feature Availability
+This feature is currently behind the `PL_ONE_CLICK_UPGRADE_DELEGATE` feature flag. To enable it, please contact [Harness Support](mailto:support@harness.io).
+:::
+
+In addition to automatic upgrades, you can now upgrade delegates manually through the Harness UI, giving you full control while keeping all existing configurations and behaviors. 
+
+When a delegated is upgraded via the UI, the new delegate version automatically inherits all settings from the previous delegate, including:
+
+- **Proxy settings**: All proxy configurations and routing rules remain intact
+- **Security configurations**: Mutual TLS (mTLS) settings and other security configurations are preserved
+- **Network settings**: All networking behaviors continue to function without modification
+
+### Steps to upgrade a delegate through the UI
+
+1. Navigate to **Settings** in your account, project, or organization.
+
+2. Under **Resources**, select **Delegates** to view the delegates list page.
+
+3. Locate the delegate you want to upgrade in the list.
+
+4. Click the vertical ellipsis (⋮) menu on the right side of the delegate row.
+
+5. Select **Upgrade** from the dropdown menu.
+
+    :::note
+    The upgrade option will not be available in the following cases:
+      - The delegate is not currently connected.
+      - The delegate is already running the latest version.
+    :::
+
+    ![Manual delegate upgrade menu](static/manual-delegate-upgrade-menu.png)
+
+    The upgrade process will begin automatically, upgrading the delegate to the latest available version.
+
+:::warning limitations
+
+The following limitations currently apply to delegate upgrades using the Harness UI:
+
+* **Docker delegates**: Upgrading via the UI is not yet supported for Docker-based delegates.
+* **Sequential upgrades only**: You can perform one upgrade at a time. Chained or simultaneous upgrades are not supported.
+* **Latest version only**: UI upgrades can update only to the latest published delegate version; selecting a custom version is not currently available.
+
+We’re actively working to address these limitations, and they will be removed in future releases.
+:::
+
 ## Determine if automatic upgrade is enabled
 
 When a delegate is installed, it may take up to an hour by default to determine if the `upgrader` was removed during installation. During that time, the delegate shows a status of **DETECTING**.
