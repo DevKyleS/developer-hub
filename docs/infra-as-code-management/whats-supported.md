@@ -49,7 +49,16 @@ Go to [OpenTofu migration](https://opentofu.org/docs/intro/migration/) to migrat
 - **AWS**: Connect via your AWS account to leverage extensive IaCM features.
 - **Azure**: Integration supports multiple Azure services.
 - **Google Cloud Platform (GCP)**: Offers tailored IaCM functionalities for GCP resources.
-- **Spot**: Utilize Spot by NetApp for cost-effective cloud workload management.
+
+### Secrets Management
+- **Vault**: HashiCorp Vault connector for secrets management
+
+**Key features:**
+- **Workspace-level attachment**: Vault connectors are attached at the workspace level
+- **Authentication methods**: Currently supports **Token** and **JWT** authentication
+- **Flexible configuration**: Can be added to workspaces after creation or through variable sets
+- **Runtime injection**: Secrets are automatically injected into runtime environments as environment variables
+- **Provider initialization**: Harness automatically adds environment variables based on the selected authentication type, which you must consume to initialize the Vault provider in your OpenTofu/Terraform code.
 
 ### Git Providers
 Harness IaCM supports the following source providers for seamless code management:

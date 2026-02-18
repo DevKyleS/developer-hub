@@ -15,6 +15,15 @@ import TabItem from "@theme/TabItem";
 ## Connectors
 A **connector** is required to authenticate with cloud providers or external systems. Most workspace operations, like fetching modules or variable files, depend on a connector.
 
+:::info supported connectors
+IaCM supports the following cloud providers and external systems through connectors:
+- **AWS**: Amazon Web Services integration
+- **GCP**: Google Cloud Platform integration
+- **Azure**: Microsoft Azure integration
+- **Vault**: HashiCorp Vault integration for secrets management
+
+Go to the [IaCM What's Supported](/docs/infra-as-code-management/whats-supported) page for detailed configuration information.
+
 :::tip add connectors
 Connectors can be added via Account Settings or directly from your workspaces **Connectors and Variables** tab.
 :::
@@ -41,6 +50,18 @@ You can attach more than one connector to a workspace. This allows your IaCM run
 - Connectors appear in the **Connectors and Variables** tab.
 - If a workspace is created from a template, template-defined connectors are included automatically (read-only).
 - You can add more connectors inline or select from account/project scope.
+
+---
+
+## Secrets Management
+The **Vault** connector provides HashiCorp Vault integration for secrets management in IaCM workspaces.
+
+**Key features:**
+- **Workspace-level attachment**: Vault connectors are attached at the workspace level
+- **Authentication methods**: Currently supports **Token** and **JWT** authentication
+- **Flexible configuration**: Can be added to workspaces after creation or through variable sets
+- **Runtime injection**: Secrets are automatically injected into runtime environments as environment variables
+- **Provider initialization**: Harness automatically adds environment variables based on the selected authentication type, which you must consume to initialize the Vault provider in your OpenTofu/Terraform code.
 
 ---
 
