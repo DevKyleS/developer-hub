@@ -23,7 +23,7 @@ After you enable CCM, it may take up to 48 hours for the recommendations to appe
     <h3 style={{margin: 0, fontSize: '18px', fontWeight: 600, color: '#000000'}}>What's New?</h3>
   </div>
   <p style={{margin: 0, fontSize: '15px'}}>
-    <strong>Auto-Inferences for Recommendations:</strong> Harness CCM now automatically detects when recommendations have been implemented and tracks the actual savings achieved eliminating manual tracking and providing real-time ROI measurement. See here for more details. 
+    <strong>Auto-Inferences for Recommendations:</strong> Harness CCM now automatically detects when recommendations have been implemented and tracks the actual savings achieved eliminating manual tracking and providing real-time ROI measurement. [See here](/docs/cloud-cost-management/use-ccm-cost-optimization/ccm-recommendations/home-recommendations#auto-inferences) for more details. 
   </p>
 </div>
 

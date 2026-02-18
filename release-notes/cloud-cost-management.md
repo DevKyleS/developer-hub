@@ -1,7 +1,7 @@
 ---
 title: Cloud Cost Management Release Notes
 sidebar_label: Cloud Cost Management
-date: 2026-02-09T18:00
+date: 2026-02-16T18:00
 sidebar_position: 6
 ---
 
@@ -25,8 +25,66 @@ We've migrated to LabelsV2, which preserves your original label keys while drama
 
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
 
+## February 2026 - Version 1.79.21
+## Deployment Date: February 16, 2026 (Prod-1)
+
+### Feature Improvements
+
+- **Anomaly Alert Recipients Display**: The Anomalies Overview screen now displays the email and Slack recipients to whom alerts were sent for each anomaly, providing better visibility into alert distribution. [CCM-28638]
+
+- **Anomaly Filtering by Cost Buckets**: Added a quick filter to view anomalies by Resource or Cost Buckets. In the Cost Buckets view, you can see which cost bucket each anomaly belongs to, drill down for details, and redirect to a Perspective with the cost bucket filter applied. You can also filter by cost categories within the Cost Buckets view. This feature is behind a feature flag. Contact [Harness Support](https://harness.io/support) to enable it. [CCM-27460]
+
+- **Enhanced Anomaly-to-Perspective Mapping**: The anomaly fetch API now supports enhanced perspective query filters. Anomalies can now be mapped to perspectives using AWS Account Name/ID, AWS Service, and AWS Usage Type filters, providing more granular anomaly analysis. [CCM-29488]
+
+- **Improved Budget Alert Email Accuracy**: Daily budget alert emails now display the date when the cost was actually incurred, rather than when the alert was generated. This improves accuracy when alerts are processed with a delay due to cloud provider cost data latency. [CCM-29490]
+
+- **Kubernetes AutoStopping Rules V2**: Kubernetes AutoStopping rules have been upgraded to V2. The new template is now available on the K8s rule creation step:
+
+```
+apiVersion: ccm.harness.io/v1
+kind: AutoStoppingRule
+metadata:
+  name: <rule_name>
+  namespace: <namespace_of_workload>
+  annotations:
+    harness.io/cloud-connector-id: autostopping_ccm_play
+spec:
+  idleTimeMins: <idle_time_in_minutes>
+  hideProgressPage: <decides_whether_to_hide_progress_page_defaults_to_false>
+  workloads:
+    <unique_id_of_workload>:
+      namespace: <namespace_of_deployment>
+      name: <name_of_deployment>
+      id: <unique_id_of_workload>
+      desired: <replica_count>
+      type: <type_of_workload_Deployment/Statefulset>
+      warmup_delay_sec: <duration_in_sec_before_depender_is_started_on_warmup>
+      traffic_routes: 
+        - ingress_name: <name_of_ingress>
+          ingress_type: <type_of_ingress.current_support_nginx>
+          service_name: <name_of_k8s_service_for_the_workload>
+          service_host: <host_name_of_the_workload>
+          service_port: <port_specified_on_service>
+          service_path: <service_path_specified_on_ingress_default_/>
+          path_type: <k8s_ingress_path_type>
+          target_path: <target_path_if_any_override>
+  relations:
+    <unique_id_of_dependent_workload>:
+      - <unique_id_of_dependee_workload>
+  dependencies: [<unique_id_of_workload>]
+```
+  [CCM-26821]
+
+### Fixed Issues
+
+- We identified and resolved an issue affecting Cost Category rules that use the NOT_IN operator. When a rule was configured to exclude specific values, the system was unintentionally also excluding line items where the field value was empty or undefined.
+
+After the fix, only the values explicitly listed in the NOT_IN condition are excluded. Cost Categories now accurately classify costs according to your defined rules [CCM-29692]
+
 ## February 2026 - Version 1.78.21
 ## Deployment Date: February 7, 2026 (Prod-1)
+
+### Feature Improvements
 
 - **Enhanced Anomaly Detection Logic**: Improved the machine learning models to handle limited data scenarios more effectively. The system now provides more accurate anomaly detection when working with sparse cost data points by better aligning the Prophet and Statistical models. [CCM-29409]
 
