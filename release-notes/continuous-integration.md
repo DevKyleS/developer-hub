@@ -62,6 +62,24 @@ Check out [Harness Cloud VM Images Docs](/docs/platform/references/harness-cloud
 
 ## February 2026
 
+### Version 1.122.0
+
+<!-- February 17, 2026 -->
+
+#### Fixed Issues
+
+- Resolved an issue with Docker Buildx Bake environment variable handling in Kubernetes builds. (CI-20510, ZD-101772)
+- Improved Test Intelligence security by updating golang version in the split test binary. (CI-20791)
+
+#### Harness Images Updates
+
+| Image | Change | Previous Version | New Version |
+|-------|--------|------------------|-------------|
+| `harness/ci-addon` | Version upgrade | 1.18.8 | 1.18.9 |
+| `harness/ci-lite-engine` | Version upgrade | 1.18.8 | 1.18.9 |
+| `plugins/artifactory` | Golang version update | 1.8.3 | 1.8.4 |
+| `harness/drone-git` | Security vulnerability fix | 1.7.15 | 1.7.16 |
+
 ### Version 1.121.0
 
 <!-- February 9, 2026 -->
