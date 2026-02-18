@@ -12,7 +12,7 @@ The **Harness AI DevOps Agent** streamlines your DevOps processes by enabling yo
 
 The AI DevOps Agents use the following AI models to facilitate your DevOps tasks:
 
-- DevOps Agent: Claude 4.0 Sonnet
+- DevOps Agent: Claude Opus 4.5
 - Support Agent: OpenAI GPT-4o
 - OPA Agent: OpenAI GPT-4o
 - Error Analyzer: OpenAI GPT-4o
@@ -440,3 +440,15 @@ Enterprise Licenses (including Dev360, Service, SI, Users) are entitled to AI De
 ### Where can I submit feedback?
 
 Please submit feedback by emailing [Harness Support](mailto:support@harness.io) or through the UI by clicking **Help** in the bottom left corner then **Give us feedback**.
+
+## Release Updates
+
+### February 18, 2026
+
+The Harness AI DevOps Agent has been upgraded to **Claude Opus 4.5**, bringing significant improvements across the board:
+
+- **Consolidated architecture** — Merged 5 sub-agents into a single unified DevOps agent, improving speed, context retention, and pipeline generation accuracy.
+- **Improved response time and output quality** — Faster responses with higher-quality results across all interactions.
+- **Enhanced template reference capabilities** — More accurate and reusable pipeline generation through better template resolution.
+- **Support for longer and more complex pipelines** — Validated with a 50-stage pipeline test, enabling enterprise-scale pipeline generation.
+- **Stronger pipeline modification fidelity** — Higher accuracy and performance when modifying existing pipelines.
