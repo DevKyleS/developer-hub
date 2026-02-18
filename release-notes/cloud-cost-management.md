@@ -26,7 +26,7 @@ We've migrated to LabelsV2, which preserves your original label keys while drama
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
 
 ## February 2026 - Version 1.79.21
-## Deployment Date: February 16, 2026 (Prod-1)
+#### Deployment Date: February 16, 2026 (Prod-1)
 
 ### Feature Improvements
 
@@ -82,7 +82,7 @@ spec:
 After the fix, only the values explicitly listed in the NOT_IN condition are excluded. Cost Categories now accurately classify costs according to your defined rules [CCM-29692]
 
 ## February 2026 - Version 1.78.21
-## Deployment Date: February 7, 2026 (Prod-1)
+#### Deployment Date: February 7, 2026 (Prod-1)
 
 ### Feature Improvements
 
