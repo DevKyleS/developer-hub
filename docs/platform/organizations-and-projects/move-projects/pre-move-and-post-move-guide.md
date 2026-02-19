@@ -58,7 +58,12 @@ This list covers common issues but is not exhaustive. Additional organization-le
     - Links in old audit logs pointing to the moved project in the older organization will break as they still contain the older organization.
     - New audit logs for the moved project will appear in the newer organization.
 
-10. Terraform Resource and State Management:
+10. Policy Management:
+    - Project-level policies and policy sets are moved with the project to the destination organization.
+    - Organization-level policies and policy sets referenced by the project will become inaccessible after the move. You may need to recreate these policies in the destination organization or update policy sets to reference policies available in the destination organization.
+    - Policy Sets that reference organization-level policies will break after the move and need to be updated to use policies from the destination organization.
+
+11. Terraform Resource and State Management:
     - Terraform state and configuration files that reference the moved project may become inconsistent after a project is moved.
     - Resources created using the Harness Terraform Provider include organization and project level identifiers that will no longer match the new organization identifier.
 
@@ -100,6 +105,12 @@ After a project is moved, ensure to review the following resources. Note that th
 5. Access Control: Create organization-level RBAC components and assign role bindings as required to ensure that users and service accounts still have the intended access.
 
 6. Monitored Services: Update monitored services if these still reference resources from previous organization.
+
+7. Policy Management:
+    - Review all policy sets in the moved project to identify any references to organization-level policies.
+    - Recreate organization-level policies in the destination organization if they are required by policy sets in the moved project.
+    - Update policy sets to reference policies from the destination organization instead of the source organization.
+    - Verify that all policy evaluations continue to work correctly after the move.
 
 Additionally, you may need to update bookmarks, saved URLs and runbooks to use the new organization path, that reference the old organization.
 

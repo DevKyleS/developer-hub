@@ -50,7 +50,6 @@ For detailed pre-move validation and post-move remediation steps, refer the [gui
 
 :::note Unsupported [Entities](/docs/platform/references/harness-entity-reference)
   In the Continuous Delivery and GitOps module, the following entities are not supported: 
-    - [Policy as Code (OPA)](/docs/category/policy-as-code)
     - [GitOps](/docs/category/get-started-with-gitops)
     - [Continuous Verification](/docs/continuous-delivery/verify/verify-deployments-with-the-verify-step)
   
