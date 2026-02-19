@@ -106,6 +106,77 @@ If you select **all** occurrences of the issue:
 
 Follow the steps in the [Submit Exemption Request](#submit-exemption-request) section to complete and submit your request.
 
+## Filters in Exemption Section
+
+The Exemptions section offers various filters to help narrow down issues:
+
+:::note
+
+Filters for Exemptions page are behind the feature flag `STO_EXEMPTION_FILTER`. Contact [Harness Support](mailto:support@harness.io) to enable the feature.
+
+:::
+
+
+
+### Issue Type
+
+Filter issues by type. Multiple selections are allowed.
+
+- SAST
+- DAST
+- SCA
+- IaC
+- Secret
+- Misconfig
+- Bug Smells
+- Code Smells
+- Code Coverage
+- External Policy
+
+### Targets
+
+Filter issues by target names. Multiple selections are allowed. The dropdown lists all targets scanned within the project.
+
+### Target Type
+
+Filter issues by target type. Multiple selections are allowed.
+
+- Repository
+- Container
+- Configuration
+- Instance
+
+### Pipelines
+
+Filter issues by pipeline names. Multiple selections are allowed. The dropdown lists all pipelines used in the project.
+
+### Scanner
+
+Filter issues by scanner names. Multiple selections are allowed. The dropdown lists all scanners used in the project.
+
+
+### Severity
+
+Filter issues by severity levels. Multiple selections are allowed.
+
+- Critical
+- High
+- Medium
+- Low
+- Info
+
+### Requested By:
+
+Filter issues by the user who submitted the Exemption request. Multiple selections are allowed.
+
+### Reason:
+
+Filter by the reason for the Exemption request was submitted. Multiple selections are allowed.
+
+### Scope:
+
+Filter the Exemptions based on scope (Target, Organization, Account, Pipeline, Project) of the request. Multiple selections are allowed.
+
 ## View Issue Exemptions
 
 You can view all exemption requests from the **Exemptions** section in the left navigation. This section is accessible from your **Project**, **Organization**, and **Account** views. Each scope displays exemption requests relevant to that level:
@@ -128,7 +199,7 @@ In the **Exemptions** sections, the requests are displayed in tabs presenting th
 - **Requested by**: User who submitted the request  
 - **Actions**: Based on your permissions and request status - Approve, Reject, Cancel, Reopen
 
-<DocImage path={require('./static/view-exemptions.png')} width="100%" height="100%" title="Click to view full-size image" />
+<DocImage path={require('./static/exemption.png')} width="100%" height="100%" title="Click to view full-size image" />
 
 Here are the columns that are specific to status tab.
 - **Pending**: Displays severity, issue, scope, reason, exemption duration, requested by, and action buttons such as *Approve*, *Reject*, or *Cancel*.
@@ -174,7 +245,7 @@ To view all exemption requests across projects in an organization:
 
 This page displays exemption requests from all projects within the selected organization that you have access to.
 
-<DocImage path={require('./static/view-exemptions-org.png')} width="100%" height="100%" title="Click to view full-size image" />
+<DocImage path={require('./static/org-exemption.png')} width="100%" height="100%" title="Click to view full-size image" />
 
 ### View exemptions at the Account level
 
@@ -186,4 +257,7 @@ To view exemption requests across the entire account:
 
 This page displays exemption requests from all projects across the organizations you have access to.
 
-<DocImage path={require('./static/view-exemptions-account.png')} width="100%" height="100%" title="Click to view full-size image" />
+<DocImage path={require('./static/account-exemption.png')} width="100%" height="100%" title="Click to view full-size image" />
+
+
+
