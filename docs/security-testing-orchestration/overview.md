@@ -85,7 +85,7 @@ You can also include STO features in CI and CD workflows. You can set up your Pi
 
 These workflows are covered in the [Get Started](/docs/security-testing-orchestration/get-started) guide.
 
-<DocImage path={require('/docs/security-testing-orchestration/get-started/static/security-testing-orchestration-basics-31.png')} width="100%" height="100%" title="Click to view full size image" />
+<!-- <DocImage path={require('/docs/security-testing-orchestration/get-started/static/security-testing-orchestration-basics-31.png')} width="100%" height="100%" title="Click to view full size image" /> -->
 
 Now let's apply these features to common use cases:
 
@@ -107,7 +107,7 @@ Now let's apply these features to common use cases:
         </td>
         <td valign="top">
             <ul>
-              <li>Deduplication and prioritization across all scanners</li>
+              <li>Deduplication of vulnerabilities within each scanner </li>
               <li>Categorization of new vs. existing vulnerabilities (with/without exemptions)</li>
             </ul>
         </td>

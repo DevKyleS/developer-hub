@@ -7,7 +7,7 @@ sidebar_position: 11
 
 Static Application Security Testing (SAST) is a security testing practice that analyzes source code or binaries for potential vulnerabilities without executing the application. It is a crucial process for identifying and addressing security risks early in the software development lifecycle (SDLC).
 
-With Harness Security Testing Orchestration (STO), you can easily perform SAST using a wide range of [integrated scanners](#supported-scanners-for-sast). STO also applies its own features, such as results normalization, the deduplication of findings from various scanners, and formatting results to make them actionable.
+With Harness Security Testing Orchestration (STO), you can easily perform SAST using a wide range of [integrated scanners](#supported-scanners-for-sast). STO also applies its own features, such as results normalization, the deduplication of findings within each scanner, and formatting results to make them actionable.
 
 ## Set up SAST scanning with Harness STO
 

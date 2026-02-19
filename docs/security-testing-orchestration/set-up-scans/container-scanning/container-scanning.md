@@ -7,7 +7,7 @@ sidebar_position: 13
 
 Container Scanning is a security testing practice that analyzes your container images for potential vulnerabilities. It is a critical step in identifying and addressing security risks early in the software development lifecycle (SDLC).
 
-With Harness Security Testing Orchestration (STO), easily perform container scanning using a wide range of [integrated scanners](#supported-scanners-for-container-scanning). STO also applies its own features, such as results normalization, deduplication of findings from various scanners, and formatting results to make them actionable.
+With Harness Security Testing Orchestration (STO), easily perform container scanning using a wide range of [integrated scanners](#supported-scanners-for-container-scanning). STO also applies its own features, such as results normalization, deduplication of findings within each scanner, and formatting results to make them actionable.
 
 ## Set up Container Scanning with Harness STO
 
