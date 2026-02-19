@@ -30,11 +30,6 @@ export const FmeData: Horizon = {
         title: "Unified UI",
         description: "A platform-wide design system. Modern and designed for action, clarity, and cohesiveness.",
       },
-      {
-        tag: [{ value: "Monitoring" }, {value: "Experimentation"}],
-        title: "Expanded guardrail metric insights",
-        description: "Make data-driven decisions at every stage of your rollout, even if it doesn't meet the requirements for statistical comparison.",
-      },
     ],
   },
   Next: {
