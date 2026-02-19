@@ -1006,5 +1006,11 @@
     "description": "Enables ApplicationSet first class support.",
     "gaStartDate": "2026-02-11",
     "module": "GitOps"
+  },
+  {
+    "flagKey": "CDS_GITOPS_ENABLE_ROLLOUTS_PIPELINE_UX",
+    "description": "Enables GitOps Rollout step and Auto Promote Rollout dropdown in GitOps Sync Step",
+    "gaStartDate": "2026-02-19",
+    "module": "Continuous Delivery"
   }
 ]
