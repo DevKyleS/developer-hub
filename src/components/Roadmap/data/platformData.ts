@@ -69,12 +69,6 @@ export const platformData: Horizon = {
           "A unified Identity & Access Management (IAM) platform for Harness: one place to define, issue, and verify identity for users, pipelines, services, and AI agents.",
         tag: [{ value: "IAM" }],
       },
-      {
-        title: "API/CLI Standardization",
-        description:
-          "Standardize API and CLI for Harness modules on a single versioning to enhance the developer experience",
-        tag: [{ value: "Developer Experience" }],
-      },
     ],
   },
   Later : {
@@ -96,6 +90,12 @@ export const platformData: Horizon = {
         title: "Connectors 2.0",
         description: "Allows users to connect to their code, cloud, and tools more efficiently, with streamlined configuration and enhanced visibility for better governance and control",
         tag: [],
+      },
+      {
+        title: "API/CLI Standardization",
+        description:
+          "Standardize API and CLI for Harness modules on a single versioning to enhance the developer experience",
+        tag: [{ value: "Developer Experience" }],
       },
       {
         title: "AI-Powered Pipeline Troubleshooting & Insights",
