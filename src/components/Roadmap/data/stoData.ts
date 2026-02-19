@@ -2,7 +2,7 @@ import { Horizon } from "./roadmapData";
 
 export const StoData: Horizon = {
   Now: {
-    description: "Q4 2025, Nov 2025 - Jan 2026",
+    description: "Q1 2026, Feb 2026 - April 2026",
     feature: [  
       {
         tag: [{ value: "Visibility" }, { value: "AppSec" }],
@@ -10,14 +10,142 @@ export const StoData: Horizon = {
         description: "Visibility into active and remediated issues trend across Targets in a Project."
       },
       {
-        tag: [{ value: "Vulnerability Prioritization" }, { value: "AppSec" }],
-        title: "Override Severity for Vulnerabilities",
-        description: "Allow AppSec users to override vulnerability severity."
-      }, 
-      {
         tag: [{ value: "Ticketing" }, { value: "Integration" }, { value: "Exemption" }],
         title: "Auto Create Jira Ticket on Exemption Request",
         description: "Automatically create a Jira ticket on exemption request using a configured template."
+      },
+    
+      {
+        tag: [{ value: "AST" }],
+        title: "App & Target Vuln View",
+        description: "Target view grouped by apps and teams.",
+      },
+      {
+        tag: [{ value: "Integration" }, { value: "Cortex Cloud" }],
+        title: "Cortex Cloud Integration",
+        description: "Native Integration with Cortex Cloud.",
+      },
+       {
+        tag: [{ value: "Delegate" }],
+        title: "Delegate 2.0 Support",
+        description: "Extend STO steps to execute on Delegate 2.0.",
+      },
+        {
+        tag: [{ value: "Integration" }, { value: "Jenkins"}, { value: "GitHub Actions"}],
+        title: "Non Harness CI (Jenkins & GHA Support)",
+        description: "Native onboarding for Non Harness CI - Jenkins and GitHub Actions.",
+      },
+    {
+          tag: [{ value: "Infrastructure" }],
+          title: "Linux ARM64 Support",
+          description: "Adds Linux ARM64 infrastructure support for all STO steps, enabling broader platform compatibility and flexibility",
+    },
+     {
+          tag: [{ value: "FedRAMP" }],
+          title: "Support Nexus scanner in FedRAMP",
+          description: "Add native ingestion-mode support for the Nexus scanner in FedRAMP environments.",
+     },
+    {
+          tag: [{ value: "FedRAMP" }],
+          title: "Support Prisma Cloud scanner in FedRAMP",
+          description: "Add native ingestion-mode support for the Nexus scanner in FedRAMP environments.",
+     },
+    {
+        tag: [{ value: "Visibility" }, { value: "Dashboard"}],
+        title: "Project level Security Dashboard",
+        description: "Redesigned STO overview page to get security posture across the Project via graphs, trends, summary.",
+      },
+
+    ],
+  },
+  Next: {
+    description: "Q2 2026, May 2026 - July 2026",
+    feature: [
+       {
+        tag: [{ value: "Onboarding" }],
+        title: "Get Started",
+        description: "A new Get Started workflow to onboard third-party integrations - Github Actions, Jenkins.",
+      },
+      {
+        tag: [{ value: "Data Handling" }],
+        title: "Target Deletion",
+        description: "Allows deletion of unwanted targets/artifacts vulnerability data to reduce noise.",
+      },
+           {
+        tag: [{ value: "Integration" }, { value: "GitLab" }],
+        title: "Add Support for GitLab CI",
+        description: "Non CI support for GitLab .",
+      },
+         {
+        tag: [{ value: "Agentic" }],
+        title: "Agentic Workflow",
+        description: "Unified Agentic Workflow across AppSec modules for Posture and Remediation use cases.",
+      },
+        {
+        tag: [{ value: "SBOM" }, { value: "Compliance"}],
+        title: "SBOM & Compliance Visibility",
+        description: "Add SBOM and Compliance Tabs in the Target view page",
+      },
+        {
+        tag: [{ value: "AI" }, { value: "Remediation" }, { value: "SCA" }],
+        title: "Auto PRs for SCA Remediation",
+        description: "Create PRs for SCA issues using AI suggestions for direct dependency upgrades (JS/TS, Python, Java). Transitives excluded."
+      },
+       {
+        tag: [{ value: "Integration" }],
+        title: "Orca Integration",
+        description: "Native integration with Orca."
+      },
+      ],
+  },
+  Later: {
+    description: "Q3 2026, Aug 2026 & Beyond",
+    feature: [
+    {
+        tag: [{ value: "Integration" }, { value: "ServiceNow" }],
+        title: "Exemption Management via ServiceNow",
+        description: "Native ServiceNow integration for exemption management.",
+      },
+          {
+        tag: [{ value: "Reachability" }, { value: "Vulnerability Prioritization"}],
+        title: "Reachability based Vulnerability Prioritization",
+        description: "Prioritize vulnerabilities on Harness risk score - formualted on CVSS, EPSS, static and runtime Reacability, etc.",
+      },
+        {
+        tag: [{ value: "Runtime" }, { value: "Visibility"}],
+        title: "Code to Runtime Visibility",
+        description: "End-to-end vulnerability traceability from code to runtime, powered by the Security Graph.",
+      },
+        {
+        tag: [{ value: "Visibility" }, { value: "AppSec" }],
+        title: "Issues List - Org/Account",
+        description: "A centralized, prioritized vulnerability list for the AppSec persona at the Org/Account scope.",
+      },
+        {
+        tag: [{ value: "Integration" }, { value: "Dastardly" }],
+        title: "Dastardly Integration",
+        description: "Support Dastardly with Orchestration, Extraction, and Ingestion modes, with Built-in scanner workflow step under DAST."
+      },
+      {
+        tag: [{ value: "Integration" }, { value: "CrowdStrike"}],
+        title: "CrowdStrike Integration",
+        description: "Native integration with CrowdStrike.",
+      },
+      {
+        tag: [{ value: "Vulnerability" }, { value: "Governance" }],
+        title: "Extraction and Ingestion mode support for Base Image detection",
+        description: "Ability to see base image vs. app layer vulnerabilities and govern pipelines.",
+        },
+    ],
+  },
+
+  Released: {
+    description: "What has been released",
+    feature: [
+       {
+        tag: [{ value: "Override Severity" }],
+        title: "Manually override severity",
+        description: "Ability to manually override the severity of an issue across all the targets at Project scope.",
       },
       {
         tag: [{ value: "EPSS" }],
@@ -25,101 +153,20 @@ export const StoData: Horizon = {
         description: "Provide EPSS score in addition to CVSS score for better vulnerability prioritization.",
       },
       {
-        tag: [{ value: "Override Severity" }],
-        title: "Manually override severity",
-        description: "Ability to manually override the severity of an issue across all the targets at Project scope.",
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "Qwiet.ai"}],
-        title: "Native Integration with Qwiet.ai",
+        tag: [{ value: "Integration" }, { value: "Qwiet AI"}],
+        title: "Native Integration with Qwiet AI ",
         description: "Native integration with Qwiet.ai scanners aka Harness Secruity Scanners for SAST/SCA/Secret.",
-      },
-      {
-        tag: [{ value: "Usability" }, { value: "Filtering"}],
-        title: "Filters on Exemption page",
-        description: "Provide filters for users to narrow down exemptions based on all the supported criteria.",
       },
       {
         tag: [{ value: "External Policy Failures" }, { value: "Severity"}],
         title: "Map External Policy Failures to severity",
         description: "Map external policy failures ingested from 3rd party scanners to a severity instead of INFO level issues.",
       },
-      {
-        tag: [{ value: "Reachability" }, { value: "Vulnerability Prioritization"}],
-        title: "Reachability based Vulnerability Prioritization",
-        description: "Prioritize vulnerabilities on Harness risk score - formualted on CVSS, EPSS, static and runtime Reacability, etc.",
-      }
-    ],
-  },
-  Next: {
-    description: "Q1 2026, Feb 2026 - April 2026",
-    feature: [
-      {
-        tag: [{ value: "Visibility" }, { value: "AppSec" }],
-        title: "Issues List - Org/Account",
-        description: "A centralized, prioritized vulnerability list for the AppSec persona at the Org/Account scope.",
+       {
+        tag: [{ value: "Usability" }, { value: "Filtering"}],
+        title: "Filters on Exemption page",
+        description: "Provide filters for users to narrow down exemptions based on all the supported criteria.",
       },
-      {
-        tag: [{ value: "AST" }],
-        title: "App/Teams view",
-        description: "Target view grouped by apps and teams.",
-      },
-      {
-        tag: [{ value: "Runtime" }, { value: "Visibility"}],
-        title: "Code to Runtime Visibility",
-        description: "End-to-end vulnerability traceability from code to runtime, powered by the Security Graph.",
-      },
-      {
-        tag: [{ value: "Agentic" }],
-        title: "Agentic Workflow",
-        description: "Unified Agentic Workflow across AppSec modules for Posture and Remediation use cases.",
-      },
-      {
-        tag: [{ value: "Visibility" }, { value: "Dashboard"}],
-        title: "Project level Security Dashboard",
-        description: "Redesigned STO overview page to get security posture across the Project via graphs, trends, summary.",
-      },
-          {
-        tag: [{ value: "Integration" }, { value: "Dastardly" }],
-        title: "Dastardly Integration",
-        description: "Support Dastardly with Orchestration, Extraction, and Ingestion modes, with Built-in scanner workflow step under DAST."
-      },
-      {
-        tag: [{ value: "AI" }, { value: "Remediation" }, { value: "SCA" }],
-        title: "Auto PRs for SCA Remediation",
-        description: "Create PRs for SCA issues using AI suggestions for direct dependency upgrades (JS/TS, Python, Java). Transitives excluded."
-      }
-    ],
-  },
-  Later: {
-    description: "Q2 2026, May 2026 & Beyond",
-    feature: [
-      {
-        tag: [{ value: "Onboarding" }],
-        title: "Get Started",
-        description: "A new Get Started workflow to onboard third-party integrations - Github Actions, Jenkins, GitLab.",
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "ServiceNow" }],
-        title: "Exemption Management via ServiceNow",
-        description: "Native ServiceNow integration for exemption management.",
-      },
-      {
-        tag: [{ value: "Data Handling" }],
-        title: "Target Deletion",
-        description: "Allows deletion of unwanted targets/artifacts vulnerability data to reduce noise.",
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "CrowdStrike"}],
-        title: "CrowdStrike Integration",
-        description: "Native integration with CrowdStrike.",
-      }
-    ],
-  },
-
-  Released: {
-    description: "What has been released",
-    feature: [
       {
         tag: [{ value: "Vulnerability" }, { value: "Governance" }],
         title: "Base image vs App layer vulnerability",
@@ -133,57 +180,16 @@ export const StoData: Horizon = {
         link: "https://developer.harness.io/release-notes/security-testing-orchestration#fixed-issues-1"
       },
       {
-        tag: [{ value: "Reporting" }],
-        title: "Download Vulnerabilities",
-        description: "Download CSV with the vulnerabilities found in the pipeline execution.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/view-security-test-results/export-scan-results#export-as-csv-from-the-vulnerabilities-tab/"
-      },
-      {
         tag: [{ value: "Notifications" }, { value: "Platform" }],
         title: "Exemption Notifications",
         description: "Notify developers and AppSec teams via email, Slack, Microsoft Teams, or a custom webhook about pending, approved, and expired exemption requests.",
         link: "https://developer.harness.io/docs/security-testing-orchestration/notifications/exemption-notifications/"
       },
       {
-        tag: [{ value: "Integration" }, { value: "GHAS"}],
-        title: "GitHub Advanced Security Integration",
-        description: "Native integration with GitHub Advanced Security for CodeQL, SCA, and Secrets.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/github-advanced-security/"
-      },
-      {
         tag: [{ value: "Platform" }, { value: "RBAC" }],
         title: "Download Issues Data as CSV from Vulnerabilities Tab",
         description: "Enable RBAC-honoring download of issues CSV from Vulnerabilities Tab, add API, and deep-link to Pipeline Execution Summary Dashboard with execution ID.",
         link: "https://developer.harness.io/docs/security-testing-orchestration/view-security-test-results/export-scan-results/"
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "Sonatype"}],
-        title: "Sonatype Integration",
-        description: "Native integration with Sonatype Nexus IQ Server and Nexus Repository.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/nexus-scanner-reference/"
-      },
-      {
-        tag: [{ value: "Visibility" }, { value: "Platform" }],
-        title: "Deduplication Stats",
-        description: "Show deduplication stats at the pipeline level.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/view-security-test-results/view-scan-results"
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "Anchore" }],
-        title: "Anchore Enhancements",
-        description: "Update the Anchore runner to the latest version, add advanced configuration, and more.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/anchore-enterprise-scanner-reference/"
-      },
-      {
-        tag: [{ value: "Visibility" }, { value: "Platform" }],
-        title: "Expose Internal Issue ID",
-        description: "Show STO internal issue ID under the issue details."
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "SonarQube" }],
-        title: "SonarQube: Code/Bug Smells as Vulnerabilities",
-        description: "Treat SonarQube Code/Bug Smells as vulnerabilities instead of info-level issues.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/sonarqube-sonar-scanner-reference/"
       },
       {
         tag: [{ value: "AI" }, { value: "Visibility" }],
@@ -209,13 +215,6 @@ export const StoData: Horizon = {
         link: "https://developer.harness.io/docs/security-testing-orchestration/rbac/"
       },
       {
-        tag: [{ value: "Integration" }, { value: "Aqua Security"}],
-        title: "Aqua Security On-Prem",
-        description: "Native integration with Aqua Security on-prem.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/aquasec-scanner-reference#scan-configuration"
-    
-      },
-      {
         tag: [{ value: "Exemption Management" }],
         title: "Approval/Rejection comment",
         description: "Enable AppSec users to add contextual comments when approving or rejecting an exemption request.",
@@ -233,37 +232,6 @@ export const StoData: Horizon = {
         description: "Exempt specific occurrences of issues without exempting the entire STO issue.",
         link: "https://developer.harness.io/docs/security-testing-orchestration/exemptions/exemption-workflows#create-exemption-request-for-occurrences-within-issue"
       },
-      {
-        tag: [{ value: "Integration"}],
-        title: "Scanner Original Severity",
-        description: "Use native scanner severity and scoring for prioritization (e.g., Prisma Cloud, SonarQube, Anchore, Checkmarx, Wiz).",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/checkmarx/checkmarxone-scanner-reference/#use-raw-scanner-severity"
-      },
-      {
-        tag: [{ value: "Integration" }, { value: "Checkmarx"}],
-        title: "Checkmarx Integration",
-        description: "Native integration with Checkmarx CxOne, SAST, SCA, and OSA.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/sto-techref-category/checkmarx/checkmarxone-scanner-reference"
-      },
-      {
-        tag: [{ value: "AI" }, { value: "Remediation" }],
-        title: "Auto Remediate Vulnerabilities with AI",
-        description: "Detect and fix vulnerabilities at the source using AI-driven remediation and automated code patches.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/remediations/ai-based-remediations"
-      },
-      {
-        tag: [{ value: "Ticketing" }, { value: "Integration" }],
-        title: "Jira Integration",
-        description: "Sync updates bi-directionally for vulnerabilities found, remediated, or exempted.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/jira-integrations"
-      },
-      {
-        tag: [{ value: "Exemption Workflow" }, { value: "Early Access"}],
-        title: "Global Exemption Management",
-        description: "Manage vulnerability exemptions at account, organization, pipeline, and project levels.",
-        link: "https://developer.harness.io/docs/security-testing-orchestration/exemptions/exemption-workflows#view-exemptions-at-the-account-level"
-      }
-
     ],
   },
 };
