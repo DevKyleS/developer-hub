@@ -101,10 +101,12 @@ Use the following options to filter and refine the dependency list:
 * **Dependency Type**: Filter dependencies based on the dependency relationship to your project. Click `Dependency Type` and then select the checkboxes next to the desired dependency type to filter the dependencies. The available options are `Direct`, `Indirect`, and `No relationship`.
   * **Direct** - Dependencies explicitly declared in your project configuration.
   * **Indirect** - Transitive dependencies brought in by other dependencies.
-  * **No relationship** - Components present in the SBOM but not currently mapped to your project’s dependency graph.
+  * **No relationship** - Dependencies present in the SBOM but not currently mapped to your project’s dependency graph.
   :::note
 
-  Filtering dependencies via dependency type is available only for code repositories.
+  * Filtering dependencies via dependency type is available only for code repositories.
+
+  * Currently, direct dependencies are identified only for a limited set of build tools and ecosystems, including `Maven`, `Gradle`, `npm`, `Yarn`, `pip`, `Conda`, and `Go modules`, based on supported manifest files.
 
   :::
 
