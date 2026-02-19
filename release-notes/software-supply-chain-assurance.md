@@ -1,7 +1,7 @@
 ---
 title: Supply Chain Security release notes
 sidebar_label: Supply Chain Security
-date: 2026-02-19T10:00
+date: 2026-02-19T00:00:00Z
 sidebar_position: 15
 ---
 
