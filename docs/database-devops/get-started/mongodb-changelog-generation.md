@@ -39,7 +39,7 @@ By automating this process in a Harness pipeline, you can:
 
 ## Prerequisites
 
-If you're unfamiliar with generating or structuring a changelog, you may want to explore our general [build a changelog](https://developer.harness.io/docs/database-devops/use-database-devops/get-started/build-a-changelog) guide first—it covers schema migration fundamentals, best practices, and format patterns. Before implementing the pipeline, ensure the following:
+If you're unfamiliar with generating or structuring a changelog file, you may want to explore our general [build a changelog](https://developer.harness.io/docs/database-devops/use-database-devops/get-started/build-a-changelog) guide first, it covers generating SQL changelog, schema migration fundamentals, best practices, and format patterns. Before implementing the pipeline, ensure the following:
 
 - Pipeline execution environment can connect to your MongoDB instance  
 - The Git connector used in the pipeline has **commit** permissions  
@@ -325,11 +325,15 @@ This step will ensure that the generated changelog file is committed to your Git
 By integrating this process into Harness pipelines, you ensure repeatable, auditable, and version-controlled database schema onboarding.
 
 ## FAQs
+
 ### 1. Can I change the changelog filename?
 Yes. Update the OUTPUT_FILE variable in the script to set a custom filename.
+
 ### 2. Does it support JSON output instead of YAML?
 Currently, the script outputs YAML. You can modify the yaml.dump section to use json.dump if JSON output is preferred.
+
 ### 3. How are indexes handled?
 All non-_id indexes are included in the changelog with createIndex changes. The script preserves uniqueness flags.
+
 ### 4. How do I avoid including Liquibase internal collections?
 The script automatically excludes DATABASECHANGELOG and DATABASECHANGELOGLOCK collections.

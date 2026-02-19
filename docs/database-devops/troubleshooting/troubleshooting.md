@@ -220,3 +220,59 @@ release-locks
 ```
 
 This clears any stale Liquibase-level locks and restores normal pipeline execution.
+
+## 11. Why is kinit failing with “Client not found in Kerberos database”?
+The principal does not exist in the realm, or the realm name is incorrect (case-sensitive).
+
+**How to Solve**:
+- Verify the principal exists in the KDC/Active Directory.
+- Verify the principal format: `user@REALM`
+- Ensure the realm is uppercase (e.g., DBDEMO.ORG)
+- Regenerate the keytab if necessary
+
+## 12. Why is the connection failing even though kinit works?
+`kinit` only proves that the principal is valid. The database connection requires a properly registered SPN.
+
+**How to Solve**:
+- Verify SPN registration in AD
+  - MSSQL format: `MSSQLSvc/hostname:1433@REALM`
+  - Oracle format: `oracle/hostname@REALM`
+- Ensure the hostname in the JDBC URL matches the SPN
+- Avoid using IP addresses in JDBC URLs
+
+## 13. Why do I see “Clock skew too great” errors?
+This error occurs when there is a significant time difference between the client machine (where kinit is run) and the KDC/AD server. Kerberos requires synchronized time for ticket validation.
+
+## 14. Why does the Delegate fail to resolve the KDC server?
+This can occur if the Delegate's DNS configuration cannot resolve the KDC hostname specified in krb5.conf.
+
+**How to Solve**:
+- Validate resolution using: `nslookup dc1.dbdemo.org`
+- Ensure the Delegate has proper DNS settings to resolve the KDC hostname.
+
+## 15. Why am I getting “No Kerberos credentials available” when running the pipeline?
+This error indicates that the Kerberos credentials obtained via `kinit` are not accessible to the pipeline execution environment. The TGT was not generated, expired, or is not accessible to the JVM process.
+
+**How to Solve**:
+Ensure the keytab is mounted at the correct path and the path is correctly referenced in the Delegate YAML configuration. Then restart the Delegate to pick up the new credentials. Also, confirm that the environment variables for Kerberos are set correctly in the Delegate configuration.
+
+## 16. Why does Oracle Kerberos authentication fail but MSSQL works?
+Oracle has additional **server-side requirements** for Kerberos authentication, such as correct `sqlnet.ora` configuration and correct keytab usage. Whereas, MSSQL is often more straightforward to set up for Kerberos.
+
+## 17. Why does the connection work locally but fail in Harness?
+This is often due to differences in the environment where `kinit` is executed and where the pipeline runs. The local environment may have access to Kerberos credentials, while the pipeline environment does not.
+
+**How to Solve**:
+- Compare `krb5.conf` files
+- Confirm mounted keytab path inside Delegate container
+- Validate environment variables in Delegate YAML
+- Ensure network policies allow traffic to KDC and database
+
+## 18. Why am I getting “ORA-12514: TNS:listener does not currently know of service requested in connect descriptor” when using Kerberos with Oracle?
+This error indicates that the Oracle listener does not recognize the service name specified in the JDBC URL.
+
+**How to Solve**:
+Either incorrect service name is specified in the JDBC URL or the Oracle listener is configured to listen on the correct port. Verify the service name in the JDBC URL matches the one registered with the Oracle listener. Also, ensure the listener is running and configured to accept connections for that service.
+
+## 19. What encryption type does Oracle require when using addent to generate a Kerberos keytab entry?
+Oracle requires `aes256-cts-hmac-sha1-96` and `aes128-cts-hmac-sha1-96` as the encryption type for modern oracle versions. Older version of Oracle also support `rc4-hmac` encryption type, but Oracle has deprecated this encryption type in modern versions due to RC4's known cryptographic weaknesses. 
