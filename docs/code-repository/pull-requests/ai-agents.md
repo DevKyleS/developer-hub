@@ -23,9 +23,9 @@ These agents help teams:
 
 These agents run as part of your pipeline workflows and interact directly with your repository:
 
-1. **Code Review Agent** – analyzes pull requests and posts review feedback and suggestions.
+1. **Code Review Agent** – analyzes pull requests and posts review feedback and suggestions. See [documentation](/docs/code-repository/pull-requests/review-pr.md#ai-code-review)
 2. **AutoFix Agent** – generates fixes for build issues and proposes code changes via pull requests.
-3. **Code Coverage Agent** – generates unit tests to improve coverage and posts a coverage report. See [documentation](/docs/code-repository/pull-requests/review-pr.md#ai-code-review)
+3. **Code Coverage Agent** – generates unit tests to improve coverage and posts a coverage report.
 
 
 All agents follow the same workflow:
@@ -39,7 +39,7 @@ All agents follow the same workflow:
 Harness agents require Harness AI to be enabled in your account settings and may take several minutes to run depending on repository size and agent task.
 :::
 
-### Code Coverage Agent
+## Code Coverage Agent
 
 The Code Coverage Agent helps teams continuously improve test coverage by automatically generating unit tests for untested or under-tested code.
 
@@ -51,7 +51,7 @@ This helps teams:
 * Ensure new code is backed by tests
 * Maintain long-term code quality with minimal manual effort
 
-#### How it works
+### How it works
 
 1. A Run step calls the Code Coverage Agent execute API.
 2. The agent analyzes the repository and identifies coverage gaps.
@@ -59,7 +59,7 @@ This helps teams:
 4. The agent opens a pull request and posts a coverage report comment.
 
 
-**Code Coverage Agent API**
+### Code Coverage Agent API
 
 ```bash
 POST https://app.harness.io/gateway/agents/api/v1/agents/Code%20Coverage/execute
@@ -74,17 +74,17 @@ The API expects the following inputs:
 | `gitConnector`   | connector | Connector used to access the repository |
 | `repo`         | string | Repository name. Consider using `${DRONE_REPO_NAME}` as value|
 | `branch`       | string | Branch to review. Consider using `<+codebase.branch>` as value  |
-   
 
 
 
-#### Coverage Agent PR Summary Example
+
+### Coverage Agent PR Summary Example
 The following example shows a coverage report posted on a pull request:
 
 <DocImage path={require('/docs/code-repository/pull-requests/static/ai-coverage-summary.png')} />
 
 
-### AutoFix Agent
+## AutoFix Agent
 
 The AutoFix Agent enables **self-healing CI pipelines**.
 When a pipeline fails, the agent analyzes the failure and recent code changes, generates a fix, verifies the build passes, and raises a pull request with the proposed solution.
@@ -104,6 +104,8 @@ This helps teams:
 4. The agent creates a pull request and posts a summary comment.
 
 
+### AutoFix Agent API
+
 Use a Run step to invoke the agent:
 
 ```bash
@@ -119,9 +121,9 @@ The API expects the following inputs:
 | `gitConnector`   | connector | Connector used to access the repository |
 | `repo`         | string | Repository name. Consider using `${DRONE_REPO_NAME}` as value|
 | `branch`       | string | Branch to review. Consider using `<+codebase.branch>` as value  |
-| `executionId`  | string    | Pipeline execution ID used as context for identifying failures . Consider using `<+pipeline.executionId>` as value      | 
+| `executionId`  | string    | Pipeline execution ID used as context for identifying failures . Consider using `<+pipeline.executionId>` as value      |
 
 
-#### Autofix Agent PR Summary Example
+### Autofix Agent PR Summary Example
 The following example shows an AutoFix summary created by the agent:
 <DocImage path={require('/docs/code-repository/pull-requests/static/ai-autofix.png')} />
