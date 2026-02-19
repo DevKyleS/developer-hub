@@ -1,7 +1,7 @@
 ---
 title: Supply Chain Security release notes
 sidebar_label: Supply Chain Security
-date: 2025-09-16T10:00
+date: 2026-02-19T10:00
 sidebar_position: 15
 ---
 
@@ -16,6 +16,32 @@ These release notes describe recent changes to Harness Supply Chain Security.
 * **More release notes:** Go to [Harness Release Notes](/release-notes) to explore all Harness release notes, including module, delegate, Self-Managed Enterprise Edition, and FirstGen release notes.
 
 :::
+
+## January 2026
+
+### Version: 1.50.0 , Plugin Version: 0.52.0
+
+#### New Features and Enhancements
+
+- Added support to filter SBOM components by [Dependency Type](/docs/software-supply-chain-assurance/manage-risk-and-compliance/repository-security-posture-management-rspm#sbomsoftware-bill-of-materials-tab) (Direct, Indirect, No Relationship) for code repositories, enabling classification based on how each component is related in the SBOM and improving component-level traceability across the project. This feature is behind the feature flag `SCS_DEPENDENCY_SEGREGATION`. Contact [Harness Support](mailto:support@harness.io) to enable this feature.
+<DocImage path={require('./static/scs/dependency-graph-analysis.png')} width="70%" height="70%" title="Click to view full size image" />
+
+- Extended SBOM vulnerability support to all STO scanners (previously limited to Snyk and Trivy). The SBOM page now displays vulnerabilities identified by any STO scanner.
+
+  If the STO license is not enabled, dependency vulnerabilities are mapped from the Harness internal database. If you have an STO license and want to map the vulnerabilities from the Harness internal database, contact [Harness Support](mailto:support@harness.io) to enable this feature.
+
+- Added `Docker:Dind` base image support to ensure SCS plugin compatibility with Docker v29 and later versions ([ZD-103871](https://harnesssupport.zendesk.com/agent/tickets/103871)).
+#### Fixed Issues
+
+- Fixed an issue where the OSS Risks – `Known Vulnerabilities in dependencies` filter on the SBOM page was not working as expected.
+- Fixed an issue where CD events were missing from the Chain of Custody during artifact redeployments. Events are now properly captured and displayed, ensuring complete traceability.
+- Fixed an issue where the SBOM count displayed on the Overview page did not match the count shown in the SBOM tab.
+- Fixed an issue in the [SBOM Score API](https://apidocs.harness.io/sbom/getsbomscoreforartifact) to correctly generate the SBOM score when the repository name is provided with the `https://` prefix.
+
+
+
+
+
 
 ## November 2025
 
