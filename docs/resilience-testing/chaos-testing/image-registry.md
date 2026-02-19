@@ -151,6 +151,66 @@ container:
 </TabItem>
 </Tabs>
 
+## Pull chaos images from GAR or ECR
+
+In addition to Docker Hub, Harness publishes chaos images to **Google Artifact Registry (GAR)** and **Amazon Elastic Container Registry (ECR)**. Pulling from GAR or ECR can help avoid Docker Hub rate limiting and throttling issues.
+
+:::tip
+For general information about configuring Harness to pull images from GAR or ECR, go to [Connect to the Harness container image registry](/docs/platform/connectors/artifact-repositories/connect-to-harness-container-image-registry-using-docker-connector).
+:::
+
+### GAR
+
+Chaos images are available on the [Harness project on GAR](https://us-docker.pkg.dev/gar-prod-setup/harness-public/harness/) at the following paths:
+
+<Tabs>
+<TabItem value = "Harness Delegate / DDCR">
+
+| Image | GAR path |
+| ----- | -------- |
+| chaos-ddcr | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-ddcr` |
+| chaos-ddcr-faults | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-ddcr-faults` |
+| chaos-log-watcher | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-log-watcher` |
+| service-discovery-collector | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/service-discovery-collector` |
+
+</TabItem>
+
+<TabItem value = "Dedicated Chaos Infrastructure">
+
+| Image | GAR path |
+| ----- | -------- |
+| chaos-log-watcher | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-log-watcher` |
+| chaos-workflow-controller | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-workflow-controller` |
+| chaos-argoexec | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-argoexec` |
+| chaos-exporter | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-exporter` |
+| chaos-operator | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-operator` |
+| chaos-runner | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-runner` |
+| chaos-subscriber | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-subscriber` |
+| chaos-go-runner | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/chaos-go-runner` |
+| k8s-chaos-infrastructure-upgrader | `us-docker.pkg.dev/gar-prod-setup/harness-public/harness/k8s-chaos-infrastructure-upgrader` |
+
+</TabItem>
+</Tabs>
+
+To configure your image registry to pull from GAR, set the **Custom image registry server** to `us-docker.pkg.dev/gar-prod-setup/harness-public` and the **Custom image registry account** to `harness`.
+
+### ECR
+
+DDCR chaos images are also available on the [Harness ECR public gallery](https://gallery.ecr.aws/harness) at the following paths:
+
+| Image | ECR path |
+| ----- | -------- |
+| chaos-ddcr | `public.ecr.aws/harness/harness/chaos-ddcr` |
+| chaos-ddcr-faults | `public.ecr.aws/harness/harness/chaos-ddcr-faults` |
+| chaos-log-watcher | `public.ecr.aws/harness/harness/chaos-log-watcher` |
+| service-discovery-collector | `public.ecr.aws/harness/harness/service-discovery-collector` |
+
+To configure your image registry to pull from ECR, set the **Custom image registry server** to `public.ecr.aws/harness` and the **Custom image registry account** to `harness`.
+
+:::info note
+Currently, only DDCR images are available on ECR. Dedicated chaos infrastructure images are available on GAR and Docker Hub only.
+:::
+
 ## Images required
 
 Listed below are images that you should download to use image registry. The example below describes images required for 1.53.x release. Based on the release, the version will vary.

@@ -21,6 +21,26 @@ The release notes describe recent changes to Harness Chaos Engineering.
 :::
 
 ## February 2026
+
+### Version 1.75.5
+
+#### Images required
+Listed below are the images to download to use [image registry with Harness Delegate](https://developer.harness.io/docs/chaos-engineering/guides/image-registry).
+
+- harness/chaos-ddcr:1.75.0
+- harness/chaos-ddcr-faults:1.75.0
+- harness/chaos-log-watcher:1.75.1
+- harness/service-discovery-collector:0.55.0
+
+#### New Features and Enhancements
+
+- Upgraded base image for Chaos components to RapidFort (CHAOS-11004)
+
+#### Fixed Issues
+
+- Fixes AZ Blackhole target selection to cause chaos on all the derived subnets (CHAOS-10982)
+- Fixed Experiment Inputs Not Visible in the Chaos Step (CHAOS-11001)
+
 ### Version 1.74.1
 
 #### Images required
