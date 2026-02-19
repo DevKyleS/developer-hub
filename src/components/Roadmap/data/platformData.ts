@@ -2,108 +2,37 @@ import { link } from "fs";
 import { Horizon } from "./roadmapData";
 export const platformData: Horizon = {
   Now: {
-    description: "🚧 Q4 2025, Nov 2025 - Jan 2026",
+    description: "🚧 Q1 2026, Feb 2026 - Apr 2026",
     feature: [
       {
-        title: "Alerting on platform limits",
+        title: "Knowledge Graph (Beta)",
         description:
-          "Proactive notifications when approaching platform usage limits to prevent service disruptions and optimize resource planning.",
-        tag: [{ value: "Platform" }],
-        link: "/docs/platform/governance/usage-limits/"
+          "A connected, graph-based data model that integrates siloed information—such as code repositories, CI/CD pipelines, infrastructure, and vulnerability scans—into a single, queryable, and visual representation.",
+        tag: [{ value: "Knowledge Graph" }],
       },
       {
-        title: "Non-default encryption key in AWS secrets manager",
+        title: "Dashboards 3.0 (Beta)",
         description:
-          "Allow the user to select a customer-managed key for encryption in AWS Secrets Manager",
-        tag: [{ value: "Secrets" }],
-      },
-      {
-        title: "Audit logs for user authentication failure",
-        description:
-          "Captures audit logs of unsuccessful login attempts across all authentication methods",
-        tag: [{ value: "Audit Trail" }],
-      },
-      {
-        title: "Cross-project access support for GCP Secrets Manager connector",
-        description:
-          "Add support for using one Google Secrets Manager connector to access secrets across multiple GCP projects",
-        tag: [{ value: "Secrets" }, { value: "Connectors"}],
-      },
-      {
-        title: "Split *Manage* permission for user groups",
-        description:
-          "Provide the user with more granular control by splitting the Manage permission into Create, Edit, and Delete permissions",
-        tag: [{ value: "Access Control" }],
-      },
-      {
-        title: "Event Streaming",
-        description:
-          "Real-time streaming of data to external systems to support advanced monitoring and observability.",
-        tag: [{ value: "Insights" }],
-      },
-      {
-        title: "Self Serve signup and payment flow",
-        description:
-          "Allow users to sign up and manage their subscriptions directly from the Harness UI.",
-        tag: [],
-      },
-      {
-        title: "Hashicorp Vault: JWT enhanced claims",
-        description:
-          "Allows users to include additional JWT claims (e.g., environment ID) for fine-grained access control and stricter secret isolation, improving security and compliance.",
-        tag: [{ value: "Connectors" }],
-      },
-    ],
-  },
-  Next: {
-    description: "🪄 Q1 2026, Feb 2026 - Apr 2026",
-    feature: [
-      {
-        title: "Move Project across Organizations",
-        description:
-          "Move a project from one organization to another to support scenarios like ownership change.",
-        tag: [{ value: "Platform" }],
-      },
-      {
-        title: "Support Kerberos authentication for proxy in Delegate",
-        description:
-          "Enables secure proxy authentication using Kerberos in Delegate, supporting enterprise environments with on-prem Kubernetes deployments.",
-        tag: [{ value: "Delegate" }],
-      },
-      {
-        title: "Automated moving of Dashboards across organizations",
-        description:
-          "Allows users to move dashboards across organizations or accounts—whether within the same production cluster or across different ones—to support collaboration and reuse.",
+          "AI powered dashboard creation in addition to manual dashboard builder experience",
         tag: [{ value: "Dashboard" }],
       },
       {
-        title: "Delegate support in Harness MCP Server",
+        title: "Unified Data Platform (Beta)",
         description:
-          "Delegate support in Harness MCP Server",
-        tag: [{ value: "Delegate" }],
-      },
-    ],
-  },
-  Later : {
-    description: "🔭 Q2 2026, May 2026 - Jul 2026",
-    feature: [
-      {
-        title: "Increased Data Retention period",
-        description:
-          "Extends the data retention period, allowing users to access and analyze historical data for a longer duration.",
-        tag: [],
+          "A centralized, AI-enabled repository that integrates, manages, and secures data across the entire software development lifecycle (SDLC)",
+        tag: [{ value: "UDP" }],
       },
       {
-        tag: [{ value: "Pipeline" }],
-        title: "DAG Support For Pipeline",
+        title: "Product Usage Analytics",
         description:
-          "Enable complex flows such as parallel execution, stage grouping, etc.",
+          "A feature-centric engagement dashboard that reveals the depth of user activity across modules",
+        tag: [{ value: "Analytics" }],
       },
       {
-        title: "Export audit trail as CSV",
+        title: "Harness ID (Beta)",
         description:
-          "Allows users to export the audit trail in CSV format for easier analysis, sharing, and record-keeping.",
-        tag: [{ value: "Audit Trail" }],
+          "A unified Identity & Access Management (IAM) platform for Harness: one place to define, issue, and verify identity for users, pipelines, services, and AI agents.",
+        tag: [{ value: "IAM" }],
       },
       {
         tag: [{ value: "Notify" }],
@@ -113,57 +42,118 @@ export const platformData: Horizon = {
       },
     ],
   },
+  Next: {
+    description: "🪄 Q2 2026, May 2026 - July 2026",
+    feature: [
+      {
+        title: "Knowledge Graph (Integration of third party data)",
+        description:
+          "A connected, graph-based data model that integrates siloed information—such as code repositories, CI/CD pipelines, infrastructure, and vulnerability scans—into a single, queryable, and visual representation.",
+        tag: [{ value: "Knowledge Graph" }],
+      },
+      {
+        title: "Dashboards 3.0 (GA)",
+        description:
+          "AI powered dashboard creation in addition to manual dashboard builder experience",
+        tag: [{ value: "Dashboard" }],
+      },
+      {
+        title: "Unified Data Platform (GA)",
+        description:
+          "A centralized, AI-enabled repository that integrates, manages, and secures data across the entire software development lifecycle (SDLC)",
+        tag: [{ value: "UDP" }],
+      },
+      {
+        title: "Harness ID (GA)",
+        description:
+          "A unified Identity & Access Management (IAM) platform for Harness: one place to define, issue, and verify identity for users, pipelines, services, and AI agents.",
+        tag: [{ value: "IAM" }],
+      },
+      {
+        title: "API/CLI Standardization",
+        description:
+          "Standardize API and CLI for Harness modules on a single versioning to enhance the developer experience",
+        tag: [{ value: "Developer Experience" }],
+      },
+    ],
+  },
+  Later : {
+    description: "🔭 Q3 2026, Aug 2026 - Oct 2026",
+    feature: [
+      {
+        title: "Knowledge Graph (GA)",
+        description:
+          "A connected, graph-based data model that integrates siloed information—such as code repositories, CI/CD pipelines, infrastructure, and vulnerability scans—into a single, queryable, and visual representation.",
+        tag: [{ value: "Knowledge Graph" }],
+      },
+      {
+        title: "Centralized certificate management",
+        description:
+          "Ability for users to add the certificates to delegate to make the call to Harness Manager.",
+        tag: [{ value: "Security" }],
+      },
+      {
+        title: "Connectors 2.0",
+        description: "Allows users to connect to their code, cloud, and tools more efficiently, with streamlined configuration and enhanced visibility for better governance and control",
+        tag: [],
+      },
+      {
+        title: "AI-Powered Pipeline Troubleshooting & Insights",
+        description: "An AI-assisted experience that helps you quickly troubleshoot pipeline failures and gain actionable insights into your workflow performance.",
+        tag: [],
+      },
+    ],
+  },
   Released: {
     description: "✅ What has been released",
     feature: [
       {
-        title: "Audit log streaming in NDJSON",
+        title: "Move Project across Organizations (Closed Beta)",
         description:
-          "Ability to stream audit logs in New Line Delimited (NDJSON) format.",
+          "Move a project from one organization to another to support scenarios like ownership change.",
+        tag: [{ value: "Platform" }],
+        link:"/docs/platform/organizations-and-projects/move-projects/overview"
+      },
+      {
+        title: "Alerting on platform limits",
+        description:
+          "Users can now set up email alerts to receive notifications when their account reaches 80%, 95%, or 100% of their platform resource limits.",
+        tag: [{ value: "Platform" }],
+        link: "/docs/platform/notifications/notification-settings/#emails-for-platform-limit-alerts"
+      },
+      {
+        title: "Non-default encryption key in AWS secrets manager",
+        description:
+          "User can now select their own KMS key when creating or editing inline secrets in AWS Secrets Manager, instead of being limited to the default `aws/secretsmanager` key.",
+        tag: [{ value: "Secrets" }],
+        link: "/docs/platform/secrets/secrets-management/add-an-aws-secret-manager/#inline-secret-in-aws-secrets-manager"
+      },
+      {
+        title: "Audit logs for user authentication failure",
+        description:
+          "User can now track authentication failures for their accounts, as Harness now captures unsuccessful login attempts across all authentication methods, providing better visibility into security events while maintaining system performance.",
         tag: [{ value: "Audit Trail" }],
-        link: "/docs/platform/governance/audit-trail/audit-streaming/#configure-the-streaming-connector"
+        link: "/docs/platform/authentication/authentication-overview#audit-logs-for-authentication"
       },
       {
-        title: "Customize Harness UI",
+        title: "Cross-project access support for GCP Secrets Manager connector",
         description:
-          "Organisations can display their own logo, and favicon.",
-        tag: [{ value: "UI" }],
-        link: "/docs/platform/get-started/harness-ui-overview"
+          "Users can now reuse a single connector across multiple GCP projects and choose the specific project where secrets are stored.",
+        tag: [{ value: "Secrets" }, { value: "Connectors"}],
+        link: "/docs/platform/secrets/secrets-management/add-a-google-cloud-secret-manager/#enable-cross-project-access"
       },
       {
-        title: "Granular Permissions for Secrets",
+        title: "Split *Manage* permission for user groups",
         description:
-          "Users will have separate Create and Edit permissions for secrets, instead of a single combined 'Create/Edit' permission, enabling more granular access control and improved security alignment.",
-        tag: [{ value: "Secrets" }, { value: "Access Control" }],
-        link: "/docs/platform/role-based-access-control/rbac-in-harness/#secrets"
-      },
-      {
-        title: "Impersonate a user",
-        description:
-          "Ability to impersonate a user allowing an impersonator to perform actions on the user behalf. This helps admins ensure that all users have desired access to resources.",
+          "The “Manage” user group permission has been split into multiple granular permissions, allowing users to have fine-grained control over specific tasks they want to execute.",
         tag: [{ value: "Access Control" }],
-        link: "/docs/platform/role-based-access-control/user-impersonation/"
+        link: "/docs/platform/role-based-access-control/rbac-in-harness#split-manage-permissions"
       },
       {
-        title: "Support Access control using tags for connectors",
+        title: "Hashicorp Vault: JWT enhanced claims",
         description:
-          "Add connectors as resources in a resource group “By Tag,” enabling dynamic inclusion or exclusion based on assigned tags." ,
-        tag: [{ value: "Access Control" }],
-        link: "/docs/platform/connectors/manage-access-control-for-connectors/#configure-roles"
-      },
-      {
-        tag: [{ value: "Access Control" }, {value: "Pipeline"}],
-        title: "Pipeline Create/Edit permission split",
-        description:
-          "Split Pipeline 'Create/Edit' permission into 'Create' and 'Edit' permissions",
-        link: "/docs/platform/role-based-access-control/rbac-in-harness/"
-      },
-      {
-        title: "Proxy support in Delegate auto upgrader",
-        description:
-          "Enhance the Delegate auto-upgrader to support proxy configuration through environment variables.",
-        tag: [{ value: "Delegate" }],
-        link: "/docs/platform/delegates/manage-delegates/configure-delegate-proxy-settings/#proxy-settings-for-delegate-upgrader"
+          "Allows users to include additional JWT claims (e.g., environment ID) for fine-grained access control and stricter secret isolation, improving security and compliance.",
+        tag: [{ value: "Connectors" }],
       },
     ],
   }, 
