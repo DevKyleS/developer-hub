@@ -2582,6 +2582,14 @@ Harness NextGen release 78214 includes no changed features or fixes for the Harn
 
 ## Delegate Helm Chart release notes
 
+## February 2026
+
+### Version 1.0.32 <!--February 20, 2026-->   
+
+#### Fixed issues
+- Added support for Kubernetes tolerations in the `harness-delegate-ng` Helm chart, enabling the upgrader job to be scheduled on tainted nodes when required. [PL-67944]
+- Added two new configurable variables in the RBAC resource—`cronjobVerbs` and `deploymentVerbs`, to control and restrict the upgrader's access permissions. [PL-68047]
+
 ## January 2026
 
 ### Version 1.0.31 <!--January 15, 2026-->   
