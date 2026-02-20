@@ -92,15 +92,15 @@ export const platformData: Horizon = {
         tag: [],
       },
       {
+        title: "AI-Powered Pipeline Troubleshooting & Insights",
+        description: "An AI-assisted experience that helps you quickly troubleshoot pipeline failures and gain actionable insights into your workflow performance.",
+        tag: [],
+      },
+      {
         title: "API/CLI Standardization",
         description:
           "Standardize API and CLI for Harness modules on a single versioning to enhance the developer experience",
         tag: [{ value: "Developer Experience" }],
-      },
-      {
-        title: "AI-Powered Pipeline Troubleshooting & Insights",
-        description: "An AI-assisted experience that helps you quickly troubleshoot pipeline failures and gain actionable insights into your workflow performance.",
-        tag: [],
       },
     ],
   },
