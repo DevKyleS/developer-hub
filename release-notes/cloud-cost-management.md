@@ -1,7 +1,7 @@
 ---
 title: Cloud Cost Management Release Notes
 sidebar_label: Cloud Cost Management
-date: 2026-02-16T18:00
+date: 2026-02-19T18:00
 sidebar_position: 6
 ---
 
@@ -24,6 +24,28 @@ In the new UI, go to **Account Settings, Account Details, General, Account Detai
 We've migrated to LabelsV2, which preserves your original label keys while dramatically improving perspective load times—from 1 minute down to under 2 seconds. **Action required**: Please update your automated scripts to ensure compatibility with the new system.
 
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
+
+
+## February 2026 - Version 1.80.3
+#### Deployment Date: February 19, 2026 (Prod-1)
+
+### Feature Improvements
+
+- **AutoStopping Logs Improvements**: AutoStopping logs now include pagination and 30-day retention. You can download logs and select your preferred timezone when exporting. [CCM-25281]
+
+- **Anomalies Widget Enhancement**: The Anomalies legend in the Cloud and Cluster Spend widget is now automatically disabled when both Cluster Spend and Cloud Spend are deselected, ensuring anomalies are only displayed alongside relevant cost data. [CCM-26683]
+
+- **Cluster Orchestrator Refresh Button**: Added a refresh button to Cluster Orchestrator tables, allowing you to quickly check for updates to nodes, workloads, schedules, and logs. [CCM-27972]
+
+- **Total Anomalies Widget**: A new Total Anomalies widget is now available on the Perspective Details screen. This widget displays data when supported filters are applied. When unsupported filters are selected, a helpful message appears indicating which filters support anomaly detection. [CCM-28637]
+
+- **Commitment Setup Display**: The commitment setup review section now displays account names instead of account IDs for improved readability. [CCM-28983]
+
+### Fixed Issues
+
+- **Cluster Orchestrator Pagination**: Fixed two pagination-related issues:
+  - Page numbers now reset correctly when filters are changed in Cluster Orchestrator Logs.
+  - Switching between Cluster Orchestrator tabs no longer persists page numbers in the URL, preventing unintended pagination carryover. [CCM-29746]
 
 ## February 2026 - Version 1.79.21
 #### Deployment Date: February 16, 2026 (Prod-1)
