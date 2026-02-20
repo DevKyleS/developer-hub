@@ -18,12 +18,12 @@ Harness SaaS is a fully managed, cloud-hosted solution that provides immediate a
 - **Managed Infrastructure**: No need to manage underlying platform components
 - **Automatic Updates**: Always access the latest features and patches
 - **Enterprise ChaosHub**: Built-in access to 200+ pre-built chaos faults
-- **AIDA Support**: AI Development Assistant for creating governance policies
+- **AI Support**: AI Development Assistant for creating governance policies
 
 ### What's Included
 - **Complete Platform**: Full chaos engineering capabilities out-of-the-box
 - **Enterprise ChaosHub**: Access to comprehensive fault library
-- **Harness AIDA**: AI assistant for policy creation and optimization
+- **Harness AI**: AI assistant for policy creation and optimization
 - **Managed Services**: Platform maintenance handled by Harness
 - **Standard Integrations**: Built-in connectors for popular tools    
 
@@ -76,7 +76,7 @@ The Self-Managed Enterprise Edition allows you to run Harness Chaos Engineering 
 - **Enterprise ChaosHub**: Not connected by default
   - Contact [Harness Support](mailto:support@harness.io) for access
   - Can be added as a [custom ChaosHub](/docs/chaos-engineering/guides/chaoshub)
-- **Harness AIDA**: AI Development Assistant not available
+- **Harness AI**: AI Development Assistant not available
 - **Updates**: Manual deployment of platform updates required
 - **Maintenance**: Customer responsibility for platform operations
 
@@ -88,7 +88,7 @@ The Self-Managed Enterprise Edition allows you to run Harness Chaos Engineering 
 | **Platform Maintenance** | Managed by Harness | Customer Responsibility |
 | **Feature Updates** | Automatic | Manual Deployment |
 | **Enterprise ChaosHub** | ✅ Included | ❌ Requires Setup |
-| **Harness AIDA** | ✅ Available | ❌ Not Available |
+| **Harness AI** | ✅ Available | ❌ Not Available |
 | **Data Location** | Harness Cloud | Customer Infrastructure |
 | **Air-gapped Deployment** | ❌ Not Supported | ✅ Supported |
 | **Custom Integrations** | Standard APIs | Full API Access |
@@ -124,7 +124,7 @@ Both deployments support the same fault types across Linux, Kubernetes, Windows,
 - Want to get started quickly with minimal setup
 - Prefer managed services and automatic updates
 - Need immediate access to Enterprise ChaosHub
-- Want to use Harness AIDA for policy creation
+- Want to use Harness AI for policy creation
 - Have standard security and compliance requirements
 
 ### Choose Self-Managed Enterprise Edition If You:

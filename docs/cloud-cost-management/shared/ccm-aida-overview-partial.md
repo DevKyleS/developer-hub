@@ -14,9 +14,8 @@ Harness AI offers comprehensive support with the following functionalities:
 Harness recommends using the rules generated with AI as references to build your policies.
 :::
 
-For more information about using AI to create rules and view comprehensive information about out-of-the-box and custom rules, go to [Create rules with Harness AI](/docs/cloud-cost-management/use-ccm-cost-governance/asset-governance/cag-aida/gen-ai-use).
+For more information about using AI to create rules and view comprehensive information about out-of-the-box and custom rules, go to [Create rules with Harness AI](/docs/cloud-cost-management/use-ccm-cost-governance/asset-governance/cag-ai/gen-ai-use).
 
-For more information about the AI legal terms and data privacy, review the following Harness legal pages:
+For more information about AI data privacy, review the following Harness legal pages:
 
-- [AI Terms](https://www.harness.io/legal/aida-terms)
-- [AI Privacy](https://www.harness.io/legal/aida-privacy)
+- [AI Privacy](https://www.harness.io/legal/harness-ai-data-privacy)

@@ -981,4 +981,4 @@ All CD features supported in Harness SaaS are also supported in Self-Managed Ent
 - **ServiceNow:** ServiceNow versions [Utah](https://docs.servicenow.com/bundle/utah-release-notes/page/release-notes/family-release-notes.html) and earlier are supported.
 - **Jira:** Jira on-premise versions < 9.0 are supported. To support Jira on-premise >= 9.0, the feature flag `SPG_USE_NEW_METADATA` must be enabled.
 - **Policy as Code:** Harness Git Experience support for OPA policies is not supported in Self-Managed Enterprise Edition.
-- **Harness AI Development Assistant (AIDA):** To support AIDA in Self-Managed Enterprise Edition running in an offline environment, you must add `https://harness.openai.azure.com` to your allowlist.
+- **Harness AI:** To support Harness AI in Self-Managed Enterprise Edition running in an offline environment, you must add `https://harness.openai.azure.com` to your allowlist.

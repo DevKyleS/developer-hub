@@ -3,6 +3,8 @@ title: Harness Agents
 description: Autonomous AI agents that run inside your pipelines — building, deploying, testing, remediating, and optimizing your software delivery lifecycle.
 sidebar_label: Agents
 sidebar_position: 6
+redirect_from:
+  - /docs/platform/harness-aida/harness-agents
 ---
 
 import Tabs from '@theme/Tabs';

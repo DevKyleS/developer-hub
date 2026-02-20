@@ -3,12 +3,14 @@ title: Use Dashboard Intelligence by AI
 description: Learn how to use Dashboard Intelligence by AI to create dashboards.
 sidebar_position: 30
 canonical_url: https://www.harness.io/blog/elevating-aida-harness-unveils-7-new-innovative-capabilities
+redirect_from:
+  - /docs/platform/dashboards/use-dashboard-intelligence-by-aida
 ---
 
-Dashboard Intelligence by Harness AI is your copilot for dashboard creation in Harness. This feature is available directly in the **Dashboard Editor** when you create or edit a dashboard. For more information on AI, go to [Overview of AI](/docs/platform/harness-aida/aida-overview).
+Dashboard Intelligence by Harness AI is your copilot for dashboard creation in Harness. This feature is available directly in the **Dashboard Editor** when you create or edit a dashboard. For more information on AI, go to [Overview of AI](/docs/platform/harness-ai/overview).
 
 :::important
-   You must [enable module-specific AI features](/docs/platform/harness-aida/aida-overview/#enable-aida) in your Harness account to use this feature.
+   You must [enable module-specific AI features](/docs/platform/harness-ai/overview/#enable-ai) in your Harness account to use this feature.
 :::
 
 This topic provides details on the current features, limitations, and best practices for dashboard engineering.
@@ -23,7 +25,7 @@ Although the documentation is written in English and assumes an English-speaking
 - [Dashboards overview](/docs/platform/dashboards/dashboards-overview)
 - [Create Dashboards](/docs/platform/dashboards/create-dashboards)
 - [Create visualizations and graphs](/docs/platform/dashboards/create-visualizations-and-graphs/)
-- [Overview of Harness AI](/docs/platform/harness-aida/aida-overview)
+- [Overview of Harness AI](/docs/platform/harness-ai/overview)
 
 ### Supported query types
 
@@ -67,11 +69,11 @@ Dashboard Intelligence by AI does not currently support customizing visualizatio
 
 :::
 
-## Create a widget using AI
+## Create a widget using Harness AI
 
-You first create your dashboard, and then you ask AIDA to set up your widget.
+You first create your dashboard, and then you ask Harness AI to set up your widget.
 
-To create a widget using AIDA, do the following:
+To create a widget using Harness AI, do the following:
 
 :::info note
 Dashboards are created inside a folder. If you don't specify a folder, the dashboard saves in the Custom Dashboards root folder.
@@ -87,7 +89,7 @@ Dashboards are created inside a folder. If you don't specify a folder, the dashb
    
    ![](./static/create-a-widget-AIDA-01.png)
 
-7. Select **Create a widget using AI**. The Harness AIDA dialog opens.
+7. Select **Create a widget using AI**. The Harness AI dialog opens.
 
    ![](./static/create-a-widget-AIDA-02.png)
 

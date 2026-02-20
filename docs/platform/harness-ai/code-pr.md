@@ -3,6 +3,8 @@ title: AI-Powered PR Summaries and Code Review
 description: Use Harness AI to generate PR summaries, analyze code changes, and facilitate code review.
 sidebar_label: PR Summaries & Code Review
 sidebar_position: 51
+redirect_from:
+  - /docs/platform/harness-aida/aida-code-pr
 ---
 
 # AI-Powered PR Summaries and Code Review
@@ -48,4 +50,4 @@ These capabilities map directly into your development workflow, helping teams ma
 
 ## Enable PR Summaries
 
-To use AI-powered PR summaries, [enable Harness AI](/docs/platform/harness-aida/aida-overview) in your account settings. PR summary generation is available for all repositories managed in Harness Code Repository.
+To use AI-powered PR summaries, [enable Harness AI](/docs/platform/harness-ai/overview) in your account settings. PR summary generation is available for all repositories managed in Harness Code Repository.

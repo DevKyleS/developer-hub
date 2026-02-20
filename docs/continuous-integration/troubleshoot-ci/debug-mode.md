@@ -32,7 +32,7 @@ Debug mode is never available for a pipeline's first build. You must run the pip
 
 :::
 
-If debug mode isn't available for your pipeline, you might consider using [AIDA](./aida.md).
+If debug mode isn't available for your pipeline, you might consider using [Harness AI](/docs/continuous-integration/troubleshoot-ci/ai).
 
 ## Enable debug mode
 

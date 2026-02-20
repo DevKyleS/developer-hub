@@ -1,8 +1,6 @@
 :::info
 
-Visit the following Harness Legal pages for legal information about AIDA:
+Visit the following Harness Legal pages for legal information about Harness AI:
 
-* [AIDA Terms](https://www.harness.io/legal/aida-terms)
-* [AIDA Data Privacy](https://www.harness.io/legal/aida-privacy)
-
+* [Harness AI Data Privacy](https://www.harness.io/legal/harness-ai-data-privacy)
 :::

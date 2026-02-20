@@ -741,7 +741,7 @@ The Dashboard Intelligence feature has been temporarily disabled until further n
 ### Version 1.72.x <!-- January 20, 2025-->
 #### Fixed issues
 
-- Enabled support for AIDA settings at the organization level. (PL-59525)
+- Enabled support for Harness AI settings at the organization level. (PL-59525)
 
 - Improved the user experience on the Settings page across all three scopes (Account, Organization, and Project) by sorting the cards for accessing specific settings or resources in alphabetical order. Previously, these cards appeared in random order, making it difficult to locate specific settings as their number increased over time. The alphabetical arrangement now ensures easier and quicker access. (PL-59352)
 
@@ -1094,7 +1094,7 @@ The Dashboard Intelligence feature has been temporarily disabled until further n
 
 - SCIM sync issues were occurring due to incorrect handling of `orgIdentifier` and `projectIdentifier`. Updated the query to correctly handle cases where `orgIdentifier` and `projectIdentifier` are null. (PL-55444, ZD-66712)
 
-- Users were able to see the enable/disable option for AIDA at the project level, even if AIDA was disabled at the account level. Implemented a change to display an error message when users attempt to enable AIDA at the project level if it is disabled at the account level. (PL-48296)
+- Users were able to see the enable/disable option for Harness AI at the project level, even if Harness AI was disabled at the account level. Implemented a change to display an error message when users attempt to enable Harness AI at the project level if it is disabled at the account level. (PL-48296)
 
 ### Version 1.48.11<!-- August 02, 2024 -->
 
@@ -1878,7 +1878,7 @@ The List projects API now returns a 404 `ENTITY_NOT_FOUND` response for projects
 
     Fixed the generate Kubernetes YAML API for default delegates with a revoked token. The delegate YAML now includes the next active token.
 
-- The AIDA option wasn't visible in the UI on the Account Resources: Delegates page when you selected **Delegate Configurations**. (PL-42896)
+- The Harness AI option wasn't visible in the UI on the Account Resources: Delegates page when you selected **Delegate Configurations**. (PL-42896)
 
    This issue has been resolved by updating the page styling. Harness removed width to prevent page overflow.
 
@@ -2259,7 +2259,7 @@ The List projects API now returns a 404 `ENTITY_NOT_FOUND` response for projects
 
 - Go has been upgraded from version 1.20.5 to version 1.21.0. This upgrade remediates CVE-2023-39533. (PL-40734)
 
-<!-- EULA RQMT REMOVED -- You are now required to sign an end-user license agreement to access the Harness AI Development Assistant (AIDA) in the account and project scopes. The EULA is displayed when you enable AIDA at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI Developer Assistant**). Each account user must sign the EULA only once. The setting is inherited at the project scope. (PL-39723) -->
+<!-- EULA RQMT REMOVED -- You are now required to sign an end-user license agreement to access Harness AI in the account and project scopes. The EULA is displayed when you enable Harness AI at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI**). Each account user must sign the EULA only once. The setting is inherited at the project scope. (PL-39723) -->
 
 - The delegate expiration policy has been extended from 3 months to 6 months. You now only have to update delegates once every 6 months. (PL-39452)
 

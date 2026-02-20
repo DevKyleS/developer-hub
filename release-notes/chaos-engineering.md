@@ -224,7 +224,7 @@ Listed below are the images to download to use [image registry with Harness Dele
 
 - Fixed Chaos Guard not working as expected on Safari browsers where configuring freeze windows and time windows would fail. Time window and freeze window configurations now work correctly on Safari with proper date and time selections saved and displayed across all browsers (CHAOS-10322)
 - Fixed ChaosGuard UI issues including tags not being visible on hover (now shown in popover), UI breaking while selecting conditions in rules (improved pagination), and YAML view coming blank before saving (CHAOS-10316, CHAOS-10315, CHAOS-10312, CHAOS-10310)
-- Fixed Ask AIDA not working for questions about windows/linux chaos infrastructures by adding relevant examples in ChaosGuard AIDA (CHAOS-10314)
+- Fixed Ask AI not working for questions about windows/linux chaos infrastructures by adding relevant examples in ChaosGuard AI (CHAOS-10314)
 - Fixed label issue for Harness infra on Chaos-guard-conditions form page (CHAOS-10503)
 - Fixed issue where REST APIs were returning data even when providing -1 as page/limit value by adding validation for page/limit parameters in all REST APIs (CHAOS-10325)
 - Fixed issue where deleting a fault from its details page would take users to a blank page (CHAOS-10437)

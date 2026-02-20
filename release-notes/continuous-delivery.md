@@ -2930,9 +2930,9 @@ on class `ScriptSshExecutor.java` made the log stream terminate.
 
 ##### Early access features
 
-- AIDA:tm: replaces Coveo for support case deflection (CDS-85267)
+- Harness AI replaces Coveo for support case deflection (CDS-85267)
 
-  AIDA replaces Coveo in proactively assisting you with content recommendations when you are entering a subject for your ticket in the **Submit a ticket** form.
+  Harness AI replaces Coveo in proactively assisting you with content recommendations when you are entering a subject for your ticket in the **Submit a ticket** form.
 
   This feature is behind the feature flag `CDS_AIDA_SUPPORT_DEFLECTION`. To enable the feature, contact [Harness Support](mailto:support@harness.io).
 
@@ -3654,7 +3654,7 @@ This release does not include early access features.
 
 ##### New features and enhancements
 
-- You can now provide detailed feedback in the Harness AIDA chat in CD. (CDS-79769)
+- You can now provide detailed feedback in the Harness AI chat in CD. (CDS-79769)
 
   <DocImage path={require('./static/73123e6efdd7d7dbc7c67b4a7df71bd42b1b20c8ba4cf409f87de0749da8dc92.png')} width="40%" height="40%" title="Click to view full size image" />
 

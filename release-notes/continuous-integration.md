@@ -2209,7 +2209,7 @@ With this feature flag enabled, Harness uses your [delegate selectors](/docs/pla
 
 ###### New features and enhancements
 
-- The Harness AI Development Assistant (AIDA:tm:) for CI is now generally available. AIDA for CI provides error analysis and remediation for failed pipelines. Harness bases these recommendations on the step logs and the context of the failed step. For more information, go to [Troubleshooting with AIDA](/docs/continuous-integration/troubleshoot-ci/aida).
+- Harness AI for CI is now generally available. Harness AI for CI provides error analysis and remediation for failed pipelines. Harness bases these recommendations on the step logs and the context of the failed step. For more information, go to [Troubleshooting with Harness AI](/docs/continuous-integration/troubleshoot-ci/ai).
 - When you [configure a Kubernetes build farm to use self-signed certificates](/docs/continuous-integration/use-ci/set-up-build-infrastructure/k8s-build-infrastructure/configure-a-kubernetes-build-farm-to-use-self-signed-certificates/), you can now use `DESTINATION_CA_PATH` instead of `CI_MOUNT_VOLUMES` and `ADDITIONAL_CERTS_PATH`. (CI-9707)
   - For `DESTINATION_CA_PATH`, provide a comma-separated list of paths in the build pod where you want the certs to be mounted, and mount your certificate files to `opt/harness-delegate/ca-bundle`.
   - Both CI build pods and the SCM client on the delegate support this method.
@@ -2283,7 +2283,7 @@ When you [enable Test Intelligence for Scala or Kotlin](/docs/continuous-integra
 
 ###### Early access features
 
-When [Troubleshooting with AIDA](/docs/continuous-integration/troubleshoot-ci/aida), stage-level error analysis is available for failed stages without steps. If a stage has steps, step-level error analysis occurs instead. The Harness AI Development Assistant (AIDA:tm:) for CI is a beta feature that is behind the feature flag `CI_AI_ENHANCED_REMEDIATIONS`. (CI-9102)
+When [Troubleshooting with Harness AI](/docs/continuous-integration/troubleshoot-ci/ai), stage-level error analysis is available for failed stages without steps. If a stage has steps, step-level error analysis occurs instead. Harness AI for CI is a beta feature that is behind the feature flag `CI_AI_ENHANCED_REMEDIATIONS`. (CI-9102)
 
 ###### Fixed issues
 
@@ -2428,7 +2428,7 @@ The **Copy** button is now available when editing input sets in the YAML editor.
 ###### Fixed issues
 
 - Fixed an issue where the active developer count was not reported for builds triggered by cron jobs, custom webhooks, and other triggers. (CI-8502, ZD-46409)
-- Fixed an issue where step details for other steps were shown when using [AIDA](/docs/continuous-integration/troubleshoot-ci/aida) to troubleshoot a pipeline with multiple failed steps. (CI-8735)
+- Fixed an issue where step details for other steps were shown when using [Harness AI](/docs/continuous-integration/troubleshoot-ci/ai) to troubleshoot a pipeline with multiple failed steps. (CI-8735)
 
 ##### Version 5003
 
@@ -2451,7 +2451,7 @@ This feature flag is now disabled by default and must be re-enabled if your CI-t
 
 ###### Fixed issues
 
-- Applied scrolling to long remediation messages when [troubleshooting with AIDA](/docs/continuous-integration/troubleshoot-ci/aida). (CI-8599)
+- Applied scrolling to long remediation messages when [troubleshooting with Harness AI](/docs/continuous-integration/troubleshoot-ci/ai). (CI-8599)
 - The [Builds page](/docs/continuous-integration/use-ci/viewing-builds) now shows the correct user's avatar for manual builds. For scheduled builds, it now shows the schedule trigger name, instead of the latest commit author's name. (CI-8531, ZD-46409)
 - If you chose to [run a specific stage](/docs/platform/pipelines/run-specific-stage-in-pipeline/) in a pipeline that had multiple stage types (such as UAT, Build/CI, CD, and so on), and you bypassed a Build stage, then the pipeline could fail due to a backend value being set to an empty string, rather than an object. This is fixed so that this backend value is always an object, even when empty. (CI-8418, ZD-45768)
 

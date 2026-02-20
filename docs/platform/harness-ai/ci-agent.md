@@ -3,6 +3,8 @@ title: Troubleshoot builds and deployments with Harness AI
 description: Troubleshoot builds and deployments with Harness AI.
 sidebar_label: Troubleshoot Builds and Deployments 
 sidebar_position: 3
+redirect_from:
+  - /docs/platform/harness-aida/aida-ci
 ---
 
 import Intro from '/docs/continuous-integration/shared/aida-intro.md';

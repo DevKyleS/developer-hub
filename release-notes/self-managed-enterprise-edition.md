@@ -1891,7 +1891,7 @@ Ensure that the `smp-airgap-bundles/` directory exists before running the comman
 - Fixed crash in chaos-web when no fault details are available. In cases where a fault is completely templatized or is a custom fault with no tunables, the details tab inside the timeline view would crash. An appropriate error/acknowledged message is now shown [CHAOS-10077]
 - Fixed Chaos Guard not working as expected on Safari browsers where configuring freeze windows and time windows would fail. Time window and freeze window configurations now work correctly on Safari with proper date and time selections saved and displayed across all browsers [CHAOS-10322]
 - Fixed ChaosGuard UI issues including tags not being visible on hover [now shown in popover], UI breaking while selecting conditions in rules [improved pagination], and YAML view coming blank before saving [CHAOS-10316, CHAOS-10315, CHAOS-10312, CHAOS-10310]
-- Fixed Ask AIDA not working for questions about windows/linux chaos infrastructures by adding relevant examples in ChaosGuard AIDA [CHAOS-10314]
+- Fixed Ask AI not working for questions about windows/linux chaos infrastructures by adding relevant examples in ChaosGuard AI [CHAOS-10314]
 - Fixed label issue for Harness infra on Chaos-guard-conditions form page [CHAOS-10503]
 - Fixed issue where REST APIs were returning data even when providing -1 as page/limit value by adding validation for page/limit parameters in all REST APIs [CHAOS-10325]
 - Fixed issue where deleting a fault from its details page would take users to a blank page [CHAOS-10437]
@@ -8281,7 +8281,7 @@ This feature is currently behind the feature flag, `CI_GIT_CLONE_ENHANCED`. Cont
 
 - Users encountered a `Media not found` error when clicking the **+Dashboard** button and in the **About the Dashboard** dialog. Removed missing Dashboard tutorial videos, resolving the `Media not found` error. (PL-50890)
 
-- Users were able to see the enable/disable option for AIDA at the project level, even if AIDA was disabled at the account level. Implemented a change to display an error message when users attempt to enable AIDA at the project level if it is disabled at the account level. (PL-48296)
+- Users were able to see the enable/disable option for AI at the project level, even if AI was disabled at the account level. Implemented a change to display an error message when users attempt to enable AI at the project level if it is disabled at the account level. (PL-48296)
 
 - The **Cancel** button was not working while creating a connector via YAML. Updated the behavior of the Connectors page YAML editor to match that of other pages. The **Discard** button on the YAML editor page now exits back to the previous page. (PL-42928)
 

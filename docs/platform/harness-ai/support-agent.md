@@ -3,6 +3,8 @@ title: Harness AI Support Agent
 description: Harness AI Support Agent provides instant answers to product and documentation questions.
 sidebar_label: Support Agent
 sidebar_position: 9
+redirect_from:
+  - /docs/platform/harness-aida/support-agent
 ---
 
 # Harness AI Support Agent
@@ -185,7 +187,7 @@ The Support Agent follows the same data privacy policies as all Harness AI featu
 - **Ephemeral processing** - Questions are processed in real-time and not stored
 - **Documentation-only responses** - Answers are sourced from public Harness documentation
 
-For complete data privacy information, refer to [Data Storage and Privacy Policies](/docs/platform/harness-aida/ai-devops#data-storage-and-privacy-policies).
+For complete data privacy information, refer to [Data Storage and Privacy Policies](/docs/platform/harness-ai/devops-agent#data-storage-and-privacy-policies).
 
 ## Limitations
 
@@ -193,7 +195,7 @@ The Support Agent is designed to answer questions based on Harness documentation
 
 - **Documentation scope** - Can only answer questions covered in the official documentation
 - **No account access** - Cannot view or access your specific account configurations
-- **No action execution** - Cannot create or modify resources (use the [DevOps Agent](/docs/platform/harness-aida/ai-devops) for that)
+- **No action execution** - Cannot create or modify resources (use the [DevOps Agent](/docs/platform/harness-ai/devops-agent) for that)
 - **Public documentation only** - Does not have access to internal or private documentation
 
 ## FAQ

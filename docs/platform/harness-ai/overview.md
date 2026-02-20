@@ -3,6 +3,8 @@ title: Overview of Harness AI
 description: Learn about how AI improves your experience on the Harness platform.
 sidebar_label: Overview
 sidebar_position: 1
+redirect_from:
+  - /docs/platform/harness-aida/aida-overview
 ---
 
 The Harness Platform leverages Harness AI to revolutionize software delivery processes. By combining AI capabilities with robust DevOps tools, features, and practices, the Harness platform streamlines and accelerates the software delivery lifecycle, and it empowers teams to deliver high-quality applications quickly and efficiently. Its AI-driven predictive analytics, continuous verification, and advanced release orchestration capabilities empower teams to drive innovation, improve efficiency, and ultimately deliver exceptional user experiences.
@@ -33,37 +35,37 @@ For more information about navigation 2.0, go to [Harness navigation 2.0](https:
 
 | Module | Feature | Description | Availability |
 |---|---|---|---|
-| **Platform** | [Harness AI DevOps Agent](/docs/platform/harness-aida/ai-devops) | Agentic AI assistant that creates and manages pipelines, stages, steps, services, environments, connectors, and secrets through natural language prompts. | Generally available |
-| Platform | [DevOps Agent - Error Analyzer](/docs/platform/harness-aida/ai-devops#error-analyzer) | AI-powered root cause analysis for pipeline failures with automated fix recommendations and YAML auto-repair. | Generally available |
-| Platform | [DevOps Agent - Policy Generation](/docs/platform/harness-aida/ai-devops#policy-generation-and-integration) | Generate and integrate Open Policy Agent (OPA) Rego policies to meet compliance standards. | Generally available |
-| Platform | [DevOps Agent - Pipeline Summarizer](/docs/platform/harness-aida/ai-devops#pipeline-summarizer) | AI-generated natural language summaries of pipelines, executions, and dependent resources. | Generally available |
-| Platform | [DevOps Agent - Resource Creation](/docs/platform/harness-aida/harness-create-with-ai) | Create Services, Environments, Connectors, and Secrets through conversational AI prompts. | Generally available |
-| Platform | [Harness AI Support Agent](/docs/platform/harness-aida/support-agent) | AI-powered first line of support that answers product and documentation questions with contextual examples from the knowledge base. | Generally available |
-| Platform | [Dashboard Intelligence](/docs/platform/dashboards/use-dashboard-intelligence-by-aida) | Craft customized dashboards with widget-level control through interactive AI prompts. | Generally available |
-| Platform | [MCP Server](/docs/platform/harness-aida/harness-mcp-server) | Model Context Protocol server enabling integration with external AI tools like Cursor, Windsurf, Claude Desktop, and VS Code. | Generally available |
-| **Code Repository** | [PR Summaries & Code Review](/docs/platform/harness-aida/aida-code-pr) | AI-generated pull request descriptions with code change analysis, file-level summaries, and impact assessment to facilitate code review. | Generally available |
-| Code Repository | Semantic Code Search | Natural language code search that understands semantic meaning across your entire codebase. | Generally available |
-| **Code Agent** | [AI Code Agent](/docs/platform/harness-aida/code-agent) | IDE extension for intelligent code generation, real-time suggestions, automated test generation, contextual code explanations, and interactive chat. | Beta |
-| Code Agent | [API Spec Generation](/docs/platform/harness-aida/code-agent#api-spec-generation) | Generate OpenAPI and Swagger API specifications from your codebase using AI. | Beta |
-| **CI** | [Troubleshoot CI builds](/docs/continuous-integration/troubleshoot-ci/aida) | Resolve build failures with Harness AI DevOps Agent's root cause analysis. | Generally available |
-| CI | Multi-Module Pipeline Creation | AI DevOps Agent creates CI, CD, IACM, IDP, SCS, STO, DB DevOps, and Chaos Engineering pipelines and stages. | Generally available |
-| **CD** | Troubleshoot CD deployments | Resolve deployment failures with AI root cause analysis (RCA). | Generally available |
-| **IACM** | IACM Pipeline Creation | AI DevOps Agent creates Infrastructure as Code Management pipelines for provisioning infrastructure with Terraform and other IaC tools. | Generally available |
+| **Platform** | [Harness Agents](/docs/platform/harness-ai/harness-agents) | Autonomous AI agents that run inside pipelines—building, deploying, testing, remediating, and optimizing the software delivery lifecycle (SDLC) from commit to production. | Generally available |
+| **Platform** | [DevOps Agent](/docs/platform/harness-ai/devops-agent) | Agentic AI assistant that creates and manages pipelines, stages, steps, services, environments, connectors, and secrets through natural language prompts. | Generally available |
+| **Platform** | [DevOps Agent (Error Analyzer) ](/docs/platform/harness-ai/devops-agent#error-analyzer) | AI-powered root cause analysis for pipeline failures with automated fix recommendations and YAML auto-repair. | Generally available |
+| **Platform** | [DevOps Agent (Policy Generation) ](/docs/platform/harness-ai/devops-agent#policy-generation-and-integration) | Generate and integrate Open Policy Agent (OPA) Rego policies to meet compliance standards. | Generally available |
+| **Platform** | [DevOps Agent (Pipeline Summarizer) ](/docs/platform/harness-ai/devops-agent#pipeline-summarizer) | AI-generated natural language summaries of pipelines, executions, and dependent resources. | Generally available |
+| **Platform** | [DevOps Agent (Resource Creation) ](/docs/platform/harness-ai/harness-create-with-ai) | Create Services, Environments, Connectors, and Secrets through conversational AI prompts. | Generally available |
+| **Platform** | [Support Agent](/docs/platform/harness-ai/support-agent) | AI-powered first line of support that answers product and documentation questions with contextual examples from the knowledge base. | Generally available |
+| **Platform** | [Dashboard Intelligence](/docs/platform/dashboards/use-dashboard-intelligence-by-ai) | Craft customized dashboards with widget-level control through interactive AI prompts. | Generally available |
+| **Platform** | [MCP Server](/docs/platform/harness-ai/harness-mcp-server) | Model Context Protocol server enabling integration with external AI tools like Cursor, Windsurf, Claude Desktop, and VS Code. | Generally available |
+| **Code Repository** | [PR Summaries & Code Review](/docs/platform/harness-ai/code-pr) | AI-generated pull request descriptions with code change analysis, file-level summaries, and impact assessment to facilitate code review. | Generally available |
+| **Code Repository** | [Semantic Code Search](/docs/platform/harness-ai/code-search) | Natural language code search that understands semantic meaning across your entire codebase. | Generally available |
+| **Code Agent** | [Code Agent](/docs/platform/harness-ai/code-agent) | IDE extension for intelligent code generation, real-time suggestions, automated test generation, contextual code explanations, and interactive chat. | Beta |
+| **Code Agent** | [API Spec Generation](/docs/platform/harness-ai/code-agent#api-spec-generation) | Generate OpenAPI and Swagger API specifications from your codebase using AI. | Beta |
+| **CI** | [Troubleshoot CI builds](/docs/continuous-integration/troubleshoot-ci/ai) | Resolve build failures with Harness AI DevOps Agent's root cause analysis. | Generally available |
+| **CI** | [DevOps Agent (Multi-Module Pipeline Creation)](/docs/platform/harness-ai/devops-agent#multi-module-pipeline-creation) | AI DevOps Agent creates CI, CD, IACM, IDP, SCS, STO, DB DevOps, and Chaos Engineering pipelines and stages. | Generally available |
+| **CD** | [Troubleshoot CD deployments](/docs/platform/harness-ai/ci-agent) | Resolve deployment failures with AI root cause analysis (RCA). | Generally available |
+| **IaCM** | [DevOps Agent (IaCM Pipeline Creation)](/docs/platform/harness-ai/devops-agent#iacm-pipeline-creation) | AI DevOps Agent creates Infrastructure as Code Management pipelines for provisioning infrastructure with Terraform and other IaC tools. | Generally available |
 | **CCM** | [Generate governance rules](/docs/cloud-cost-management/use-ccm-cost-governance/asset-governance/recommendations#rules-generating-recommendations) | Generate rules for asset governance with detailed descriptions to optimize cloud spend. | Generally available |
 | **STO** | [Security remediation](/docs/security-testing-orchestration/remediations/ai-based-remediations) | AI-powered vulnerability analysis and remediation recommendations to secure applications. | Generally available |
 | **CE** | [ChaosGuard](/docs/chaos-engineering/guides/governance/governance-in-execution/) | Generate conditions for chaos experiments with ChaosGuard. | Generally available |
-| **FME** | [Release Agent](/docs/platform/harness-aida/release-agent) | AI-powered release intelligence with documentation summarization and experiment result analysis. | Generally available |
+| **FME** | [Release Agent](/docs/platform/harness-ai/release-agent) | AI-powered release intelligence with documentation summarization and experiment result analysis. | Generally available |
 | **SEI** | [AI Productivity Insights](/docs/software-engineering-insights/propelo-sei/ai-productivity-insights/aipi-overview) | AI-powered analysis of developer productivity, AI tool adoption impact, and engineering metrics including DORA and SPACE frameworks. | Generally available |
-| **AI SRE** | AI Scribe Agent | Automated incident documentation with real-time communication monitoring across Slack, Zoom, and Microsoft Teams. | Generally available |
-| **AI Test** | [AI Test Copilot](/docs/ai-test-automation/test-authoring/harness-ai-copilot/natural-language-tests) | Natural language test generation with intent-driven testing, automated step decomposition, and AI assertions. | Generally available |
-| **Platform** | [Harness Agents](/docs/platform/harness-aida/harness-agents) | Autonomous AI agents that run inside pipelines — building, deploying, testing, remediating, and optimizing the SDLC from commit to production. | Generally available |
+| **AI SRE** | [AI Scribe Agent](/docs/ai-sre/ai-agent/) | Automated incident documentation with real-time communication monitoring across Slack, Zoom, and Microsoft Teams. | Generally available |
+| **AI Test Automation** | [AI Test Copilot](/docs/ai-test-automation/test-authoring/harness-ai-copilot/natural-language-tests) | Natural language test generation with intent-driven testing, automated step decomposition, and AI assertions. | Generally available |
 
 ## Harness AI terms and data privacy information
 
 Visit the following Harness Legal pages for information about Harness AI data privacy and terms of use:
 
 - [Harness AI Terms](https://www.harness.io/legal/aida-terms)
-- [Harness AI Data Privacy](https://www.harness.io/legal/aida-privacy)
+- [Harness AI Data Privacy](https://www.harness.io/legal/harness-ai-data-privacy)
 
 ## FAQ
 

@@ -315,9 +315,9 @@ Yes for more information, go to [getUsers](https://apidocs.harness.io/tag/User#o
 
 Currently, Harness doesn't support direct functionality for exporting all users. To export users from Harness, you can utilize the getUsers API. For more information, go to [getUsers](https://apidocs.harness.io/tag/User#operation/getUsers) in the API documentation.
 
-### Does Harness AIDA support APIs for developers to create custom AI/ML solutions?
+### Does Harness AI support APIs for developers to create custom AI/ML solutions?
 
-No. AIDA does not offer Rest APIs to be used by Harness users.
+No. Harness AI does not offer Rest APIs to be used by Harness users.
 
 ### How can I export all AutoStopping rules?
 

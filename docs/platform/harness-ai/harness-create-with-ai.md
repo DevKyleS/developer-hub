@@ -3,6 +3,8 @@ title: Create with Harness AI
 description: Learn how to create Harness resources using Harness AI
 sidebar_label: Get Started
 sidebar_position: 2
+redirect_from:
+  - /docs/platform/harness-aida/harness-create-with-ai
 ---
 
 # Getting Started with Harness AI 

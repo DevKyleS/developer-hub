@@ -3112,13 +3112,13 @@ Avail this feature with below configurations :
 
 To read more on this refer to documentation on [Handling empty strings in Input Variable](https://developer.harness.io/docs/platform/pipelines/input-data-preprocessing/)
 
-#### Can customers request the deactivation of the AIDA feature for their account?
+#### Can customers request the deactivation of the AI feature for their account?
 
-Customers can deactivate the AIDA feature themselves without needing to request or create a support ticket. The AIDA setting is available in the default settings of the platform, allowing users to manage this feature directly.
+Customers can deactivate the AI feature themselves without needing to request or create a support ticket. The AI setting is available in the default settings of the platform, allowing users to manage this feature directly.
 
-#### Is AIDA definitively enabled on the Harness platform?
+#### Is AI definitively enabled on the Harness platform?
 
-AIDA is enabled on the Harness platform by default. To read more on the security impact of this please refer the [Documentation](https://www.harness.io/legal/aida-privacy)
+Harness AI is enabled on the Harness platform by default. To read more on the security impact of this please refer the [Documentation](https://www.harness.io/legal/harness-ai-data-privacy)
 
 #### Is there a way to reference a step group variable without knowing the step group ID in Harness Pipelines?
 

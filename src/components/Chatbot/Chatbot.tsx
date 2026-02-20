@@ -258,7 +258,7 @@ const Chatbot = () => {
             <div className={styles["chatbot-heading-top"]}>
               <div className={styles.left}>
                 <img src="/img/aida-logo.svg" alt="AIDA logo" />
-                <h1>Harness AIDA Chatbot</h1>
+                <h1>Harness AI Chatbot</h1>
               </div>
               <div className={styles.right} onClick={toggleChatWindow}>
                 <i className="fa-solid fa-chevron-down"></i>
@@ -324,7 +324,7 @@ const Chatbot = () => {
 
                 <Tooltip
                   placement="bottom"
-                  overlay="Authenticate AIDA with your Harness Account"
+                  overlay="Authenticate Harness AI with your Harness Account"
                 >
                   <button onClick={handleSignIn} ref={sessionExpiredElement}>
                     Sign In

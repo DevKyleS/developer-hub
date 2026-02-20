@@ -15,7 +15,7 @@ helpdocs_is_published: true
   target="_self"
 />
 
-[AIDA:tm:](./aida.md) can help you troubleshoot errors and other issues in Harness FF.
+[Harness AI](/docs/feature-flags/troubleshoot-ff/ai) can help you troubleshoot errors and other issues in Harness FF.
 
 For troubleshooting guidance and questions related to Harness FF, go to the [Feature Flags FAQs](/docs/feature-flags/harness-feature-flag-faqs).
 

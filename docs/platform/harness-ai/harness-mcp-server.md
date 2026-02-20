@@ -3,6 +3,8 @@ title: Harness MCP Server
 description: A unified interface for AI agents to interact with Harness tools and services using the Model Context Protocol (MCP).
 sidebar_label: MCP Server
 sidebar_position: 10
+redirect_from:
+  - /docs/platform/harness-aida/harness-mcp-server
 ---
 
 The Harness Model Context Protocol (MCP) Server enables integration with Harness tools, providing endpoints for pipelines, pull requests, and more. This guide outlines the installation, configuration, and usage of the MCP server.

@@ -44,13 +44,13 @@ Harness Manager verifies registration requests by matching the IP address agains
 
 You can now grant public access to Harness pipelines. New settings on the Authentication page and in pipeline **Advanced Options** allow you to grant public access to pipeline executions.
 
-### AIDA:tm: recommends docs when creating support tickets
+### Harness AI recommends docs when creating support tickets
 
 * **Release date:** December 2023
 * **Release version:** 81820
 * **Issue number:** CDS-85267
 
-AIDA replaces Coveo to provide content recommendations when you enter a subject in the **Submit a ticket** form.
+Harness AI replaces Coveo to provide content recommendations when you enter a subject in the **Submit a ticket** form.
 
 ### SCIM user provisioning enhancements
 
@@ -211,7 +211,7 @@ These features were released as early access (beta) features, and they have sinc
 
 ### Platform features promoted to GA
 
-#### AIDA support automatically available
+#### AI support automatically available
 
 * **GA date:** Late 2023
 * **Early access release date:** October 2023
@@ -219,33 +219,32 @@ These features were released as early access (beta) features, and they have sinc
 * **Issue number:** PL-41700
 * **Feature flag:** `PL_AI_SUPPORT_CHATBOT`
 
-AIDA's support chat feature is now always available without requiring you to enable the feature in **Settings**.
+Harness AI's support chat feature is now always available without requiring you to enable the feature in **Settings**.
 
-#### Harness AI Development Assistant (AIDA:tm:)
+#### Harness AI
 
 * **GA date:** Late 2023
 * **Early access release date:** June 2023
 
-The Harness platform leverages Harness AI Development Assistant (AIDA) to revolutionize software delivery processes. By combining AI capabilities with robust DevOps tools, features, and practices, the Harness platform streamlines and accelerates the software delivery lifecycle, and it empowers teams to deliver high-quality applications quickly and efficiently. Its AI-driven predictive analytics, continuous verification, and advanced release orchestration capabilities empower teams to drive innovation, improve efficiency, and ultimately deliver exceptional user experiences.
+The Harness platform leverages Harness AI to revolutionize software delivery processes. By combining AI capabilities with robust DevOps tools, features, and practices, the Harness platform streamlines and accelerates the software delivery lifecycle, and it empowers teams to deliver high-quality applications quickly and efficiently. Its AI-driven predictive analytics, continuous verification, and advanced release orchestration capabilities empower teams to drive innovation, improve efficiency, and ultimately deliver exceptional user experiences.
 
-Following are some key benefits of Harness AIDA:
+Following are some key benefits of Harness AI:
 
-- Auto-recognition of failures in pipelines: The root cause analysis (RCA) option generates recommendations for step failures in pipelines. Harness bases these recommendations on the step logs and the context of the failed step. For more information, go to [Troubleshooting with AIDA](/docs/continuous-integration/troubleshoot-ci/aida).
+- Auto-recognition of failures in pipelines: The root cause analysis (RCA) option generates recommendations for step failures in pipelines. Harness bases these recommendations on the step logs and the context of the failed step. For more information, go to [Troubleshooting with AI](/docs/continuous-integration/troubleshoot-ci/ai).
 
-- Asset governance: The asset governance feature assists you in drafting rules that are based on your requirements and aligned with your governance goals. Harness AIDA governance support also offers detailed descriptions of built-in rules. When you are creating policies, this feature facilitates informed decision-making by clarifying the purpose, scope, and implications of each rule. For more information, go to [Asset governance with AIDA](/docs/cloud-cost-management/use-ccm-cost-governance/asset-governance/overview).
+- Asset governance: The asset governance feature assists you in drafting rules that are based on your requirements and aligned with your governance goals. Harness AI governance support also offers detailed descriptions of built-in rules. When you are creating policies, this feature facilitates informed decision-making by clarifying the purpose, scope, and implications of each rule. For more information, go to [Asset governance with AI](/docs/cloud-cost-management/use-ccm-cost-governance/asset-governance/overview).
 
-- Security: Harness AI identifies security vulnerabilities, describes them, and suggests remediation. For more information, go to [Remediations with AIDA](/docs/security-testing-orchestration/remediations/ai-based-remediations).
+- Security: Harness AI identifies security vulnerabilities, describes them, and suggests remediation. For more information, go to [Remediations with AI](/docs/security-testing-orchestration/remediations/ai-based-remediations).
 
-Review the following information for details about data privacy and terms of use:
+Review the following information for details about data privacy:
 
-- [AIDA Terms](https://www.harness.io/legal/aida-terms)
-- [AIDA Privacy](https://www.harness.io/legal/aida-privacy)
+- [Harness AI Data Privacy](https://www.harness.io/legal/harness-ai-data-privacy)
 
-**Update (October 2023):** AIDA for CI is now generally available. For more information, go to [Troubleshooting with AIDA](/docs/continuous-integration/troubleshoot-ci/aida).
+**Update (October 2023):** AI for CI is now generally available. For more information, go to [Troubleshooting with AI](/docs/continuous-integration/troubleshoot-ci/ai).
 
-**Update (November 2023):** AIDA for STO is now generally available. For more information, go to [Use AI to fix security issues](/docs/security-testing-orchestration/remediations/ai-based-remediations).
+**Update (November 2023):** AI for STO is now generally available. For more information, go to [Use AI to fix security issues](/docs/security-testing-orchestration/remediations/ai-based-remediations).
 
-**Update (January 2024):** Most AIDA functionalities are generally available. For more information, go to the [AIDA overview](/docs/platform/harness-aida/aida-overview).
+**Update (January 2024):** Most AI functionalities are generally available. For more information, go to the [Harness AI overview](/docs/platform/harness-ai/overview).
 
 #### Google Cloud Secret Manager
 
@@ -484,7 +483,7 @@ The **Security Tests** tab includes a set of pull-down menus so you can filter t
 
 ![Click on a tile to filter issues by severity](./static/sto-pulldown-filters-sto-5212.png)
 
-#### Harness AI Development Assistant (AIDA:tm:) for STO
+#### Harness AI for STO
 
 * **GA date:** November 2023
 * **Early access release date:** June 2023
@@ -496,13 +495,13 @@ import Intro from '/docs/security-testing-orchestration/use-sto/shared/sto-aida-
 
 <Intro />
 
-**Update (Version 1.60.0):** Reference Identifiers selected for AIDA enhancement in a Security Issue are now remembered, upon generation, and shown when revisited in the UI. (STO-6032)
+**Update (Version 1.60.0):** Reference Identifiers selected for AI enhancement in a Security Issue are now remembered, upon generation, and shown when revisited in the UI. (STO-6032)
 
-**Update (Version 1.61.1):** Fixed an issue that broke the capability to customize the code snippet for AIDA-augmented remediations in the Security Tests module. (STO-6181)
+**Update (Version 1.61.1):** Fixed an issue that broke the capability to customize the code snippet for AI-augmented remediations in the Security Tests module. (STO-6181)
 
-**Update (Version 1.72.1):** You can now provide feedback about the AIDA-generated remediation step for a selected issue. (STO-6593)
+**Update (Version 1.72.1):** You can now provide feedback about the AI-generated remediation step for a selected issue. (STO-6593)
 
-<!-- EULA RQMT REMOVED -- You are now required to sign an end-user license agreement to access the Harness AI Development Assistant (AIDA) in the account and project scopes. You need to do this even if you could previously use AIDA without signing a EULA. This change was originally introduced in the 80505 platform release. The EULA is displayed when you enable AIDA at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI Developer Assistant**). Each account user must sign the EULA only once, and the setting is inherited at the project scope. (PL-39723) -->
+<!-- EULA RQMT REMOVED -- You are now required to sign an end-user license agreement to access Harness AI in the account and project scopes. You need to do this even if you could previously use AI without signing a EULA. This change was originally introduced in the 80505 platform release. The EULA is displayed when you enable AI at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI Developer Assistant**). Each account user must sign the EULA only once, and the setting is inherited at the project scope. (PL-39723) -->
 
 #### Improved UI for configuring scan steps
 

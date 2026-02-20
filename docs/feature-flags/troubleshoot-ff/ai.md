@@ -1,7 +1,9 @@
 ---
-title: Troubleshoot FF with AIDA
-description: AIDA is the Harness AI Development Assistant.
+title: Troubleshoot FF with Harness AI
+description: Learn how to use Harness AI to troubleshoot your feature flags.
 sidebar_position: 20
+redirect_from:
+  - /docs/feature-flags/troubleshoot-ff/aida
 ---
 
 import Intro from '/docs/feature-flags/shared/aida-intro.md';
@@ -18,16 +20,16 @@ import Legal from '/docs/feature-flags/shared/aida-legal.md';
   target="_self"
 />
 
-<!-- Video: AIDA demo
+<!-- Video: Harness AI demo
 https://www.youtube.com/watch?v=b-l0Ig4HHBQ-->
 <DocVideo src="https://www.youtube.com/watch?v=jHXtmj64V64" />
 
-## Get started with AIDA for FF
+## Get started with Harness AI for FF
 
 <!--
 <Use />
 
-![An example of AIDA dialog.](./static/aida-launch-button.png)
+![An example of Harness AI dialog.](./static/aida-launch-button.png)
 
 You can find step logs on the [**Build details** page](/docs/continuous-integration/use-ci/viewing-builds.md).
 -->

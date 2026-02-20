@@ -33,7 +33,7 @@ export default function CI() {
               Harness CI helps you build faster and be more productive. Build
               and test your code, manage dependencies, upload artifacts, and
               monitor build outcomes, all within the Harness Platform. Leverage
-              unique features, like AIDA, Test Intelligence, and Cache
+              unique features like Harness AI, Test Intelligence, and Cache
               Intelligence, and integrate third party tools, custom scripts, and
               other Harness modules.
             </p>

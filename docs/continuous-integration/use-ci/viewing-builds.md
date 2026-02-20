@@ -31,7 +31,7 @@ On the **Build details** page, you can investigate a variety of details about a 
 
 This tab shows the build stages and steps.
 
-Select a step to investigate logs, inputs, outputs, and errors (if any) for that steps. If enabled, [AIDA](../troubleshoot-ci/aida.md) can provide troubleshooting assistance.
+Select a step to investigate logs, inputs, outputs, and errors (if any) for that steps. If enabled, [Harness AI](/docs/continuous-integration/troubleshoot-ci/ai) can provide troubleshooting assistance.
 
 When troubleshooting failed builds, you can switch to **Console View** to allocate more screen space to logs. Once you've identified a potential cause, select **Edit Pipeline** to go directly to the Pipeline Studio.
 

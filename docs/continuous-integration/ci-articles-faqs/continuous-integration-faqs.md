@@ -2894,9 +2894,9 @@ There are several [debug mode requirements](https://developer.harness.io/docs/co
 
 Debug mode is not available for a pipeline's first build. Run the pipeline again and, if it meets the [debug mode requirements](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/debug-mode#debug-mode-requirements), you should be able to trigger re-run in debug mode.
 
-## AIDA for CI
+## AI for CI
 
-For information about using AIDA to troubleshoot your Harness CI builds, go to [Troubleshoot builds with AIDA](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/aida/).
+For information about using AI to troubleshoot your Harness CI builds, go to [Troubleshoot builds with AI](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/ai/).
 
 ## CI with CD
 

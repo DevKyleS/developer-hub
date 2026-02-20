@@ -158,7 +158,7 @@ In addition, the Harness Platform provides several cross-module capabilities tha
   * [Dashboards](/docs/platform/dashboards/dashboards-overview)
   * [Global default settings](/docs/platform/settings/default-settings)
   * [Governance](/docs/category/governance-1) and [monitored services](/docs/platform/monitored-service)
-  * [Harness AIDA](/docs/platform/harness-aida/aida-overview)
+  * [Harness AI](/docs/platform/harness-ai/overview)
   * [Notifications](/docs/platform/notifications/notification-settings)
   * [Templates](/docs/platform/templates/template)
   * [Triggers](/docs/platform/triggers/triggers-overview)

@@ -83,7 +83,7 @@ No-LLM-Training: /docs/continuous-integration/private/**
   - [Private network connectivity options for Harness Cloud](https://developer.harness.io/docs/platform/references/private-network-connectivity.md): Connect Harness Cloud to private resources using IP allowlisting or enterprise networking solutions.
   - [Security hardening for Harness CI](https://developer.harness.io/docs/continuous-integration/secure-ci/security-hardening.md): Best practices and features to help you build securely with Harness CI.
 - Troubleshoot Ci
-  - [Troubleshoot builds with AIDA](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/aida.md): AIDA is the Harness AI Development Assistant.
+  - [Troubleshoot builds with Harness AI](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/ai.md): Learn how to use Harness AI to troubleshoot your builds.
   - [CI environment variables reference](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/ci-env-var.md): Learn about environment variables in Harness CI pipelines.
   - [Debug with SSH](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/debug-mode.md): Use debug mode to troubleshoot remote builds
   - [Optimize Windows VM Runner](https://developer.harness.io/docs/continuous-integration/troubleshoot-ci/optimize-windows-vm-runner.md): Optimizing Self-Hosted Windows VM Runner for Faster Startup and Response Times.

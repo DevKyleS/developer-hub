@@ -100,7 +100,7 @@ Here are some helpful guidelines when creating or editing content:
 
 -   Place content in thematically relevant locations. Consider the audience/persona (for example, beginner = get started). Consider the feature/use case.
 
--   Consider discoverability. Users can find content through manual browsing, search (site / google), AIDA/in-product links, or links from other webpages and other HDH pages. If a page "requires" information from another page, make sure they are connected by links. If a user lands on a similar page through search, are they able to find other related pages organically, or do they have to do another search?
+-   Consider discoverability. Users can find content through manual browsing, search (site / google), Harness AI/in-product links, or links from other webpages and other HDH pages. If a page "requires" information from another page, make sure they are connected by links. If a user lands on a similar page through search, are they able to find other related pages organically, or do they have to do another search?
 
 -   Think "user journey" not "textbook". Rather than stepping through a module screen-by-screen, think about what it's like to experience a module as a user and the goals someone is trying to achieve by using that module. Walk through the user journey from opening the app for the first time, to setting up their first pipeline, to more advanced techniques.
 

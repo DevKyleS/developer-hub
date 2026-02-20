@@ -2,6 +2,8 @@
 title: Harness AI x Gemini CLI Extension
 description: Leverage Gemini CLI with Harness AI MCP Server to unleash your developer workflows
 sidebar_position: 11
+redirect_from:
+  - /docs/platform/harness-aida/harness-gemini-extension
 ---
 
 # Harness MCP with Gemini CLI Extension
@@ -14,7 +16,7 @@ Harness MCP (Model Context Protocol) integrates seamlessly with **Gemini CLI**, 
 
 Before getting started, ensure you have:
 
-- Installed [Harness MCP Server](https://developer.harness.io/docs/platform/harness-aida/harness-mcp-server/)  
+- Installed [Harness MCP Server](https://developer.harness.io/docs/platform/harness-ai/harness-mcp-server/)  
 - [Gemini CLI](https://github.com/google-gemini/cli) installed (requires Node.js v18+)  
 - Harness API key with required permissions
 - Docker installed (for running the MCP server)

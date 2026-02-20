@@ -564,7 +564,7 @@ This section provides a consolidated view of all security issues affecting your 
 #### New features and enhancements
 - You can now override the image that runs the STO step directly in the scanner step UI. Expand **Additional Configuration** and then set **Container Registry** and **Image Tag**. (STO-7724)
 - The Bandit, Anchor, and Semgrep steps now support [private network connectivity](https://developer.harness.io/docs/platform/references/private-network-connectivity) within STO. (STO-7666)
-- The dark theme for AIDA is improved. Its appearance is now consistent with other UI components. (STO-7849)
+- The dark theme for Harness AI is improved. Its appearance is now consistent with other UI components. (STO-7849)
 
 ### Version 1.103.3
 
@@ -985,9 +985,9 @@ For more information, go to:
 - [Exclude vulnerabilities using STO output variables](/docs/security-testing-orchestration/policies/create-opa-policies#exclude-vulnerabilities-using-sto-output-variables)
 
 
-#### New feature: AIDA remediations for STO stage failures
+#### New feature: Harness AI remediations for STO stage failures
 
-- AIDA remediations are now available for STO stage failures. (STO-6966, STO-7254, ZD-56426, ZD-59425)
+- Harness AI remediations are now available for STO stage failures. (STO-6966, STO-7254, ZD-56426, ZD-59425)
 
 
 ### Version 1.87.2
@@ -1267,7 +1267,7 @@ You can now scan your repositories and other components used in your code with [
 
 #### Fixed issues
 
-- Fixed a configuration issue in a back-end service that prevented AIDA from generating remediation steps. (STO-6610) 
+- Fixed a configuration issue in a back-end service that prevented Harness AI from generating remediation steps. (STO-6610) 
 
 - Fixed a UI issue where the module sidebar in the left-side menu would scroll when a user clicked different menus within STO. With this fix, the module sidebar maintains its position when a user clicks different menus. (STO-6219)
 
@@ -1291,7 +1291,7 @@ You can now scan your repositories and other components used in your code with [
 import sto_exemptions_timebound from './static/sto-timebound-exemption.png'
 import sto_exemptions_table from './static/sto-exemptions-table.png'
 
-- You can now provide feedback about the [AIDA-generated remediation step](https://developer.harness.io/docs/security-testing-orchestration/use-sto/view-and-troubleshoot-vulnerabilities/ai-based-remediations) for a selected issue. (STO-6593)
+- You can now provide feedback about the [AI-generated remediation step](https://developer.harness.io/docs/security-testing-orchestration/use-sto/view-and-troubleshoot-vulnerabilities/ai-based-remediations) for a selected issue. (STO-6593)
 
   ![](./static/sto-aida-feedback-sto-6593.png)
 
@@ -1313,7 +1313,7 @@ import sto_exemptions_table from './static/sto-exemptions-table.png'
 
     ![Click on a tile to filter issues by severity](./static/sto-pulldown-filters-sto-5212.png)
 
-<!-- EULA RQMT REMOVED -- H4 Early access -- You are now required to sign an end-user license agreement to access the Harness AI Development Assistant (AIDA) in the account and project scopes. You need to do this even if you could previously use AIDA without signing a EULA. This change was originally introduced in the 80505 platform release. The EULA is displayed when you enable AIDA at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI Developer Assistant**). Each account user must sign the EULA only once. The setting is inherited at the project scope. (PL-39723) -->
+<!-- EULA RQMT REMOVED -- H4 Early access -- You are now required to sign an end-user license agreement to access Harness AI in the account and project scopes. You need to do this even if you could previously use Harness AI without signing a EULA. This change was originally introduced in the 80505 platform release. The EULA is displayed when you enable Harness AI at the account scope (**Account Settings** > **Account Resources** > **Default Settings** > **Harness AI**). Each account user must sign the EULA only once. The setting is inherited at the project scope. (PL-39723) -->
 
 ##### Fixed issues
 
@@ -1532,7 +1532,7 @@ This feature is behind the Feature Flag `STO_BASELINE_REGEX`. For more informati
 
 ###### Fixed issues
 
-* Fixed an issue that broke the capability to customize the code snippet for AIDA-augmented remediations in the Security Tests module. (STO-6181)
+* Fixed an issue that broke the capability to customize the code snippet for AI-augmented remediations in the Security Tests module. (STO-6181)
 
 ###### Fossa runner update
 
@@ -1551,7 +1551,7 @@ This feature is behind the Feature Flag `STO_BASELINE_REGEX`. For more informati
 
   For information on how to set up this workflow, go to [Configure your pipeline to use STO images from private registry](/docs/security-testing-orchestration/use-sto/set-up-sto-pipelines/configure-pipeline-to-use-sto-images-from-private-registry).
 
-- Reference Identifiers selected for AIDA enhancement in a Security Issue are now remembered, upon generation, and shown when revisited in the UI. (STO-6032)
+- Reference Identifiers selected for Harness AI enhancement in a Security Issue are now remembered, upon generation, and shown when revisited in the UI. (STO-6032)
 
 ##### Early Access
 
@@ -1574,7 +1574,7 @@ This feature is behind the Feature Flag `STO_BASELINE_REGEX`. For more informati
 
 ##### Fixed Issues
 
-* Fixed an issue where some Reference Identifiers were not listed in the AIDA **Edit Inputs** form for enhancing a Security Issue's remediation steps. (STO-6102)
+* Fixed an issue where some Reference Identifiers were not listed in the Harness AI **Edit Inputs** form for enhancing a Security Issue's remediation steps. (STO-6102)
 
 #### June 2023
 
@@ -1584,11 +1584,11 @@ This feature is behind the Feature Flag `STO_BASELINE_REGEX`. For more informati
 
 ###### Early access features
 
-Harness AI Development Assistant (AIDA) uses state-of-the-art AI technology to streamline the process of triaging and fixing security vulnerabilities. For every vulnerability detected by STO, Harness AIDA explains the issue precisely and provides detailed advice  — including code changes and package upgrades — on how to fix it. Harness AIDA is based on large, well-trained language models. It learns continuously based on feedback and the latest public knowledge. Optionally, you can regenerate advice with additional context and thereby optimize your results. 
+Harness AI uses state-of-the-art AI technology to streamline the process of triaging and fixing security vulnerabilities. For every vulnerability detected by STO, Harness AI explains the issue precisely and provides detailed advice  — including code changes and package upgrades — on how to fix it. Harness AI is based on large, well-trained language models. It learns continuously based on feedback and the latest public knowledge. Optionally, you can regenerate advice with additional context and thereby optimize your results. 
 
-Harness AIDA reduces developer toil by streamlining and simplifying the process of fixing vulnerabilities. It enables developers and security personnel to manage security-issue backlogs and address critical issues promptly. Harness AIDA can dramatically reduce your TTR, speed up your software delivery lifecycle, and improve the security posture of your applications and services. (STO-5882)
+Harness AI reduces developer toil by streamlining and simplifying the process of fixing vulnerabilities. It enables developers and security personnel to manage security-issue backlogs and address critical issues promptly. Harness AI can dramatically reduce your TTR, speed up your software delivery lifecycle, and improve the security posture of your applications and services. (STO-5882)
 
-For more information, go to [Remediations with AIDA](/docs/security-testing-orchestration/remediations/ai-based-remediations).
+For more information, go to [Remediations with Harness AI](/docs/security-testing-orchestration/remediations/ai-based-remediations).
 
 ###### Fixed issues
 

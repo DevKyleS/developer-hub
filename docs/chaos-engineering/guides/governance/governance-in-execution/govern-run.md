@@ -37,7 +37,7 @@ This topic describes how you can configure **ChaosGuard** to enforce security po
 This gives you 3 ways to define a condition from the **Condition Editor**:
 - [YAML manifest](#define-constraints-using-yaml)
 - [Using the visual editor](#define-constraints-using-the-visual-editor)
-- [Harness AIDA](#define-constraints-using-aida)
+- [Harness AI](#define-constraints-using-ai)
 
 ### Define constraints using YAML
 
@@ -76,23 +76,23 @@ This gives you 3 ways to define a condition from the **Condition Editor**:
 - You can also use wildcards within the condition entities, which offers flexibility and control in defining conditions.
 :::
 
-### Define constraints using AIDA
+### Define constraints using AI
 
-1. Instead of selecting the required parameters, you can generate conditions with the help of Harness AIDA. AIDA assistant shows up when you are configuring a condition. You can choose one of the suggestions provided by Harness AIDA by clicking on it or writing something along the same lines as the suggestions.
+1. Instead of selecting the required parameters, you can generate conditions with the help of Harness AI. AI assistant shows up when you are configuring a condition. You can choose one of the suggestions provided by Harness AI by clicking on it or writing something along the same lines as the suggestions.
 
     ![aida suggestion](../static/chaosguard/aida-sug-1.png)
 
-2. When you type a condition, you will see that AIDA generates a YAML corresponding to your condition. If the YAML generated meets the conditions, you can click **Apply YAML**.
+2. When you type a condition, you will see that Harness AI generates a YAML corresponding to your condition. If the YAML generated meets the conditions, you can click **Apply YAML**.
 
     ![aida generation](../static/chaosguard/aida-gen-2.png)
 
-3. If the generated YAML does not meet your conditions, click **Try again**. In the snippet below, you will see that AIDA applies the YAML generated to the editor.
+3. If the generated YAML does not meet your conditions, click **Try again**. In the snippet below, you will see that Harness AI applies the YAML generated to the editor.
 
     ![aida apply](../static/chaosguard/aida-apply-3.png)
 
 ### Save condition
 
-After you define the constraints of a condition either using [YAML](#define-constraints-using-yaml), [visual editor](#define-constraints-using-the-visual-editor), or [AIDA](#define-constraints-using-aida), select **Save**.
+After you define the constraints of a condition either using [YAML](#define-constraints-using-yaml), [visual editor](#define-constraints-using-the-visual-editor), or [Harness AI](#define-constraints-using-ai), select **Save**.
 
     ![save constraints](../static/chaosguard/save-constraint.png)
 

@@ -33,6 +33,6 @@
 | Create triggers for pipeline runs based on code activity | [Triggers](https://developer.harness.io/docs/code-repository/pipelines/code-triggers) |
 | Run and monitor pipeline executions | [Monitor Executions](https://developer.harness.io/docs/code-repository/pipelines/code-triggers#permissions-required-for-creating-and-updating-triggers) |
 | **9. Leverage AI for Developer Productivity** | |
-| Generate PR summaries with Harness AI | [AI PR Summaries](https://developer.harness.io/docs/code-repository/pull-requests/aida-code-pr) |
-| Use AI-generated insights to support code reviews | [AI Code Review Support](https://developer.harness.io/docs/code-repository/pull-requests/aida-code-pr) |
-| Identify use cases for AI in code and pipeline automation | [AI Use Cases](https://developer.harness.io/docs/code-repository/pull-requests/aida-code-pr#generate-pr-summary-with-harness-ai) |
+| Generate PR summaries with Harness AI | [AI PR Summaries](https://developer.harness.io/docs/code-repository/pull-requests/code-pr) |
+| Use AI-generated insights to support code reviews | [AI Code Review Support](https://developer.harness.io/docs/code-repository/pull-requests/code-pr) |
+| Identify use cases for AI in code and pipeline automation | [AI Use Cases](https://developer.harness.io/docs/code-repository/pull-requests/code-pr#generate-pr-summary-with-harness-ai) |

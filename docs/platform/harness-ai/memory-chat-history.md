@@ -3,6 +3,8 @@ title: Chat History and Memory
 description: Using Harness AI's chat search and memory to build on previous context
 sidebar_label: Chat History & Memory
 sidebar_position: 15
+redirect_from:
+  - /docs/platform/harness-aida/memory-chat-history
 ---
 
 # Chat History & Memory

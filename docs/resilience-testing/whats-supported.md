@@ -79,7 +79,7 @@ Chaos Engineering on Self-Managed Enterprise Edition has the following limitatio
 - **Harness Enterprise ChaosHub** is not connected by default
   - Contact [Harness Support](mailto:support@harness.io) for access to the Enterprise ChaosHub
   - Once you have access, you can add it as a [custom ChaosHub](./chaos-testing/chaoshub)
-- **Harness AI Development Assistant (AIDA™)** for CE
+- **Harness AI** for CE
 
 ### Supported Platforms
 

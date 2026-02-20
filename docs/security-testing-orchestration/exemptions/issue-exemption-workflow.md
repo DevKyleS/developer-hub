@@ -32,7 +32,7 @@ Here are some reasons wny your organization might want to exempt an issue:
 - The security risk is low and remediation would require too much effort or expense.
 - The scanner detects an issue but it is, in fact, a false positive.
 - You need to exempt an issue so you can deploy a hotfix. In this case, you can request a temporary exemption that expires within your organization's SLA for fixing security issues.
-- There are currently no known fixes or remediation steps available for the detected vulnerability. You might want to enable [Harness AI Development Assistant (AIDA™)](/docs/security-testing-orchestration/remediations/ai-based-remediations) to help you remediate your issues using AI.
+- There are currently no known fixes or remediation steps available for the detected vulnerability. You might want to enable [Harness AI](/docs/security-testing-orchestration/remediations/ai-based-remediations) to help you remediate your issues using AI.
 
 
 import request_exemption from '../use-sto/static/request-exemption.png'

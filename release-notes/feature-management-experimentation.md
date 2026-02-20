@@ -399,7 +399,7 @@ The Harness FME MCP helps teams accelerate feature delivery and experimentation 
 #### Related documentation
 
 - [Harness FME MCP Tools](/docs/feature-management-experimentation/release-agent/mcp-tools)
-- [Harness MCP Server](/docs/platform/harness-aida/harness-mcp-server/)
+- [Harness MCP Server](/docs/platform/harness-ai/harness-mcp-server/)
 
 ### [New Feature] OpenFeature Providers
 ----

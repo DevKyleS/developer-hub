@@ -1089,7 +1089,7 @@ This feature is currently in Beta and behind a feature flag `CCM_EXTERNAL_DATA_I
 
 <DocImage path={require('./static/savings-computation.png')} width="90%" height="90%" title="Click to view full-size image" />
 
-2. Error Dialog for Governance Rule Validation Errors: The error dialog used for AIDA-generated policies during rule validations will now also appear for standard rule validation errors, ensuring consistency and clarity. [CCM-20170]
+2. Error Dialog for Governance Rule Validation Errors: The error dialog used for AI-generated policies during rule validations will now also appear for standard rule validation errors, ensuring consistency and clarity. [CCM-20170]
 
 3. UI for Actioned Resources and Savings: Asset Governance now displays the count of actioned resources along with the associated savings. Users can view the "Actioned Resources" tab in the test terminal output for better visibility. [CCM-20108]
 <DocImage path={require('./static/actioned-resources.png')} width="90%" height="90%" title="Click to view full-size image" />
