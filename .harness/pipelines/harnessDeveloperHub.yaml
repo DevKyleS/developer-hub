@@ -145,7 +145,7 @@ pipeline:
                       SEGMENT_API_KEY: <+pipeline.variables.yarnBuildSegmentApiKey>
                       HARNESS_GENERIC_READ_ONLY_KEY: <+pipeline.variables.hdhYarnBuild>
                       HARNESS_GENERIC_ACCOUNT_IDENTIFIER: <+pipeline.variables.hdhPipelineAccountId>
-                      COVEO_API_KEY: <+pipeline.variables.developerhubCoveoAccessToken>
+                      COVEO_API_KEY: <+pipeline.variables.coveoApiKey>
                       GEMINI_API_KEY: <+pipeline.variables.GEMINI_API_KEY>
               - step:
                   type: Plugin
@@ -236,7 +236,7 @@ pipeline:
       type: Secret
       description: ""
       required: false
-      value: coveoApiKey
+      value: developerhubCoveoAccessToken
     - name: yarnBuildSegmentApiKey
       type: Secret
       description: ""
