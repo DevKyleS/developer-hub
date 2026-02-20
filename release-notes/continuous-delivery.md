@@ -56,6 +56,23 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 ## February 2026
 
+### Version 1.131.0
+
+#### Breaking changes
+
+- **Google MIG Blue-Green deployment updates**: All Blue-Green deployment plugin images have been updated from `0.0.1` to `0.1.0`. This release includes the following changes:
+  - The `targetSize` field in the Blue-Green Deploy step no longer defaults to `1`. If not specified, Harness automatically fetches the current instance count from the stable MIG and applies it to the stage MIG. If an autoscaler is configured, the autoscaler controls the final instance count. Existing pipelines with an explicit `targetSize` value are not affected.
+  - A new `downsizeOldMig` flag is available in the Google MIG Traffic Shift step. When enabled, Harness scales the old MIG to zero instances after the label swap at 100% traffic shift, optimizing costs by removing unused instances. Associated autoscalers are managed automatically during the downsize operation.
+  - The `GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.instanceTemplate` output now refers to the pre-deploy version of the instance template instead of the deployed one. To reference the currently deployed instance template, use `GoogleMigBlueGreenDeployOutcome.stageTemplate`.
+  
+  For more details, go to [Blue-Green Deployment for MIG](/docs/continuous-delivery/deploy-srv-diff-platforms/google-cloud-functions/mig/mig-blue-green-deployment).
+
+#### Fixed issues
+
+- Fixed an issue where the Service step in pipelines took significantly longer than expected to complete, sometimes exceeding five minutes for operations that typically finish in under 15 seconds. This inconsistent delay affected multiple services across different projects and produced no logs during the wait period. The root cause was in the wait-notify mechanism, which has been optimized for scenarios involving more than one `notifyId`. (**PIPE-31895**, **ZD-100546**)
+- Fixed an issue where the "Enforce OAuth For Commits" setting incorrectly blocked pipeline saves for users with Bitbucket OAuth configured through a custom provider (Bitbucket Server). The enforce OAuth flow relied on the connector type (`BITBUCKET`) to fetch user OAuth profiles, but on-prem setups registered profiles as `BITBUCKET_SERVER`, preventing the correct profile from being matched. Users with Bitbucket OAuth configured can now successfully save pipelines when "Enforce OAuth For Commits" is enabled. (**PIPE-31586**, **ZD-95814**, **ZD-100787**)
+- Fixed an issue where Harness ASG deployments did not fail when an AWS instance refresh was manually moved to a rollback state (e.g., `RollbackInProgress`) from the AWS Console. Although Harness detected the rollback state in the execution logs, it continued the deployment instead of treating it as a failure condition. Harness now correctly fails the deploy step when an externally initiated rollback is detected during an instance refresh. (**CDS-118529**, **ZD-101769**)
+
 ### Version 1.130.4
 
 #### Fixed issues
@@ -64,9 +81,7 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 - Fixed an issue where the WinRM service artifact source displayed every artifact as a Docker artifact in the UI. The artifact source template now shows the actual artifact type in the icon if the user has not provided a custom icon. (**CDS-117751**, **ZD-101243**)
 - Fixed an issue where the tag dropdown was not populating with any tags generated in the last day. (**CDS-117808**, **ZD-101214**)
 - Fixed an issue where Google Cloud Run deployments did not work on rerun when a service was scaled to zero. (**CDS-118269**)
-- Fixed an issue where Harness ASG deployment did not fail when the AWS instance refresh was manually moved to a rollback state. (**CDS-118529**, **ZD-101769**)
 - Fixed an issue where bulk reconciliation of pipelines referencing shared templates and stored in remote repositories could fail. The error occurred when the system incorrectly attempted to access a "HARNESS" branch in the remote repository. Improved logging has been added to provide better visibility into the Git branch and repository being accessed during reconciliation. (**PIPE-31123**, **ZD-98783**)
-- Fixed an issue where the "Enforce OAuth For Commits" setting incorrectly blocked pipeline saves, even when users had already configured Bitbucket OAuth with a custom provider. Users with Bitbucket OAuth configured can now successfully save pipelines when "Enforce OAuth For Commits" is enabled. (**PIPE-31586**, **ZD-95814**, **ZD-100787**)
 - Fixed an issue where the account-level "Skip Git Webhook Registration" setting incorrectly restricted administrators from enabling or disabling Git webhooks. Administrators can now manage all Git webhooks, regardless of the "Skip Git Webhook Registration" setting, respecting their administrative permissions. (**PIPE-31922**, **ZD-102235**)
 - Fixed an issue where the log viewer would unexpectedly jump to the bottom, interrupting users while reviewing logs during pipeline executions. The log viewer now maintains the user's scroll position when manually scrolling or when a log section is collapsed, preventing unwanted auto-scrolling behavior. (**PIPE-32017**, **ZD-101156**)
 
