@@ -10,7 +10,7 @@ This document will guide the user through the creation of new Terraform template
 
 ## Prerequisites
 
-This document assumes that your local development environment has followed the steps outline in the [Developer Environment Setup](../best-practices/developer-env-setup.md) guide.  Please review those requirements to ensure that you have all the tools necessary to proceed.
+This document assumes that your local development environment has followed the steps outline in the [Developer Environment Setup](../configurations/developer-env-setup.md) guide.  Please review those requirements to ensure that you have all the tools necessary to proceed.
 
 ## Walk-thru
 

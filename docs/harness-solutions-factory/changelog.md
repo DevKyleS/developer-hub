@@ -9,6 +9,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.4.0] - 2026-02-03
+
+  _Enhancement - HSF Core and Hub_
+
+  - ADD:    HSF Hub core-framework
+  - ADD:    HsfCore::terraform.tf placeholder for hsf_core_mode
+  - UPDATE: PilotLight configuration to support the 'should_use_harness_idp' variable which when 'false' will skip setting up Harness IDP during the Unpack process
+  - UPDATE: SolutionsFactory configuration to support the 'should_use_harness_idp' variable which when 'false' will skip setting up Harness IDP during the Unpack process
+  - UPDATE: SolutionsFactory to set the idp_resources as optional based on the variable 'should_use_harness_idp'
+  - UPDATE: FactoryFloor to set all IDP resource updates as optional based on the variable 'should_use_harness_idp'
+  - UPDATE: Variable documentation
+  - UPDATE: PilotLight to remove decommissioned AWS connector 'HSF Solutions Factory Connector'
+  - UPDATE: PilotLight configuration to use IACM stages when running in hsf_core_mode
+  - UPDATE: FactoryFloor configuration to use IACM stages when running in hsf_core_mode
+  - UPDATE: SolutionsFactory configuration to use IACM stages when running in hsf_core_mode
+  - UPDATE: PilotLight CodeRepo Merge strategy rules
+  - REMOVE: Deprecated AWS Connector details
+  - UPDATE: PilotLight setup to configure HSF Users with shared resource access to Organization
+  - UPDATE: FactoryFloor to include improved RBAC and OPA Policy governance for better delegated access
+  - UPDATE: SolutionsFactory to include landing zone details
+  - UPDATE: CustomTemplateLibrary to be a full one-time mirror of the HTL repo
+  - UPDATE: FactoryFloor::CreateAndManage pipeline to add support for Terraform Variable files - `RESOURCE_VARS_FILES`
+  - UPDATE: Documentation in repository
+  - REMOVE: SolutionsFactory::Pipeline - Register Official IDP Templates
+
+## [v2.3.10] - 2025-12-17
+
+  _Enhance unpack process to support Custom Template Library loading_
+
+  - UPDATE: PilotLight::Pipeline::UnpackSolutionsFactory to include automatic loading of all custom template library resources as part of the deployment
+  - UPDATE: PilotLight::Modules::ServiceAccount to ignore any changes to the service_account secret, thereby allowing customizating to use a different secretsProvider
+  - UPDATE: PilotLight::Variables to configure the default rotation schedule for the service account token to once per week on Sundays at 0300
+  - UPDATE: editorconfig and gitignore
+  - ADD:    Mise.toml configuration
+
+## [v2.3.9] - 2025-12-03
+
+  - ADD: PilotLight/FactoryFloor/SolutionsFactory::ALL support for kubernetes_serviceaccount in pipeline infrastructure.
+
 ## [v2.3.8] - 2025-11-10
 
   - FIX: PilotLight::MirrorRepos to fix logic so that it will only trigger email notification when a new PR is created.

@@ -40,7 +40,7 @@ _**Note**: The steps detailed here will assume that you have permissions to crea
 ## Creating a new Template
 A Terraform scaffold is included within the baseline repository (`scaffolds/terraform`).  This scaffold includes everything required to begin building out new templates for use with the Solutions Factory.
 
-[Learn more about creating new templates](/docs/harness-solutions-factory/best-practices/developer-env-setup)
+[Learn more about creating new templates](/docs/harness-solutions-factory/configurations/developer-env-setup)
 
 ## Updating Harness provided samples and baseline templates
 Often, the provided samples and baseline templates do not cover 100% of your use cases and require adjustment. In order to customize the Templates, follow the below steps.

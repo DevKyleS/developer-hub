@@ -42,7 +42,7 @@ At the organization level one user group is created:
 
 **Secrets**
 
-Secrets are also created at the organization level to securely manage authentication and access credentials. `HSF Platform API Key`, stores the secret value associated with the `harness-platform-manager` service account. This key is managed by a pipeline that automatically handles rotation to maintain security best practices.  `hsf_harness_stub_secret_key` and `hsf_harness_stub_access_key` are also created but will be removed in a future update because they are no longer being used.
+Secrets are also created at the organization level to securely manage authentication and access credentials. `HSF Platform API Key`, stores the secret value associated with the `harness-platform-manager` service account. This key is managed by a pipeline that automatically handles rotation to maintain security best practices.
 
 **Projects**
 

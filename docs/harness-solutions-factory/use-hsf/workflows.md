@@ -6,7 +6,7 @@ redirect_from:
     - /kb/reference-architectures/hsf/hsf-workflows
 ---
 ## Default Workflows
-These are the workflows that are automatically created when HSF is deployed into your account:
+These are the workflows that are automatically created when HSF is deployed into your account. These workflows are created by `harness-template-library` repository and registered into IDP via the `Register Official IDP Templates` pipeline:
 
 ### Harness Organization Setup
 Harness Organization Setup is a workflow that creates and manages organizations within your Harness account. It standardizes the process for requesting new organizations and provides an easy way to manage them consistently. The workflow provisions an organization with a defined name.

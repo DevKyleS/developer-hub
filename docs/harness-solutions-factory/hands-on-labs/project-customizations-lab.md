@@ -11,6 +11,10 @@ sidebar_position: 20
 
 ### Modify the Harness Project Setup workflow to source from the Custom Template Library
 
+:::note
+If you have deployed HSF after Febuary 2026, a copy of harness-project and harness-organization should be already in your custom-harness-template-library and therefore steps 1-14 can be skipped. If you are looking to customize a different workflow follow steps 1-14 but use the desired folder.
+:::
+
 1. Log into your Harness Account and select `Code Repository`
 2. Change your scope to the organization named `Harness Platform Management`
 3. Select the repository - `harness-template-library` and clone this locally to your machine
@@ -32,12 +36,13 @@ sidebar_position: 20
         :::note 
         You will need to remove the `[]` at the end of this line `entities: []`
         :::    
-
+        <DocImage path={require('../static/getting-started9.png')} title="Click to view full size image" />
 9. Reopen the `custom-harness-template-library` in the container
     - On the bottom left corner of VSCode is a blue box `><`, click on this icon to open the DevContainers management panel and choose `Reopen in Container`
 10. Now we will modify the Harness IDP workflow for the `harness-project` template - open the file `harness-project/.harness/catalog_template.yaml` in VSCode
     :::note
     There are account level variables that manage the configuration of the Custom Template Library Connector and Repositories. You can access these variables and adjust them by updating the variable in the Account Settings for the platform.
+    <DocImage path={require('../static/getting-started5.png')} title="Click to view full size image" />
     :::
 11. Find and Modify the following `Solutions Factory Details` parameters to match the following values
 ```
@@ -54,6 +59,7 @@ sidebar_position: 20
               default: main
               ui:widget: hidden
 ```
+<DocImage path={require('../static/getting-started6.png')} title="Click to view full size image" />
 12. Find and Modify the following `Solutions Factory Options` parameters to match the following values 
 ```
 repo_source: 
@@ -62,6 +68,7 @@ repo_source:
         default: custom 
         ui:widget: hidden
 ```
+<DocImage path={require('../static/getting-started8.png')} title="Click to view full size image" />
 13. Save and Commit your changes.
     :::note
     For this workshop, we will just commit directly to* `main`*. In a different workshop, we will work through a feature branch upgrade process
@@ -73,16 +80,16 @@ repo_source:
     :::note
     For this execution, we will make no changes to the inputs and accept the default details
     ::: 
-16. Navigate to IDP and review the YAML for the workflow `harness-project`
-    :::note 
-    If you would like to verify that the change has been made, you can click the three dots and choose `View Yaml`. You should see the following annotations:
-    :::
+    <DocImage path={require('../static/getting-started10.png')} title="Click to view full size image" />
+16. Navigate to IDP, Workflows, `Harness Project Setup` and click the three dots to choose `View Raw YAML` to verify that the change has been made.
+
     ```
     annotations:
         is_harness_official: "False"
         source: custom-template-library
         created_by: custom
     ```
+    <DocImage path={require('../static/getting-started11.png')} title="Click to view full size image" />
 17. Create a new Project with the name `Custom Project`
     - Wait for the execution to complete.
 18. Review the IACM Workspace `Lab_Custom-Project` in the `Solutions Factory` project
@@ -93,18 +100,20 @@ repo_source:
 ### Customize your Harness Project template
 
 1. Open the `custom-harness-template-library` in VSCode. Make sure you `Reopen in Container`
-2. Create the file `harness-project/templates/roles/Security_Admins.yaml`
-3. Copy the contents from this file `harness-project/templates/roles/permission_sets/Security_Orchestration.yaml` into the new role file created.
+2. Create the file `harness-project/templates/roles/Security_Champions.yaml`
+3. Sample permission sets are included under the `permission_sets` directory. Copy the contents from this file `harness-project/templates/roles/permission_sets/Security_Orchestration.yaml` into the new role file created.
     :::note
     Multiple permissions could be added and interspersed from other permission sets. For the purposes of this exercise, we will just copy the entire set.
     ::: 
+    <DocImage path={require('../static/getting-started12.png')} title="Click to view full size image" />
 4. Create the file `harness-project/templates/groups/Security_Champions.yaml`
 5. Copy the contents from this file `harness-project/templates/groups/Project_Viewers.yaml` into the new group file created.
 6. Add a new role binding to include our new role. 
     ```
-    - role: Security_Admins 
+    - role: Security_Champions 
       resource_group: _all_project_level_resources
     ```
+    <DocImage path={require('../static/getting-started13.png')} title="Click to view full size image" />
 7. Save and commit your changes.
     :::note
     For this workshop, we will just commit directly to main. In a different workshop, we will work through a feature branch upgrade process

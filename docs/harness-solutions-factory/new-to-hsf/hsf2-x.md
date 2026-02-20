@@ -4,6 +4,14 @@ description: Comprehensive overview guide to HSF 2.X
 sidebar_label: HSF 2.X Overview
 sidebar_position: 30
 ---
+## HSF 2.4
+:::note
+HSF 2.4 was released in February of 2026
+:::
+HSF 2.4 introduces the ability to bring your own self service portal. Here's what's new:
+
+- Added HSF Hub functionality which creates a project with pipelines that execute Harness Template Library and Custom Harness Template Library workflows.
+- BYO-IDP where Hub pipelines can be triggered via API.
 
 ## HSF 2.3
 :::note

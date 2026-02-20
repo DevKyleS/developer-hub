@@ -17,6 +17,7 @@ sidebar_position: 10
 4. Enter the following details:
     - Name: `Lab`
     - Description: `This will be our development lab for learning Harness`
+    <DocImage path={require('../static/getting-started1.png')} title="Click to view full size image" />
 5. Click *Next*
 6. Choose *Review*
 7. Review the final configuration details and click *Create*
@@ -25,6 +26,8 @@ sidebar_position: 10
 :::note
 What is happening during the Workflow action?
 The Workflow will trigger the `Create and Manage IACM Workspaces` pipeline in the `Solutions Factory` project in the `Harness Platform Management` organization.  By default, the workflow requires a member of the `HSF Admins` group to approve the request. An email will be sent to the users in that group. 
+
+<DocImage path={require('../static/getting-started2.png')} title="Click to view full size image" />
 
 There are two approval points in this execution: 
     - The first Harness Approval is an acknowledgement that the request is ready to review
@@ -48,3 +51,7 @@ There are two approval points in this execution:
 4. While the pipeline is running, follow the same steps to create a second project called `infrastructure`
 5. Complete the approvals for both executions
 6. Review the deployed project
+
+<DocImage path={require('../static/getting-started3.png')} title="Click to view full size image" />
+
+Above are the resoures that are now currently in the account - one organization named Lab and two projects named infrastructure and workshop both in the Lab organization. 
