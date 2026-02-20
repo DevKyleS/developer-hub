@@ -65,21 +65,21 @@ const sidebars: SidebarsConfig = {
         //ce
         {
           type: "doc",
-          label: "Chaos Engineering",
+          label: "Resilience Testing - CE",
           id: "chaos-engineering",
           className: "sidebar-ce"
         },
         //sto
         {
           type: "doc",
-          label: "Security Testing Orchestration",
+          label: "Application Security Testing - STO",
           id: "sto",
           className: "sidebar-sto"
         },
         //scs
         {
           type: "doc",
-          label: "Supply Chain Security",
+          label: "Application Security Testing - SCS",
           id: "scs",
           className: "sidebar-ssca"
         },

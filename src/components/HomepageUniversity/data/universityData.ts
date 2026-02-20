@@ -79,7 +79,7 @@ export const university: CardItem[] = [
     SPT_available: true,
   },
   {
-    title: "Chaos Engineering",
+    title: "Resilience Testing - CE",
     module: MODULES.ce,
     description:
       "Discover how your applications stand up to real-world failure scenarios.",
@@ -90,7 +90,7 @@ export const university: CardItem[] = [
   },
 
   {
-    title: "Security Testing Orchestration",
+    title: "Application Security Testing - STO",
     module: MODULES.sto,
     description:
       "Seamlessly integrate security scanners and orchestrate tests anywhere across your build pipelines.",
@@ -100,7 +100,7 @@ export const university: CardItem[] = [
     SPT_available: true,
   },
   {
-    title: "Supply Chain Security",
+    title: "Application Security Testing - SCS",
     module: MODULES.ssca,
     description:
       "Secure your SDLC and align them with industry-standard risk frameworks.",

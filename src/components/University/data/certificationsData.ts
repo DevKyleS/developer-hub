@@ -113,53 +113,53 @@ export const university: CardItem[] = [
     // numberOfCerts: 1,
   },
   {
-    title: "Chaos Engineering  - Developer",
+    title: "Resilience Testing - CE - Developer",
     module: MODULES.ce,
     type: certType.developer,
     description:
       "Chaos Developer focuses on the fundamental skills to inject failure into your applications to build resilience.",
-    version: "Harness Chaos Free Plans",
+    version: "Harness Resilience Testing Free Plans",
     link: "/university/chaos-engineering?lvl=developer",
     // numberOfCerts: 1,
   },
   {
-    title: "Chaos Engineering  - Administrator",
+    title: "Resilience Testing - CE - Administrator",
     module: MODULES.ce,
     type: certType.administrator,
     description:
       "Chaos Administrator focuses focuses on the advanced skills in of injecting failure into your applications to build resilience.",
-    version: "Harness Chaos Paid Plans",
+    version: "Harness Resilience Testing Paid Plans",
     link: "/university/chaos-engineering?lvl=administrator",
     // numberOfCerts: 1,
   },
 
   {
-    title: "Security Testing Orchestration  - Developer",
+    title: "Application Security Testing - STO - Developer",
     module: MODULES.sto,
     type: certType.developer,
     description:
       "STO Developer focuses on the fundamental skills to shift security left in your pipelines.",
-    version: "Harness STO Free Plans",
+    version: "Harness Application Security Testing Free Plans",
     link: "/university/sto?lvl=developer",
     // numberOfCerts: 1,
   },
   {
-    title: "Security Testing Orchestration  - Administrator",
+    title: "Application Security Testing - STO - Administrator",
     module: MODULES.sto,
     type: certType.administrator,
     description:
       "STO Administrator focuses on configuring and managing security testing processes within the Harness platform.",
-    version: "Harness STO Paid Planss",
+    version: "Harness Application Security Testing Paid Plans",
     link: "/university/sto?lvl=administrator",
     // numberOfCerts: 1,
   },
   {
-    title: "Supply Chain Security  - Developer",
+    title: "Application Security Testing - SCS  - Developer",
     module: MODULES.ssca,
     type: certType.developer,
     description:
       "SCS Developer focuses on the fundamental skills to secure your SDLC with risk frameworks.",
-    version: "Harness SCS Paid Plans",
+    version: "Harness Application Security Testing Paid Plans",
     link: "/university/scs?lvl=developer",
     // numberOfCerts: 1,
   },
