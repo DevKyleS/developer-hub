@@ -231,13 +231,19 @@ This second MIG forms the other half of your Blue-Green setup, alternating with 
 
 **Enter Route**: This field specifies the full GCP resource path to your Cloud Service Mesh route resource. The format should be: `projects/PROJECT_ID/locations/global/httpRoutes/ROUTE_NAME` (for HTTPRoute) or `projects/PROJECT_ID/locations/global/grpcRoutes/ROUTE_NAME` (for GRPCRoute). This route controls how traffic is distributed between your stable and stage environments by adjusting weights. Harness updates this route during traffic shifting to gradually move traffic from the current stable version to the newly deployed stage version.
 
-**Target Size**: This field specifies the desired number of instances to maintain in the newly deployed MIG. You can select a specific number to control deployment size (e.g., 3, 5, 10). This allows you to deploy with a particular capacity requirement. This is useful when you want to validate a new version with fewer instances before scaling up, or when you need to adjust capacity for specific deployments.
+**Target Size** (optional): This field specifies the desired number of instances to maintain in the newly deployed MIG. If left empty, Harness automatically fetches the current instance count from the stable MIG and applies the same size to the stage MIG. This ensures the new deployment matches your production capacity without requiring manual input.
+
+You can also set a specific number to override this behavior (e.g., 3, 5, 10). This is useful when you want to validate a new version with fewer instances before scaling up, or when you need to adjust capacity for a specific deployment.
+
+:::note
+If an autoscaler is configured on the MIG, the autoscaler controls the final instance count and may override the specified target size.
+:::
 
 **Container Configuration**:
 
 **Container Registry**: This field specifies the Harness connector that provides authentication to your container registry (e.g., Docker Hub, GCR, GAR, ECR). This connector pulls the deployment plugin image, which executes the deployment operations. The plugin runs in a containerized environment and needs access to pull its image from the registry. You should select a connector with appropriate read permissions to the registry where your plugin images are stored. This is part of Harness's containerized step execution model.
 
-**Image**: This field specifies the full path to the deployment plugin container image used to execute this deployment step. This image contains the deployment logic and tools needed to interact with GCP APIs, create and update MIGs, configure backend services, and manage Cloud Service Mesh routes. Use the official Harness image: [`harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-bluegreen-deploy/tags) for Blue-Green deployments.
+**Image**: This field specifies the full path to the deployment plugin container image used to execute this deployment step. This image contains the deployment logic and tools needed to interact with GCP APIs, create and update MIGs, configure backend services, and manage Cloud Service Mesh routes. Use the official Harness image: [`harness/google-mig-bluegreen-deploy:0.1.0-linux-amd64`](https://hub.docker.com/r/harness/google-mig-bluegreen-deploy/tags) for Blue-Green deployments.
 
 :::note Deployment Scenarios
 Harness supports two deployment scenarios:
@@ -264,9 +270,8 @@ Harness supports two deployment scenarios:
             spec:
           type: GRPCRoute
           route: projects/PROJECT_ID/locations/global/grpcRoutes/ROUTE_NAME
-      targetSize: 1
-      connectorRef: GCP_CONNECTOR_ID
-      image: harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64
+      connectorRef: account.harnessImage
+      image: harness/google-mig-bluegreen-deploy:0.1.0-linux-amd64
       imagePullPolicy: Always
       resources:
         limits:
@@ -318,7 +323,7 @@ Use this expression to fetch the instance template name from the Blue-Green Depl
 
 **Container Registry**: Harness connector for authenticating to your container registry (Docker Hub, GCR, GAR, ECR). This connector pulls the deployment plugin image that executes the deployment operations.
 
-**Image**: Full path to the deployment plugin container image for this step. Use the official Harness image: [`harness/google-mig-steady-state:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-steady-state/tags) for steady state verification.
+**Image**: Full path to the deployment plugin container image for this step. Use the official Harness image: [`harness/google-mig-steady-state:0.1.0-linux-amd64`](https://hub.docker.com/r/harness/google-mig-steady-state/tags) for steady state verification.
 
 **Timeout**: The default timeout is 10 minutes. If your MIG requires more time to reach steady state, increase this value accordingly.
 
@@ -333,8 +338,8 @@ Use this expression to fetch the instance template name from the Blue-Green Depl
   spec:
       mig: <+pipeline.stages.Deploy.spec.execution.steps.STEP_GROUP_ID.steps.DEPLOY_STEP_ID.GoogleMigBlueGreenDeployOutcome.stageMig>
       instanceTemplate: <+pipeline.stages.Deploy.spec.execution.steps.STEP_GROUP_ID.steps.DEPLOY_STEP_ID.GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.instanceTemplate>
-      connectorRef: GCP_CONNECTOR_ID
-      image: harness/google-mig-steady-state:0.0.1-linux-amd64
+      connectorRef: account.harnessImage
+      image: harness/google-mig-steady-state:0.1.0-linux-amd64
       imagePullPolicy: Always
       resources:
         limits:
@@ -373,11 +378,13 @@ For example, setting Stable=90 and Stage=10 sends 90% of requests to the primary
 
 When the secondary (stage) reaches 100% traffic weight, Harness automatically swaps the labels—the secondary becomes the new primary (stable) and serves production traffic going forward. Monitor application metrics between shifts to catch issues early.
 
+**Downsize Old MIG** (optional): Enable this flag to automatically downscale the old MIG (the one that was previously serving production traffic) to zero instances after the label swap completes during a traffic shift. This only takes effect when the stage service reaches 100% traffic weight and the label swap occurs. Enabling this flag optimizes costs and resource utilization by ensuring unused instances from the previous deployment are scaled down. If the old MIG has an associated autoscaler, Harness manages the autoscaler configuration during the downsize operation. The step output includes a `downsizedOldMig` property indicating whether the old MIG was successfully downsized.
+
 **Container Configuration**:
 
 **Container Registry**: Harness connector for authenticating to your container registry (Docker Hub, GCR, GAR, ECR). This connector pulls the deployment plugin image that executes the deployment operations.
 
-**Image**: Full path to the deployment plugin container image for this step. Use the official Harness image: [`harness/google-mig-traffic-shift:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-traffic-shift/tags) for traffic shifting operations.
+**Image**: Full path to the deployment plugin container image for this step. Use the official Harness image: [`harness/google-mig-traffic-shift:0.1.0-linux-amd64`](https://hub.docker.com/r/harness/google-mig-traffic-shift/tags) for traffic shifting operations.
 
 <details>
 <summary>YAML Example</summary>
@@ -398,8 +405,9 @@ When the secondary (stage) reaches 100% traffic weight, Harness automatically sw
               weight: 0
             - destination: stage
               weight: 100
-      connectorRef: GCP_CONNECTOR_ID
-      image: harness/google-mig-traffic-shift:0.0.1-linux-amd64
+      downsizeOldMig: true
+      connectorRef: account.harnessImage
+      image: harness/google-mig-traffic-shift:0.1.0-linux-amd64
       imagePullPolicy: Always
       resources:
         limits:
@@ -521,7 +529,7 @@ Configure the **GoogleMigBlueGreenRollback** step in the Rollback Steps section 
 **Container Configuration**:
 
 - **Container Registry**: Harness connector for authenticating to your container registry
-- **Image**: Use the official Harness image: [`harness/google-mig-bluegreen-rollback:0.0.1-linux-amd64`](https://hub.docker.com/r/harness/google-mig-bluegreen-rollback/tags) for rollback operations
+- **Image**: Use the official Harness image: [`harness/google-mig-bluegreen-rollback:0.1.0-linux-amd64`](https://hub.docker.com/r/harness/google-mig-bluegreen-rollback/tags) for rollback operations
 
 **YAML example**:
 
@@ -534,8 +542,8 @@ Configure the **GoogleMigBlueGreenRollback** step in the Rollback Steps section 
             spec:
         deleteNewResources: true
         preserveCapacity: false
-        connectorRef: GCP_CONNECTOR_ID
-        image: harness/google-mig-bluegreen-rollback:0.0.1-linux-amd64
+        connectorRef: account.harnessImage
+        image: harness/google-mig-bluegreen-rollback:0.1.0-linux-amd64
         imagePullPolicy: Always
         resources:
           limits:
@@ -606,9 +614,8 @@ pipeline:
                             spec:
                               type: GRPCRoute
                               route: projects/PROJECT_ID/locations/global/grpcRoutes/ROUTE_NAME
-                          targetSize: 1
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-bluegreen-deploy:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -623,8 +630,8 @@ pipeline:
                         spec:
                           mig: <+pipeline.stages.Deploy.spec.execution.steps.Google_MIG_Step_Group.steps.BlueGreen_Deploy.GoogleMigBlueGreenDeployOutcome.stageMig>
                           instanceTemplate: <+pipeline.stages.Deploy.spec.execution.steps.Google_MIG_Step_Group.steps.BlueGreen_Deploy.GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.instanceTemplate>
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-steady-state:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-steady-state:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -646,8 +653,9 @@ pipeline:
                                   weight: 0
                                 - destination: stage
                                   weight: 100
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-traffic-shift:0.0.1-linux-amd64
+                          downsizeOldMig: true
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-traffic-shift:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -673,8 +681,8 @@ pipeline:
                         name: GoogleMigBlueGreenRollback_1
                         identifier: GoogleMigBlueGreenRollback_1
                         spec:
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-bluegreen-rollback:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-bluegreen-rollback:0.1.0-linux-amd64
                         timeout: 10m
                   stepGroupInfra:
                     type: KubernetesDirect
@@ -756,9 +764,8 @@ pipeline:
                             spec:
                               type: GRPCRoute
                               route: projects/PROJECT_ID/locations/global/grpcRoutes/ROUTE_NAME
-                          targetSize: 1
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-bluegreen-deploy:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-bluegreen-deploy:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -773,8 +780,8 @@ pipeline:
                         spec:
                           mig: <+pipeline.stages.Deploy.spec.execution.steps.Google_MIG_Step_Group.steps.BlueGreen_Deploy.GoogleMigBlueGreenDeployOutcome.stageMig>
                           instanceTemplate: <+pipeline.stages.Deploy.spec.execution.steps.Google_MIG_Step_Group.steps.BlueGreen_Deploy.GoogleMigBlueGreenDeployOutcome.rollbackData.deploymentMetadata.stage.instanceTemplate>
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-steady-state:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-steady-state:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -796,8 +803,8 @@ pipeline:
                                   weight: 80
                                 - destination: stage
                                   weight: 20
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-traffic-shift:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-traffic-shift:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -819,8 +826,8 @@ pipeline:
                                   weight: 50
                                 - destination: stage
                                   weight: 50
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-traffic-shift:0.0.1-linux-amd64
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-traffic-shift:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
@@ -842,8 +849,9 @@ pipeline:
                                   weight: 0
                                 - destination: stage
                                   weight: 100
-                          connectorRef: GCP_CONNECTOR_ID
-                          image: harness/google-mig-traffic-shift:0.0.1-linux-amd64
+                          downsizeOldMig: true
+                          connectorRef: account.harnessImage
+                          image: harness/google-mig-traffic-shift:0.1.0-linux-amd64
                           imagePullPolicy: Always
                           resources:
                             limits:
