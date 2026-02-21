@@ -20,6 +20,12 @@ These release notes describe recent changes to Harness Code Repository.
 
 :::
 
+## February 2026
+  
+:::info UI refresh
+We’ve revamped the Code Repository UI with major usability and workflow improvements. Starting in February, customers will see the updated Code UI as the rollout progresses.
+:::
+
 ## November 2025
 
 <!-- November 3, 2025 -->
