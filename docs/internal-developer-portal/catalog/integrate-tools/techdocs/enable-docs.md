@@ -149,9 +149,52 @@ When your TechDocs source content is managed in a location separate from your `c
 ### Supported Git Providers
 
 **Harness Code Repository:**
-- Account scope: `url:https://app.harness.io/ng/account/account_id/module/code/repos/repo_name`
-- Organization scope: `url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/repos/repo_name` 
-- Project scope: `url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/projects/project_id/repos/repo_name`
+- Account scope: `url:https://app.harness.io/ng/account/account_id/module/code/repos/repo_name/~/`
+- Organization scope: `url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/repos/repo_name/~/`
+- Project scope: `url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/projects/project_id/repos/repo_name/~/`
+
+:::note URL Formatting
+If you are copying the URL directly from the browser and adding it in `techdocs-ref`, please ensure to reformat the URL and add `~` at the end of the path (before any file paths).
+:::
+
+#### Examples for Different Scenarios
+
+**Monorepo (docs in subdirectory):**
+
+When your documentation is in a subdirectory like `docs/` within your repository:
+
+```yaml
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/projects/project_id/repos/repo_name/files/master/~/docs
+```
+
+**Non-monorepo (docs at root):**
+
+When your documentation (`mkdocs.yml` and `docs/` folder) is at the repository root:
+
+```yaml
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/projects/project_id/repos/repo_name/files/main/~/
+```
+
+**Non-default branch:**
+
+When your documentation is on a branch other than the default branch:
+
+```yaml
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: url:https://app.harness.io/ng/account/account_id/module/code/orgs/org_id/projects/project_id/repos/repo_name/files/<branch_name>/~/
+```
+
+:::info Key Points
+- The `~` character is required and acts as a separator between the repository path and file path
+- For subdirectories, add the path after `~/` (e.g., `~/docs`)
+- For root-level docs, end with `~/`
+- For non-default branches, specify the branch name in the URL path
+:::
 
 **Third-Party Git Providers:**
 - **GitHub**: `url:https://githubhost.com/org/repo/tree/<branch_name>`
