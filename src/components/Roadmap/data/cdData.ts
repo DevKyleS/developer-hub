@@ -1,5 +1,16 @@
 import routesChunkNames from "@generated/routesChunkNames";
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const cdModuleTheme: ModuleTheme = {
+  moduleKey: "cd",
+  moduleTitle: "Continuous Delivery & GitOps",
+  palette: {
+    light: { bg: "#F6FFF2", text: "#30841F" },
+    dark: { bg: "#1E3320", text: "#8ED982" },
+  },
+};
+
 export const CdData: Horizon = {
   "Now": {
     description: "Q1 2026, Feb 2026 - Apr 2026",

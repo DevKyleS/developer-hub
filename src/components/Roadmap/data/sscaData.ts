@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const sscaModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "ssca", moduleTitle: "Supply Chain Security" };
 
 export const SscaData: Horizon = {
   

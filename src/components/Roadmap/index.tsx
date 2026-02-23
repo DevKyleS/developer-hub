@@ -182,6 +182,7 @@ const Roadmap = () => {
                           description={feature.description}
                           link={feature.link}
                           backgroundColorCard={feature.backgroundColor}
+                          moduleTheme={selectedModule.moduleTheme}
                         />
                       ))}
                   </div>
@@ -212,6 +213,7 @@ const Roadmap = () => {
                       description={feature.description}
                       link={feature.link}
                       backgroundColorCard={feature.backgroundColor}
+                      moduleTheme={selectedModule.moduleTheme}
                     />
                   ))}
               </div>

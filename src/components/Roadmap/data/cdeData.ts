@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const cdeModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "cde", moduleTitle: "Cloud Development Environments" };
 
 /** Copy this for a new item
 {

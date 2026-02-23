@@ -1,4 +1,15 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const dbdevopsModuleTheme: ModuleTheme = {
+  moduleKey: "dbdevops",
+  moduleTitle: "Database DevOps",
+  palette: {
+    light: { bg: "#F6FFF2", text: "#30841F" },
+    dark: { bg: "#1E3320", text: "#8ED982" },
+  },
+};
+
 export const DbdevopsData: Horizon = {
   "Recently Delivered": {
     description: "What has been released in the last ~2 Quarters",

@@ -1,34 +1,37 @@
 .card {
   width: 100%;
   min-height: 143px;
-  padding: 16px;
+  padding: 18px;
   border-radius: 8px;
-  border: 1px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border: 2px solid #d9dae5;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #d9dae5;
+  box-shadow:
+    0 2px 4px 0 rgba(96, 97, 112, 0.16),
+    0 0 1px 0 rgba(40, 41, 61, 0.04);
   transition: border-color 0.2s ease;
-  
+  font-family: var(--harness-font-family);
+
   &:hover {
     text-decoration: none;
     border-color: var(--tag-border-color, var(--primary));
   }
-  
+
   &:focus {
     border-color: var(--tag-border-color, var(--primary));
   }
-  
-  // background-color: white;
+
   .tag {
     width: auto;
-    // height: 24px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     p {
+      margin: 0;
       border-radius: 4px;
       padding: 4px 8px;
       font-size: 12px;
@@ -36,104 +39,38 @@
       line-height: 15px;
       letter-spacing: 0px;
       text-align: left;
-      background: var(--primary-2);
-      color: var(--primary-8);
-    }
-    
-    // Category-specific tag colors
-    .tagPlatform {
-      background-color: #6BB0EB !important;
-      color: #0A4A7A !important;
-    }
-    
-    .tagOperations {
-      background-color: #AFA0FF !important;
-      color: #3D2B80 !important;
-    }
-    
-    .tagGovernance {
-      background-color: #EB7970 !important;
-      color: #7A1410 !important;
-    }
-    
-    .tagIntegration {
-      background-color: #6DD4A5 !important;
-      color: #0A5D35 !important;
-    }
-    
-    .tagReporting {
-      background-color: #6DD7F1 !important;
-      color: #0A5A6E !important;
-    }
-    
-    .tagAI {
-      background-color: #9F95F4 !important;
-      color: #2E2075 !important;
-    }
-    
-    .tagDeveloperExperience {
-      background-color: #FFC270 !important;
-      color: #804D0A !important;
+      font-family: var(--harness-font-family);
     }
   }
 }
 
-  h4 {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0px;
-    text-align: left;
-    margin: 0;
-  }
-  p {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0px;
-    text-align: left;
-    margin: 0;
-  }
-
-
-// Dark mode overrides - slightly darker backgrounds with lighter text
-[data-theme='dark'] .card .tag {
-  .tagPlatform {
-    background-color: #5A9DD9 !important;
-    color: #E8F4FC !important;
-  }
-  
-  .tagOperations {
-    background-color: #9D8AED !important;
-    color: #F0EDFC !important;
-  }
-  
-  .tagGovernance {
-    background-color: #D96660 !important;
-    color: #FCE8E6 !important;
-  }
-  
-  .tagIntegration {
-    background-color: #5BC293 !important;
-    color: #E6F9F1 !important;
-  }
-  
-  .tagReporting {
-    background-color: #5BC5DF !important;
-    color: #E6F7FC !important;
-  }
-  
-  .tagAI {
-    background-color: #8D83E2 !important;
-    color: #EFEDFB !important;
-  }
-  
-  .tagDeveloperExperience {
-    background-color: #EDB05E !important;
-    color: #FCF3E6 !important;
-  }
+[data-theme="dark"] .card {
+  background: #1c2024;
 }
 
-// Module-specific hover/focus styles removed - now using generic tag color approach
-// The border color on hover is controlled by the --tag-border-color CSS variable
-// set dynamically on each card based on the first tag's color
+.card h4,
+.card p {
+  font-family: var(--harness-font-family);
+}
+
+.card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin: 0;
+}
+
+.card > p {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin: 0;
+}
+
+[data-theme="dark"] .card > p {
+  color: #b8b9c4;
+}

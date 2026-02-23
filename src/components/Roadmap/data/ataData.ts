@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const ataModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "ata", moduleTitle: "AI Test Automation" };
 
 export const AtaData: Horizon = {
   "Now": {

@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const seiModuleTheme: ModuleTheme = {
+  moduleKey: "sei",
+  moduleTitle: "Software Engineering Insights",
+  palette: {
+    light: { bg: "#F6FFF2", text: "#30841F" },
+    dark: { bg: "#1E3320", text: "#8ED982" },
+  },
+};
 
 export const SeiData: Horizon = {
   Now: {

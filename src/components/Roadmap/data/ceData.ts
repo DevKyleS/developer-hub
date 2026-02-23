@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const ceModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "ce", moduleTitle: "Chaos Engineering" };
 
 export const CeData: Horizon = {
   Now: {

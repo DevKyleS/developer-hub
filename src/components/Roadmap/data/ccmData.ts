@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const ccmModuleTheme: ModuleTheme = {
+  moduleKey: "ccm",
+  moduleTitle: "Cloud Cost Management",
+  palette: {
+    light: { bg: "#01C9CC", text: "#ECFFFF" },
+    dark: { bg: "#0D3D3E", text: "#7ED9DB" },
+  },
+};
 
 export const CcmData: Horizon = {
   Released: {

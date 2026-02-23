@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const fmeModuleTheme: ModuleTheme = {
+  moduleKey: "fme",
+  moduleTitle: "Feature Management & Experimentation",
+  palette: {
+    light: { bg: "#F6F1FF", text: "#6938C0" },
+    dark: { bg: "#2E2845", text: "#B8A8E8" },
+  },
+};
 
 export const FmeData: Horizon = {
   Now: {

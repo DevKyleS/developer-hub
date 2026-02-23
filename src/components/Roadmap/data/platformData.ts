@@ -1,5 +1,9 @@
 import { link } from "fs";
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const platformModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "platform", moduleTitle: "Platform" };
+
 export const platformData: Horizon = {
   Now: {
     description: "🚧 Q1 2026, Feb 2026 - Apr 2026",

@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const ciModuleTheme: ModuleTheme = {
+  moduleKey: "ci",
+  moduleTitle: "Continuous Integration",
+  palette: {
+    light: { bg: "#E2F5FF", text: "#0672B6" },
+    dark: { bg: "#1A3045", text: "#6BB3E8" },
+  },
+};
 
 export const CiData: Horizon = {
   Now: {

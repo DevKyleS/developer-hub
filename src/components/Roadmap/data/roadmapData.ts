@@ -1,29 +1,31 @@
 import { MODULES } from "../../../constants";
-import { CdData } from "./cdData";
-import { CiData } from "./ciData";
-import { FmeData } from "./fmeData";
-import { CcmData } from "./ccmData";
-import { StoData } from "./stoData";
-import { SscaData } from "./sscaData";
-import { CeData } from "./ceData";
-import { IdpData } from "./idpData";
-import { SeiData } from "./seiData";
-import { IacmData } from "./iacmData";
-import { platformData } from "./platformData";
-import { aidaData } from "./aidaData";
-import { codeData } from "./codeData";
-import { CdeData } from "./cdeData"; 
-import { DbdevopsData } from "./dbdevopsData"; 
-import { AtaData } from "./ataData";
-import { arData } from "./arData"; 
-import { QwietaiData } from "./qwietaidata";
-import { AiSreData } from "./aiSreData";
+import type { ModuleTheme } from "./roadmapPalette";
+import { CdData, cdModuleTheme } from "./cdData";
+import { CiData, ciModuleTheme } from "./ciData";
+import { FmeData, fmeModuleTheme } from "./fmeData";
+import { CcmData, ccmModuleTheme } from "./ccmData";
+import { StoData, stoModuleTheme } from "./stoData";
+import { SscaData, sscaModuleTheme } from "./sscaData";
+import { CeData, ceModuleTheme } from "./ceData";
+import { IdpData, idpModuleTheme } from "./idpData";
+import { SeiData, seiModuleTheme } from "./seiData";
+import { IacmData, iacmModuleTheme } from "./iacmData";
+import { platformData, platformModuleTheme } from "./platformData";
+import { aidaData, aidaModuleTheme } from "./aidaData";
+import { codeData, codeModuleTheme } from "./codeData";
+import { CdeData, cdeModuleTheme } from "./cdeData";
+import { DbdevopsData, dbdevopsModuleTheme } from "./dbdevopsData";
+import { AtaData, ataModuleTheme } from "./ataData";
+import { arData, arModuleTheme } from "./arData";
+import { QwietaiData, qwietaiModuleTheme } from "./qwietaidata";
+import { AiSreData, aisreModuleTheme } from "./aiSreData";
 
 export interface ModuleData {
   title: string;
   description: string;
   module: string;
   horizon: Horizon;
+  moduleTheme: ModuleTheme;
 }
 
 export type tag = {
@@ -53,60 +55,70 @@ const ModuleData: ModuleData[] = [
       "SaaS release status: GA, SMP release status: GA",
     module: MODULES.platform,
     horizon: platformData,
+    moduleTheme: platformModuleTheme,
   },
   {
     title: "Continuous Delivery & GitOps",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.cd,
     horizon: CdData,
+    moduleTheme: cdModuleTheme,
   },
   {
     title: "Database DevOps",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.dbdevops,
     horizon: DbdevopsData,
+    moduleTheme: dbdevopsModuleTheme,
   },
   {
     title: "AI Test Automation",
     description: "SaaS release status: GA, SMP release status: Not yet planned",
     module: MODULES.ata,
     horizon: AtaData,
+    moduleTheme: ataModuleTheme,
   },
   {
     title: "Continuous Integration",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.ci,
     horizon: CiData,
+    moduleTheme: ciModuleTheme,
   },
   {
     title: "Feature Management & Experimentation",
     description: "SaaS release status: GA, SMP release status: Not yet planned",
     module: MODULES.fme,
     horizon: FmeData,
+    moduleTheme: fmeModuleTheme,
   },
   {
     title: "Cloud Cost Management",
     description: "SaaS release status: GA, SMP release status: Beta",
     module: MODULES.ccm,
     horizon: CcmData,
+    moduleTheme: ccmModuleTheme,
   },
   {
     title: "Security Testing Orchestration",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.sto,
     horizon: StoData,
+    moduleTheme: stoModuleTheme,
   },
   {
     title: "Supply Chain Security",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.ssca,
     horizon: SscaData,
+    moduleTheme: sscaModuleTheme,
   },
   {
     title: "SAST & SCA",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.qwietai,
     horizon: QwietaiData,
+    moduleTheme: qwietaiModuleTheme,
   },
   {
     title: "Chaos Engineering",
@@ -114,12 +126,14 @@ const ModuleData: ModuleData[] = [
       "SaaS release status: GA, SMP release status: Limited GA",
     module: MODULES.ce,
     horizon: CeData,
+    moduleTheme: ceModuleTheme,
   },
   {
     title: "Internal Developer Portal",
     description: "SaaS release status: GA, SMP release status: On Roadmap",
     module: MODULES.idp,
     horizon: IdpData,
+    moduleTheme: idpModuleTheme,
   },
   {
     title: "Software Engineering Insights",
@@ -127,45 +141,50 @@ const ModuleData: ModuleData[] = [
       "SaaS release status: GA, SMP release status: Not yet planned",
     module: MODULES.sei,
     horizon: SeiData,
+    moduleTheme: seiModuleTheme,
   },
   {
     title: "Infrastructure as Code Management",
     description: "SaaS release status: GA, SMP release status: On Roadmap",
     module: MODULES.iacm,
     horizon: IacmData,
+    moduleTheme: iacmModuleTheme,
   },
- 
   {
     title: "Code Repository",
     description: "SaaS release status: GA, SMP release status: GA",
     module: MODULES.code,
     horizon: codeData,
+    moduleTheme: codeModuleTheme,
   },
   {
     title: "Harness AI",
     description: "SaaS release status: GA, SMP release status: Not yet planned",
     module: MODULES.aida,
     horizon: aidaData,
+    moduleTheme: aidaModuleTheme,
   },
   {
     title: "Cloud Development Environments",
     description: "SaaS release status: GA, SMP release status: On Roadmap",
     module: MODULES.cde,
     horizon: CdeData,
+    moduleTheme: cdeModuleTheme,
   },
   {
     title: "Artifact Registry",
     description: "SaaS release status: GA",
     module: MODULES.ar,
     horizon: arData,
+    moduleTheme: arModuleTheme,
   },
   {
     title: "AI SRE",
     description: "SaaS release status: GA",
     module: MODULES.aisre,
     horizon: AiSreData,
+    moduleTheme: aisreModuleTheme,
   },
-
 ];
 
 export default ModuleData;

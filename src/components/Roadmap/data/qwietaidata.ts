@@ -1,5 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
 
+export const qwietaiModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "qwietai", moduleTitle: "SAST and SCA" };
 
 export const QwietaiData: Horizon = {
   Now: {

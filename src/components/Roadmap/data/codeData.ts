@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const codeModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "code", moduleTitle: "Code Repository" };
 
 export const codeData: Horizon = {
   

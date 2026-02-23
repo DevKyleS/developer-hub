@@ -1,4 +1,8 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const aidaModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "aida", moduleTitle: "Harness AI" };
+
 export const aidaData: Horizon = {
   Now: {
     description: "Q3 2025, Aug-Oct 2025",

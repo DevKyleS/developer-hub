@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const aisreModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "aisre", moduleTitle: "AI SRE" };
 
 export const AiSreData: Horizon = {
   Now: {

@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const iacmModuleTheme: ModuleTheme = {
+  moduleKey: "iacm",
+  moduleTitle: "Infrastructure as Code Management",
+  palette: {
+    light: { bg: "#F6FFF2", text: "#30841F" },
+    dark: { bg: "#1E3320", text: "#8ED982" },
+  },
+};
 
 export const IacmData: Horizon = {
     
@@ -7,7 +17,7 @@ export const IacmData: Horizon = {
     description: "Q1 2026, February-April 2026",
     feature: [
       {
-        tag: [{ value: "Platform" }],
+        tag: [{ value: "Developer Experience" }],
         title: "Module Registry 2.0",
         description: "Enhanced Module Registry workflows with Auto Sync, Native module artifact at multiple hierarchical levels",
       },
@@ -22,12 +32,12 @@ export const IacmData: Horizon = {
         description: "OPA, Cost Estimation, Native Approvals and Workspace templates",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Ansible Galaxy Support",
         description: "Integration with Ansible Galaxy for discovering and leveraging community roles and collections.",
       },
       {
-        tag: [{ value: "Reporting" }],
+        tag: [{ value: "Insights & Reporting" }],
         title: "Advanced Reporting",
         description: "Support for Resource level metadata in Custom Dashboards",
       },
@@ -37,22 +47,22 @@ export const IacmData: Horizon = {
     description: "Q2 2026, May-July 2026",
     feature: [
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Native AWS CDK Integration",
         description: "Seamless integration with AWS CDK for native IaC development and deployment.",
       },
       {
-        tag: [{ value: "AI" }],
+        tag: [{ value: "AI & Automation" }],
         title: "AI Remediation Agent",
         description: "Automatically detect and resolve cost, security, compliance, and drift issues using AI-driven remediation.",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Platform" }],
         title: "Native CCM Integration",
         description: "Native Cloud Cost insights in IaCM Workspaces, Cost Recommendation insights in IaCM Approvals.",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Ansible Execution Environments",
         description: "Native support for Ansible Execution Environments",
       },
@@ -72,17 +82,17 @@ export const IacmData: Horizon = {
         description: "Support sharing metadata across workspaces spanning across projects",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "AWS CloudFormation support",
         description: "Supporting AWS CloudFormation as an IaC provider",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "CI/CD" }],
         title: "Harness CD integration",
         description: "Integration with CD allows IaCM users to link Resources with Services and Environments, giving end-to-end visibility",
       },
       {
-        tag: [{ value: "AI" }],
+        tag: [{ value: "AI & Automation" }],
         title: "AI Discovery Agent",
         description: "Automate infrastructure discovery and conversion to IaC with an intelligent discovery agent.",
       },
@@ -92,22 +102,22 @@ export const IacmData: Horizon = {
     description: "What has been released recently",
     feature: [
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Platform" }],
         title: "IDP plugin enhancements",
         description: "Enhanced IaCM plugin for IDP with rich context on resources, drill downs and High level overview.",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Native Vault Support",
         description: "Native support for HashiCorp Vault connectors",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "MCP Server support",
         description: "Native support for MCP Server",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Ansible Support (Beta)",
         description: "Configuration management support with native playbooks, static and dynamic inventory",
         link: "/docs/infra-as-code-management/configuration/ansible",
@@ -119,7 +129,7 @@ export const IacmData: Horizon = {
         link: "/docs/infra-as-code-management/registry/provider-registry",
       },
       {
-        tag: [{ value: "Integration" }],
+        tag: [{ value: "Integrations" }],
         title: "Terragrunt Support (Beta)",
         description: "Native Terragrunt support for IaCM Workspaces",
         link: "/docs/infra-as-code-management/get-started/#terragrunt",

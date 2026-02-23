@@ -1,4 +1,7 @@
 import { Horizon } from "./roadmapData";
+import { DEFAULT_MODULE_THEME } from "./roadmapPalette";
+
+export const stoModuleTheme = { ...DEFAULT_MODULE_THEME, moduleKey: "sto", moduleTitle: "Security Testing Orchestration" };
 
 export const StoData: Horizon = {
   Now: {

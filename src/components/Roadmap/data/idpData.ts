@@ -1,4 +1,14 @@
 import { Horizon } from "./roadmapData";
+import type { ModuleTheme } from "./roadmapPalette";
+
+export const idpModuleTheme: ModuleTheme = {
+  moduleKey: "idp",
+  moduleTitle: "Internal Developer Portal",
+  palette: {
+    light: { bg: "#01C9CC", text: "#ECFFFF" },
+    dark: { bg: "#0D3D3E", text: "#7ED9DB" },
+  },
+};
 
 // Recommended Tags to use
 // 1. Catalog
