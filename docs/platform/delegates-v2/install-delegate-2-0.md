@@ -1,6 +1,6 @@
 ---
-title: Install Harness Delegate
-description: Learn how to install a Delegate for local machines
+title: Install Harness Delegate on a Local Machine
+description: Learn how to install and configure the Harness Delegate on a local machine
 sidebar_position: 2
 redirect_from:
   - /docs/continuous-integration/use-ci/set-up-build-infrastructure/install-delegate-2-0
@@ -280,10 +280,26 @@ These settings ensure proper permission mapping between your local filesystem an
 If you are using [Colima](https://github.com/abiosoft/colima) as your Docker runtime on macOS, start it with the following recommended settings:
 
 ```bash
-colima start --vm-type qemu --mount-type sshfs
+colima start --vm-type qemu --mount-type sshfs --cpu 8 --memory 20 --mount ~:w --mount /private/tmp/engine:/private/tmp/engine:w
 ```
 
-This ensures the VM uses QEMU emulation and sshfs mounts, which provide the correct filesystem permission mapping needed by the delegate.
+This ensures the VM uses QEMU emulation and sshfs mounts, which provide the correct filesystem permission mapping needed by the delegate. The `--mount ~:w` flag grants write access to your home directory, and `--mount /private/tmp/engine:/private/tmp/engine:w` mounts the engine's temporary directory so the delegate can read output files written by containerized steps.
+
+:::warning Mounting /private/tmp/engine is required
+
+Unlike Rancher Desktop, which automatically maps system directories into the VM, Colima only mounts your home directory by default. The delegate uses `/tmp/engine/` (which resolves to `/private/tmp/engine` on macOS) to exchange output files between containerized steps and the host. Without this mount, pipelines that export output variables from container-based steps will fail with an error like:
+
+```
+stat /tmp/engine/<hash>-output.env: no such file or directory
+```
+
+If you still encounter this error after adding the mount flag, SSH into the Colima VM and create the directory manually, since Linux VMs don't have a `/private` directory by default:
+
+```bash
+colima ssh -- sudo mkdir -p /private/tmp/engine
+```
+
+:::
 
 **Proxy configuration:**
 
@@ -1009,4 +1025,28 @@ sudo ln -s ~/.rd/docker.sock /var/run/docker.sock
 ```
 
 :::
+
+### Output variable errors with Colima on macOS
+
+If a pipeline step running inside a container exports an output variable and you see an error like:
+
+```
+stat /tmp/engine/<hash>-output.env: no such file or directory
+```
+
+The delegate writes output `.env` files to `/tmp/engine/` on the host, which resolves to `/private/tmp/engine` on macOS. Colima only mounts your home directory into the underlying Lima VM by default, so the host cannot read files written by the container to this path.
+
+To fix this, restart Colima with an explicit mount for the engine directory:
+
+```bash
+colima start --vm-type qemu --mount-type sshfs --mount ~:w --mount /private/tmp/engine:/private/tmp/engine:w
+```
+
+If the error persists, the `/private` directory may not exist inside the Linux VM. Create it manually:
+
+```bash
+colima ssh -- sudo mkdir -p /private/tmp/engine
+```
+
+For full Colima configuration details, see the [Colima section](#colima) under macOS installation.
 
