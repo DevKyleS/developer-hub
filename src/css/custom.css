@@ -2506,6 +2506,7 @@ html[data-theme='dark'] .navbar .dropdown__menu .dropdown__section-header {
   padding: 2px 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  line-height: 1.5;
 
   position: absolute;
   right: 0.75rem;
@@ -2521,18 +2522,17 @@ html[data-theme='dark'] .navbar .dropdown__menu .dropdown__section-header {
   position: absolute;
   right: 3.5rem;
 
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   padding: 2px 6px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  line-height: 1;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
 
-  color: #0278d5;
+  color: white;
 
-  background: transparent;
-  border: 1px solid #0278d5;
-  border-radius: 999px;
+  background: #0278d5;
+  border-radius: 4px;
 
   animation: newBadgePulse 3s ease-in-out infinite;
   flex-shrink: 0;
