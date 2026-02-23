@@ -28,6 +28,13 @@ import { MODULES } from "@site/src/constants";
             link: "/release-notes/delegate",
           },
           {
+            title: "Code Repository release notes",
+            module: MODULES.code,
+            description:
+              "",
+            link: "/release-notes/code-repository",
+          },
+          {
             title: "Self-Managed Enterprise Edition release notes",
             module: MODULES.platform,
             description:
@@ -75,13 +82,6 @@ import { MODULES } from "@site/src/constants";
             description:
               "",
             link: "/release-notes/cloud-cost-management",
-          },
-          {
-            title: "Code Repository release notes",
-            module: MODULES.code,
-            description:
-              "",
-            link: "/release-notes/code-repository",
           },
           {
             title: "Continuous Delivery and GitOps release notes",

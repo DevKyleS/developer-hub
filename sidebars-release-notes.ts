@@ -14,6 +14,7 @@ const sidebars: SidebarsConfig = {
          "all-modules",
     "platform",
     "delegate",
+    "code-repository",
     "harness-solutions-factory",
     "self-managed-enterprise-edition",      
     {

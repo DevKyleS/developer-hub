@@ -45,10 +45,6 @@ export default function ReleaseNotesSummaries() {
         <div className="col col--9">
           <Admonition type="info" title="INFO">
             <p>
-              These are AI-generated summaries intended to help you scan what changed. They are not
-              complete release notes.
-            </p>
-            <p>
               Please review the full module release notes by selecting a module in the sidebar, or using
               the <strong>View full release notes</strong> links beside each module summary.
             </p>
