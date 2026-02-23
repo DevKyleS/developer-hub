@@ -51,3 +51,8 @@ This topic shows you how to import an Input Set to the CD module.
 7. Click **Import**.  
 Click on your **Run Pipeline** to proceed.
 
+:::tip
+
+If you use triggers to run pipelines and need the input set fetched from a specific Git branch (such as a PR source branch), you can define the `inputSetBranchName` property in your trigger YAML. For details, go to [Define the input set branch for trigger-based executions](/docs/platform/pipelines/input-sets#define-the-input-set-branch-for-trigger-based-executions).
+
+:::

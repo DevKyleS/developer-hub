@@ -128,7 +128,7 @@ inputSet:
 
 ### Import input sets
 
-With the Harness Git Experience, you can also [import input sets](/docs/platform/git-experience/import-input-sets) from a Git repo.
+With the Harness Git Experience, you can also [import input sets](/docs/platform/git-experience/import-input-sets) from a Git repository.
 
 ## Create overlays
 
@@ -220,6 +220,83 @@ Here's an example of a resolved `<+inputSet>` expression:
 ```
 {pipeline:identifier:Custom} {pipeline:stages:[{stage:identifier:Custom}]} {pipeline:stages:[{stage:type:Custom}]} {pipeline:stages:[{stage:spec:{execution:steps:[{step:identifier:ShellScript_1}}}]} {pipeline:stages:[{stage:spec:{execution:steps:[{step:type:ShellScript}}}]} {pipeline:stages:[{stage:spec:{execution:steps:[{step:timeout:10s}}}]} {pipeline:stages:[{stage:spec:{execution:{step:identifier:json_format}]}}]} {pipeline:stages:[{stage:spec:{execution:{step:type:ShellScript}]}}]} {pipeline:stages:[{stage:spec:{execution:{step:timeout:10m}]}}]}
 ```
+
+## Define the input set branch for trigger-based executions
+
+When using [Harness Git Experience](/docs/platform/git-experience/git-experience-overview), Harness automatically determines which Git branch to fetch input sets from based on the relationship between the pipeline and input set repositories. You can override this default behavior by specifying the `inputSetBranchName` property in your trigger YAML to fetch input sets from a specific branch.
+
+This is especially useful when your pipeline resides on a static branch (such as `main`) but your input sets are updated on feature or PR branches that change with each trigger event.
+
+### Default branch resolution
+
+By default, Harness resolves the branch for fetching input sets as follows:
+
+- **Same repository as the pipeline:** The input set is fetched from the same branch selected for pipeline execution.
+- **Different repository from the pipeline:** The input set is fetched from its own default branch.
+
+For more information on default entity linking logic, go to [Harness Git Experience workflow](/docs/platform/git-experience/git-experience-overview#harness-git-experience-workflow).
+
+### Override the input set branch with `inputSetBranchName`
+
+You can add the `inputSetBranchName` property to your trigger YAML to specify the exact branch from which Harness should fetch the input set at trigger time. This property supports both static branch names and [Harness expressions](/docs/platform/variables-and-expressions/harness-variables), such as `<+trigger.sourceBranch>`.
+
+Here is an example trigger YAML using `inputSetBranchName` with an expression:
+
+<details>
+<summary>Example trigger YAML with inputSetBranchName</summary>
+
+```yaml
+trigger:
+  name: PR Trigger
+  identifier: pr_trigger
+  enabled: true
+  description: ""
+  tags: {}
+  orgIdentifier: default
+  projectIdentifier: myProject
+  pipelineIdentifier: myPipeline
+  source:
+    type: Webhook
+    spec:
+      type: Github
+      spec:
+        type: PullRequest
+        spec:
+          connectorRef: myGithubConnector
+          autoAbortPreviousExecutions: false
+          repoName: myRepo
+          actions:
+            - Open
+            - Reopen
+            - Synchronize
+  pipelineBranchName: main
+  inputSetBranchName: <+trigger.sourceBranch>
+  inputSetRefs:
+    - myInputSet
+```
+
+</details>
+
+In this example, the pipeline is always fetched from `main` (via `pipelineBranchName`), while the input set `myInputSet` is fetched from the PR's source branch (via `inputSetBranchName: <+trigger.sourceBranch>`).
+
+### `inputSetBranchName` behavior
+
+The following rules apply when using `inputSetBranchName` property:
+
+1. **Not provided:** The input set is fetched from the pipeline branch (default behavior).
+2. **Empty or blank value (`""`, `" "`):** The input set is still fetched from the pipeline branch.
+3. **Valid branch name or expression:** The input set is fetched only from the specified branch.
+   - **Correct input set and branch:** The input set in the specified branch is used (works as expected).
+   - **Input set exists, but not in the specified branch:** An error is thrown.
+   - **Input set does not exist:** An error is thrown.
+   - **Invalid branch name:** An error is thrown.
+4. **Multiple input sets:** When multiple input sets are referenced in `inputSetRefs`, all input sets are fetched from the branch specified in `inputSetBranchName`.
+
+:::tip
+
+Use the expression `<+trigger.sourceBranch>` for PR-based triggers so that the input set is automatically fetched from the source branch of the pull request. This eliminates the need to manually update the input set branch before each trigger event.
+
+:::
 
 ## Handling Input Changes During Pipeline Re-Runs
 
