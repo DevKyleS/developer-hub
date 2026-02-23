@@ -179,6 +179,12 @@ When a user creates a new input set, Create/Edit and View permissions are added 
 
 ## Run pipelines with input sets or overlays
 
+:::info Using input sets with triggers
+
+When starting a pipeline through a [trigger](/docs/platform/triggers/triggering-pipelines), you can use either an **input set** or provide **runtime values** directly, but not both at the same time. If you select an input set, any fields not covered by the input set use their default values. To override specific values from an input set while keeping the rest, use the [override YAML approach](/docs/platform/triggers/customize_trigger_input_configuration_using_override_yaml) in the trigger configuration.
+
+:::
+
 To run a pipeline with an input set or overlay:
 
 1. In the Pipeline Studio, select **Run**.

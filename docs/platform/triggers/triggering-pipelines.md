@@ -174,6 +174,12 @@ For more information about **Attributes**, **Operators**, **Matching Values**, a
 
 Pipelines often have [runtime inputs](../variables-and-expressions/runtime-inputs.md), such as codebase branch names or artifact versions and tags.
 
+:::info
+
+When configuring pipeline inputs for a trigger, you can use either an **input set** or provide **runtime values** directly, but not both at the same time. If you select an input set, any fields not covered by the input set use their default values. To override specific values from an input set while keeping the rest, use the [override YAML approach](/docs/platform/triggers/customize_trigger_input_configuration_using_override_yaml) in the trigger configuration.
+
+:::
+
 1. Provide values for the inputs or use [input sets](../pipelines/input-sets.md).
 
    Any time you change the settings that require runtime input in the pipeline, you must also update the pipeline inputs in the trigger. If the trigger doesn't have a value for a runtime input, then the pipeline can fail due to the missing value.
