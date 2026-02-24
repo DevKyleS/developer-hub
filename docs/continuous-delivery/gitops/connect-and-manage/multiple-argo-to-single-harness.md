@@ -113,26 +113,67 @@ To map your existing Argo CD projects to Harness projects, select the Argo CD pr
    Do not map the same Argo CD project to multiple Harness projects.
    :::
 
-3. Select **Import & Continue**.
+3. To automatically create Harness services and environments during the import, enable the **Enables automatic creation of service environments** toggle on the Map Projects screen.
+
+   ![](./static/map-argo-project.png)
+
+   When this toggle is enabled, Harness checks each Argo CD application for `harness.io/serviceRef` and `harness.io/envRef` labels. If a service or environment matching the label value already exists in the target Harness project, the application is mapped to it. If it does not exist, Harness creates the service or environment automatically and then maps it to the application.
+
+   To use this feature, add the `harness.io/serviceRef` and `harness.io/envRef` labels to the `metadata.labels` section of your Argo CD Application YAML before importing.
+
+   <details>
+   <summary>Example Application YAML with serviceRef and envRef labels</summary>
+
+   ```yaml
+   apiVersion: argoproj.io/v1alpha1
+   kind: Application
+   metadata:
+     name: dev-corp-banking-api
+     namespace: argocd
+     labels:
+       harness.io/serviceRef: cbcorpbankapi
+       harness.io/envRef: Dev_GitOps_Product_Demo
+   spec:
+     project: banking
+     source:
+       repoURL: https://github.com/example-org/gitops-demo
+       targetRevision: main
+       path: services/corporate-banking/corp-banking-api/overlays/dev
+     destination:
+       server: https://kubernetes.default.svc
+       namespace: corporate-banking
+     syncPolicy:
+       automated:
+         prune: true
+         selfHeal: true
+       syncOptions:
+         - CreateNamespace=true
+   ```
+
+   </details>
+
+   :::tip
+   If you are using ApplicationSets, you can templatize the `harness.io/serviceRef` and `harness.io/envRef` labels so that every generated application automatically includes them. For details, go to [Auto-create services and environments with ApplicationSets](/docs/continuous-delivery/gitops/applicationsets/harness-git-ops-application-set-tutorial#auto-create-services-and-environments).
+   :::
+
+4. Select **Import & Continue**.
    
-   The Argo CD projects are imported.
+   The Argo CD projects are imported. When auto-creation is enabled, the import summary also shows the number of services, environments, and cluster links created or mapped.
 
-   Here's an example where the Argo CD applications, repositories, repository certs, and clusters are imported.
+   ![](./static/importing-projects.png)
 
-   ![](./static/multiple-argo-to-single-harness-70.png)
-
-4. Select **Finish**. The mapping is displayed in the Agent details.
+5. Select **Finish**. The mapping is displayed in the Agent details.
    
    ![](./static/multiple-argo-to-single-harness-71.png)
    
-5. Select **Save**.
+6. Select **Save**.
 
 ## Verify mapping
 
 To see the imported Argo CD entities from the mapping, look in the mapped Harness project.
 
-1. In your Harness project, Select **GitOps**, and then select **Applications**.
-   You can see the imported application.
+1. In your Harness project, select **GitOps**, and then select **Applications**.
+   You can see the imported applications.
    
    ![](./static/multiple-argo-to-single-harness-72.png)
 
@@ -142,6 +183,22 @@ To see the imported Argo CD entities from the mapping, look in the mapped Harnes
    You can see the imported clusters.
 
 Do the same for any other mapped project entities.
+
+### Verify auto-created services and environments
+
+If you enabled the **Enables automatic creation of service environments** toggle during the import, verify that the services and environments were created correctly.
+
+1. In your Harness project, select **Services** in the left navigation. You can see the services that Harness created automatically based on the `harness.io/serviceRef` labels in your application manifests.
+
+   ![](./static/services-view.png)
+
+2. Select **Environments** in the left navigation. You can see the environments that Harness created based on the `harness.io/envRef` labels.
+
+   ![](./static/env-view.png)
+
+3. To confirm that an application is mapped to the correct service and environment, go to **GitOps** > **Applications**, select an application, and open the **App Details** tab. The **Service** and **Environment** fields display the mapped values.
+
+   ![](./static/app-details.png)
 
 ## Adding new mappings to existing Agent
 
