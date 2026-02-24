@@ -601,6 +601,7 @@ The following expressions are for steps in pipeline stages.
 * `<+step.name>`: The step name. The resolved value is relative to the context where you use the expression.
 * `<+step.identifier>`: The step [identifier](/docs/platform/references/entity-identifier-reference/).
 * `<+step.executionUrl>`: The execution URL of the step. This is the same URL you see in your browser when you are viewing the pipeline execution. To get the execution URL for a specific step in a pipeline, use `<+pipeline.stages.STAGE_ID.spec.execution.steps.STEP_ID.executionUrl>`.
+* `<+pipeline.stages.STAGE_ID.spec.execution.steps.STEP_ID.log.url>`: Resolves to a secure Log Service URL for downloading a step's execution logs. Send an HTTP POST to this URL with an `x-api-key` header containing a valid [Harness PAT](/docs/platform/automation/api/add-and-manage-api-keys) to receive a time-bound link to a ZIP file of the step's logs. For an end-to-end example, go to [Access step logs using expressions](/docs/platform/variables-and-expressions/harness-variables#access-step-logs-using-expressions).  
 * `<+steps.STEP_ID.retryCount>` or `<+execution.steps.STEP_ID.retryCount>`: When you set a [failure strategy](/docs/platform/pipelines/failure-handling/define-a-failure-strategy-on-stages-and-steps) to **Retry Step**, you can specify the retry count for a step or all steps in the stage. The `retryCount` expressions resolve to the total number of times a step was retried.
 
 ### Strategy expressions

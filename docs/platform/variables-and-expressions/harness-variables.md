@@ -530,6 +530,57 @@ Some important points to note:
 2. The Execution Context is non-editable, meaning you won't be able to add or remove items from it.
 :::
 
+## Access step logs using expressions
+
+You can use the `log.url` expression to retrieve a step's execution logs programmatically within the same pipeline. This is useful when you need to forward step logs — for example, sending them via email, attaching them to a notification, or processing them in a downstream step.
+
+The expression resolves to a secure API URL hosted by the Harness Log Service. To download the actual logs, you must make an HTTP POST request to this URL with a valid `x-api-key` header containing a [Harness Personal Access Token (PAT)](/docs/platform/automation/api/add-and-manage-api-keys). The response returns a time-bound download link for a ZIP file containing the step's logs.
+
+```
+<+pipeline.stages.STAGE_ID.spec.execution.steps.STEP_ID.log.url>
+```
+
+<details>
+<summary>Example: Forward step logs via email</summary>
+
+Consider a pipeline where a step in one stage produces logs that you want to email to your team if something goes wrong. You can accomplish this with two additional steps: an **HTTP step** to fetch the logs and an **Email step** to send them.
+
+**Step 1: Set up the pipeline stage that produces logs.**
+
+Create a stage with the step whose logs you want to capture (for example, a Shell Script step that runs a validation script).
+
+![](./static/step-log-expression-pipeline-overview.png)
+
+**Step 2: Use an HTTP step to download the step's logs.**
+
+In a subsequent stage, add an HTTP step that calls the `log.url` expression. Configure it as follows:
+
+- **URL**: `<+pipeline.stages.STAGE_ID.spec.execution.steps.STEP_ID.log.url>`
+- **Method**: `GET`
+- **Headers**: Add `x-api-key` with a [Harness PAT](/docs/platform/automation/api/add-and-manage-api-keys) stored as a [Harness secret](/docs/platform/secrets/add-use-text-secrets).
+
+![](./static/step-log-expression-http-step.png)
+
+**Step 3: Send the logs in an Email step.**
+
+Add an Email step after the HTTP step. Reference the HTTP step's response body using the `httpResponseBody` output to include the log content (or a download link) in the email body.
+
+```
+<+execution.steps.STEP_ID.output.httpResponseBody>
+```
+
+![](./static/step-log-expression-email-step.png)
+
+This pattern works across stage types (CD, CI, Custom) and with other notification channels such as Slack or pipeline-level webhook notifications.
+
+</details>
+
+:::info
+- The `log.url` expression is available for any step that produces logs, including Shell Script, Run, and deployment steps.
+- Each retry of a step generates its own logs, so the expression returns logs specific to the latest execution attempt.
+- The download link returned by the Log Service is temporary. Make sure to consume it promptly.
+:::
+
 ## Troubleshooting expressions
 
 The following sections describe some common issues or troubleshooting scenarios for expressions. For more troubleshooting information, go to the [Harness Platform Knowledge Base](/docs/category/knowledge-base).
