@@ -22,6 +22,31 @@ The release notes describe recent changes to Harness Chaos Engineering.
 
 ## February 2026
 
+### Version 1.76.0
+
+#### Images required
+Listed below are the images to download to use [image registry with Harness Delegate](https://developer.harness.io/docs/chaos-engineering/guides/image-registry).
+
+- harness/chaos-ddcr:1.76.0
+- harness/chaos-ddcr-faults:1.76.0
+- harness/chaos-log-watcher:1.76.0
+- harness/service-discovery-collector:0.56.0
+
+#### New Features and Enhancements
+
+- Added live logging support for linux v2 and windows v2 infrastructure (CHAOS-10975)
+- Added UI support for experiment templates for Windows and Linux infrastructure (CHAOS-10920)
+- Added Resource Selector for probe, action, faults in chaos module (CHAOS-10900)
+- Added new submodule routes behind feature flags in chaos web (CHAOS-11037)
+- Added changes in linux infrastructure and infrastructure server to support load tests (CHAOS-11024)
+- Updated go-billing package for flex licensing to fix memory leak (CHAOS-11017)
+
+#### Fixed Issues
+
+- Fixed HSM secret mechanism in backend for SecretText case for faults - redis/vmware (password) (CHAOS-11026)
+- Fixed ACL permission gaps and missing UI error handling across UI/API in Chaos module (CHAOS-11012)
+- Implemented start/stop polling control on the onboarding status query. When the user reaches the "Create Application Maps" step, polling is automatically paused so the Network Map table remains stable for interaction (including opening menus and deleting maps). Polling resumes when the user navigates away from the step or advances to the next onboarding phase (CHAOS-9644)
+
 ### Version 1.75.5
 
 #### Images required
