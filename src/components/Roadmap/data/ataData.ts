@@ -18,23 +18,23 @@ export const AtaData: Horizon = {
     "tag": [{ "value": "Authoring" }]
   },
   {
-    "title": "Harness Platform - Tunnels / Delegate Integration",
-    "description": "Connects test execution to private environments securely through Harness Tunnels and Delegates.",
-    "tag": [{ "value": "Integration" }]
+    "title": "Natural Language Based Test Creation",
+    "description": "Ability to create end to end tests from Natural language prompts.",
+    "tag": [{ "value": "Authoring" }]
   },
   {
-    "title": "Task Enhancements",
-    "description": "Introduces support for nested, modular tasks to simplify complex test flows and adds version control to manage changes with reliability and traceability.",
-    "tag": [{ "value": "Authoring" }]
+    "title": "Harness UI Integration",
+    "description": "Update to new Harness UI standards.",
+    "tag": [{ "value": "Integration" }]
   }
     ],
   },
   "Next": {
     description: "What we'll build next, next ~2 quarters",
     feature: [
- {
-    "title": "Harness Platform - Audit Trails Integration",
-    "description": "Integrates test activity logs into Harness audit trails for better traceability and compliance.",
+  {
+    "title": "Harness Platform - Tunnels / Delegate Integration",
+    "description": "Connects test execution to private environments securely through Harness Tunnels and Delegates.",
     "tag": [{ "value": "Integration" }]
   },
   {
@@ -42,21 +42,26 @@ export const AtaData: Horizon = {
     "description": "Enables dynamic test execution by ingesting test data directly from CSV and Excel files.",
     "tag": [{ "value": "Authoring" }]
   },
-{
-  "title": "JIRA Integration",
-  "description": "Enables seamless integration with JIRA for defect tracking, including 1-click issue creation directly from failed test runs for streamlined bug reporting.",
-  "tag": [{ "value": "Integration" }]
-},
   {
     "title": "AI Test Case Generation",
     "description": "Automatically generates end-to-end test cases using AI from user flows or high-level descriptions.",
     "tag": [{ "value": "Authoring" }]
+  },
+  {
+    "title": "Headless API Testing Support",
+    "description": "Enables automated, UI-independent validation of backend APIs using headless test execution.",
+    "tag": [{ "value": "Execution" }]
   }
     ]
   },
   "Future": {
     description: "typically > 6 months out",
     feature: [
+  {
+    "title": "Harness Platform - Audit Trails Integration",
+    "description": "Integrates test activity logs into Harness audit trails for better traceability and compliance.",
+    "tag": [{ "value": "Integration" }]
+  },
   {
     "title": "Branching Support",
     "description": "Enables users to create and manage test branches for isolated development and parallel test evolution.",
@@ -65,11 +70,6 @@ export const AtaData: Horizon = {
   {
     "title": "Cross Browser Testing",
     "description": "Supports execution of tests across multiple browsers to ensure consistent application behavior.",
-    "tag": [{ "value": "Execution" }]
-  },
-  {
-    "title": "Headless API Testing Support",
-    "description": "Enables automated, UI-independent validation of backend APIs using headless test execution.",
     "tag": [{ "value": "Execution" }]
   },
   {
