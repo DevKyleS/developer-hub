@@ -1,7 +1,7 @@
 ---
 title: Manage access for GitOps Applications using labels
 description: Learn how to manage access control for GitOps resources
-sidebar_position: 40
+sidebar_position: 3
 redirect_from:
   - /docs/continuous-delivery/gitops/use-gitops/manage-permissions
 ---
