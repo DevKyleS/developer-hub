@@ -1012,5 +1012,17 @@
     "description": "Enables GitOps Rollout step and Auto Promote Rollout dropdown in GitOps Sync Step",
     "gaStartDate": "2026-02-19",
     "module": "Continuous Delivery"
+  },
+  {
+    "flagKey": "STO_STEP_PALETTE_SHIFTLEFT",
+    "description": "Enables Harness SAST and SCA scanners in the step palette for security tests.",
+    "gaStartDate": "2026-02-24",
+    "module": "Security Test Orchestration"
+  },
+  {
+    "flagKey": "STO_FETCH_DATAFLOW",
+    "description": "Enables fetching dataflow information for security issue occurrences to provide better visibility into vulnerability paths for Harness SAST and SCA scanners.",
+    "gaStartDate": "2026-02-24",
+    "module": "Security Test Orchestration"
   }
 ]
