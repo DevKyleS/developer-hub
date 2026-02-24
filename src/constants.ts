@@ -47,7 +47,7 @@ export const MODULE_DISPLAY_NAME = {
     [MODULES.arp]: 'Application & API Runtime Protection',
     [MODULES.ast]: 'Application & API Security Testing',
     [MODULES.srm]: 'Service Reliability Management',
-    [MODULES.ce]: 'Chaos Engineering',
+    [MODULES.ce]: 'Resilience Testing',
     [MODULES.aisre]: 'AI SRE',
     [MODULES.sei]: 'Software Engineering Insights',
     [MODULES.cet]: 'Continuous Error Tracking',

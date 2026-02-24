@@ -121,7 +121,7 @@ const ModuleData: ModuleData[] = [
     moduleTheme: qwietaiModuleTheme,
   },
   {
-    title: "Chaos Engineering",
+    title: "Resilience Testing",
     description:
       "SaaS release status: GA, SMP release status: Limited GA",
     module: MODULES.ce,
