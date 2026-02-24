@@ -625,6 +625,7 @@ You can [use Harness expressions to retrieve the current execution status or ide
 * `<+pipeline.triggeredBy.name>`: The name of the user or the trigger name if the pipeline is triggered using a webhook.
    * For more information, go to [Trigger Pipelines using Git Events](../triggers/triggering-pipelines.md).
    * If a user name is not present in the event payload, the `<+pipeline.triggeredBy.name>` expression will resolve as empty. For example, in the SaaS edition of Bitbucket, a user name is not present.
+   * User names containing non-ASCII characters (such as accented letters like é, á, or ñ) can cause an `X-TRIGGERED-BY-NAME` header validation error. HTTP headers only support ASCII characters, and the triggered-by name is passed as an HTTP header internally. As a workaround, remove accented or non-ASCII characters from the user's display name in Harness. For more details, go to [X-TRIGGERED-BY-NAME error for accented characters](/docs/platform/pipeline-faq#why-do-i-get-an-x-triggered-by-name-error-when-a-user-with-accented-characters-triggers-a-pipeline).
 * `<+pipeline.triggeredBy.email>`: The email of the user who triggered the pipeline. This returns `null` if the pipeline is triggered using a webhook. For more information, go to [Trigger How-tos](/docs/category/triggers).
 * `<+pipeline.triggerType>`: The type of trigger. Similar to `<+trigger.type>`.
 

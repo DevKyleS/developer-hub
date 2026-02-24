@@ -320,6 +320,12 @@ This API returns successful responses only when pipeline execution kicks in. Bet
 
 To be safe, Harness recommends a polling approach. For example, try calling the API ten seconds after trigger initiation. If this fails, wait another ten seconds and try again, and so on.
 
+### Why do I get an X-TRIGGERED-BY-NAME error when a user with accented characters triggers a pipeline?
+
+This error occurs because the triggered-by user name is passed internally as the `X-TRIGGERED-BY-NAME` HTTP header, and HTTP headers only support ASCII characters (per RFC 7230). When a user's display name contains non-ASCII characters such as accented letters (for example, "Andrés" or "Chávez"), the HTTP stack rejects the header value with an unexpected-byte validation error.
+
+As a workaround, remove any accented or non-ASCII characters from the user's display name in Harness. For example, change "Andrés" to "Andres" and "Chávez" to "Chavez".
+
 ### Can I create a trigger that starts another pipeline when one pipeline ends?
 
 You can't create a trigger for this, but you can set up [Pipeline chaining](https://developer.harness.io/docs/platform/pipelines/pipeline-chaining).
