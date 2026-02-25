@@ -2,6 +2,8 @@
 title: Tofu/Terraform Plugin Commands
 description: Explore how to use Tofu/Terraform commands within your pipelines effectively.
 sidebar_position: 10
+redirect_from:
+  - /docs/infra-as-code-management/pipelines/terraform-plugins
 ---
 
 import Tabs from '@theme/Tabs';

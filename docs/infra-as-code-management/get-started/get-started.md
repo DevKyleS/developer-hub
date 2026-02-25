@@ -3,6 +3,8 @@ title: Get started with IaCM
 description: A self-service onboarding guide for Harness IaCM.
 sidebar_position: 20
 sidebar_label: Get Started
+redirect_from:
+  - /docs/infra-as-code-management/get-started/onboarding-guide
 ---
 
 import Tabs from '@theme/Tabs';
