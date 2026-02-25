@@ -36,6 +36,15 @@ If you have custom integrations, queries, or monitoring workflows that depend on
 If you encounter any issues after the initial upgrade, contact [Harness Support](https://support.harness.io) for assistance before taking any further action. 
 :::
 
+:::info TimescaleDB Removed from Version 0.37.0 Onwards
+
+**TimescaleDB has been completely Removed** starting from Harness SMP version **0.37.0**. The migration from TimescaleDB to PostgreSQL is performed in version **0.36.x**.
+
+**Upgrading through 0.36.x is mandatory.** You cannot skip this version when upgrading to 0.37.0 or later. If you are running a version prior to 0.36.0, you must first upgrade to 0.36.x to complete the TimescaleDB-to-PostgreSQL migration before proceeding to 0.37.0 or any subsequent release.
+
+Attempting to upgrade directly to 0.37.0 or later without passing through 0.36.x will result in an unsupported state, as the required database migration will not have been performed.
+:::
+
 :::info MongoDB Upgrade to Version 7.x in SMP Environments
 
 With MongoDB 6 reaching end-of-life (EOL), it is recommended that customers using an in-cluster MongoDB instance upgrade to MongoDB 7.x. This upgrade mitigates known CVEs and aligns with MongoDB's recommended upgrade path. Please also see the transition from Mongo 6 to Mongo 7 below.
