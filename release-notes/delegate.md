@@ -2629,6 +2629,13 @@ Harness NextGen release 78214 includes no changed features or fixes for the Harn
 
 ## Delegate Upgrader release notes
 
+## February 2026
+
+### Version 1.11.0 <!--February 25, 2026-->
+
+#### New features and enhancements
+- Resolved CVE-2025-68121 by upgrading Go to version 1.25.7. [PL-69339]
+
 ## January 2026
 
 ### Version 1.10.0 <!--Jan 23, 2025-->
