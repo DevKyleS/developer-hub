@@ -1,7 +1,7 @@
 ---
 title: Cloud Cost Management Release Notes
 sidebar_label: Cloud Cost Management
-date: 2026-02-19T18:00
+date: 2026-02-25T18:00
 sidebar_position: 6
 ---
 
@@ -25,6 +25,37 @@ We've migrated to LabelsV2, which preserves your original label keys while drama
 
 [Instructions to Update](https://developer.harness.io/docs/cloud-cost-management/use-ccm-cost-reporting/ccm-perspectives/key-concepts/#how-to-migrate)
 
+## February 2026 - Important Updates to Dashboard
+
+We are officially deprecating `reporting_timeframe` field and replacing it with a much more intuitive and powerful workflow.
+
+To ensure a smooth transition with minimal disruption to your daily operations, we are rolling out this change in two careful phases: an automated migration and the official retirement of the field
+
+**Please note that this entire deprecation process will be fully completed by March 1, 2026.**
+
+### Phase 1: Automated Dashboard Migration
+
+We are running an automated migration script across all sub-folders within your account's dashboard folder. The script will first update your user attributes to ensure your data access remains perfectly aligned. From there, it will iterate through your dashboards and seamlessly update your filters.
+
+Because we know you rely on historical comparisons, the script uses specific logic to update both your dashboard-level and element-level filters without breaking your current views.
+
+**Dashboard-Level Changes:** The script evaluates the elements on your dashboard and updates the old `reporting_timeframe` filter based on the following:
+
+<DocImage path={require('./static/ccm/db-notice.png')} width="60%" height="60%" title="Click to view full size image" />
+
+**Element-Level Changes:** For individual tiles and elements, the script will swap out the old `reporting_timeframe` filter for a standard `start_date` filter.
+
+The technical detail: If an element uses legacy cost trend reporting, the script will automatically set the new `start_date` to 2x the original timeframe (or a default of 60 days). We do this intentionally to ensure Looker pulls enough historical data to calculate your period-over-period trends accurately.
+
+Below is a high-level diagram detailing what the script will do:
+
+<DocImage path={require('./static/ccm/db-diag.png')} width="100%" height="100%" title="Click to view full size image" />
+
+#### Phase 2: Retiring the Field
+
+Once the migration is complete on 03/01/26, the `reporting_timeframe` field will no longer be a viable filter for standard time filtering.
+
+However, we are not deleting it entirely. It will remain as a hidden field. This ensures that any highly specific legacy period-over-period reporting that relied on it will not suddenly break.
 
 ## February 2026 - Version 1.80.3
 #### Deployment Date: February 19, 2026 (Prod-1)
