@@ -1,6 +1,27 @@
-A metric measures [events](/docs/feature-management-experimentation/experimentation/events/) that are sent to Harness FME. Metrics can be defined to count the occurrence of events, measure event values, or measure event properties.
+The **Metrics** page in Harness Feature Management & Experimentation (FME) provides a centralized list view for searching and managing your <Tooltip id="fme.release-monitoring.metric">metrics</Tooltip>. You can browse metrics created in Harness FME, scan key details such as traffic type, tags, ownership, and last updated time, and navigate directly to metric definitions, alert policies, and audit logs.
 
-Metric results are calculated for each treatment of a feature flag that shares the same traffic type as the metric and has a percentage targeting rule applied. Impact can be calculated between a selected comparison treatment and baseline treatment within a feature flag.
+![](../static/metrics.png)
+
+Metric results are calculated per treatment for <Tooltip id="fme.openfeature.feature-flag">feature flags</Tooltip> that share the same traffic type and use percentage-based targeting rules, allowing you to compare impact between a baseline and comparison treatment.
+
+## Search and manage metrics
+
+To access metrics created in Harness FME, select **Metrics** from the FME navigation menu. When viewing the list of metrics, you can use the following filters and indicators to help you navigate to a selected metric.
+
+![](../static/metrics-1.png)
+
+- **Search**: Search for metrics by name.
+- **Starred by me**: Show only metrics you’ve starred.
+- **Owned by me**: Show metrics you created or where you are listed as an owner.
+- **Search by tags**: Use the `Search by tags` dropdown menu to filter metrics by one or more tag values.
+- **Filter by traffic type**: Narrows results by traffic types such as `user`, `account`, or `anonymous`.
+- **All categories**: Use the **All categories** dropdown to filter by [**Guardrail** metrics](/docs/feature-management-experimentation/release-monitoring/metrics/categories/).
+
+Each metric appears as a row in the list with column-based details, including the name, traffic type, tags, and the timestamp it was last updated. If a bell icon appears next to a metric name, the metric has an associated [alert policy](/docs/feature-management-experimentation/release-monitoring/metrics/setup/metric-alert-policy/).
+
+Select a metric to open its details. You can switch between the **Metric definition**, **Alert policies**, and **Audit logs** tabs.
+
+![](../static/metric-details.png)
 
 ### Common metrics
 
@@ -38,21 +59,3 @@ In the table below, we assume the traffic type selected for the metric is `user`
 ## Metric categories
 
 For more information about metric categories, see [Metric categorization](/docs/feature-management-experimentation/experimentation/metrics/categories/).
-
-## Configure an alert policy
-
-You can set an alert policy for a metric and Harness FME will notify you if a feature flag impacts the metric beyond a threshold you define. For more information, review the [Configuring metric alerting guide](/docs/feature-management-experimentation/release-monitoring/metrics/setup/metric-alert-policy/).
-
-## Audit logs
-
-Audit logs are captured every time the metric's definition or alert policy is changed. For more information, see [Audit logs](/docs/feature-management-experimentation/audit-logs/).
-
-## Metric list
-
-When viewing the list of metrics, you can use the following filters and indicators to help you navigate to a selected metric.
-
-* Owned by me: Filters metrics to those that you created or were added as an owner.
-* Starred by me: Filters metrics to those that you starred.
-* Sort: Sorts metrics by name alphabetically.
-* Filter: Filters metrics by traffic type or tags.
-* Bell icon: Indicates whether an alert policy exists (filled icon) or does not exist (unfilled icon).

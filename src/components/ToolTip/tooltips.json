@@ -14,6 +14,12 @@
       }
     },
     "fme": {
+      "feature-management": {
+        "segment": "Segments are groups of users defined by specific attributes or behaviors. They allow you to target feature flags and experiments to specific subsets of your user base."
+        },
+      "release-monitoring": {
+        "metric":"A metric measures events that are sent to Harness FME and can count the occurrence of events, measure event values, or measure event properties. Metrics are used to evaluate the impact of feature flags and experiments on user behavior and system performance."
+      },
       "openfeature": {
         "feature-flag": "A feature flag is a conditional toggle in Harness FME that enables or disables specific functionality without deploying new code. It allows for controlled feature rollouts, A/B testing, and quick rollbacks if issues arise.",
         "targeting-key": "A unique identifier used to target specific users or entities when evaluating feature flags. It helps determine which variation of a flag should be served based on predefined rules and conditions.",

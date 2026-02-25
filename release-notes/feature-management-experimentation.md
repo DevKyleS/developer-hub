@@ -1,18 +1,61 @@
 ---
 title: Feature Management & Experimentation release notes
 sidebar_label: Feature Management & Experimentation
-date: 2026-01-30T10:00:00
+date: 2026-02-13T10:00:00
 tags: ["fme", "feature management experimentation"]
 sidebar_position: 11
 ---
 
 import HarnessApiData from '../src/components/HarnessApiData/index.tsx';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <DocsButton icon = "fa-solid fa-square-rss" text="Subscribe via RSS" link="https://developer.harness.io/release-notes/feature-management-experimentation/rss.xml" />
 
 These release notes describe recent changes to Harness Feature Management & Experimentation (FME).
 
-#### Last updated: February 5, 2026
+#### Last updated: February 13, 2026
+
+## February 2026
+
+### [New Enhancement] Explore Feature Flag, Segment, and Metric Lists in Harness FME
+----
+#### 2026-02-13
+
+
+Harness FME has improved the browsing experience for feature flags, segments, and metrics by replacing the browse panels with full-width list pages, consistent with other Harness modules.
+
+<Tabs queryString="fme-object">
+<TabItem value="feature-flag" label="Feature Flags">
+
+![](./static/fme/list-2.png)
+
+</TabItem>
+<TabItem value="segment" label="Segments">
+
+![](./static/fme/list-1.png)
+
+</TabItem>
+<TabItem value="metrics" label="Metrics">
+
+![](./static/fme/list-3.png)
+
+</TabItem>
+</Tabs>
+
+With this enhancement, you can:
+
+- View a full list of feature flags, segments, or metrics in a single page
+- Create FME objects using the **+ Create feature flag**, **+ Create segment**, and **+ Create metric** buttons
+- Search FME objects by name or tags and filter results by traffic type
+- Access FME objects you've starred or that are owned by you
+- Scan FME object details at a glance using column-based lists
+
+#### Related documentation
+
+- [FME Feature Flags](/docs/feature-management-experimentation/feature-management/setup/create-a-feature-flag/)
+- [FME Segments](/docs/feature-management-experimentation/feature-management/targeting/segments)
+- [FME Metrics](/docs/feature-management-experimentation/release-monitoring/metrics/)
 
 ## January 2026
 
