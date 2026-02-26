@@ -1,0 +1,8 @@
+{
+  "label": "Dependency Firewall",
+  "collapsible": "true",
+  "collapsed": "true",
+  "link": { "type": "doc", "id": "artifact-registry/dependency-firewall/overview" },
+  "customProps": {},
+  "position": 35
+}

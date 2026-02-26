@@ -103,6 +103,30 @@ The feature to add Artifact Registry to the Upstream Proxy list is currently beh
 If you are adding an Artifact Registry to the Upstream Proxy list, ensure that there are no upstream proxies configured within your artifact registry.
 :::
 
+### Enable Dependency Firewall
+
+:::info Feature Flag
+This feature is behind the feature flag `HAR_DEPENDENCY_FIREWALL`. Contact [Harness Support](mailto:support@harness.io) to enable it.
+:::
+
+For upstream proxy registries, you can enable **Dependency Firewall** to control and secure artifacts fetched from external sources. When enabled, Dependency Firewall acts as a gatekeeper that evaluates every artifact version against configured security policies before allowing it to be cached in your registry.
+
+To enable Dependency Firewall:
+
+1. In your upstream proxy registry, select **Configuration**.
+2. Open the **Advanced (Optional)** dropdown menu.
+3. Toggle **Enable Dependency Firewall** to ON.
+4. Select the **Mode** for how policy violations should be handled:
+   - **Block**: All artifacts with policy violations will be blocked and not cached in your registry. Blocked artifacts cannot be downloaded or used
+   - **Warn**: All artifacts with policy violations will be cached and flagged with a warning status for review. Warning artifacts can still be downloaded and used
+5. Click **Save** to apply the changes.
+
+<DocImage path={require('./static/enable-dependency-firewall.png')} />
+
+Once enabled, all artifacts fetched from external sources through this upstream proxy will be automatically evaluated against your configured policy sets. The selected mode determines whether policy violations result in blocked artifacts (not cached) or warnings (cached but flagged for review).
+
+To learn more about how Dependency Firewall works and how to view violations, see [Dependency Firewall](/docs/artifact-registry/dependency-firewall/overview).
+
 ### Cleanup Policies
 
 *Coming Soon*

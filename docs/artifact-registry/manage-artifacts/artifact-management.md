@@ -66,6 +66,24 @@ You will be prompted to provide a reason for quarantining the artifact. Enter yo
 
 you can remove a quarantined artifact by selecting the artifact and clicking **Remove from Quarantine**.
 
+## Re-evaluate artifact versions
+
+:::note
+This feature is only available for cached artifact versions in upstream proxy registries with Dependency Firewall enabled.
+:::
+
+For upstream proxy registries with Dependency Firewall enabled, you can re-evaluate artifact versions against your configured policy sets. This is useful when policies have been updated or when you want to verify if a previously flagged version now passes your security requirements.
+
+When viewing artifacts in an upstream proxy registry, you'll see an **Evaluation Status** column that displays the policy evaluation result for each version. The status can be **Passed**, **Warning**, or **Blocked**. Note that blocked versions are typically not cached in the registry, but they can appear here if they were already present and someone re-scanned those artifacts.
+
+<DocImage path={require('./static/reevaluate.png')} />
+
+To re-evaluate an artifact version, click the three-dot menu (**⋮**) next to the version of the artifact in an upstream proxy registry and select **Re-Evaluate** from the menu.
+
+The system will re-run the evaluation against all configured policy sets and update the evaluation status in real time. You can also re-evaluate versions from within the artifact's **Versions** tab, where you'll see the same evaluation status and re-evaluate option for each individual version.
+
+To learn more about how Dependency Firewall evaluates artifacts and how to view detailed violation information, see [Dependency Firewall](/docs/artifact-registry/dependency-firewall/overview).
+
 ## Download an artifact
 
 You can download artifacts directly from the Harness Artifact Registry UI. Navigate to the desired level (registry, artifact, or version), click the options menu (**⋮**), and select **Download**. 
@@ -75,12 +93,12 @@ The system prepares your download and displays a status indicator at the bottom 
 
 **Download levels:**
 
-- **Package level** - Downloads all versions of a specific package (non-OCI packages only)
+- **Package level** - Downloads all versions of a specific package
 - **Version level** - Downloads a specific version only
 - **Individual files** - In the **Artifact Details** tab under **Files**, click any file to download it directly (no preparation needed)
 
 :::info Important Notes
-- **Package type support**: Download is available for non-OCI package types only (Maven, npm, PyPI, Generic, etc.). OCI images (Docker) should be pulled using standard container tools.
+- **Package type support**: Download is available for all supported artifact types, including Docker/OCI images, Maven, npm, PyPI, Generic, and more.
 - **Stay on the page**: Do not navigate to another tab or close the browser while the download is being prepared, as this will interrupt the process.
 - **Download availability**: Once ready, downloads remain available for **24 hours** or until you close the notification.
 :::
