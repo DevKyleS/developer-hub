@@ -25,8 +25,30 @@ import RedirectIfStandalone from '@site/src/components/DynamicMarkdownSelector/R
 To setup Commitment Orchestrator in Harness CCM, you need:
 
 - **Active CCM Connectors**: You must have at least one active cloud connector set up for the cloud providers you want to categorize costs for: Set Up [CCM Connectors](/docs/cloud-cost-management/get-started#aws).
-- A master account with the right permissions to be added via AWS connector on which you want to enable orchestration.
+- A master account with the right permissions to be added via AWS connector on which you want to enable orchestration. Select the services for which you want to enable orchestration (permissions can be limited to specific service).
+
+<DocImage path={require('../../4-use-ccm-cost-optimization/commitment-orch-docs/version-two/aws/static/permissions.png')} width="80%" height="80%" title="Click to view full size image" />
+
+Available permissions for RDS:
+
+```
+Action:
+- 'ce:GetSavingsPlansCoverage'
+- 'ce:GetReservationCoverage'
+- 'ce:GetSavingsPlansUtilization'
+- 'ce:GetDimensionValues'
+- 'ce:GetReservationUtilization'
+- 'ce:GetSavingsPlansUtilizationDetails'
+- 'ce:GetCostAndUsage'
+- 'organizations:ListAccounts'
+- 'rds:DescribeReservedDBInstances'
+- 'rds:DescribeReservedDBInstancesOfferings'
+- 'rds:PurchaseReservedDBInstancesOffering'
+'Resource: '*'
+```
+
 - **For AWS RDS, only RI orchestration is supported**
+
 - **Required Permissions (Read-Only)**: Your Harness user account must belong to a user group with the following role permissions:
 
 
@@ -69,6 +91,26 @@ For RDS additional permissions are required.
 "pricing:GetProducts"
 ```
 </details>
+
+:::important note 
+We have rolled out permissions for Elasticache as well. Available permissions for Elasticache:
+
+```
+Action:
+- 'ce:GetSavingsPlansCoverage'
+- 'ce:GetReservationCoverage'
+- 'ce:GetSavingsPlansUtilization'
+- 'ce:GetDimensionValues'
+- 'ce:GetReservationUtilization'
+- 'ce:GetSavingsPlansUtilizationDetails'
+- 'ce:GetCostAndUsage'
+- 'organizations:ListAccounts'
+- 'elasticache:DescribeReservedCacheNodes'
+- 'elasticache:DescribeReservedCacheNodesOfferings'
+- 'elasticache:PurchaseReservedCacheNodesOffering'
+Resource: '*'
+```
+:::
 
 ------
 

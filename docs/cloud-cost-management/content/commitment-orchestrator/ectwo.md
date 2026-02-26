@@ -10,9 +10,36 @@ To setup Commitment Orchestrator in Harness CCM, you need:
 
 - **Active CCM Connectors**: You must have at least one active cloud connector set up for the cloud providers you want to categorize costs for: Set Up [CCM Connectors](/docs/cloud-cost-management/get-started#aws).
 
-- A master account with the right permissions to be added via AWS connector on which you want to enable orchestration.
+- A master account with the right permissions to be added via AWS connector on which you want to enable orchestration. Select the services for which you want to enable orchestration (permissions can be limited to specific service).
 
-- **Required Permissions (Read-Only)**: Your Harness user account must belong to a user group with the following role permissions:
+<DocImage path={require('../../4-use-ccm-cost-optimization/commitment-orch-docs/version-two/aws/static/permissions.png')} width="80%" height="80%" title="Click to view full size image" />
+
+Available permissions for EC2:
+
+```
+Action:
+- 'ec2:ModifyReservedInstances'
+- 'ec2:GetReservedInstancesExchangeQuote'
+- 'ec2:AcceptReservedInstancesExchangeQuote'
+- 'ec2:DescribeReservedInstancesOfferings'
+- 'ec2:DescribeReservedInstances'
+- 'ec2:DescribeReservedInstancesModifications'
+- 'ec2:DescribeInstanceTypeOfferings'
+- 'ec2:PurchaseReservedInstancesOffering'
+- 'ce:GetSavingsPlansCoverage'
+- 'ce:GetReservationCoverage'
+- 'ce:GetSavingsPlansUtilization'
+- 'ce:GetDimensionValues'
+- 'ce:GetReservationUtilization'
+- 'ce:GetSavingsPlansUtilizationDetails'
+- 'ce:GetCostAndUsage'
+- 'savingsplans:DescribeSavingsPlansOfferings'
+- 'savingsplans:CreateSavingsPlan'
+- 'organizations:ListAccounts'
+Resource: '*'
+```
+
+- **Required Permissions**: Your Harness user account must belong to a user group with the following role permissions:
 
 <details>
 <summary>**Required Read-Only Permissions**</summary>
