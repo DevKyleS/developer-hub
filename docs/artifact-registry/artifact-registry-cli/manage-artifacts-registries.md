@@ -7,11 +7,15 @@ keywords:
   - CLI commands
   - registry management
   - artifact management
+  - firewall audit
+  - security scanning
+  - npm configure
 tags:
   - artifact-registry-cli
   - registries
   - artifacts
   - cli-commands
+  - security
 ---
 
 This guide covers the essential commands for working with the Artifact Registry from the command line.
@@ -85,6 +89,55 @@ Go to the [Artifact Registry documentation](https://developer.harness.io/docs/ar
 
 You can also use global flags to override the org and project, to know more about global flags, refer to the [Global Flags](/docs/platform/automation/cli/reference#v1-hc--global-flags) section.
 
+---
+
+### Configure Package Manager Clients
+
+Configure your package manager clients to work with [supported Harness Artifact Registries](/docs/artifact-registry/whats-supported), such as npm. The `hc registry configure` command automatically sets up the necessary configuration files with the correct registry URLs and authentication.
+
+#### Configure npm Client
+
+Configure your npm client to use a Harness Artifact Registry virtual npm registry. This command updates your `.npmrc` file with the appropriate registry URL and authentication token.
+
+```bash
+hc registry configure npm [flags]
+```
+
+**Required flags:**
+- `--registry string`: Registry identifier
+- `--pkg-url string`: Package registry base URL (e.g., `https://pkg.harness.io`)
+
+**Flags:**
+- `--scope string`: NPM scope (e.g., `@myorg`) - configures scoped registry. If not provided, configures the default registry
+- `--global`: Configure globally for the user (modifies `~/.npmrc`)
+- `--project-level`: Configure at project level (creates/modifies `.npmrc` in current directory)
+
+**Example - Configure default registry:**
+
+```bash
+hc registry configure npm --registry npmproxy --pkg-url https://pkg.harness.io
+```
+
+**Example - Configure scoped registry:**
+
+```bash
+hc registry configure npm --registry npmproxy --pkg-url https://pkg.harness.io --scope @myorg
+```
+
+**Example - Configure globally:**
+
+```bash
+hc registry configure npm --registry npmproxy --pkg-url https://pkg.harness.io --global
+```
+
+**Example - Configure at project level:**
+
+```bash
+hc registry configure npm --registry npmproxy --pkg-url https://pkg.harness.io --project-level
+```
+
+---
+
 ### Manage Registry Metadata
 
 Attach custom key-value pairs to registries for better organization and tracking.
@@ -155,6 +208,101 @@ hc registry delete my-docker-registry
 :::warning Permanent Action
 Deleting a registry will remove all artifacts stored within it. This action cannot be undone. Make sure to back up any important artifacts before deletion.
 :::
+
+---
+
+### Audit Dependencies from Lock Files
+
+The `hc registry fw audit` (or `hc registry firewall audit`) command parses and evaluates dependencies from package manager lock files against your registry's firewall policies to identify which packages are allowed, blocked, or flagged with warnings.
+
+```bash
+hc registry fw audit [flags]
+```
+
+**Required flags:**
+- `-f, --file string`: Path to dependency file
+  - **NPM**: package.json, package-lock.json, pnpm-lock.yaml, yarn.lock
+  - **Java**: pom.xml, build.gradle, build.gradle.kts
+  - **Python**: requirements.txt, pyproject.toml, Pipfile.lock, poetry.lock
+- `--registry string`: Registry name
+
+**Example:**
+
+```bash
+hc registry fw audit --file package-lock.json --registry npmproxy --org Devrel --project sd1
+```
+
+**Sample output:**
+
+```
+  > Fetching registry details for: npmproxy...
+  Found registry: d991f9d1-1cda-4a66-a13b-83dd2d9e0b82 (type: NPM)
+  Parsing dependency file: package-lock.json...
+  Found 15 dependencies in package-lock.json
+  > Initiating bulk scan evaluation for registry: npmproxy...
+  Bulk scan evaluation completed successfully
+
+  Scan Results for 15 dependencies:
+  > Warnings: 2...
+  Allowed: 13
+
+┌──────────────────────────────────┐
+| Package Name | Version | Status  |
+| body-parser  | 1.20.1  | WARN    |
+| express      | 4.18.2  | ALLOWED |
+| lodash       | 4.17.20 | WARN    |
+| ...          | ...     | ...     |
+└──────────────────────────────────┘
+```
+
+---
+
+### Get Firewall Status for an Artifact Version
+
+The `hc registry fw explain` command gets detailed firewall and scan status information for a specific artifact version already stored in your registry.
+
+```bash
+hc registry fw explain [flags]
+```
+
+**Required flags:**
+- `--registry string`: Registry name
+- `--package string`: Package name
+- `--version string`: Package version
+
+**Example:**
+
+```bash
+hc registry fw explain --registry npmproxy --package express --version 4.18.2 --org Devrel --project sd1
+```
+
+**Sample output:**
+
+```
+  Fetching registry details for: npmproxy...
+  Found registry UUID: d991f9d1-1cda-4a66-a13b-83dd2d9e0b82
+  > Initiating scan evaluation for express@4.18.2...
+  Scan evaluation completed successfully
+
+  > Scan Result...
+   Package:     express
+   Version:     4.18.2
+   Scan Status: ALLOWED
+   Scan ID:     0e2ed1a8-3977-481a-8bb7-1ccc7b0f399c
+
+  This artifact version is ALLOWED by the firewall
+
+  > Fetching detailed scan information...
+
+Scan Details:
+============================================================
+Last Evaluated: 2026-02-18 11:18:06 IST
+```
+
+**Possible scan statuses:**
+- **ALLOWED**: The artifact passes all firewall policies and is safe to use
+- **BLOCKED**: The artifact violates firewall policies and should not be used
+- **WARN**: The artifact has potential issues but is not blocked
 
 ---
 
@@ -514,5 +662,23 @@ Use global flags to work with different projects without changing configuration:
 hc registry list --project dev-project
 hc registry list --project prod-project
 ```
+
+**6. Audit Dependencies for Security**
+
+Use firewall audit to check your dependencies before deployment:
+
+```bash
+hc registry fw audit --file package-lock.json --registry npmproxy
+```
+
+**7. Configure Package Managers Once**
+
+Set up your package manager client configuration once, then use standard commands:
+
+```bash
+hc registry configure npm --registry npmproxy --pkg-url https://pkg.harness.io --project-level
+```
+
+After configuration, use standard npm commands like `npm install` and `npm publish` without additional setup.
 
 ---
