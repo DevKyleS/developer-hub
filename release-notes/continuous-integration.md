@@ -62,6 +62,30 @@ Check out [Harness Cloud VM Images Docs](/docs/platform/references/harness-cloud
 
 ## February 2026
 
+### Version 1.123.0
+
+<!-- 23 Feb 2026 -->
+
+#### New Features and Enhancements
+
+- Introduced Save Cache to Azure and Restore Cache to Azure pipeline steps (YAML-only) to enable artifact caching with Azure Blob Storage using Microsoft identity provider authentication. (CI-19778)
+
+#### Fixed Issues
+
+- Resolved an issue with the `<+codebase.repoUrl>` expression returning incorrect URLs in Azure Repos commit-based builds. (CI-20559, ZD-102404)
+- Resolved an issue with environment variable resolution in Buildx Bake configurations on self-hosted, VM runners and local runners. (CI-20510, ZD-101772)
+- Improved Test Intelligence security by upgrading the underlying runtime to address known vulnerabilities. (CI-20791)
+- Improved Artifactory plugin security by upgrading the underlying runtime to address known vulnerabilities. (CI-20916)
+
+#### Harness Images Updates
+
+| Image | Change | Previous Version | New Version |
+|-------|--------|------------------|-------------|
+| `harness/ci-addon` | Version update | 1.18.8 | 1.18.9 |
+| `harness/ci-lite-engine` | Version update | 1.18.8 | 1.18.9 |
+| `plugins/artifactory` | Security update - upgraded golang version | 1.8.3 | 1.8.4 |
+| `harness/drone-git` | Security update - upgraded dependencies | 1.7.15 | 1.7.16 |
+
 ### Version 1.122.0
 
 <!-- February 17, 2026 -->
