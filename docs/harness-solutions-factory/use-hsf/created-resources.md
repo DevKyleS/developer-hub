@@ -31,6 +31,8 @@ To support IDP workflows, account-level variables are created. These variables s
 
 All HSF-related resources are organized under a newly created organization named `Harness Platform Management`. This organization serves as the central location for all projects, configurations, and access controls associated with the HSF deployment.
 
+HSF is intentionally isolated into its own organization rather than placed inside an existing one so that platform-level management concerns stay separate from everything else in your Harness account. This also makes RBAC cleaner — HSF Admins can have org-admin rights scoped to this organization.
+
 **User Groups**
 
 Within the `Harness Platform Management` organization, two user groups are created at the account level: 
@@ -60,7 +62,6 @@ The Solutions Factory project includes sixteen pipelines, each designed to perfo
 - The `Manage Pilot Light` pipeline applies updates and changes to the core HSF framework. It is used to maintain and evolve the foundational infrastructure that supports the overall platform.
 - The `Mirror Harness Official Solutions Factory Repository` pipeline is responsible for cloning and copying data from the official HSF repository into your target Harness account. It also manages the synchronization of updates during future releases, effectively keeping your local copy aligned with the source of truth.
 - The `Unpack Solutions Factory` pipeline unpacks the Solutions Factory.
-- The `Register Official IDP Templates` pipeline automatically imports all available templates from the harness-template-library and registers them into your IDP instance. This ensures that your IDP has access to the full suite of templates required to power self-service workflows.
 - The `Register Custom IDP Templates` pipeline automatically imports all available templates from the custom-harness-template-library and registers them into your IDP instance.
 - The `Rotate HSF Token` pipeline handles secure token rotation for the `harness-platform-manager` service account.
 - The `Create and Manage IACM Workspaces` pipeline is invoked at the start of each workflow execution. It provisions and manages IACM workspaces, ensuring that the required infrastructure is in place before any resource provisioning begins. It also registers resources in IDP.
@@ -86,4 +87,4 @@ There are three repositories included in the deployment and exist under the orga
 
 - The `harness-solutions-factory` repository houses all of the source code that is required to standup and run Harness Solutions Factory. A code branch rule called `harness_solutions_factory_codeowners` is created in this repository.
 - The `harness-template-library` repository houses all of the scaffold and templates for how to manage Harness resources. A code branch rule called `harness_solutions_factory_codeowners` is created in this repository.
-- The `custom-harness-template-library` repository houses customized templates created to support Harness entity management and provisioning.
+- The `custom-harness-template-library` repository houses customized templates created to support Harness entity management and provisioning. It is created via a point in time mirror of `harness-template-library` when your instance of HSF is deployed.

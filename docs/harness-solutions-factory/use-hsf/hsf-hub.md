@@ -28,38 +28,21 @@ With HSF Hub, we changed how permissions are implemented since we no longer coul
 - A role called `Shared_Resource_Access` which allows access to shared resources in the project such as secrets and templates
 - And a resource group for each of the HSF Hub pipelines. By combining a role and resource group you are able to control which pipelines a user can run.
 
-### Operating Modes
-
-With the creation of HSF Hub, HSF 2.4 introduces the concept of operating modes. The different operating modes allows usage of HSF with and without Harness IDP.
-
-HSF Core are the core 12 pipelines of Harness Solutions Factory
-
-#### *HSF Core + Harness IDP*
-
-This operating model is the traditional model and the only one that has been supported till now. It leverages Harness IDP features to execute workflows, run pipeline stages and control RBAC.
-
-#### *HSF Core + HSF Hub*
-
-This operating model is new with HSF 2.4. Removing the dependency on Harness IDP, HSF Hub is a new project that gets created to house all of the best practice templates from Custom Template Library. It runs a chained pipeline from this project and is controlled by ABAC.
-
-#### *HSF Core + Backstage (or BYO API Connector)*
-
-This operating model is new with HSF 2.4. It allows you to bring your own form of Backstage or API to trigger a HSF Core pipeline.
-
 ### Changing Operating Modes to use HSF Hub
 
 Since HSF Hub was created starting version 2.4 you will need to make sure that you are on 2.4 or later. If you need help updating please refer back to this document.
 
-1. Navigate to the Harness Solutions Factory workspace in the Solutions Factory project.
-2. Go into the Connectors and Variables tab and scroll down to find the `should_use_harness_idp` and `should_use_hsf_hub` variable.
-    <DocImage path={require('../static/hsfhub.png')} title="Click to view full size image" />
-3. Change the variable value to use/not use IDP and use/not use HSF Hub
-4. Navigate to pipelines and run Deploy Solutions Factory
+1. Navigate to the Harness Pilot Light workspace in the Solutions Factory project. 
+2. Go into the Connectors and Variables tab and scroll down to find the `should_use_harness_idp` and set it to false.
+3. Click provision and wait till it's completed. Verify that the HSF Core Manager is created.
+4. Navigate to the Solutions Factory Workspace and add in the variables `should_use_hsf_hub` set to true and `should_use_harness_idp` set to true.
+5. Click provision. This will remove the IDP pipelines and change the Create and Manage IaCM pipeline to use IaCM steps. 
+6. Navigate to pipelines and run Deploy Solutions Factory.
 
 If you are upgrading from a version prior to 2.4 you will also need to update your templates because HSF Hub now points to Custom Template Library instead of Harness Template Library
 
-1. Pull in example files for the specific templates that you are using
-2. Add in customized inputs and additional variables
-3. Run Deploy HSF Hub
+1. Pull in example files for the specific templates that you are using.
+2. Add in customized inputs and additional variables.
+3. Run Deploy HSF Hub.
 
 Deploy HSF Hub is a pipeline that will be created when the `should_use_hsf_hub` variable is set to true. This pipeline will clone the Custom Harness Template Library repository and use the hub registration file to parse through the resources to create the pipelines that live inside the HSF Hub project. These pipelines can be customized with pre and post steps, role bindings and resource groups.

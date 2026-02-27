@@ -5,8 +5,14 @@ sidebar_position: 2
 redirect_from: 
     - /kb/reference-architectures/hsf/hsf-workflows
 ---
+When workflows are triggered, it creates an IaCM workspace to create and manage the resources. A workspace maps to a single Terraform state file. If you don't want to maintain ongoing state, there is an option to create ephemeral workspaces. Workspaces for platform-level resources (creating orgs, projects, connectors) live inside the Solutions Factory project.
+
+By default, approval notifications are sent by email to members of the HSF Admins group. If your team uses Microsoft Teams or Slack, this can be reconfigured in the notification settings on the user group. There are two distinct approvals — one before entity creation and one before the Terraform plan is applied. The IaCM plan approval shows the resource diff so the approver can see exactly what will change before confirming.
+
+After a workflow completes, the outputs are pushed directly into the IDP catalog entry for that workspace. 
+
 ## Default Workflows
-These are the workflows that are automatically created when HSF is deployed into your account. These workflows are created by `harness-template-library` repository and registered into IDP via the `Register Official IDP Templates` pipeline:
+Below are the workflows that are automatically created when HSF is deployed into your account. These workflows are created by `harness-template-library` repository and registered into IDP via the `Register Custom IDP Templates` pipeline.
 
 ### Harness Organization Setup
 Harness Organization Setup is a workflow that creates and manages organizations within your Harness account. It standardizes the process for requesting new organizations and provides an easy way to manage them consistently. The workflow provisions an organization with a defined name.

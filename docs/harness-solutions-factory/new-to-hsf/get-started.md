@@ -7,23 +7,24 @@ sidebar_position: 20
 
 Welcome to the HSF onboarding guide. Discover how Harness accelerates onboarding and adoption by reducing setup time and maintaining best practices
 
-## Pre Deployment of HSF
-### Prerequisites
+## Prerequisites
 
-Before beginning, ensure you have: 
+Before HSF can be deployed, confirm the following:
 
-- Access to a Harness Account
-- Ability to create an admin level token
+- Your Harness account has the IDP and IaCM modules enabled.
+- Harness Code Repository is enabled on the account.
+- You have an account with admin-level permissions, or can coordinate with someone who does to generate a temporary Personal Access Token (PAT).
+- No account-level OPA policies are in place that would block pipeline execution.
 
 If you do not meet all these prerequisites but think your organization could benefit from HSF, please reach out to your Harness account team.
 
 ## Post Deployment of HSF
-Now that HSF has been deployed, what’s next? Below are a couple things to get you started using Harness Solutions Factory:
+After deployment, complete the following steps to configure your account and verify the installation.
 
 - Create Organizations and Projects. [This lab](../hands-on-labs/getting-started-lab.md) goes over some details. 
 - Add users to the HSF Admin, HSF Users (account level) and HSF Mirror Reviewers (organization level) groups
-    - This can be bound to SSO Provider Groups
-    - Decide on the notification preferences for HSF Admins (Slack, Email, Teams) 
+    - This can be bound to [SSO Provider Groups](https://developer.harness.io/docs/platform/authentication/single-sign-on-saml/)
+    - Decide on the [notification preferences](https://developer.harness.io/docs/platform/role-based-access-control/add-user-groups#edit-notification-preferences) for HSF Admins (Slack, Email, Teams) 
     - You can also change the mirror schedule by going into Harness Pilot Light and finding the `mirror_schedule` variable 
 - Change token configurations
     - You can change the rotation schedule or if it should rotate on a schedule by going into Harness Pilot Light and finding the `should_rotate_on_schedule` and `rotation_schedule` variables

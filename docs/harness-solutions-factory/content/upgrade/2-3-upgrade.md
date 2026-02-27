@@ -27,8 +27,9 @@
         | hsf_idp_resource_mgr_image | harnesssolutionfactory/harness-idp-resource-manager:latest |
         | hsf_iacm_manager_plugin | harnesssolutionfactory/harness-manage-iacm-workspace:latest |
         | enable_hsf_mini_factory | false |
-        1. Save Changes
+        | should_use_hsf_hub | false |
+        | should_use_harness_idp | true |
+        - Save Changes
 6. Run `Deploy Solutions Factory` 
 7. If you’re doing an upgrade from pre 2.2 run `Bulk Workspace IDP Registration`  
-8. Run `Register Official IDP Templates` to get all the new templates from `harness-template-library`
-9. The upgrade is now complete!
+8. The upgrade is now complete!

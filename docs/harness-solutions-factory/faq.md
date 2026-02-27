@@ -25,9 +25,9 @@ HSF is provided as a no-additional cost solution delivered as part of an existin
 </details>
 
 <details>
-<summary>Do I have to purchase HSF? Is there a cost associated with HSF?</summary>
+<summary>What modules do I need for HSF?</summary>
 
-No, you do not need to purchase IaCM or IDP modules to use HSF, but you can only use the modules to manage the Harness Platform.
+HSF leverages Harness Internal Developer Portal, Infrastructure as Code Management and Harness Code Repository. You do not need to purchase additional modules specifically for HSF. If you do not have IDP, IaCM or HCR licensed, we will provide you a limited license in order to use HSF and manage Harness entities.
 </details>
 
 ---
@@ -86,4 +86,10 @@ Harness Solutions Factory supports integration with all **OpenTofu** versions<Ha
     parse='.[-1] | " (latest: v\(.))"'></HarnessApiData>.  
  
  Due to licensing and legal limitations all legacy Terraform versions under the MPL license are supported (up to **1.5.x**), any BSL versions (from 1.6.0) are not supported.
+</details>
+
+<details>
+<summary>Can HSF manage cloud resources, not just Harness entities? </summary>
+
+Yes. Because HSF is built on OpenTofu and IaCM, it can provision any resource that has a Terraform provider — AWS, Azure, GCP, etc. However, you will need a paid enterprise license for IDP and IaCM if provisioning non Harness entites.
 </details>

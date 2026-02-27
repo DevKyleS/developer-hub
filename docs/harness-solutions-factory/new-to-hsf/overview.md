@@ -7,21 +7,17 @@ redirect_from:
     - /kb/reference-architectures/hsf/overview
 ---
 
-Harness Solutions Factory (HSF) is a scalable automation framework designed to help organizations rapidly deploy and manage **Harness resources** through **self-service workflows**, **governance**, and **best practices** — all out of the box.
-
-Whether you’re enabling new teams, setting up golden templates, or driving adoption of Harness at scale, HSF provides a repeatable, governed foundation to help you get started faster and stay standardized across your organization.
+Harness Solutions Factory (HSF) is an automation framework that deploys and manages Harness platform resources through self-service workflows, governed templates, and Infrastructure as Code. It gives platform engineering teams a repeatable foundation for onboarding teams to Harness at scale, without requiring each team to configure their own pipelines, projects, or environments from scratch.
 
 ### Key Capabilities
-- **Self-Service Enablement:** Empower development teams to deploy their own Harness resources using guided workflows — no YAML editing or pipeline scripting required.
-- **Governance by Design:** Enforce organizational standards automatically through reusable templates and pre-approved configurations.
-- **Accelerated Time to Value:** Reduce setup from days or weeks to minutes using out-of-the-box automation.
-- **Continuous Standardization:** Ensure all Harness resources stay aligned with best practices.
+- **Self-service workflows:** Development teams can request Harness resources — projects, pipelines, environments — through IDP workflow. No direct platform or Terraform knowledge is required.
+- **IaC-backed governance:** Every resource HSF creates is backed by a Terraform workspace in IaCM. Changes go through plan-and-approve cycles, and drift is surfaced in the IDP catalog.
+- **Out-of-the-box templates:** HSF ships with pre-built templates for common platform operations: project setup, CI pipeline onboarding, security scanning, build farm configuration, and delegate management.
+- **Managed updates:** When Harness releases new versions of HSF, a scheduled pipeline creates a pull request in your custom template library. You review and merge on your timeline — nothing auto-applies.
 
 ## Core Concepts
 ### 1. Self-Service Workflows
-Workflows are the user-facing automation steps in HSF.
-
-These guided processes help teams create, configure, and deploy new Harness resources — such as projects, pipelines, and repositories — following approved standards.
+Workflows are the user-facing entry point to HSF. A user selects a workflow in IDP, fills out some details, and submits. HSF then triggers a pipeline that creates the requested resource, registers it in the IDP catalog, and optionally gates on an approval before applying the changes. Users can watch the execution in real time and access outputs directly from the catalog entry once provisioning is complete.
 
 Example workflows include:
 
@@ -30,7 +26,7 @@ Example workflows include:
 - **Deploy Harness CI Golden Standard Templates**
 
 ### 2. Harness Template Library
-Harness Template Library houses all the templates that are created by Harness. They reflect best practices validated by our Center of Excellence (CoE) and implementation engineering team. These templates serve as the foundation for all workflows created through HSF.
+Harness Template Library houses all the templates that are created by Harness. They reflect best practices validated by the Harness Center of Excellence (CoE) and implementation engineering team. These templates serve as the foundation for all workflows created through HSF.
 
 This repository is stored in Harness Code Repository and is copied over locally when you first deploy HSF. 
 

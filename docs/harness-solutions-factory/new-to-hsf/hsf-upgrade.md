@@ -10,6 +10,7 @@ import DynamicMarkdownSelector from '@site/src/components/DynamicMarkdownSelecto
 We are constantly adding new features and functionality to Harness Solutions Factory. Below are the detailed steps on how to upgrade to the latest!
 
 <DynamicMarkdownSelector
+    defaultOption="PR Process Upgrade"
     options={{
         "PR Process Upgrade": {
         path: "/harness-solutions-factory/content/upgrade/pr-upgrade.md",

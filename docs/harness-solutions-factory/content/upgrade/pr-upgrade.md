@@ -33,12 +33,15 @@ Starting from HSF 2.2.5 you will get a pull request notification email when a ne
 6. Run `Manage Pilot Light` → Approve Changes (Review) → Approve Now
     <DocImage path={require('../../static/PR-upgrade7.png')} title="Click to view full size image" />
 
+6. Go into IaCM Workspaces → `Harness Solutions Factory`
+    - Go into Connectors and Variables and add the variables:
+        | Variable Key | Value |
+        | --- | --- |
+        | should_use_hsf_hub | false |
+        | should_use_harness_idp | true |
+    - Save Changes
+
 7. Wait for `Manage Pilot Light` to finish and then run `Deploy Solutions Factory`
     <DocImage path={require('../../static/PR-upgrade8.png')} title="Click to view full size image" />
 
-**Refresh IDP Workflows**
-
-8. Because we updated `harness-template-library` run `Register Official IDP Templates`
-    <DocImage path={require('../../static/PR-upgrade9.png')} title="Click to view full size image" />
-
-9. Update is complete!
+8. Update is complete!
