@@ -319,3 +319,11 @@ The ability to pass artifacts between steps depends on the CI/CD system’s conf
 ### How do I generate a valid PLUGIN_TAR_PATH for the ECR step?
 
 The Build and Push to ECR step does not automatically generate a tarball. The PLUGIN_TAR_PATH environment variable is supported only in plugins/kaniko and must be manually set when using `plugins/kaniko-ecr`.
+
+### Why is the image tag not available in stage start notifications?
+
+Artifact metadata such as the image tag is not available during stage start notifications. A CD stage begins by executing the **Service Initialization** step, which fetches all service-related configuration including artifact details. The stage start notification fires before this initialization completes, so service output expressions like `<+artifact.tag>`, `<+artifact.image>`, and `<+artifact.imagePath>` remain unresolved.
+
+If you need artifact information in a stage start notification, use pipeline variables or trigger-based expressions that resolve before the stage begins executing. For example, if the pipeline is triggered with a specific image tag through a trigger payload, reference it using `<+trigger.payload.imageTag>` or a pipeline variable like `<+pipeline.variables.imageTag>`. These expressions resolve before stage execution starts and are available in the notification.
+
+For more details on notification behavior during stage start events, go to [Notify users of pipeline events](/docs/continuous-delivery/x-platform-cd-features/cd-steps/notify-users-of-pipeline-events).
