@@ -56,6 +56,19 @@ For more information on GCR, see the [Harness GCR Documentation](/docs/continuou
 
 ## February 2026
 
+### Version 1.132.4
+
+#### Fixed issues
+
+- Fixed an issue where Harness dashboards failed to load data, returning a PostgreSQL error when attempting to retrieve dashboard information. (**CDS-117508**, **ZD-97705**)
+- Fixed an issue where saving a freeze window with email notifications configured in delegate mode failed with a YAML validation error. The UI-generated YAML for delegate selectors was incorrectly formatted, causing the save operation to fail even though no manual YAML edits were made. (**CDS-118870**, **ZD-104033**)
+- Fixed an issue where the **Triggered by** column in the pipeline executions list displayed a generic `Webhook(<id>)` label instead of the configured trigger name after adding a CI stage to an existing CD pipeline. The trigger name now displays consistently regardless of the stage types present in the pipeline. (**PIPE-31572**, **ZD-100883**)
+- Fixed an issue where `send status back to git` does not publish commit status when the pipeline is triggered via the Harness code trigger in custom stages. Status handling was missing in the Harness code repository because it lacks a connectorRef. Added proper handling for the code repository. (**PIPE-31736**, **ZD-100597**)
+- Fixed an issue where executing a pipeline directly from an input set failed with a validation error for a required variable, even though the variable value was already populated. This was caused by an empty pipeline identifier being sent in the input set API call. (**PIPE-32073**, **ZD-102863**)
+- Fixed an issue where the **Updated Time** column on the pipeline template's referencing entities tab displayed time in 24-hour format with an incorrect AM/PM suffix (for example, `14:11 PM`). The timestamp now uses a consistent and valid time format. (**PIPE-32114**, **ZD-104150**)
+- Fixed an issue where the **Start** button in the Infra Workspace Template creation flow was unresponsive on prod2, preventing users from creating new templates. This occurred even though the workspace templates feature was GA and enabled for the account. (**PIPE-32258**, **ZD-103995**)
+- Fixed a race condition where the built-in expression `<+project.identifier>` failed to resolve in time during parallel HTTP steps, causing a 400 error. The expression now resolves consistently across all parallel steps during pipeline execution. (**PIPE-32334**, **ZD-102702**)
+
 ### Version 1.131.0
 
 #### Breaking changes
