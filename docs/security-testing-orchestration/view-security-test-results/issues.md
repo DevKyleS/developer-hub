@@ -129,3 +129,14 @@ Filter issues by exemption status. Multiple selections are allowed.
 - Approved
 - Rejected
 - Expired
+
+### Severity Overridden 
+
+Filter issues based on whether the severity has been manually overridden or not.
+
+### EPSS Percentile 
+
+Filter issues by EPSS percentile (eg., 90th).
+### EPSS Probability
+
+Filter issues by EPSS probability (eg., 15%).

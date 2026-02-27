@@ -66,6 +66,9 @@ You can filter issues using multiple criteria in the **Vulnerabilities** tab:
 - **Step**: Filter by pipeline steps.
 - **Scanner**: Filter issues by specific scanners.
 - **Issue Type**: Filter by issue types (e.g., SAST, DAST, SCA, IaC, Secret, [External Policy Failure](/docs/security-testing-orchestration/view-security-test-results/view-scan-results#external-policy-failure), etc.).
+- **Severity Overridden**: Filter issues based on whether the severity has been manually overridden or not.
+- **EPSS Percentile**: Filter issues by EPSS percentile (eg., 90th).
+- **EPSS Probability**: Filter issues by EPSS probability (eg., 15%).
 
 
 ### External Policy Failures
@@ -73,11 +76,6 @@ You can filter issues using multiple criteria in the **Vulnerabilities** tab:
 External Policy Failures indicate that a policy or compliance rule defined in the security scanner did not pass during the scan. These issues reflect  policies defined by organization, such as assurance policies, quality gates, or compliance rules, and are not security vulnerabilities.
 
 External policy failures are surfaced in Harness STO as a distinct **Issue Type** so that you can view External Policy Failures alongside other scan results.
-
-In the Settings, you can enable the External Policy Failures to map policy failures to a selected severity level - `Critical`, `High`, `Medium`, or `Low`. Once enabled, external policy failures are treated as vulnerabilities instead of `Info` level issues.  This setting takes effect from the next pipeline execution.
-
-<DocImage path={require('./static/external-policy.png')} width="90%" height="90%" title="Click to view full size image" />
-
 
 Scanners that currently support External Policy Failures:
 
@@ -88,7 +86,10 @@ Scanners that currently support External Policy Failures:
 5. [Anchore](/docs/security-testing-orchestration/sto-techref-category/anchore-enterprise-scanner-reference#view-anchore-policy-failures)
 6. [Veracode](/docs/security-testing-orchestration/sto-techref-category/veracode-scanner-reference#view-veracode-policy-failures)
 
+<DocImage path={require('./static/external-policy.png')} width="90%" height="90%" title="Click to view full size image" />
+
 ### Severity-based filtering
+
 Issues are summarized by severity levels (**Critical**, **High**, **Medium**, **Low**, **Info**) as clickable tiles, serving as additional filters. You can select multiple tiles.
 
 <DocImage path={require('./static/filter-issue-by-severity.png')} width="90%" height="90%" title="Click to view full size image" />
