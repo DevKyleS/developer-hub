@@ -519,6 +519,301 @@ With this feature flag enabled, Harness uses your [delegate selectors](/docs/pla
 
 </details>
 
+## Export runner metrics to Splunk
+
+The VM runner exposes Prometheus metrics on port 3000 at `/metrics`, covering build queue time, VM provisioning latency, pool utilization, and per-build CPU and memory peaks. You can forward these to your own Splunk instance by running an [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) container alongside the delegate and runner. The collector scrapes the runner over loopback and pushes to the Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector).
+
+This requires no changes to the runner or the delegate. The collector runs out-of-process, so a collector crash, a misconfiguration, or a Splunk outage cannot degrade or block builds.
+
+```
+Primary VM
+
+  Harness Delegate ──▶ drone-runner-aws
+                            :3000 /metrics
+                                  ▲
+                                  │ scrape every 30s (loopback)
+                                  │
+                       otel-collector-contrib
+                                  │
+                                  │ outbound HTTPS
+                                  ▼
+                          Customer Splunk HEC
+```
+
+Because the scrape is a loopback call and the only egress is outbound HTTPS, no new inbound ports or security group rules are required.
+
+### Metrics export requirements
+
+- Docker on the primary VM. This is already required to run the delegate and runner.
+- A Splunk HEC endpoint and token, with HEC enabled on your Splunk instance.
+- A pre-created **metrics** index in Splunk. HEC does not create indexes on demand, and metrics sent to an events index do not chart correctly. The HEC token's allowed-index list must include this index.
+- Outbound HTTPS from the primary VM to your Splunk endpoint. This is port 443 for Splunk Cloud, or port 8088 for self-managed Splunk Enterprise.
+
+The Splunk HEC token is the only credential involved. No Harness API key or delegate token is used, because the collector reads the runner's endpoint over localhost.
+
+### Runner version requirements for metrics
+
+:::note Minimum Version
+
+Metrics export requires drone runner version `1.0.0-rc.313` or newer.
+
+:::
+
+`docker run` does not consult the registry when a matching local image already exists, so a `latest` tag can serve a months-old cached image indefinitely. Pull the version explicitly and check the image age before you begin:
+
+```
+docker pull drone/drone-runner-aws:1.0.0-rc.313
+docker image inspect --format '{{.Created}}' drone/drone-runner-aws:1.0.0-rc.313
+```
+
+If the runner is running an older image, some metrics are **absent** from `/metrics` entirely rather than reported as zero. The symptom is easy to misread, because the collector logs no errors and other metrics continue to arrive normally.
+
+### Create the collector configuration
+
+Create `/runner/otel-config.yaml` on your primary VM:
+
+```yaml
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'drone-runner-aws'
+          scrape_interval: 30s
+          static_configs:
+            ## The runner is on this VM. The default /metrics path is implied.
+            - targets: ['localhost:3000']
+
+processors:
+  ## Must be listed first in the pipeline. Applies backpressure so the collector
+  ## cannot grow unbounded alongside the runner and delegate on the same VM.
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 256
+    spike_limit_mib: 64
+
+  ## Tags every metric with the source VM so multiple runners stay separable.
+  resourcedetection:
+    detectors: [env, system, ec2]
+    timeout: 5s
+
+  cumulativetodelta:
+    initial_value: auto
+
+  ## Optional. Add this block only if you want to forward a specific set of
+  ## metrics instead of all of them; otherwise skip it. The condition below
+  ## keeps the two named metrics and drops everything else. If you add this
+  ## block, also add it to the processors list under service.pipelines.metrics.
+  # filter/keep_selected_metrics:
+  #   error_mode: ignore
+  #   metric_conditions:
+  #     - 'metric.name != "harness_ci_pipeline_execution_total" and metric.name != "harness_ci_pipeline_running_executions"'
+
+  batch:
+    send_batch_size: 512
+    timeout: 10s
+
+extensions:
+  ## Buffers metrics on disk so a Splunk outage doesn't lose data. Entries are
+  ## removed as they are exported successfully, so this stays small in normal
+  ## operation and only grows while Splunk is unreachable.
+  file_storage/splunk:
+    directory: /var/lib/otelcol/storage
+    timeout: 1s
+    ## Reclaims disk space after a backlog drains. Without this, the database
+    ## file stays at the size of the largest backlog it has ever held.
+    compaction:
+      on_start: true
+      on_rebound: true
+      directory: /var/lib/otelcol/tmp
+      rebound_needed_threshold_mib: 100
+      rebound_trigger_threshold_mib: 10
+      max_transaction_size: 65536
+
+exporters:
+  splunk_hec:
+    ## Splunk Cloud:      https://http-inputs-STACK.splunkcloud.com:443/services/collector
+    ## Splunk Enterprise: https://SPLUNK_HOST:8088/services/collector
+    endpoint: "https://SPLUNK_HOST:8088/services/collector"
+    token: "${env:SPLUNK_HEC_TOKEN}"
+    source: "drone-runner-aws"
+    sourcetype: "harness:ci:runner:metrics"
+    index: "YOUR_METRICS_INDEX"
+    tls:
+      insecure_skip_verify: false
+      ## For self-managed Splunk behind a private CA, point to your CA bundle.
+      ## Omit this for Splunk Cloud: setting it replaces the system trust store
+      ## rather than adding to it.
+      # ca_file: /etc/otelcol/splunk-ca.pem
+    ## Worst-case disk usage is roughly queue_size multiplied by batch size, so
+    ## this caps how large the on-disk queue can grow. Beyond this limit new
+    ## items are dropped rather than buffered. Builds are unaffected either way.
+    sending_queue:
+      enabled: true
+      storage: file_storage/splunk
+      queue_size: 1000
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 60s
+      max_elapsed_time: 300s
+
+service:
+  extensions: [file_storage/splunk]
+  telemetry:
+    metrics:
+      level: basic
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      processors: [memory_limiter, resourcedetection, cumulativetodelta, batch]
+      exporters: [splunk_hec]
+```
+
+The endpoint must use `https://`. Splunk HEC is HTTPS-only on port 8088 by default, and a plain `http://` endpoint produces a bare `EOF` error from the exporter.
+
+The token is read from the environment rather than written inline, so the configuration file can be committed to source control without exposing the credential.
+
+### Start the collector
+
+The persistent send queue needs two writable directories: one for the queue itself and one as scratch space for compaction. The collector image runs as UID `10001`, so a root-owned bind mount prevents the storage extension from starting:
+
+```
+sudo mkdir -p /var/lib/otelcol/storage /var/lib/otelcol/tmp
+sudo chown -R 10001:10001 /var/lib/otelcol
+```
+
+:::info
+
+The queue writes to disk on every export and deletes each entry once Splunk accepts it, so it stays small during normal operation. It grows only while Splunk is unreachable, bounded by `queue_size`. Because the underlying database does not return freed space to the operating system on its own, the `compaction` settings reclaim it once a backlog drains. Allow free disk space roughly equal to the queue ceiling, since compaction briefly holds both the original and compacted copies.
+
+:::
+
+Start the collector:
+
+```
+sudo docker run -d --name otel-collector \
+  --network host \
+  --restart unless-stopped \
+  --memory=512m \
+  -e SPLUNK_HEC_TOKEN='YOUR_HEC_TOKEN' \
+  -v /runner/otel-config.yaml:/etc/otelcol-contrib/config.yaml \
+  -v /var/lib/otelcol:/var/lib/otelcol \
+  otel/opentelemetry-collector-contrib:0.159.0
+```
+
+`--network host` is what makes `localhost:3000` resolve to the runner, matching how the delegate and runner are started elsewhere in this topic.
+
+`--memory=512m` is what actually caps the collector. The `memory_limiter` processor throttles the collector's pipeline but does not cap the process, so pair the two and keep `limit_mib` comfortably below the container limit.
+
+:::note
+
+Pin the collector image tag rather than using `latest`. Collector configuration schemas change between releases, so a floating tag can turn an unrelated container restart months later into a crash loop on a configuration that previously worked.
+
+:::
+
+### Verify metrics are flowing
+
+1. Confirm the runner is serving the `runner_*` metric families:
+
+   ```
+   curl -s localhost:3000/metrics | grep -c '^runner_'
+   ```
+
+   A non-zero count confirms the runner version supports the full catalog.
+
+2. Confirm the collector is actually scraping. This runner-side counter increments once per scrape interval:
+
+   ```
+   curl -s localhost:3000/metrics | grep promhttp_metric_handler_requests_total
+   ```
+
+   The `code="200"` value should increase every 30 seconds, while `code="500"` and `code="503"` stay at zero.
+
+3. Check the collector logs:
+
+   ```
+   docker logs otel-collector
+   ```
+
+   A healthy collector logs nothing after startup, because successful exports aren't logged. Silence is expected here. However, silence is also what a stale runner image looks like, so treat steps 1 and 2 as the positive confirmation rather than relying on the absence of errors.
+
+4. Run a pipeline on your VM build infrastructure, then query your metrics index in Splunk.
+
+### Runner metrics reference
+
+The following metrics are the most useful for capacity and queue analysis.
+
+**Queue and allocation latency**
+
+| Metric | Type | Answers |
+| ------ | ---- | ------- |
+| `harness_ci_runner_wait_duration_seconds` | Histogram | How long a build waited for a VM. Buckets span 0.5s to 1800s. |
+| `harness_ci_runner_total_vm_init_duration_seconds` | Histogram | Total time to get a usable machine, including wait, provision, health check, and setup. |
+| `runner_vm_creation_duration_seconds` | Histogram | Time spent in the cloud provider's instance-creation call alone. |
+| `runner_vm_init_duration_seconds` | Histogram | Per-attempt init duration, including failed attempts. |
+| `runner_vm_health_check_duration_seconds` | Histogram | Duration of the lite engine health-check phase, which is dominated by VM boot time. |
+| `runner_vm_setup_duration_seconds` | Histogram | Duration of the lite engine setup phase. |
+
+**Capacity and pool health**
+
+| Metric | Type | Answers |
+| ------ | ---- | ------- |
+| `harness_ci_pipeline_warm_pool_executions` | Gauge | Warm pool availability. |
+| `harness_ci_pipeline_running_executions` | Gauge | Concurrent builds in flight. |
+| `harness_ci_pipeline_per_account_running_executions` | Gauge | Concurrent builds in flight, per account. |
+| `harness_ci_pipeline_pool_fallbacks` | Counter | Builds that fell back to another pool. |
+| `runner_vms_current` | Gauge | Live VM count by pool, VM type, source, and lifecycle state. |
+| `harness_ci_capacity_reservation_total`, `_errors_total`, `_fallbacks_total` | Counter | Capacity reservation outcomes. |
+
+**Build outcomes and resource usage**
+
+| Metric | Type | Answers |
+| ------ | ---- | ------- |
+| `harness_ci_pipeline_execution_total` | Counter | Completed executions, both passed and failed. |
+| `harness_ci_pipeline_execution_errors_total` | Counter | Executions that failed due to system errors. |
+| `harness_ci_pipeline_max_cpu_usage_percent` | Histogram | Peak CPU per build, for right-sizing instance types. |
+| `harness_ci_pipeline_max_mem_usage_percent` | Histogram | Peak memory per build. |
+| `runner_vm_usage_duration_seconds` | Histogram | How long a VM stayed in use. |
+
+**Cleanup and cost**
+
+| Metric | Type | Answers |
+| ------ | ---- | ------- |
+| `runner_purger_instances_force_deleted_total` | Counter | Leaked instances force-deleted, which signals a cloud cost leak. |
+| `runner_purger_last_run_timestamp_seconds` | Gauge | Purger liveness, per pool. |
+| `harness_ci_predictor_idle_age_seconds` | Histogram | Idle age of predictor-created instances. |
+
+:::info
+
+Some labels are only populated when the corresponding pool setting is present. For example, `zone` is empty unless the pool declares `availability_zone` in `pool.yml`, because the runner does not read the zone back from AWS when the setting is omitted.
+
+:::
+
+### Control metrics ingest volume
+
+Splunk bills on ingest, so filtering in the collector rather than at search time is what reduces cost. Histograms dominate the series count, because each one emits a series per bucket plus `_sum` and `_count`. For example, `harness_ci_runner_wait_duration_seconds` produces 31 series for every distinct combination of its labels.
+
+To forward only the metrics you need, uncomment the optional `filter/keep_selected_metrics` block in the collector configuration and edit the condition to name the metrics you want to keep. Then add the processor to the pipeline, after `memory_limiter` and before `batch`, so you aren't batching datapoints you're about to discard:
+
+```yaml
+service:
+  pipelines:
+    metrics:
+      processors: [memory_limiter, resourcedetection, cumulativetodelta, filter/keep_selected_metrics, batch]
+```
+
+### Troubleshoot metrics export
+
+| Symptom | Cause and resolution |
+| ------- | -------------------- |
+| Exporter logs a bare `EOF` | The endpoint uses `http://`. Splunk HEC is HTTPS-only on port 8088 by default. Change the endpoint to `https://`. |
+| HEC returns `400` with `{"text":"Incorrect index","code":7}` | The target index does not exist, or the HEC token is not authorized for it. The collector treats this as a permanent error and drops the batch. Create the metrics index and add it to the token's allowed-index list. |
+| `connect: connection refused` on the Splunk endpoint | Splunk is unreachable from the primary VM. Check the endpoint host and port and confirm outbound HTTPS is permitted. |
+| Some metrics are missing in Splunk while others arrive normally, and the collector logs no errors | The runner is running an image older than `1.0.0-rc.313`, most likely a stale cached `latest` tag. Run `docker pull` for a pinned version and recreate the runner container. |
+| Collector fails to start with a storage extension error | `/var/lib/otelcol` is not writable by UID `10001`. Run `sudo chown -R 10001:10001 /var/lib/otelcol`. |
+| Collector logs nothing and no metrics reach Splunk | Confirm the collector is scraping by checking that `promhttp_metric_handler_requests_total{code="200"}` increments on the runner. If it doesn't, the scrape target is wrong. |
+| Metrics stop arriving without any error | Alert on the `up` metric that the Prometheus receiver synthesizes for each scrape target. `up == 0` means the scrape failed, and absence of the series means the collector isn't running. |
+
 ## AWS Fargate Limitations
 
 If you are running builds on AWS Fargate, please be aware of the following limitations.
